@@ -90,6 +90,7 @@ int parse_data_input(t_data *data)
 	if (data->exit_value == 0)
 	{
 		var_process(data, data->token);
+		quote_process(data);
 		fill_cmd(data, data->token);
 	//test_1(data->cmd);
 	//	test_2(data->cmd);

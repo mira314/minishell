@@ -19,9 +19,18 @@ int arg_count(t_token *token)
 	count = 0;
 	while (token && (token->type_token == WORD || token->type_token == VAR))
 	{
-		//les cquote est le variable ne sont pas prise en cmpte pour le moment
-		count++;
-		token = token->next;
+
+		if (token->type_token == VAR && token->inner_join == 1)
+		{
+			while (token->type_token == VAR && token->inner_join ==1)
+				token = token->next;
+		}
+		else
+		{
+			count++;
+			token = token->next;
+		}
+
 	}
 	return (count);
 }
@@ -94,7 +103,6 @@ t_token *split_args(t_token *token, t_cmd *cmd)
 			token = add_args_for_other_cmd(token, cmd);
 			return(token);
 		}
-		printf("cas non gere -split_args.c\n");
 	}
 	return (token);
 }
