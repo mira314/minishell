@@ -6,7 +6,7 @@
 /*   By: derakoto <derakoto@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/25 10:30:04 by vrandria          #+#    #+#             */
-/*   Updated: 2024/11/02 14:34:03 by derakoto         ###   ########.fr       */
+/*   Updated: 2023/11/22 00:54:08 by derakoto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ char **ft_split_expansion(int len, t_token *token, t_cmd *cmd, char **tab);
 char **copy_new_tab(int len, char **str, t_token *token, t_cmd *cmd);
 /*******************mini_commande_pars.c***********************/
 int parse_commande(t_data *data);
-int handles_bultin(t_data *data);
+int handles_bultin(t_data *data, t_cmd *cmd);
 /******************var_processing.c***********************/
 int var_process(t_data *data, t_token *token);
 t_token *statu_quote_token(t_token *token, int c);

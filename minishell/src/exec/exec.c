@@ -20,6 +20,7 @@ static int	exec_with_fork(char *path, char **args, char **envs)
 {
 	int	pid;
 	int	status;
+	int	exit_status;
 
 	pid = fork();
 	if (pid == -1)
@@ -31,12 +32,21 @@ static int	exec_with_fork(char *path, char **args, char **envs)
 	{
 		if(execve(path, args, envs) == -1)
 		perror(path);
-		exit(127);
+		if (errno == EACCES)
+			exit(126);
+		else if (errno == ENOENT)
+			exit(127);
 	}else
 	{
 		wait(&status);
+		if (WIFEXITED(status))
+			exit_status = WEXITSTATUS(status);
+		else if (WIFSIGNALED(status))
+		{
+			exit_status = 130;
+		}
 	}
-	return (WEXITSTATUS(status));
+	return (exit_status);
 }
 
 static int	is_delimiter(char *delimiter, char *str)
@@ -171,7 +181,7 @@ static int redir_input(t_input *file, t_term *term)
 	return (0);
 }
 
-static void redir_output(t_output *file)
+static int redir_output(t_output *file)
 {
 	int	open_mode;
 	int	fd;
@@ -184,22 +194,33 @@ static void redir_output(t_output *file)
 		if (file[i].mode == APPEND)
 			open_mode = O_WRONLY | O_CREAT | O_APPEND;
 		fd = open(file[i].filename, open_mode, 0644);
+		if (fd == -1)
+		{
+			perror(file[i].filename);
+			return (-1);
+		}
 		if (file[i + 1].filename != NULL)
 			close(fd);
 		else
 		{
-			dup2(fd, 1);
+			if (dup2(fd, 1) == -1)
+			{
+				perror(file[i].filename);
+				return (-1);
+			}
 			close (fd);
 		}
 		i++;
 	}
+	return (0);
 }
 
 static int	handle_redir(t_io_fd *io, t_data *data)
 {
-	if (redir_input(io->inputs, &data->term_backup))
+	if (redir_input(io->inputs, &data->term_backup) == -1)
 		return (-1);
-	redir_output(io->outputs);
+	if (redir_output(io->outputs) == -1)
+		return (-1);
 	return (0);
 }
 
@@ -281,47 +302,57 @@ void	exec(t_data *data)
 		pipe_loop(data, cmd, NULL);
 }
 
-void	exec_one_cmd(t_data	*data,  t_cmd *cmd)
+int	exec_one_cmd(t_data	*data,  t_cmd *cmd)
 {
 	char	*path;
 	char	*total_path;
-	
-	if (data->cmd->cmd == NULL)
-		return ;
-	if (handle_var(data->cmd->args, &data->var, &cmd->offset) == SUCCESS)
-		return ;
-	if (handles_bultin(data) == SUCCESS)
-		return ;
+	char 	exit_status;
+
+	if (cmd->cmd == NULL)
+		return (0);
+	if (handle_var(cmd->args, &data->var, &cmd->offset) == SUCCESS)
+		return (0);
+	if (handles_bultin(data, cmd) == SUCCESS)
+		return (data->exit_value);
 	path = is_in_path_env(cmd->args[cmd->offset], data->env);
 	if (path != NULL)
 	{
 		total_path = build_path(path, cmd->args[cmd->offset]);
 		free(path);
 		if (total_path == NULL)
-		{
-			g_last_val = 1;
-			return ;
-		}
-		g_last_val = exec_with_fork(total_path, cmd->args + cmd->offset, data->env); 
+			return (1);
+		exit_status = exec_with_fork(total_path, cmd->args + cmd->offset, data->env); 
 		free(total_path);
-		return ;
+		return (exit_status);
 	}
 	else if (is_path(cmd->args[cmd->offset]) == 0)
-		g_last_val = exec_with_fork(cmd->args[cmd->offset], cmd->args + cmd->offset, data->env);
+		exit_status = exec_with_fork(cmd->args[cmd->offset], cmd->args + cmd->offset, data->env);
 	else
+	{
+		exit_status = 127;
 		print_error(cmd->args[cmd->offset], ": command not found\n", 127);
+	}
+	return (exit_status);
 }
 
 void	exec_with_redir(t_data *data, t_cmd *cmd)
 {
 	int		fd_in_backup;
 	int		fd_out_backup;
+	unsigned int		exit_status;
 
 	fd_out_backup = dup(1);
 	fd_in_backup = dup(0);
 	if (handle_redir(cmd->io, data) == -1)
+	{
+		data->exit_value = 1;
+		dup2(fd_out_backup, 1);
+		dup2(fd_in_backup, 0);
+		printf("exit status : 1\n");
 		return ;
-	exec_one_cmd(data, cmd);
+	}
+	exit_status = exec_one_cmd(data, cmd);
 	dup2(fd_out_backup, 1);
 	dup2(fd_in_backup, 0);
+	printf("exit status : %d\n", exit_status);
 }

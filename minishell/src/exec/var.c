@@ -6,7 +6,7 @@
 /*   By: derakoto <derakoto@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/02 10:34:21 by derakoto          #+#    #+#             */
-/*   Updated: 2023/11/22 01:37:58 by derakoto         ###   ########.fr       */
+/*   Updated: 2023/11/22 00:41:30 by derakoto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,6 @@ int count_assignement(char **tbl)
 int handle_var(char **tbl, char ***var, int *assign_count)
 {
     *assign_count = count_assignement(tbl);
-    printf("%d\n", *assign_count);
     if (*assign_count == -1)
         return (FAIL);
     if (tbl[*assign_count] == NULL)
