@@ -96,7 +96,7 @@ static char	*get_doc(char *delim)
 	}
 	return result;
 }
-static int	handle_here_doc(int	*fds, char *del)
+static int	handle_here_doc(int	*fds, char *del, t_term *term)
 {
 	char	*heredoc_result;
 	int		exit_status;
@@ -106,6 +106,8 @@ static int	handle_here_doc(int	*fds, char *del)
 	{
 		signal(SIGINT, SIG_DFL);
 		close(fds[0]);
+		dup2(term->keybord_backup, 0);
+		dup2(term->term_backup, 1);
 		heredoc_result = get_doc(del);
 		if (heredoc_result == NULL)
 			write(fds[1], "", 1);
@@ -129,7 +131,7 @@ static int	handle_here_doc(int	*fds, char *del)
 	return (0);
 }
 
-static int redir_input(t_input *file)
+static int redir_input(t_input *file, t_term *term)
 {
 	int		input;
 	int		i;
@@ -141,7 +143,7 @@ static int redir_input(t_input *file)
 		if (file[i].mode == HEREDOC)
 		{
 			pipe(fds);
-			if (handle_here_doc(fds, file[i].filename) == -1)
+			if (handle_here_doc(fds, file[i].filename, term) == -1)
 			{
 				close(fds[0]);
 				close(fds[1]);
@@ -193,9 +195,9 @@ static void redir_output(t_output *file)
 	}
 }
 
-static int	handle_redir(t_io_fd *io)
+static int	handle_redir(t_io_fd *io, t_data *data)
 {
-	if (redir_input(io->inputs))
+	if (redir_input(io->inputs, &data->term_backup))
 		return (-1);
 	redir_output(io->outputs);
 	return (0);
@@ -232,27 +234,27 @@ static void fork_fun(int *input, int *output, t_data *data, t_cmd *cmd)
 
 int    pipe_loop(t_data *data, t_cmd *cmd, int *pipe_in)
 {
-    int     output[2];
+    int     pipe_out[2];
     int     pid;
     int     status;
 
-    if (pipe(output) == -1)
+    if (pipe(pipe_out) == -1)
     {
         perror("piping");
         return (1);
     }
     pid = fork();
     if (pid == -1)
-        on_forking_error_pipe(output);   
+        on_forking_error_pipe(pipe_out);   
     if (pid == 0)
-        fork_fun(pipe_in, output, data, cmd);
+        fork_fun(pipe_in, pipe_out, data, cmd);
     else
     {
         if (pipe_in != NULL)
             close_pipe(pipe_in);
         if (cmd->next != NULL)
         {
-            pipe_loop(data, cmd->next, output);
+            pipe_loop(data, cmd->next, pipe_out);
             wait(NULL);
         }
         else
@@ -273,7 +275,10 @@ void	exec(t_data *data)
 	t_cmd *cmd;
 
 	cmd = data->cmd;
-	pipe_loop(data, cmd, NULL);
+	if (cmd->next == NULL)
+		exec_with_redir(data, cmd);
+	else
+		pipe_loop(data, cmd, NULL);
 }
 
 void	exec_one_cmd(t_data	*data,  t_cmd *cmd)
@@ -314,7 +319,7 @@ void	exec_with_redir(t_data *data, t_cmd *cmd)
 
 	fd_out_backup = dup(1);
 	fd_in_backup = dup(0);
-	if (handle_redir(data->cmd->io) == -1)
+	if (handle_redir(cmd->io, data) == -1)
 		return ;
 	exec_one_cmd(data, cmd);
 	dup2(fd_out_backup, 1);
