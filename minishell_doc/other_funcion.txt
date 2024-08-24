@@ -1,0 +1,16 @@
+/*************access()*************/
+
+headers : 
+	<unistd.h>
+prototype:
+	int access( const char * pathname, int aMode );
+
+Description :
+	La fonction access vérifie l'existence et les autorisations d'accès au fichier spécifié par le paramètre pathname. L'information à vérifier doit être spécifié dans le paramètre aMode.
+	aMode : un entier qui représente le mode d'accès à tester. Il peut prendre l'un des valeurs suivantes.
+	-F_OK : teste l'existence du fichier.
+	-R_OK : teste la permission de lecture.
+	-W_OK : teste la permission d'écriture.
+	-X_OK : teste la permission d'exécution.
+Valeur de retour :
+	La fonction access renvoie 0 si l'accès au fichier est autorisé en fonction du mode d'accès spécifié. Si l'accès est refusé ou si une erreur s'est produite, la fonction renvoie -1. Si une erreur est constatée, la variable errno sera fixée avec le code erreur constaté.

@@ -1,0 +1,56 @@
+GNU Readline Library
+
+headers : 
+	#include <stdio.h>
+      	#include <readline/readline.h>
+      	#include <readline/history.h>
+      	
+/*******************readline()********************/
+      	
+prototype : 
+	char *readline (const char *prompt);
+	
+Description :
+	readline() will read a line from the terminal and return it, using
+       prompt as a prompt.  If prompt is NULL or the empty string, no
+       prompt is issued.  The line returned is allocated with malloc(3);
+       the caller must free it when finished.  The line returned has the
+       final newline removed, so only the text of the line remains.
+       
+/*******************rl_clear_history()********************/       
+       
+prototype:
+	void rl_clear_history (void)
+Description :
+	Clear the history list by deleting all of the entries, in the same manner as the History library’s clear_history() function. This differs from clear_history because it frees private data Readline saves in the history list.
+	
+/*******************rl_on_new_line()********************/
+
+prototype:
+	int l_on_new_line(void)
+description:
+	Tell the update functions that we have moved onto a new (empty) line, usually after outputting a newline.
+	
+/*******************rl_replace_line()********************/
+	
+prototype:
+	void rl_replace_line (const char *text, int clear_undo)
+description:
+	Replace the contents of rl_line_buffer with text. The point and mark are preserved, if possible. If clear_undo is non-zero, the undo list associated with the current line is cleared.
+
+
+/*******************rl_redisplay()********************/
+
+prototype :
+	void rl_redisplay (void)
+description :
+	Change what's displayed on the screen to reflect the current contents of rl_line_buffer
+	
+/*******************add_history()********************/
+
+prototype : 
+	void add_history (const char *);
+Description :
+	Place STRING at the end of the history list.
+	
+	
