@@ -14,6 +14,8 @@
 # define MINISHELL_H
 
 # include "../lib/libft/libft.h"
+# include "parse/parse.h"
+# include "exec/exec.h"
 # include <stdio.h>
 # include <unistd.h>
 # include <readline/history.h>

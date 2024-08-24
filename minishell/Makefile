@@ -3,7 +3,19 @@ NAME = minishell
 
 SRCS_DIR = ./src/
 
-SRCS = $(addprefix $(SRCS_DIR), main.c)
+PARSE_FILE = 
+
+EXEC_FILE = 
+
+DIR_PARSE = ${SRCS_DIR}parse/
+
+DIR_EXEC = ${SRCS_DIR}exec/
+
+PARSE = $(addprefix $(DIR_PARSE), ${PARSE_FILE})
+
+EXEC = $(addprefix $(DIR_EXEC), ${EXEC_FILE})
+
+SRCS = $(addprefix $(SRCS_DIR), main.c) ${PARSE} ${EXEC}
 
 LIBFT = ./lib/libft.a
 
@@ -17,7 +29,7 @@ all: $(NAME)
 	@$(CC) ${FLAGS} -o $@ -c $?
 
 $(NAME): ${LIBFT} $(OBJS)
-	${CC} ${FLAGS} ${SRCS} -o $(NAME) ${LIBFT}
+	${CC} ${FLAGS} ${SRCS} -o $(NAME) ${LIBFT} -lreadline
 
 ${LIBFT}:
 	make all -C lib
