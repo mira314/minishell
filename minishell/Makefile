@@ -5,7 +5,8 @@ SRCS_DIR = ./src/
 
 PARSE_FILE = 
 
-EXEC_FILE = ft_echo.c
+EXEC_FILE =	ft_echo.c	\
+			ft_pwd.c
 
 DIR_PARSE = ${SRCS_DIR}parse/
 
