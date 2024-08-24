@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vrandria <vrandria@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vrandria <vrandria@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/18 13:32:50 by vrandria          #+#    #+#             */
-/*   Updated: 2024/08/18 13:34:51 by vrandria         ###   ########.fr       */
+/*   Updated: 2024/08/24 11:20:56 by vrandria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@
 # include "../lib/libft/libft.h"
 # include <stdio.h>
 # include <unistd.h>
+# include <readline/history.h>
+# include <readline/readline.h>
 
 #endif
 
