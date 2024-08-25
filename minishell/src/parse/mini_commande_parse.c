@@ -14,13 +14,13 @@
 
 int is_built_in_cmd(char *cmd)
 {
-    if (ft_strncmp(cmd, "cd", 3) == 0)
+    if (ft_strncmp(cmd, "cd", 2) == 0)
         return (1);
-    if (ft_strncmp(cmd, "cd..", 5) == 0)
+    if (ft_strncmp(cmd, "cd..", 4) == 0)
         return (1);
-    if (ft_strncmp(cmd, "pwd", 4) == 0)
+    if (ft_strncmp(cmd, "pwd", 3) == 0)
         return (1);
-    if (ft_strncmp(cmd, "echo", 5) == 0)
+    if (ft_strncmp(cmd, "echo", 4) == 0)
         return (1);
     return (0);
 }
