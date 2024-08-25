@@ -1,0 +1,46 @@
+/*******************fork()********************/
+
+headers :
+            #include <sys/types.h>
+            #include <unistd.h>
+
+prototype:
+            pid_t fork(void);
+
+Description :
+                fork() creates a new process by duplicating the calling process.  The new process is referred to as the child process.  The calling process is referred to as the parent process.
+
+       The  child process and the parent process run in separate memory spaces.  At the time of fork() both memory spaces have the same content.  Memory writes, file mappings (mmap(2)),
+       and unmappings (munmap(2)) performed by one of the processes do not affect the other.
+
+Valeur de retour:
+                     On success, the PID of the child process is returned in the parent, and 0 is returned in the child.  On failure, -1 is returned in the parent, no child process  is  created,  and
+       errno is set appropriately.
+
+/*******************wait() and waitpid()********************/
+
+headers: 
+            #include <sys/wait.h>
+            #include <unistd.h>
+
+prototype :
+                pid_t wait(int *stat_loc); 
+                pid_t waitpid(pid_t pid, int *wstatus, int options);
+
+Description :
+                A call to wait() blocks the calling process until one of its child processes exits or a signal is received. After the child process terminates, parent continues its execution after wait system call instruction. 
+Child process may terminate due to any of these: 
+
+It calls exit();
+It returns (an int) from main
+It receives a signal (from the OS or another process) whose default action is to terminate.
+
+               The  waitpid()  system  call  suspends execution of the calling thread until a child specified by pid argument has changed state.
+
+If the parent process has multiple children, the wait() call will cause the parent to wait until any child process terminates.
+If a child process terminates, wait() returns the PID of the terminated child.
+If multiple child processes terminate, wait() will reap any one of them arbitrarily and return its PID.
+If no children exist, wait() immediately returns -1.
+
+ If stat_loc is not NULL, wait() and waitpid() store status information in the int to which it points.  This integer can be inspected with the  macros specified in man(which take the  in‐
+       teger itself as an argument, not a pointer to it, as is done in wait() and waitpid()!):
