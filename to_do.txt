@@ -1,0 +1,15 @@
+GESTION DES ERREURS 
+-Permissions
+-Commandes non trouvées
+
+
+
+BUILT-IN
+
+
+  - cd
+  - echo 
+  - exit
+  - export
+  - unset 
+
