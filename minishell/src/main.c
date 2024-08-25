@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: derakoto <derakoto@student.42antananari    +#+  +:+       +#+        */
+/*   By: vrandria <vrandria@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/24 10:56:40 by vrandria          #+#    #+#             */
-/*   Updated: 2024/08/24 14:00:05 by derakoto         ###   ########.fr       */
+/*   Updated: 2024/08/25 11:45:42 by vrandria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,19 @@
 int main(int argc, char *argv[])
 {
 	char *command;
+	char *cmd;
 	(void)argc;
-	ft_printf("%s\n","test");
 	while (1)
 	{
 		printf("minishell%%");
 		command = readline(argv[1]);
-		//printf("la commande est ->%s\n", command);
+		cmd = ft_strdup(command);
+		if (is_built_in_cmd(cmd) == 1)
+			exec_mini_built(cmd);
+		else
+			printf("command not found: %s\n", cmd);
 		free(command);
+		free(cmd);
 	}
 	return 0;
 }

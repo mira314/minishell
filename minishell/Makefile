@@ -3,7 +3,7 @@ NAME = minishell
 
 SRCS_DIR = ./src/
 
-PARSE_FILE = 
+PARSE_FILE = mini_commande_parse.c
 
 EXEC_FILE =	ft_echo.c	\
 			ft_pwd.c

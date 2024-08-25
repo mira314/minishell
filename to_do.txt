@@ -12,4 +12,5 @@ BUILT-IN
   - exit
   - export
   - unset 
+  - pwd ok
 
