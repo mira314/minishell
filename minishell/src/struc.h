@@ -1,32 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   struc.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vrandria <vrandria@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/24 10:56:40 by vrandria          #+#    #+#             */
-/*   Updated: 2024/08/28 07:34:06 by vrandria         ###   ########.fr       */
+/*   Created: 2024/08/28 08:13:10 by vrandria          #+#    #+#             */
+/*   Updated: 2024/08/28 08:20:03 by vrandria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#ifndef STRUCT_H
+# define STRUCT_H
 
-int main(int argc, char *argv[])
+typedef enum e_token
 {
-	char *command;
-	char *cmd;
-	(void)argc;
-	while (1)
-	{
-		printf("minishell%%");
-		command = readline(argv[1]);
-		if (is_built_in_cmd(cmd) == 1)
-			exec_mini_built(cmd);
-		else
-			printf("command not found: %s\n", cmd);
-		free(command);
-		free(cmd);
-	}
-	return 0;
-}
+    STRING = 0,
+}t_token_type;
+
+#endif
