@@ -1,0 +1,31 @@
+/*******************getcwd()**********************/
+headers:
+            #include <unistd.h>
+prototype:
+            char * getcwd( char *buffer, size_t size );
+Description:
+                Cette fonction permet de récupérer le chemin du répertoire de travail courant (getcwd = get current working directory). Le chemin renvoyé sera exprimé en absolu (à partir de la racine du système de fichiers).
+                -buffer : le bloc de mémoire dans lequel le chemin de travail courant vous sera retourné.
+                -size : la taille du bloc de mémoire passé en premier paramètre.
+Return value : 
+                Si tout se passe bien, la fonction renvoie un pointeur vers la chaîne contenant votre chemin (en fait, buffer). Dans le cas contraire, la valeur NULL vous sera retournée et la variable errno sera fixée avec le code erreur constaté.
+
+/*******************chdir()**********************/
+
+prototype:
+            int chdir( const char * path );
+Description:
+            Cette fonction permet de changer le répertoire courant de travail. Le chemin vers le nouveau dossier doit être passé en paramètre. Le nouveau chemin peut être exprimé en absolu (à partir de la racine de votre système de fichier) ou relativement au répertoire courant.
+Valeur de retour :
+            Si tout se passe bien, la fonction renvoie la valeur 0. Dans le cas contraire, la valeur -1 vous sera retournée et la variable errno sera fixée avec le code erreur constaté.
+
+/*******************stat()**********************/
+
+headers:
+        #include <sys/stat.h>
+prototype:
+            int stat( const char *path, struct stat *buf );
+Description :
+                The stat() function obtains information about the file or directory referenced in path. This information is placed in the structure located at the address indicated by buf
+Return value:
+                0 if the information was successfully obtained. Otherwise, -1.
