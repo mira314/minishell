@@ -33,10 +33,11 @@ void exec_mini_built(char *cmd)
         ft_echo(&cmd[5], 0);// a modifier apres split
 }
 
-char **splited(char  *cmd)
+char **splited_pipe(char  *cmd)
 {
-    char *splited;
-    
-    splited = ft_split(cmd, '|')
+    char **splited;
+
+    splited = ft_split(cmd, '|');
     return (splited);
 }
+
