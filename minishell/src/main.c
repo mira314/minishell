@@ -6,7 +6,7 @@
 /*   By: vrandria <vrandria@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/24 10:56:40 by vrandria          #+#    #+#             */
-/*   Updated: 2024/08/31 15:27:17 by vrandria         ###   ########.fr       */
+/*   Updated: 2024/08/31 15:28:17 by vrandria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 int main(int argc, char *argv[])
 {
-	char *command;
 	char *cmd;
 	(void)argc;
 	while (1)
