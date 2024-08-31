@@ -6,7 +6,7 @@
 /*   By: vrandria <vrandria@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/25 10:13:53 by vrandria          #+#    #+#             */
-/*   Updated: 2024/08/25 11:58:01 by vrandria         ###   ########.fr       */
+/*   Updated: 2024/08/31 15:46:10 by vrandria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,14 @@ void exec_mini_built(char *cmd)
 {
     if (ft_strncmp(cmd, "pwd",ft_strlen(cmd)) == 0)
         ft_pwd();
-    if (ft_strncmp(cmd, "echo",ft_strlen(cmd)) == 0)
-        ft_echo(cmd, 0);// a modifier apres split
+    if (ft_strncmp(cmd, "echo", 4) == 0)
+        ft_echo(&cmd[5], 0);// a modifier apres split
+}
+
+char **splited(char  *cmd)
+{
+    char *splited;
+    
+    splited = ft_split(cmd, '|')
+    return (splited);
 }
