@@ -6,7 +6,7 @@
 /*   By: vrandria <vrandria@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/24 10:56:40 by vrandria          #+#    #+#             */
-/*   Updated: 2024/08/31 15:26:22 by vrandria         ###   ########.fr       */
+/*   Updated: 2024/08/31 15:27:17 by vrandria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int main(int argc, char *argv[])
 			exec_mini_built(cmd);
 		else
 			printf("command not found: %s\n", cmd);
-		free(command);
+		free(cmd);
 		free(cmd);
 	}
 	return 0;
