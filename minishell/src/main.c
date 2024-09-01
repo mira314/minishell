@@ -12,10 +12,11 @@
 
 #include "minishell.h"
 
-int main(int argc, char *argv[])
+int main(int argc, char *argv[], char **env)
 {
 	char *cmd;
 	(void)argc;
+	(void)argv;
 	while (1)
 	{
 		printf("minishell%%");
@@ -24,7 +25,6 @@ int main(int argc, char *argv[])
 			exec_mini_built(cmd);
 		else
 			printf("command not found: %s\n", cmd);
-		free(cmd);
 		free(cmd);
 	}
 	return 0;

@@ -16,6 +16,10 @@
 typedef enum e_token
 {
     STRING = 0,
-}t_token_type;
+}t_token;
 
+typedef struc s_data;
+{
+    char **env;
+}t_data;
 #endif
