@@ -12,15 +12,11 @@
 
 #include "parse.h"
 
-char *ft_strtok(char *str, const char *delim);
-{
-    
-}
+/*
 int count_token(char *str, char *limit)
 {
-    int i;
-    char *temp;
-    char *token;
 
+    return 0;
 
 }
+*/

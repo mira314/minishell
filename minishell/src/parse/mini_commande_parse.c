@@ -41,3 +41,14 @@ char **splited_pipe(char  *cmd)
     return (splited);
 }
 
+int parse_from_prompt(t_data *data)
+{
+    (void)data;
+    return (1);
+}
+
+int init_data(t_data *data)
+{
+    data->input_prompt = NULL;
+    return (1);
+}
