@@ -1,10 +1,9 @@
 #include "exec.h"
 
-void ft_pwd(void)
+void	ft_pwd(void)
 {
-    char *pwd;
+	char	pwd_buffer[100];
 
-    pwd = getenv("PWD");
-    if(pwd != 0)
-        printf("%s\n", pwd);
+	if (getcwd(pwd_buffer, 100) != NULL)
+		printf("%s\n", pwd_buffer);
 }
