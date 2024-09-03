@@ -1,0 +1,21 @@
+/*************strerror()*************/
+
+header:
+            #include <string.h>
+
+prototype:
+            char *strerror(int errnum);
+
+Description:
+            This returns a pointer to the textual representation of the current errno value. The pointer sould not be freed.
+
+/*************perror()*************/
+
+header:
+            #include <stdio.h>
+
+prototype:
+            void perror(const char *str);
+
+Description:
+            displays the string you pass to it, followed by a colon, a space, and then the textual representation of the current errno value.

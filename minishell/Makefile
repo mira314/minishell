@@ -6,7 +6,9 @@ SRCS_DIR = ./src/
 PARSE_FILE = mini_commande_parse.c token.c
 
 EXEC_FILE =	ft_echo.c	\
-			ft_pwd.c
+			ft_pwd.c	\
+			mini_cd.c	\
+			mini_exec_utils.c 
 
 DIR_PARSE = ${SRCS_DIR}parse/
 

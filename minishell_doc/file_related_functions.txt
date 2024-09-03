@@ -19,13 +19,70 @@ Description:
 Valeur de retour :
             Si tout se passe bien, la fonction renvoie la valeur 0. Dans le cas contraire, la valeur -1 vous sera retournée et la variable errno sera fixée avec le code erreur constaté.
 
-/*******************stat()**********************/
+/*******************stat() & lstat()**********************/
 
 headers:
         #include <sys/stat.h>
 prototype:
             int stat( const char *path, struct stat *buf );
 Description :
-                The stat() function obtains information about the file or directory referenced in path. This information is placed in the structure located at the address indicated by buf
+                The stat() function obtains information about the file or directory referenced in path. This information is placed in the structure located at the address indicated by buf.
+                The lstat() function shall be equivalent to stat(), except when path refers to a symbolic link. In that case lstat() shall return information about the link, while stat() shall return information about the file the link references.          
 Return value:
                 0 if the information was successfully obtained. Otherwise, -1.
+
+/*******************fstat()**********************/
+prototype:
+                int fstat(int fildes, struct stat *buf);
+Description:
+                The fstat() function shall obtain information about an open file associated with the file descriptor fildes, and shall write it to the area pointed to by buf.
+Retrun value:
+                Upon successful completion, 0 shall be returned. Otherwise, -1 shall be returned and errno set to indicate the error.
+
+/*******************unlink()**********************/
+
+headers:
+                #include <unistd.h>
+prototype:
+                int unlink(const char *path);
+Description:
+                Still do not understand
+
+/*******************execve()**********************/
+
+headers: 
+                #include <unistd.h>
+prototype :
+        int execve(const char *pathname, char *const _Nullable argv[], char *const _Nullable envp[]);
+Description:
+                execve()  executes  the program referred to by pathname.  This causes the program that is currently being run by the calling process to be replaced with a new program, with newly
+       initialized stack, heap, and (initialized and uninitialized) data segments.
+
+       pathname must be either a binary executable, or a script starting with a line of the form:
+
+           #!interpreter [optional-arg]
+
+        argv is an array of pointers to strings passed to the new program as its command-line arguments.  By convention, the first of these strings (i.e.,  argv[0])  should  contain  the
+       filename associated with the file being executed.  The argv array must be terminated by a NULL pointer.  (Thus, in the new program, argv[argc] will be NULL.)
+
+       envp  is  an  array  of pointers to strings, conventionally of the form key=value, which are passed as the environment of the new program.  The envp array must be terminated by a
+       NULL pointer.
+
+       The argument vector and environment can be accessed by the new program's main function, when it is defined as:
+
+           int main(int argc, char *argv[], char *envp[])
+
+/*******************dup() && dup2()**********************/
+
+header :
+        #include <unistd.h>
+
+prototype :
+        int dup(int oldfd);
+        int dup2(int oldfd, int newfd); 
+Description:
+        The dup() system call creates a copy of a file descriptor:
+                It uses the lowest-numbered unused descriptor for the new descriptor.
+                If the copy is successfully created, then the original and copy file descriptors may be used interchangeably.
+                They both refer to the same open file description and thus share file offset and file status flags.
+        The dup2() system call is similar to dup() but the basic difference between them is that instead of using the lowest-numbered unused file descriptor, it uses the descriptor number specified by the user.
