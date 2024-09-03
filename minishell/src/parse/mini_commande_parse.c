@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mini_commande_parse.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vrandria <vrandria@student.42antananari    +#+  +:+       +#+        */
+/*   By: derakoto <derakoto@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/25 10:13:53 by vrandria          #+#    #+#             */
-/*   Updated: 2024/09/03 07:39:40 by vrandria         ###   ########.fr       */
+/*   Updated: 2024/09/03 11:14:19 by derakoto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ void exec_mini_built(char *cmd)
         ft_pwd();
     if (ft_strncmp(cmd, "echo", 4) == 0)
         ft_echo(&cmd[5], 0);// a modifier apres split
+    if (ft_strncmp(cmd, "cd", 2) == 0)
+        mini_cd(NULL);
 }
 
 char **splited_pipe(char  *cmd)
