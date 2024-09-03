@@ -6,7 +6,7 @@
 /*   By: vrandria <vrandria@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/24 10:56:40 by vrandria          #+#    #+#             */
-/*   Updated: 2024/08/31 15:28:17 by vrandria         ###   ########.fr       */
+/*   Updated: 2024/09/03 07:33:53 by vrandria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int main(int argc, char *argv[], char **env)
 	t_data data;
 	(void)env;
 
-	if(!init_data(&data))////work on it vrandria
+	if(!init_data(&data))////vrandria working on it;
 		return (0);
 	printf("%s\n","ok for init_data");
 	while (1)

@@ -6,7 +6,7 @@
 /*   By: vrandria <vrandria@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/25 10:13:53 by vrandria          #+#    #+#             */
-/*   Updated: 2024/08/31 15:46:10 by vrandria         ###   ########.fr       */
+/*   Updated: 2024/09/03 07:39:40 by vrandria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,11 +44,5 @@ char **splited_pipe(char  *cmd)
 int parse_from_prompt(t_data *data)
 {
     (void)data;
-    return (1);
-}
-
-int init_data(t_data *data)
-{
-    data->input_prompt = NULL;
     return (1);
 }
