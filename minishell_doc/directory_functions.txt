@@ -1,0 +1,38 @@
+/********************opendir()******************/
+
+header:
+        #include <dirent.h>
+prototype:
+        DIR *opendir(const char *dirname);
+description:
+            The opendir() function shall open a directory stream corresponding to the directory named by the dirname argument. The directory stream is positioned at the first entry.
+            If the type DIR is implemented using a file descriptor, applications shall only be able to open up to a total of {OPEN_MAX} files and directories.
+            N.B: The DIR pointer should be freed at the end to avoid leaks. 
+Return Value:
+            Upon successful completion, opendir() shall return a pointer to an object of type DIR. Otherwise, a null pointer shall be returned and errno set to indicate the error.
+
+/********************readdir()******************/
+
+header:
+        #include <dirent.h>
+prototype:
+            struct dirent *readdir(DIR *dirp);
+description:
+            The readdir() function returns a pointer to a dirent structure representing the next directory entry in the directory stream
+       pointed to by dirp.  It returns NULL on reaching the end of the directory stream or if an error occurred.
+       In the glibc implementation, the dirent structure is defined asfollows:
+
+           struct dirent {
+               ino_t          d_ino;       /* Inode number */
+               off_t          d_off;       /* Not an offset; see below */
+               unsigned short d_reclen;    /* Length of this record */
+               unsigned char  d_type;      /* Type of file; not supported
+                                              by all filesystem types */
+               char           d_name[256]; /* Null-terminated filename */
+           };
+
+RETURN VALUE
+       On success, readdir() returns a pointer to a dirent structure.  (This structure may be statically allocated; do not attempt to free(3) it.)
+
+       If  the  end  of the directory stream is reached, NULL is returned and errno is not changed.  If an error occurs, NULL is returned and errno is set appropriately.  To distinguish
+       end of stream from an error, set errno to zero before calling readdir() and then check the value of errno if NULL is returned.
