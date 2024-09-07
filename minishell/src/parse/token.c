@@ -12,11 +12,38 @@
 
 #include "parse.h"
 
-/*
-int count_token(char *str, char *limit)
+int check_quote(int flag, int input)
 {
-
-    return 0;
-
+    if (input == 39 && flag == NO_QUOTE)
+        flag = ONE_QUOTE;
+    if (input == 34 && flag == NO_QUOTE)
+        flag = DOUBLE_QUOTE;
+    if (input == 39 && flag == ONE_QUOTE)
+        flag = NO_QUOTE;
+    if (input == 34 && flag == DOUBLE_QUOTE)
+        flag = NO_QUOTE;
 }
-*/
+
+/**flag is for to check is quote inthe str*/
+
+int init_token(t_data *data, char *input, int flag)
+{
+    int i;
+    int start;
+    int limit;
+
+    i = 0;
+    start = 0;
+    limit = ft_strlen(input);
+    while (limit >= i)
+    {
+        flag = check_quote(flag, (int)input[i]);
+        if (flag == NO_QUOTE)
+        {
+            return (0)// a ajouter dans t_cmd
+        }
+        i++;
+    }
+    return (0);
+}
+

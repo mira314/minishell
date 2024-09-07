@@ -24,10 +24,19 @@ typedef struct s_token
     struct s_token *next;
 } t_token;
 
+typedef struct s_cmd
+{
+    char *cmd;
+    char **args;
+    struct s_cmd *prev;
+    struct s_cmd *next;
+}t_cmd;
+
 typedef struct s_data
 {
     char **env;
-    char    *input_prompt;
+    char    *input;
+    t_cmd   *cmd;
 } t_data;
 
 #endif

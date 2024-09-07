@@ -48,3 +48,10 @@ int parse_from_prompt(t_data *data)
     (void)data;
     return (1);
 }
+
+void init_commad(t_data data, t_token *token)
+{
+    token *temp;
+
+    temp = token;
+}

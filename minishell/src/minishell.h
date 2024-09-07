@@ -1,5 +1,5 @@
 /* ************************************************************************** */
-/*                                                                            */
+/*                                    data                                        */
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
@@ -27,15 +27,12 @@
 # define APPEND 2
 # define STDERR 3
 
-typedef struct s_cmd
+enum e_quote_flag
 {
-    char *args;
-    char *input_file;
-    char *output_file;
-    int append;
-} t_cmd;
-
-
+    NO_QUOTE,
+    ONE_QUOTE,
+    DOUBLE_QUOTE
+};
 #endif
 
 

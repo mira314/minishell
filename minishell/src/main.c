@@ -25,8 +25,8 @@ int main(int argc, char *argv[], char **env)
 	while (1)
 	{
 		(&data)->input_prompt = readline("minishell%");
-		if (is_built_in_cmd((&data)->input_prompt) == 1)
-			exec_mini_built((&data)->input_prompt);
+		if (is_built_in_cmd((&data)->input) == 1)
+			exec_mini_built((&data)->input);
 		else
 			printf("command not found: %s\n", (&data)->input_prompt);
 		free((&data)->input_prompt);
