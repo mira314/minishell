@@ -6,7 +6,7 @@
 /*   By: derakoto <derakoto@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/18 13:32:50 by vrandria          #+#    #+#             */
-/*   Updated: 2024/09/03 11:14:14 by derakoto         ###   ########.fr       */
+/*   Updated: 2024/09/07 06:02:51 by derakoto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +29,11 @@
 
 typedef struct s_cmd
 {
-    char *args;
-    char *input_file;
-    char *output_file;
-    int append;
-} t_cmd;
+	char	*args;
+	char	*input_file;
+	char	*output_file;
+	int		append;
+}	t_cmd;
 
 
 #endif
