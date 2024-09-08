@@ -51,7 +51,8 @@ int parse_from_prompt(t_data *data)
 
 void init_commad(t_data data, t_token *token)
 {
-    token *temp;
-
+    t_token *temp;
+    (void)data;
     temp = token;
+    (void)temp;
 }

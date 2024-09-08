@@ -12,6 +12,27 @@
 
 #include "minishell.h"
 
+
+int main(int argc, char *argv[], char **env)
+{
+	(void)argc;
+	(void)argv;
+	t_data data;
+	(void)env;
+
+	if(!init_data(&data))////vrandria working on it;
+		return (0);
+	printf("%s\n","ok for init_data");
+	while (1)
+	{
+		(&data)->input = readline("minishell%");
+		init_token(&data, (&data)->input, 0);
+		free((&data)->input);
+	}
+	return 0;
+}
+
+/*
 int main(int argc, char *argv[], char **env)
 {
 	(void)argc;
@@ -32,4 +53,4 @@ int main(int argc, char *argv[], char **env)
 		free((&data)->input_prompt);
 	}
 	return 0;
-}
+}*/

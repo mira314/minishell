@@ -14,7 +14,7 @@
 
 int init_data(t_data *data)
 {
-    data->input_prompt = NULL;
-    data->cnd = 0;
+    data->input = 0;
+    data->cmd = 0;
     return (1);
 }

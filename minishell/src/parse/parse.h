@@ -25,5 +25,7 @@ char *ft_strtok(char *str, const char *delim);
 int parse_from_prompt(t_data *data);
 /**************initialisation************** */
 int init_data(t_data *data);
+/*****token.c***************************/
+int init_token(t_data *data, char *input, int flag);
 #endif
 
