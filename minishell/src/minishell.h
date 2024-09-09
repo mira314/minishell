@@ -22,17 +22,16 @@
 # include <readline/readline.h>
 
 # define EMPTY 0
-# define STDOUT 0
-# define STDIN 1
-# define APPEND 2
-# define STDERR 3
+# define WORD 1
+# define SPACES 2
+# define VAR 3
+# define INPUT 4
+# define TRUNC 5
+# define HEREDOC 6
+# define APPEND 8
+# define PIPE 9
+# define END 10
+# define ONE_QUOTE 11
+# define DOUBLE_QUOTE 12
 
-enum e_quote_flag
-{
-    NO_QUOTE,
-    ONE_QUOTE,
-    DOUBLE_QUOTE
-};
 #endif
-
-
