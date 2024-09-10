@@ -18,8 +18,10 @@ typedef struct s_token
 {
     char *str;
     char *temp;
-    int *check_var;
+    int check_var;
     int type_token;
+    int flag;
+    int inner_join;
     struct s_token *prev;
     struct s_token *next;
 } t_token;

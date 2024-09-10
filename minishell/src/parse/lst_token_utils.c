@@ -11,3 +11,21 @@
 /* ************************************************************************** */
 
 #include "parse.h"
+
+t_token	*new_token(char *str, char *lastadd, int flag, int type_token)
+{
+	t_token *token;
+
+	token = (t_token *)malloc(sizeof(t_token));
+	if (!token)
+		return (0);
+	token->str = str;
+	token->temp = lastadd;
+	token->check_var = 0;
+	token->inner_join = 0;
+	token->type_token = type_token;
+	token->flag = flag;
+	token->prev = 0;
+	token->next = 0;
+	return (token);
+}
