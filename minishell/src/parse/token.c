@@ -6,13 +6,13 @@
 /*   By: vrandria <vrandria@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 07:35:00 by vrandria          #+#    #+#             */
-/*   Updated: 2024/08/31 15:46:25 by vrandria         ###   ########.fr       */
+/*   Updated: 2024/09/10 08:48:46 by vrandria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parse.h"
 
-static int check_quote(int flag, int input)
+int check_quote(int flag, int input)
 {
     if (input == 39 && flag == EMPTY)
         flag = ONE_QUOTE;
@@ -69,35 +69,5 @@ int token_split_word_and_sep(char *str, int start, t_data *data, int i)
 }
 /**flag is for to check is quote inthe str*/
 
-int init_token(t_data *data, char *input, int flag)
-{
-    int i;
-    int start;
-    int limit;
 
-    (void)data;
-    i = 0;
-    start = 0;
-    limit = ft_strlen(input);
-    while (limit >= i)
-    {
-        flag = check_quote(flag, (int)input[i]);
-        if (flag == EMPTY)
-        {
-            i = token_split_word_and_sep(input, start, data, i);
-            printf("ici i = %d\n",i );
-        }
-        i++;
-        start = i;
-    }
-    if (flag != EMPTY)
-    {
-        if (flag == DOUBLE_QUOTE || flag == ONE_QUOTE)
-        {
-            printf("unexpected quote is not close\n");
-            return(1);
-        }
-    }
-    return (0);
-}
 

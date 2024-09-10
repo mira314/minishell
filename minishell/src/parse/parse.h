@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vrandria <vrandria@student.42antananari    +#+  +:+       +#+        */
+/*   By: vrandria <vrandria@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/25 10:30:04 by vrandria          #+#    #+#             */
-/*   Updated: 2024/09/03 07:35:08 by vrandria         ###   ########.fr       */
+/*   Updated: 2024/09/10 08:50:04 by vrandria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,10 @@ char *ft_strtok(char *str, const char *delim);
 int parse_from_prompt(t_data *data);
 /**************initialisation************** */
 int init_data(t_data *data);
-/*****token.c***************************/
 int init_token(t_data *data, char *input, int flag);
+/*****token.c***************************/
+int token_split_word_and_sep(char *str, int start, t_data *data, int i);
+int what_is_sep(char *str, int i);
+int check_quote(int flag, int input);
 #endif
 

@@ -3,7 +3,7 @@ NAME = minishell
 
 SRCS_DIR = ./src/
 
-PARSE_FILE = mini_commande_parse.c token.c initialization.c exce_builtin.c
+PARSE_FILE = mini_commande_parse.c token.c initialization.c exce_builtin.c lst_token_utils.c
 
 EXEC_FILE =	ft_echo.c	\
 			ft_pwd.c	\
