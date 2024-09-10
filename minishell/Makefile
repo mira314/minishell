@@ -1,44 +1,37 @@
-
 NAME = minishell
 
 SRCS_DIR = ./src/
-
 PARSE_FILE = mini_commande_parse.c token.c initialization.c exce_builtin.c lst_token_utils.c
+EXEC_FILE = ft_echo.c ft_pwd.c mini_cd.c mini_exec_utils.c
 
-EXEC_FILE =	ft_echo.c	\
-			ft_pwd.c	\
-			mini_cd.c	\
-			mini_exec_utils.c 
+DIR_PARSE = $(SRCS_DIR)parse/
+DIR_EXEC = $(SRCS_DIR)exec/
 
-DIR_PARSE = ${SRCS_DIR}parse/
+PARSE = $(addprefix $(DIR_PARSE), $(PARSE_FILE))
+EXEC = $(addprefix $(DIR_EXEC), $(EXEC_FILE))
+SRCS = $(addprefix $(SRCS_DIR), main.c) $(PARSE) $(EXEC)
 
-DIR_EXEC = ${SRCS_DIR}exec/
-
-PARSE = $(addprefix $(DIR_PARSE), ${PARSE_FILE})
-
-EXEC = $(addprefix $(DIR_EXEC), ${EXEC_FILE})
-
-SRCS = $(addprefix $(SRCS_DIR), main.c) ${PARSE} ${EXEC}
+OBJS = $(SRCS:.c=.o)
 
 LIBFT = ./lib/libft.a
 
 CC = gcc
-
 FLAGS = -Wall -Wextra -Werror -g
 
 all: $(NAME)
 
+# Compilation des fichiers objets
 %.o: %.c
-	@$(CC) ${FLAGS} -o $@ -c $?
+	@$(CC) $(FLAGS) -o $@ -c $<
 
-$(NAME): ${LIBFT} $(OBJS)
-	${CC} ${FLAGS} ${SRCS} -o $(NAME) ${LIBFT} -lreadline
+$(NAME): $(OBJS) $(LIBFT)
+	$(CC) $(FLAGS) $(OBJS) -o $(NAME) $(LIBFT) -lreadline
 
-${LIBFT}:
+$(LIBFT):
 	make all -C lib
 
 clean:
-	-rm -f ${OBSJ}
+	-rm -f $(OBJS)
 	make clean -C lib
 
 fclean: clean
@@ -47,3 +40,4 @@ fclean: clean
 
 re: fclean all
 	make re -C lib
+
