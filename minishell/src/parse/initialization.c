@@ -25,7 +25,6 @@ int init_token(t_data *data, char *input, int flag)
     int start;
     int limit;
 
-    (void)data;
     i = 0;
     start = 0;
     limit = ft_strlen(input);
@@ -34,11 +33,9 @@ int init_token(t_data *data, char *input, int flag)
         flag = check_quote(flag, (int)input[i]);
         if (flag == EMPTY)
         {
-            i = token_split_word_and_sep(input, start, data, i);
-            printf("ici i = %d\n",i );
+            start = token_split_word_and_sep(input, start, data, i);
         }
         i++;
-        start = i;
     }
     if (flag != EMPTY)
     {
@@ -48,5 +45,16 @@ int init_token(t_data *data, char *input, int flag)
             return(1);
         }
     }
+    
+    t_token *test;
+    test = data->token;
+    while(test)
+    {
+    printf("%s\n",test->str);
+    test = test->next;
+    
+    }
+ 
+
     return (0);
 }

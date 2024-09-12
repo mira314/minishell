@@ -39,6 +39,7 @@ typedef struct s_data
     char **env;
     char    *input;
     t_cmd   *cmd;
+    t_token *token;
 } t_data;
 
 #endif

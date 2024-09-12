@@ -49,22 +49,20 @@ int what_is_sep(char *str, int i)
 int token_split_word_and_sep(char *str, int start, t_data *data, int i)
 {
     int token_type;
-    (void)data;
-    (void)start;
-
     token_type = what_is_sep(str, i);
     if (token_type)
     {
         if (i != 0 && (!what_is_sep(str, i - 1)))
-            printf("is_word");
+            token_word(&data->token, str, i, start);
         if (token_type == HEREDOC || token_type == PIPE || token_type == APPEND || token_type == END || token_type == TRUNC || token_type == INPUT)
         {
-            printf("token is %d", token_type);
+            token_other(&data->token, str, i, token_type);
             if (token_type == HEREDOC || token_type == APPEND)
                 i++;
         }
+        start = i + 1;
     }
-    return (i);
+    return (start);
 
 }
 /**flag is for to check is quote inthe str*/

@@ -31,6 +31,14 @@ int token_split_word_and_sep(char *str, int start, t_data *data, int i);
 int what_is_sep(char *str, int i);
 int check_quote(int flag, int input);
 
-t_token	*new_token(char *str, char *lastadd, int flag, int type_token);
+/******************lst_token_utils.c   ******************************/
+
+t_token	*new_token(char *str, int flag, int type_token);
+
+t_token	*lst_add_back_token(t_token *token, t_token *new_token);
+t_token	*lst_del_token(t_token *token);
+void lst_clear_all_token(t_token *token);
+int token_word(t_token **token, char *str, int i, int start);
+int token_other(t_token **token, char *str, int i, int type_token);
 #endif
 
