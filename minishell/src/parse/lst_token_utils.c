@@ -29,3 +29,43 @@ t_token	*new_token(char *str, char *lastadd, int flag, int type_token)
 	token->next = 0;
 	return (token);
 }
+
+t_token	*lst_add_back_token(t_token *token, t_token *new_token)
+{
+	t_token *tmp;
+
+	tmp = token;
+	if (!tmp)
+		return (new_token);
+	if(tmp && new_token)
+	{
+		while (tmp->next)
+			tmp = tmp->next;
+		tmp->next = new_token;
+		new_token->prev = tmp;
+	}
+	return (token);
+}
+
+//it's possible to free all value token here, to check if it's necessary
+t_token	*lst_del_token(t_token *token)
+{
+	t_token *tmp;
+
+	tmp = token->next;
+	free(token);
+	return (tmp);
+}
+
+void lst_clear_all(t_token *token)
+{
+	while (token)
+		token = lst_del_token(token);
+}
+
+int token_word(t_token *token, char *str, int i, int start)
+{
+	int		y;
+	char *word;
+	
+}
