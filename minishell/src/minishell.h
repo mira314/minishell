@@ -22,18 +22,18 @@
 # include <readline/readline.h>
 
 # define EMPTY 0
-# define WORD 1
-# define SPACES 2
+# define SPACES 1
+# define WORD 2
 # define VAR 3
-# define INPUT 4
-# define TRUNC 5
-# define HEREDOC 6
+# define TRUNC 6
+# define INPUT 5
+# define HEREDOC 7
 # define APPEND 8
-# define PIPE 9
-# define END 10
+# define PIPE 4
+# define END 9
 # define ONE_QUOTE 11
 # define DOUBLE_QUOTE 12
 # define FAIL 1
-# define SUCCES 0
+# define SUCCESS 0
 
 #endif

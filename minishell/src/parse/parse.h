@@ -27,7 +27,7 @@ int parse_from_prompt(t_data *data);
 int init_data(t_data *data);
 int init_token(t_data *data, char *input, int flag);
 /*****token.c***************************/
-int token_split_word_and_sep(char *str, int start, t_data *data, int i);
+int token_split_word_and_sep(char *str, int start, t_data *data, int *i);
 int what_is_sep(char *str, int i);
 int check_quote(int flag, int input);
 
@@ -41,6 +41,8 @@ void lst_clear_all_token(t_token *token);
 /******************lexing_check.c***********************************/
 t_token *def_var_on_token(t_token *token);
 t_token *var_check(t_token *token);
+t_token *check_double(t_token *token);
+int check_double_helpers(t_token *token);
 /**************************save_token.c */
 int token_word(t_token **token, char *str, int i, int start);
 int token_other(t_token **token, char *str, int i, int type_token);

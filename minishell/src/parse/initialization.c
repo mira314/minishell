@@ -33,7 +33,8 @@ int init_token(t_data *data, char *input, int flag)
     {
         flag = check_quote(flag, (int)input[i]);
         if (flag == EMPTY)
-            start = token_split_word_and_sep(input, start, data, i);
+            start = token_split_word_and_sep(input, start, data, &i);
+        //printf("start = %d, i = %d\n", start, i);
         i++;
     }
     if (flag != EMPTY)

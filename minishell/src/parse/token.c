@@ -12,6 +12,8 @@
 
 #include "parse.h"
 
+/**flag is for to check is quote inthe str*/
+
 int check_quote(int flag, int input)
 {
     if (input == 39 && flag == EMPTY)
@@ -46,26 +48,24 @@ int what_is_sep(char *str, int i)
     return (0);
 }
 
-int token_split_word_and_sep(char *str, int start, t_data *data, int i)
+int token_split_word_and_sep(char *str, int start, t_data *data, int *i)
 {
     int token_type;
-    token_type = what_is_sep(str, i);
+    token_type = what_is_sep(str, (*i));
     if (token_type)
     {
-        if (i != 0 && (!what_is_sep(str, i - 1)))
-            token_word(&data->token, str, i, start);
+        if ((*i) != 0 && (!what_is_sep(str, (*i) - 1)))
+            token_word(&data->token, str, (*i), start);
         if (token_type == HEREDOC || token_type == PIPE || token_type == APPEND || token_type == END || token_type == TRUNC || token_type == INPUT)
         {
-            token_other(&data->token, str, i, token_type);
+            token_other(&data->token, str, (*i), token_type);
             if (token_type == HEREDOC || token_type == APPEND)
-                i++;
+                (*i)++;
+            printf("%d\n",(*i));
         }
-        start = i + 1;
+        start = (*i) + 1;
     }
     return (start);
-
 }
-/**flag is for to check is quote inthe str*/
-
 
 

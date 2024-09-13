@@ -27,6 +27,7 @@ t_token	*new_token(char *str, int flag, int type_token)
 	token->inner_join = 0;
 	token->type_token = type_token;
 	token->flag = flag;
+	token->exit_value = 0;
 	token->prev = 0;
 	token->next = 0;
 	return (token);
