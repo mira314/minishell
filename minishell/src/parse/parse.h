@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vrandria <vrandria@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vrandria <vrandria@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/25 10:30:04 by vrandria          #+#    #+#             */
-/*   Updated: 2024/09/10 08:50:04 by vrandria         ###   ########.fr       */
+/*   Updated: 2024/09/13 13:29:49 by vrandria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,10 +38,11 @@ t_token	*new_token(char *str, int flag, int type_token);
 t_token	*lst_add_back_token(t_token *token, t_token *new_token);
 t_token	*lst_del_token(t_token *token);
 void lst_clear_all_token(t_token *token);
-int token_word(t_token **token, char *str, int i, int start);
-int token_other(t_token **token, char *str, int i, int type_token);
 /******************lexing_check.c***********************************/
 t_token *def_var_on_token(t_token *token);
 t_token *var_check(t_token *token);
+/**************************save_token.c */
+int token_word(t_token **token, char *str, int i, int start);
+int token_other(t_token **token, char *str, int i, int type_token);
 #endif
 

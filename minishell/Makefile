@@ -1,7 +1,7 @@
 NAME = minishell
 
 SRCS_DIR = ./src/
-PARSE_FILE = mini_commande_parse.c token.c initialization.c exce_builtin.c lst_token_utils.c save_token.c 
+PARSE_FILE = lexing_check.c mini_commande_parse.c token.c initialization.c exce_builtin.c lst_token_utils.c save_token.c lexing.c 
 EXEC_FILE = ft_echo.c ft_pwd.c mini_cd.c mini_exec_utils.c
 
 DIR_PARSE = $(SRCS_DIR)parse/
