@@ -12,6 +12,15 @@
 
 #include "minishell.h"
 
+void test(t_token test)
+{
+    while(test)
+    {
+    printf("%s\n",test->str);
+    test = test->next;
+    }
+
+}
 
 int main(int argc, char *argv[], char **env)
 {
@@ -21,14 +30,23 @@ int main(int argc, char *argv[], char **env)
 	(void)env;
 
 	if(!init_data(&data))////vrandria working on it;
-		return (0);
+		return (1);
 	printf("%s\n","ok for init_data");
 	while (1)
 	{
 		(&data)->input = readline("minishell%");
-		init_token(&data, (&data)->input, 0);
+		if(init_token(&data, (&data)->input, 0))
+			return (1);
+		(&data)->token = def_var_on_token((&data)->token);
+		if ((&data)->token->exit_value == FAIL)
+			return(1);
 		free((&data)->input);
+		lst_clear_all_token((&data)->token);
+		(&data)->token = 0;
 	}
+
+ 
+
 	return 0;
 }
 

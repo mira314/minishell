@@ -32,9 +32,7 @@ int init_token(t_data *data, char *input, int flag)
     {
         flag = check_quote(flag, (int)input[i]);
         if (flag == EMPTY)
-        {
             start = token_split_word_and_sep(input, start, data, i);
-        }
         i++;
     }
     if (flag != EMPTY)
@@ -45,16 +43,5 @@ int init_token(t_data *data, char *input, int flag)
             return(1);
         }
     }
-    
-    t_token *test;
-    test = data->token;
-    while(test)
-    {
-    printf("%s\n",test->str);
-    test = test->next;
-    
-    }
- 
-
     return (0);
 }

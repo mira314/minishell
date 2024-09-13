@@ -40,5 +40,8 @@ t_token	*lst_del_token(t_token *token);
 void lst_clear_all_token(t_token *token);
 int token_word(t_token **token, char *str, int i, int start);
 int token_other(t_token **token, char *str, int i, int type_token);
+/******************lexing_check.c***********************************/
+t_token *def_var_on_token(t_token *token);
+t_token *var_check(t_token *token);
 #endif
 

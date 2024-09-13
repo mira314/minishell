@@ -33,5 +33,7 @@
 # define END 10
 # define ONE_QUOTE 11
 # define DOUBLE_QUOTE 12
+# define FAIL 1
+# define SUCCES 0
 
 #endif

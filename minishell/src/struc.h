@@ -22,6 +22,7 @@ typedef struct s_token
     int type_token;
     int flag;
     int inner_join;
+    int exit_value;
     struct s_token *prev;
     struct s_token *next;
 } t_token;
