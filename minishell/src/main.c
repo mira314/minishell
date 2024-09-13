@@ -6,7 +6,7 @@
 /*   By: vrandria <vrandria@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/24 10:56:40 by vrandria          #+#    #+#             */
-/*   Updated: 2024/09/13 13:29:05 by vrandria         ###   ########.fr       */
+/*   Updated: 2024/09/13 13:35:41 by vrandria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void test(t_token *test)
 {
     while(test)
     {
-    printf("%s |type %d\n",test->str, test->type_token);
+    printf("[%s] [type] %d\n",test->str, test->type_token);
     test = test->next;
     }
 
