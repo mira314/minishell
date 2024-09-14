@@ -6,7 +6,7 @@
 # include <stdio.h>
 # include <errno.h>
 
-void	ft_echo(char *str, int n_option);
+void	ft_echo(char **args);
 void	ft_pwd(void);
 int		mini_tbl_len(char **tbl);
 int		mini_cd(char **argv);
