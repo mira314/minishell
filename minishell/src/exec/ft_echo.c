@@ -20,4 +20,5 @@ void	ft_echo(char **args)
 	}
 	if (nl)
 		printf("\n");
+	exit(EXIT_SUCCESS);
 }
