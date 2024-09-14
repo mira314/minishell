@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vrandria <vrandria@student.42antananari    +#+  +:+       +#+        */
+/*   By: vrandria <vrandria@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/24 10:56:40 by vrandria          #+#    #+#             */
-/*   Updated: 2024/09/13 13:35:41 by vrandria         ###   ########.fr       */
+/*   Updated: 2024/09/14 09:45:49 by vrandria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void test(t_token *test)
 {
     while(test)
     {
-    printf("[%s] [type] %d\n",test->str, test->type_token);
+    printf("[%s] [%d] \n",test->str, test->type_token);
     test = test->next;
     }
 

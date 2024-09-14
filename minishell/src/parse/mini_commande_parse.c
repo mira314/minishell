@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mini_commande_parse.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: derakoto <derakoto@student.42antananari    +#+  +:+       +#+        */
+/*   By: vrandria <vrandria@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/25 10:13:53 by vrandria          #+#    #+#             */
-/*   Updated: 2024/09/03 11:14:19 by derakoto         ###   ########.fr       */
+/*   Updated: 2024/09/14 09:57:28 by vrandria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,8 @@ int parse_from_prompt(t_data *data)
 
 void init_commad(t_data data, t_token *token)
 {
-    t_token *temp;
-    (void)data;
-    temp = token;
-    (void)temp;
+    t_token *tmp;
+    
+    tmp = token;
 }
+

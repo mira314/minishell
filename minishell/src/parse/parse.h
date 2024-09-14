@@ -6,7 +6,7 @@
 /*   By: vrandria <vrandria@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/25 10:30:04 by vrandria          #+#    #+#             */
-/*   Updated: 2024/09/13 13:29:49 by vrandria         ###   ########.fr       */
+/*   Updated: 2024/09/14 10:03:55 by vrandria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,5 +46,8 @@ int check_double_helpers(t_token *token);
 /**************************save_token.c */
 int token_word(t_token **token, char *str, int i, int start);
 int token_other(t_token **token, char *str, int i, int type_token);
+/*******************parsing.c **********************************/
+
+/*********************lst_cmd_utils.c************************ */
 #endif
 
