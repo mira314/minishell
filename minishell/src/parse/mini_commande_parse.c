@@ -30,7 +30,7 @@ void exec_mini_built(char *cmd)
     if (ft_strncmp(cmd, "pwd",ft_strlen(cmd)) == 0)
         ft_pwd();
     if (ft_strncmp(cmd, "echo", 4) == 0)
-        ft_echo(&cmd[5], 0);// a modifier apres split
+        ft_echo(&cmd);// a modifier apres split
     if (ft_strncmp(cmd, "cd", 2) == 0)
         mini_cd(NULL);
 }
@@ -47,12 +47,5 @@ int parse_from_prompt(t_data *data)
 {
     (void)data;
     return (1);
-}
-
-void init_commad(t_data data, t_token *token)
-{
-    t_token *tmp;
-    
-    tmp = token;
 }
 

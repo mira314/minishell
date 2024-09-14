@@ -31,7 +31,6 @@ int main(int argc, char *argv[], char **env)
 
 	if(!init_data(&data))////vrandria working on it;
 		return (1);
-	printf("%s\n","ok for init_data");
 	while (1)
 	{
 		(&data)->input = readline("minishell%");
@@ -40,6 +39,7 @@ int main(int argc, char *argv[], char **env)
 		(&data)->token = def_var_on_token((&data)->token);
 		if ((&data)->token->exit_value == FAIL)
 			return(1);
+		fill_cmd(&data, (&data)->token);
 		free((&data)->input);
 		test((&data)->token);
 		lst_clear_all_token((&data)->token);

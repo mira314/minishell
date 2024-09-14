@@ -26,6 +26,8 @@ int parse_from_prompt(t_data *data);
 /**************initialisation************** */
 int init_data(t_data *data);
 int init_token(t_data *data, char *input, int flag);
+t_cmd *init_cmd(t_cmd *cmd);
+void fill_cmd(t_data *data, t_token *token);
 /*****token.c***************************/
 int token_split_word_and_sep(char *str, int start, t_data *data, int *i);
 int what_is_sep(char *str, int i);
@@ -47,7 +49,9 @@ int check_double_helpers(t_token *token);
 int token_word(t_token **token, char *str, int i, int start);
 int token_other(t_token **token, char *str, int i, int type_token);
 /*******************parsing.c **********************************/
-
+t_token *parsins_word(t_cmd *cmd, t_token *token);
 /*********************lst_cmd_utils.c************************ */
+t_cmd *new_cmd(void);
+t_cmd *lst_add_back_cmd(t_cmd *cmd, t_cmd *new_cmd);
 #endif
 
