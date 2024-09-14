@@ -16,17 +16,14 @@ static int	cd_to_home(void)
 	return (1);
 }
 
-int	mini_cd(char **argv)
+int	mini_cd(char *path)
 {
 	int		argc;
 
 	errno = 0;
-	if (argv == NULL)
+	if (path == NULL)
 		return (cd_to_home());
-	argc = mini_tbl_len(argv);
-	if (argc == 0)
+	if (ft_strlen(path) == 0)
 		return (cd_to_home());
-	else if (argc > 1)
-		return (1);
-	return (chdir(argv[0]));
+	return (chdir(path));
 }

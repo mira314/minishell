@@ -6,8 +6,8 @@
 # include <stdio.h>
 # include <errno.h>
 
-void	ft_echo(char **args);
-void	ft_pwd(void);
+int	    ft_echo(char **args);
+int 	ft_pwd(void);
 int		mini_tbl_len(char **tbl);
-int		mini_cd(char **argv);
+int		mini_cd(char *path);
 #endif

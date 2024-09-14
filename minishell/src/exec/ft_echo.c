@@ -1,12 +1,12 @@
 #include "exec.h"
 
-void	ft_echo(char **args)
+int	ft_echo(char **args)
 {
 	int	i;
     int	nl;
 
 	if (args == 0)
-		exit(EXIT_SUCCESS);
+		return (0);
 	i = 0;
 	nl = ft_strncmp(args[0], "-n", 3);
 	if (nl == 0)
@@ -20,5 +20,5 @@ void	ft_echo(char **args)
 	}
 	if (nl)
 		printf("\n");
-	exit(EXIT_SUCCESS);
+	return (0);
 }
