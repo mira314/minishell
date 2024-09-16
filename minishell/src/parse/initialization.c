@@ -104,8 +104,13 @@ void fill_cmd(t_data *data, t_token *token)
             data->cmd = lst_add_back_cmd(data->cmd, new_cmd());
         if (tmp->type_token == WORD || tmp->type_token == VAR)
             tmp = parsins_word(data->cmd, tmp);
+        else if (token->type_token == END)
+            break ;
         else
+        {
+            printf("initialisation elsen fill cmd\n");
             tmp = tmp->next;// working on it
-        printf("ok\n");
+        }
     }
+    printf("fin fill cmd\n");
 }

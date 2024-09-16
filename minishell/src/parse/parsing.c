@@ -12,6 +12,42 @@
 
 #include "parse.h"
 
+int arg_count(t_token *token)
+{
+	int count;
+
+	count = 0;
+	while (token && (token->type_token == WORD || token->type_token == VAR))
+	{
+		count++;
+		token = token->next;
+	}
+	return (count);
+}
+
+t_token *split_args(t_token *token, t_cmd *cmd)
+{
+	if (ft_strncmp(cmd->cmd, "echo", 5) == 0)
+	{
+		printf("parsing est echo\n");
+		return(token->next);
+	}
+	else
+	{
+		if (!cmd->args)
+		{
+			printf("la commande n est pas echo sans argument mais %s\n", cmd->cmd);
+			return(token->next);
+		}
+		else
+		{
+			printf("la commande n est pas echo avec argument mais %s\n", cmd->cmd);
+			return(token->next);
+		}
+	}
+	return (token);
+}
+
 t_token *parsins_word(t_cmd *cmd, t_token *token)
 {
 	while (token->type_token == WORD || token->type_token == VAR)
@@ -20,19 +56,23 @@ t_token *parsins_word(t_cmd *cmd, t_token *token)
 			cmd = cmd->next;
 		if (token->prev == 0 || (token->prev && token->prev->type_token == PIPE) || cmd->cmd == 0)
 		{
-			if (token->type_token == VAR && (ft_strchr(token->str, ' ')) != 0)
-				printf("il faut spliter");
+			if (token->type_token == VAR && (ft_strchr(token->str, 32)))
+				printf("il faut spliter car espace trouve");
 			else
 			{
 				cmd->cmd =ft_strdup(token->str);// a freee e
-				printf("else dans parsing");
+				printf("else dans parsing \n");
 			}
 			token = token->next;
 		}
 		else
-			printf("%s\n",token->str);
-		printf("la commade est %s\n", cmd->cmd);
+		{
+			printf("on est dans parsing else pour arglent\n");
+			token = split_args(token, cmd);
+		}
+		
 	}
+	printf("la commade est %s\n", cmd->cmd);
 	return (token);
 }
 

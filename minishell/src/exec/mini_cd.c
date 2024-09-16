@@ -18,8 +18,6 @@ static int	cd_to_home(void)
 
 int	mini_cd(char *path)
 {
-	int		argc;
-
 	errno = 0;
 	if (path == NULL)
 		return (cd_to_home());
