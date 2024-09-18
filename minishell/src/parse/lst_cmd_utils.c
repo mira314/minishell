@@ -1,0 +1,45 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   lst_cmd_utils.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: vrandria <vrandria@student.42antananari    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/09/18 07:51:18 by vrandria          #+#    #+#             */
+/*   Updated: 2024/09/18 07:51:29 by vrandria         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "parse.h"
+
+t_cmd *new_cmd(void)
+{
+    t_cmd *new;
+
+    new = (t_cmd *)malloc(sizeof(t_cmd));
+    if (!new)
+        return (0);
+    new = init_cmd(new);
+    return (new);
+}
+
+t_cmd *lst_add_back_cmd(t_cmd *cmd, t_cmd *new_cmd)
+{
+    t_cmd *tmp;
+
+    tmp = cmd;
+
+    if (tmp == 0)
+    {
+        cmd = new_cmd;
+        return(cmd);
+    }
+    if (tmp && new_cmd)
+    {
+        while (tmp->next)
+            tmp = tmp->next;
+        tmp->next = new_cmd;
+        new_cmd->prev = tmp;
+    }
+    return(cmd);
+}

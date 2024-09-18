@@ -6,7 +6,7 @@
 /*   By: vrandria <vrandria@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 10:00:24 by vrandria          #+#    #+#             */
-/*   Updated: 2024/09/14 10:03:27 by vrandria         ###   ########.fr       */
+/*   Updated: 2024/09/18 08:18:25 by vrandria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,21 +27,21 @@ int arg_count(t_token *token)
 
 t_token *split_args(t_token *token, t_cmd *cmd)
 {
-	if (ft_strncmp(cmd->cmd, "echo", 5) == 0)
+	if (ft_strncmp(cmd->cmd, "echo", 4) == 0)
 	{
-		printf("parsing est echo\n");
+		printf("(parsing)parsing des argument echo car la commande est %s\n", cmd->cmd);
 		return(token->next);
 	}
 	else
 	{
 		if (!cmd->args)
 		{
-			printf("la commande n est pas echo sans argument mais %s\n", cmd->cmd);
+			printf("la commande n est pas echo sans argument mais %s (parsing.c)\n", cmd->cmd);
 			return(token->next);
 		}
 		else
 		{
-			printf("la commande n est pas echo avec argument mais %s\n", cmd->cmd);
+			printf("la commande n est pas echo avec argument mais %s (parsing.c)\n", cmd->cmd);
 			return(token->next);
 		}
 	}
@@ -67,7 +67,7 @@ t_token *parsins_word(t_cmd *cmd, t_token *token)
 		}
 		else
 		{
-			printf("on est dans parsing else pour arglent\n");
+			printf("gestion des argume de la commade dams parsing\n");
 			token = split_args(token, cmd);
 		}
 		

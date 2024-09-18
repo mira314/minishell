@@ -6,7 +6,7 @@
 /*   By: vrandria <vrandria@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/03 07:31:00 by vrandria          #+#    #+#             */
-/*   Updated: 2024/09/14 09:36:15 by vrandria         ###   ########.fr       */
+/*   Updated: 2024/09/18 08:11:26 by vrandria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,38 +57,6 @@ t_cmd *init_cmd(t_cmd *cmd)
     cmd->next = 0;
     cmd->history = 0;
     return (cmd);
-}
-
-t_cmd *new_cmd(void)
-{
-    t_cmd *new;
-
-    new = (t_cmd *)malloc(sizeof(t_cmd));
-    if (!new)
-        return (0);
-    new = init_cmd(new);
-    return (new);
-}
-
-t_cmd *lst_add_back_cmd(t_cmd *cmd, t_cmd *new_cmd)
-{
-    t_cmd *tmp;
-
-    tmp = cmd;
-
-    if (tmp == 0)
-    {
-        cmd = new_cmd;
-        return(cmd);
-    }
-    if (tmp && new_cmd)
-    {
-        while (tmp->next)
-            tmp = tmp->next;
-        tmp->next = new_cmd;
-        new_cmd->prev = tmp;
-    }
-    return(cmd);
 }
 
 void fill_cmd(t_data *data, t_token *token)
