@@ -20,6 +20,7 @@
 # include <unistd.h>
 # include <readline/history.h>
 # include <readline/readline.h>
+# include <errno.h>
 
 # define EMPTY 0
 # define SPACES 1

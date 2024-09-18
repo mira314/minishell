@@ -1,15 +1,12 @@
 #ifndef EXEC_H
 # define EXEC_H
 
-# include "libft.h"
-# include <stdlib.h>
-# include <stdio.h>
-# include <errno.h>
-# include <unistd.h>
+# include "../../src/minishell.h"
 
 int		ft_echo(char **args);
 int	    ft_pwd(void);
 int		mini_tbl_len(char **tbl);
+void	mini_tbl_free(char **tbl);
 int		mini_cd(char *path);
 char	**dup_env(char **f_env);
 char	**add_env(char **o_env, char **n_env);

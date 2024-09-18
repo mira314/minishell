@@ -6,7 +6,7 @@
 /*   By: derakoto <derakoto@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 15:43:58 by derakoto          #+#    #+#             */
-/*   Updated: 2024/09/18 15:09:21 by derakoto         ###   ########.fr       */
+/*   Updated: 2024/09/18 16:21:13 by derakoto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ char	**dup_env(char **f_env)
 
 	if (f_env == NULL)
 		return (NULL);
-	size = ft_tbllen(f_env);
+	size = mini_tbl_len(f_env);
 	result = (char **)malloc(sizeof(char *) * (size + 1));
 	if (result == NULL)
 		return (NULL);

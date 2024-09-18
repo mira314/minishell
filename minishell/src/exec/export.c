@@ -33,7 +33,7 @@ char	**add_one_env(char **o_env, char *env)
 	result = try_update(o_env, env);
 	if (result != 0)
 		return (result);
-	size = ft_tbllen(o_env) + 1;
+	size = mini_tbl_len(o_env) + 1;
 	result = (char **)malloc(sizeof(char *) * (size + 1));
 	if (result == NULL)
 		return (o_env);
@@ -64,7 +64,7 @@ int	export(char **env)
 			export_one_env(env[i]);
 		i++;
 	}
-	ft_tbl_free(env_dup);
+	mini_tbl_free(env_dup);
 	return (0);
 }
 
