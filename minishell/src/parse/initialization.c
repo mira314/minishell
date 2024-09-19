@@ -80,5 +80,6 @@ void fill_cmd(t_data *data, t_token *token)
             tmp = tmp->next;// working on it
         }
     }
+    //printf("data->args[%s] args 0\n",data->cmd->args[1]);
     printf("fin fill cmd\n");
 }

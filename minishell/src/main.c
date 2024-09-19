@@ -41,7 +41,7 @@ int main(int argc, char *argv[], char **env)
 			return(1);
 		fill_cmd(&data, (&data)->token);
 		free((&data)->input);
-		test((&data)->token);
+		//test((&data)->token);
 		lst_clear_all_token((&data)->token);
 		(&data)->token = 0;
 	}
