@@ -12,6 +12,20 @@
 
 #include "parse.h"
 
+int arg_count(t_token *token)
+{
+	int count;
+
+	count = 0;
+	while (token && (token->type_token == WORD || token->type_token == VAR))
+	{
+		//les cquote est le variable ne sont pas prise en cmpte pour le moment
+		count++;
+		token = token->next;
+	}
+	return (count);
+}
+
 t_token *ft_split_echo(t_token *token, t_cmd *cmd)
 {
 	int len_arg;
@@ -65,4 +79,29 @@ t_token *split_args(t_token *token, t_cmd *cmd)
 		}
 	}
 	return (token);
+}
+
+char **ft_split_expansion(int len, t_token *token, t_cmd *cmd, char **tab)
+{
+	int i;
+
+	i = 0;
+	while (len > i)
+	{
+		tab[i] = cmd->args[i];
+		i++;
+	}
+	while (token->type_token == VAR || token->type_token == WORD)
+	{
+		if (token->inner_join == 1)
+		{	
+			printf("%s\n", "var non gere sur ft_split_expansion");//////////////////
+		}
+		else
+			tab[i] = ft_strdup(token->str);
+		i++;
+		token = token->next;
+	}
+	tab[i] = 0;
+	return (tab);
 }

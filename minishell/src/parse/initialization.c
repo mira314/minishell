@@ -17,6 +17,7 @@ int init_data(t_data *data)
     data->input = 0;
     data->cmd = 0;
     data->token = 0;
+    data->exit_value = 1;
     return (1);
 }
 
@@ -74,12 +75,9 @@ void fill_cmd(t_data *data, t_token *token)
             tmp = parsins_word(data->cmd, tmp);
         else if (token->type_token == END)
             break ;
-        else
-        {
-            printf("initialisation elsen fill cmd\n");
-            tmp = tmp->next;// working on it
-        }
     }
-    //printf("data->args[%s] args 0\n",data->cmd->args[1]);
-    printf("fin fill cmd\n");
+    if (data && data->cmd)
+        data->exit_value = parse_commande(data);
+    else
+        data->exit_value = 1;
 }

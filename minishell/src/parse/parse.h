@@ -50,11 +50,16 @@ int token_word(t_token **token, char *str, int i, int start);
 int token_other(t_token **token, char *str, int i, int type_token);
 /*******************parsing.c **********************************/
 t_token *parsins_word(t_cmd *cmd, t_token *token);
+t_token *echo_parsing_arg(t_token *token, t_cmd *cmd);
 /*********************lst_cmd_utils.c************************ */
 t_cmd *new_cmd(void);
 t_cmd *lst_add_back_cmd(t_cmd *cmd, t_cmd *new_cmd);
 /*********************split_args.c *************************** */
 t_token *split_args(t_token *token, t_cmd *cmd);
+int arg_count(t_token *token);
 t_token *ft_split_echo(t_token *token, t_cmd *cmd);
+char **ft_split_expansion(int len, t_token *token, t_cmd *cmd, char **tab);
+/*******************mini_commande_pars.c***********************/
+int parse_commande(t_data *data);
 #endif
 

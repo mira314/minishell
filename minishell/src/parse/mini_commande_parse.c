@@ -43,9 +43,23 @@ char **splited_pipe(char  *cmd)
     return (splited);
 }
 
-int parse_from_prompt(t_data *data)
+int parse_commande(t_data *data)
 {
-    (void)data;
-    return (1);
+
+    t_cmd *cmd;
+
+    cmd = data->cmd;
+    while (cmd && cmd)
+    {
+        if (cmd->args)
+            cmd = cmd->next;
+        else
+        {
+            cmd->args = (char **)malloc(sizeof(char)*2);
+            cmd->args[0] = ft_strdup(cmd->cmd);
+            cmd->args[1] = 0;
+        }
+    }
+    return (0);   
 }
 

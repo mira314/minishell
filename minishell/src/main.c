@@ -33,7 +33,7 @@ void test(t_token *test)
     }
 
 }
-
+//il faut faire free la la liste cmd
 int main(int argc, char *argv[], char **env)
 {
 	(void)argc;
@@ -52,6 +52,7 @@ int main(int argc, char *argv[], char **env)
 		if ((&data)->token->exit_value == FAIL)
 			return(1);
 		fill_cmd(&data, (&data)->token);
+		ft_echo((&data)->cmd->args);
 		free((&data)->input);
 		test((&data)->token);
 		lst_clear_all_token((&data)->token);
