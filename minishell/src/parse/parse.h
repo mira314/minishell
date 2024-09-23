@@ -6,7 +6,7 @@
 /*   By: vrandria <vrandria@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/25 10:30:04 by vrandria          #+#    #+#             */
-/*   Updated: 2024/09/18 07:51:39 by vrandria         ###   ########.fr       */
+/*   Updated: 2024/09/23 08:44:37 by vrandria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,5 +53,8 @@ t_token *parsins_word(t_cmd *cmd, t_token *token);
 /*********************lst_cmd_utils.c************************ */
 t_cmd *new_cmd(void);
 t_cmd *lst_add_back_cmd(t_cmd *cmd, t_cmd *new_cmd);
+/*********************split_args.c *************************** */
+t_token *split_args(t_token *token, t_cmd *cmd);
+t_token *ft_split_echo(t_token *token, t_cmd *cmd);
 #endif
 

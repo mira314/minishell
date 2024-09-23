@@ -3,21 +3,33 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vrandria <vrandria@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vrandria <vrandria@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/24 10:56:40 by vrandria          #+#    #+#             */
-/*   Updated: 2024/09/14 09:45:49 by vrandria         ###   ########.fr       */
+/*   Updated: 2024/09/23 08:37:44 by vrandria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+int print_token(int token)
+{
+	if (token ==  WORD)
+		printf("[word]");
+	if (token ==  VAR)
+		printf("[VAR]");
+	if (token ==  END)
+		printf("[END]");
+	return (0);
+}
 void test(t_token *test)
 {
     while(test)
     {
-    printf("[%s] [%d] \n",test->str, test->type_token);
+    printf("[%s]",test->str);
+	print_token(test->type_token);
     test = test->next;
+	printf("\n");
     }
 
 }
@@ -41,7 +53,7 @@ int main(int argc, char *argv[], char **env)
 			return(1);
 		fill_cmd(&data, (&data)->token);
 		free((&data)->input);
-		//test((&data)->token);
+		test((&data)->token);
 		lst_clear_all_token((&data)->token);
 		(&data)->token = 0;
 	}
