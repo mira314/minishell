@@ -6,7 +6,7 @@
 /*   By: vrandria <vrandria@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/03 07:31:00 by vrandria          #+#    #+#             */
-/*   Updated: 2024/09/18 08:11:26 by vrandria         ###   ########.fr       */
+/*   Updated: 2024/09/25 09:37:30 by vrandria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ int init_token(t_data *data, char *input, int flag)
         flag = check_quote(flag, (int)input[i]);
         if (flag == EMPTY)
             start = token_split_word_and_sep(input, start, data, &i);
-        //printf("start = %d, i = %d\n", start, i);
         i++;
     }
     if (flag != EMPTY)

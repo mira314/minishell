@@ -6,7 +6,7 @@
 /*   By: vrandria <vrandria@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 08:42:40 by vrandria          #+#    #+#             */
-/*   Updated: 2024/09/23 08:44:25 by vrandria         ###   ########.fr       */
+/*   Updated: 2024/09/25 09:35:34 by vrandria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,7 @@ t_token *split_args(t_token *token, t_cmd *cmd)
 			printf("la commande n est pas echo avec argument mais '%s' (parsing.c)\n", cmd->cmd);
 			return(token->next);
 		}
+		printf("cas non gere -split_args.c\n");
 	}
 	return (token);
 }

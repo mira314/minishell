@@ -6,12 +6,12 @@
 /*   By: vrandria <vrandria@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/25 10:13:53 by vrandria          #+#    #+#             */
-/*   Updated: 2024/09/18 07:48:30 by vrandria         ###   ########.fr       */
+/*   Updated: 2024/09/25 09:48:57 by vrandria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parse.h"
-
+/*
 int is_built_in_cmd(char *cmd)
 {
     if (ft_strncmp(cmd, "cd", 2) == 0)
@@ -42,14 +42,29 @@ char **splited_pipe(char  *cmd)
     splited = ft_split(cmd, '|');
     return (splited);
 }
+*/
 
+int handles_bultin(t_data *data)
+{
+    t_cmd *cmd;
+    cmd = data->cmd;
+    int exit;
+
+    printf("la cmd->cmd = %s \n", cmd->cmd);
+    exit = 1;
+    if (ft_strncmp(cmd->cmd, "echo", 4) == 0)
+        exit = ft_echo(&(cmd->args[1]));
+    else
+        printf("commande not found\n");
+    return (exit);
+}
 int parse_commande(t_data *data)
 {
 
     t_cmd *cmd;
 
     cmd = data->cmd;
-    while (cmd && cmd)
+    while (cmd)//a revoir
     {
         if (cmd->args)
             cmd = cmd->next;

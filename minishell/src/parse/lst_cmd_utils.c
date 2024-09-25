@@ -6,7 +6,7 @@
 /*   By: vrandria <vrandria@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 07:51:18 by vrandria          #+#    #+#             */
-/*   Updated: 2024/09/18 07:51:29 by vrandria         ###   ########.fr       */
+/*   Updated: 2024/09/25 09:16:25 by vrandria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,4 +42,28 @@ t_cmd *lst_add_back_cmd(t_cmd *cmd, t_cmd *new_cmd)
         new_cmd->prev = tmp;
     }
     return(cmd);
+}
+static t_cmd *lst_del_cmd(t_cmd *cmd)
+{
+    t_cmd *tmp;
+
+    tmp = cmd->next;
+    free(cmd->args);///non gere actuellement pour **
+    free(cmd->cmd);
+    free(cmd->history);
+    cmd->history = 0;
+    cmd->args = 0;
+    cmd->cmd = 0;
+
+    return (tmp);
+}
+
+void clear_lst_cmd(t_data *data)
+{
+    t_cmd *cmd;
+
+    cmd = data->cmd;
+    while (cmd)
+        cmd = lst_del_cmd(cmd);
+    data->cmd = 0;
 }

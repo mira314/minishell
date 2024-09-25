@@ -6,7 +6,7 @@
 /*   By: vrandria <vrandria@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/24 10:56:40 by vrandria          #+#    #+#             */
-/*   Updated: 2024/09/23 08:37:44 by vrandria         ###   ########.fr       */
+/*   Updated: 2024/09/25 09:38:06 by vrandria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ void test(t_token *test)
     }
 
 }
-//il faut faire free la la liste cmd
 int main(int argc, char *argv[], char **env)
 {
 	(void)argc;
@@ -46,19 +45,22 @@ int main(int argc, char *argv[], char **env)
 	while (1)
 	{
 		(&data)->input = readline("minishell%");
-		if(init_token(&data, (&data)->input, 0))
-			return (1);
-		(&data)->token = def_var_on_token((&data)->token);
-		if ((&data)->token->exit_value == FAIL)
-			return(1);
-		fill_cmd(&data, (&data)->token);
-		ft_echo((&data)->cmd->args);
-		free((&data)->input);
-		test((&data)->token);
-		lst_clear_all_token((&data)->token);
-		(&data)->token = 0;
+		if (*data.input)
+		{
+			if(init_token(&data, (&data)->input, 0))
+				return (1);
+			(&data)->token = def_var_on_token((&data)->token);
+			if ((&data)->token->exit_value == FAIL)
+				return(1);
+			fill_cmd(&data, (&data)->token);
+			handles_bultin(&data);
+			free((&data)->input);
+			test((&data)->token);
+			lst_clear_all_token((&data)->token);
+			(&data)->token = 0;
+			clear_lst_cmd(&data);
+		}
 	}
-
 	return 0;
 }
 

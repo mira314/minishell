@@ -6,7 +6,7 @@
 /*   By: vrandria <vrandria@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/25 10:30:04 by vrandria          #+#    #+#             */
-/*   Updated: 2024/09/23 08:44:37 by vrandria         ###   ########.fr       */
+/*   Updated: 2024/09/25 09:18:47 by vrandria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ t_token *echo_parsing_arg(t_token *token, t_cmd *cmd);
 /*********************lst_cmd_utils.c************************ */
 t_cmd *new_cmd(void);
 t_cmd *lst_add_back_cmd(t_cmd *cmd, t_cmd *new_cmd);
+void clear_lst_cmd(t_data *data);
 /*********************split_args.c *************************** */
 t_token *split_args(t_token *token, t_cmd *cmd);
 int arg_count(t_token *token);
@@ -61,5 +62,7 @@ t_token *ft_split_echo(t_token *token, t_cmd *cmd);
 char **ft_split_expansion(int len, t_token *token, t_cmd *cmd, char **tab);
 /*******************mini_commande_pars.c***********************/
 int parse_commande(t_data *data);
+int handles_bultin(t_data *data);
+/******************var_processing.c***********************/
 #endif
 
