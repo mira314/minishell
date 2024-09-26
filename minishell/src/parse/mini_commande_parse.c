@@ -50,10 +50,11 @@ int handles_bultin(t_data *data)
     cmd = data->cmd;
     int exit;
 
-    printf("la cmd->cmd = %s \n", cmd->cmd);
     exit = 1;
-    if (ft_strncmp(cmd->cmd, "echo", 4) == 0)
+    if (ft_strncmp(cmd->cmd, "echo", 5) == 0)
         exit = ft_echo(&(cmd->args[1]));
+    else if (ft_strncmp(cmd->cmd, "pwd", 3) == 0)
+        exit = ft_pwd();
     else
         printf("commande not found\n");
     return (exit);

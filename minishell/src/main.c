@@ -55,7 +55,7 @@ int main(int argc, char *argv[], char **env)
 			fill_cmd(&data, (&data)->token);
 			handles_bultin(&data);
 			free((&data)->input);
-			test((&data)->token);
+			//test((&data)->token);
 			lst_clear_all_token((&data)->token);
 			(&data)->token = 0;
 			clear_lst_cmd(&data);
