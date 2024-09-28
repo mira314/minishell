@@ -9,7 +9,7 @@ DIR_EXEC = $(SRCS_DIR)exec/
 
 PARSE = $(addprefix $(DIR_PARSE), $(PARSE_FILE))
 EXEC = $(addprefix $(DIR_EXEC), $(EXEC_FILE))
-SRCS = $(addprefix $(SRCS_DIR), main.c) $(PARSE) $(EXEC)
+SRCS = $(addprefix $(SRCS_DIR), main.c utils.c) $(PARSE) $(EXEC)
 
 OBJS = $(SRCS:.c=.o)
 

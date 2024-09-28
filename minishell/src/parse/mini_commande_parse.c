@@ -6,7 +6,7 @@
 /*   By: vrandria <vrandria@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/25 10:13:53 by vrandria          #+#    #+#             */
-/*   Updated: 2024/09/25 09:48:57 by vrandria         ###   ########.fr       */
+/*   Updated: 2024/09/28 16:31:31 by vrandria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,14 +34,6 @@ void exec_mini_built(char *cmd)
     if (ft_strncmp(cmd, "cd", 2) == 0)
         mini_cd(NULL);
 }
-
-char **splited_pipe(char  *cmd)
-{
-    char **splited;
-
-    splited = ft_split(cmd, '|');
-    return (splited);
-}
 */
 
 int handles_bultin(t_data *data)
@@ -56,7 +48,8 @@ int handles_bultin(t_data *data)
     else if (ft_strncmp(cmd->cmd, "pwd", 3) == 0)
         exit = ft_pwd();
     else
-        printf("commande not found\n");
+        exit = print_error("command not found: ", cmd->cmd, 127);
+    data->exit_value = exit;
     return (exit);
 }
 int parse_commande(t_data *data)
@@ -71,7 +64,7 @@ int parse_commande(t_data *data)
             cmd = cmd->next;
         else
         {
-            cmd->args = (char **)malloc(sizeof(char)*2);
+            cmd->args = (char **)malloc(sizeof(char *) * 2);
             cmd->args[0] = ft_strdup(cmd->cmd);
             cmd->args[1] = 0;
         }

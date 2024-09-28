@@ -6,7 +6,7 @@
 /*   By: vrandria <vrandria@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/03 07:31:00 by vrandria          #+#    #+#             */
-/*   Updated: 2024/09/28 09:31:40 by vrandria         ###   ########.fr       */
+/*   Updated: 2024/09/28 17:06:50 by vrandria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int init_token(t_data *data, char *input, int flag)
     {
         if (flag == DOUBLE_QUOTE || flag == ONE_QUOTE)
         {
-            printf("unexpected quote is not close\n");
+            data->exit_value = print_error("error: missing terminating quote", NULL, 127);
             return(1);
         }
     }

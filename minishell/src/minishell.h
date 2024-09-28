@@ -37,4 +37,6 @@
 # define FAIL 1
 # define SUCCESS 0
 
+/***************utils.c*********************** */
+int print_error(char *str, char *msg, int code);
 #endif
