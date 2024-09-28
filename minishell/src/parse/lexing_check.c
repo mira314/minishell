@@ -6,7 +6,7 @@
 /*   By: vrandria <vrandria@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/13 13:30:17 by vrandria          #+#    #+#             */
-/*   Updated: 2024/09/18 08:09:34 by vrandria         ###   ########.fr       */
+/*   Updated: 2024/09/28 07:09:37 by vrandria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,10 +41,8 @@ t_token *def_var_on_token(t_token *token)
 t_token *var_check(t_token *token)
 {
 	int i;
-    t_token *tmp;
 
 	i = 0;
-    tmp = token;
 	while (token->str[i])
 	{
 		if (token->str[i] == '$')
@@ -52,14 +50,13 @@ t_token *var_check(t_token *token)
 			if (token->prev && token->prev->type_token == HEREDOC)
 				break ;
 			token->type_token = VAR;
-			printf("var trouve");
-			token = token->next;
 			return (token);
 		}
 		i++;
 	}
-	return (tmp);
+	return (token);
 }
+
 int check_double_helpers(t_token *token)
 {
     int type;

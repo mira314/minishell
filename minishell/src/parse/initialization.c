@@ -6,18 +6,19 @@
 /*   By: vrandria <vrandria@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/03 07:31:00 by vrandria          #+#    #+#             */
-/*   Updated: 2024/09/25 09:37:30 by vrandria         ###   ########.fr       */
+/*   Updated: 2024/09/28 09:31:40 by vrandria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parse.h"
 
-int init_data(t_data *data)
+int init_data(t_data *data, char **env)
 {
     data->input = 0;
     data->cmd = 0;
     data->token = 0;
     data->exit_value = 1;
+    data->env = dup_env(env);
     return (1);
 }
 

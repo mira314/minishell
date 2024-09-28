@@ -6,7 +6,7 @@
 /*   By: vrandria <vrandria@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/24 10:56:40 by vrandria          #+#    #+#             */
-/*   Updated: 2024/09/25 09:38:06 by vrandria         ###   ########.fr       */
+/*   Updated: 2024/09/28 09:35:33 by vrandria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int main(int argc, char *argv[], char **env)
 	t_data data;
 	(void)env;
 
-	if(!init_data(&data))////vrandria working on it;
+	if(!init_data(&data, env))////vrandria working on it;
 		return (1);
 	while (1)
 	{
@@ -52,6 +52,7 @@ int main(int argc, char *argv[], char **env)
 			(&data)->token = def_var_on_token((&data)->token);
 			if ((&data)->token->exit_value == FAIL)
 				return(1);
+			var_process(&data, (&data)->token);
 			fill_cmd(&data, (&data)->token);
 			handles_bultin(&data);
 			free((&data)->input);

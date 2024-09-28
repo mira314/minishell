@@ -6,7 +6,7 @@
 /*   By: vrandria <vrandria@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 10:00:24 by vrandria          #+#    #+#             */
-/*   Updated: 2024/09/23 08:44:14 by vrandria         ###   ########.fr       */
+/*   Updated: 2024/09/28 06:58:46 by vrandria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,7 @@ t_token *echo_parsing_arg(t_token *token, t_cmd *cmd)
 	while (token->type_token == VAR || token->type_token == WORD)
 	{
 		if (token->inner_join == 1)
-		{
-			printf("il echo parsing dans var non gere \n");
-		}
+			printf("il echo parsing dans var non gere \n");// to do
 		else
 			cmd->args[i] = ft_strdup(token->temp);
 		i++;
@@ -55,12 +53,11 @@ t_token *parsins_word(t_cmd *cmd, t_token *token)
 		}
 		else
 		{
-			printf("gestion des argume de la commade dams parsing\n");
 			token = split_args(token, cmd);
 		}
 		
 	}
-	printf("la commade est [%s]\n", cmd->cmd);
+	///printf("la commade est [%s]\n", cmd->cmd);
 	return (token);
 }
 

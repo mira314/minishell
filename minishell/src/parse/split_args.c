@@ -6,7 +6,7 @@
 /*   By: vrandria <vrandria@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 08:42:40 by vrandria          #+#    #+#             */
-/*   Updated: 2024/09/25 09:35:34 by vrandria         ###   ########.fr       */
+/*   Updated: 2024/09/28 06:56:34 by vrandria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,6 @@ t_token *split_args(t_token *token, t_cmd *cmd)
 		if (cmd->args == 0)
 		{
 			token = echo_parsing_arg(token, cmd);
-			printf("%s\n","adding arg ok" );///////////////
 			return (token);
 		}
 		else

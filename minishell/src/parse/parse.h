@@ -6,7 +6,7 @@
 /*   By: vrandria <vrandria@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/25 10:30:04 by vrandria          #+#    #+#             */
-/*   Updated: 2024/09/25 09:18:47 by vrandria         ###   ########.fr       */
+/*   Updated: 2024/09/28 09:32:55 by vrandria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ char *ft_strtok(char *str, const char *delim);
 /*************parse_prompt_input ********/
 int parse_from_prompt(t_data *data);
 /**************initialisation************** */
-int init_data(t_data *data);
+int init_data(t_data *data, char **env);
 int init_token(t_data *data, char *input, int flag);
 t_cmd *init_cmd(t_cmd *cmd);
 void fill_cmd(t_data *data, t_token *token);
@@ -64,5 +64,11 @@ char **ft_split_expansion(int len, t_token *token, t_cmd *cmd, char **tab);
 int parse_commande(t_data *data);
 int handles_bultin(t_data *data);
 /******************var_processing.c***********************/
+int var_process(t_data *data, t_token *token);
+t_token *statu_quote_token(t_token *token, int c);
+int sep_next_char(char c);
+int double_quote_is_close(char *str, int i);
+/*************var_proces_utils.c********************** */
+
 #endif
 
