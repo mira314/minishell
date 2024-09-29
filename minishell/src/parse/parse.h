@@ -69,6 +69,7 @@ t_token *statu_quote_token(t_token *token, int c);
 int sep_next_char(char c);
 int double_quote_is_close(char *str, int i);
 /*************var_proces_utils.c********************** */
-
+int ft_varchr(t_data *data, char *str);
+char *get_var_env(t_data *data, char *str, int size);
 #endif
 
