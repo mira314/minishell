@@ -20,16 +20,16 @@ FLAGS = -Wall -Wextra -Werror -g
 
 all: $(NAME)
 
-# Compilation des fichiers objets
 %.o: %.c
 	@$(CC) $(FLAGS) -o $@ -c $<
 
 $(NAME): $(OBJS) $(LIBFT)
 	$(CC) $(FLAGS) $(OBJS) -o $(NAME) $(LIBFT) -lreadline
+	clear
 
 $(LIBFT):
 	make all -C lib
-
+	clear
 clean:
 	-rm -f $(OBJS)
 	make clean -C lib

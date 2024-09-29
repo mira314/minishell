@@ -6,43 +6,43 @@
 /*   By: vrandria <vrandria@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/13 13:30:17 by vrandria          #+#    #+#             */
-/*   Updated: 2024/09/29 11:19:26 by vrandria         ###   ########.fr       */
+/*   Updated: 2024/09/29 13:04:07 by vrandria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parse.h"
 
-t_token *def_var_on_token(t_token *token)
+t_token	*def_var_on_token(t_token *token)
 {
-	t_token *tmp;
+	t_token	*tmp;
+	char	*str;
 
 	tmp = token;
 	if (tmp->type_token == PIPE)
 	{
-        char *str;
-
-        str = "syntax error near unexpected token\'|\'";
-		token->exit_value = print_error(str, "", 2);
+		str = ft_strdup("syntax error near unexpected token\'|\'");
+		token->exit_value = print_error(str, NULL, 2);
+		free(str);
 		return (token);
 	}
 	while (tmp)
-    {
-        tmp = var_check(tmp);
-        tmp = check_double(tmp);
-        if (tmp->exit_value == 2)
-            {
-                token->exit_value = 2;
-                return (token);
-            }
-        tmp = tmp->next;
-    }
-    token->exit_value = 0;
+	{
+		tmp = var_check(tmp);
+		tmp = check_double(tmp);
+		if (tmp->exit_value == 2)
+		{
+			token->exit_value = 2;
+			return (token);
+		}
+		tmp = tmp->next;
+	}
+	token->exit_value = 0;
 	return (token);
 }
 
-t_token *var_check(t_token *token)
+t_token	*var_check(t_token *token)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (token->str[i])
@@ -59,40 +59,41 @@ t_token *var_check(t_token *token)
 	return (token);
 }
 
-int check_double_helpers(t_token *token)
+int	check_double_helpers(t_token *token)
 {
-    int type;
+	int	type;
 
-    type = 0;
-    if (token->prev)
-    {
-        type = token->prev->type_token;
-        if (token->type_token == PIPE && type == PIPE)
-            return (1);
-        if (token->type_token > PIPE && type >= PIPE)
-            return (1);
-        if (token->type_token == END && type > PIPE)
-            return (1);
-    }
-    return (0);
+	type = 0;
+	if (token->prev)
+	{
+		type = token->prev->type_token;
+		if (token->type_token == PIPE && type == PIPE)
+			return (1);
+		if (token->type_token > PIPE && type >= PIPE)
+			return (1);
+		if (token->type_token == END && type > PIPE)
+			return (1);
+	}
+	return (0);
 }
 
-t_token *check_double(t_token *token)
+t_token	*check_double(t_token *token)
 {
-    t_token *tmp;
-    tmp = token;
-    char *msg;
+	t_token	*tmp;
+	char	*msg;
 
-    msg = "syntax error near unexpected token \'newline\'";
-    while (tmp)
-    {
-        if (check_double_helpers(tmp) == 1)
-        {
-            token->exit_value = print_error(msg, 0, 2);
-            return (token);
-        }
-        tmp = tmp->next;
-    }
-    token->exit_value = 0;
-    return (token);
+	tmp = token;
+	while (tmp)
+	{
+		if (check_double_helpers(tmp) == 1)
+		{
+			msg = ft_strdup("syntax error near unexpected token \'newline\'");
+			token->exit_value = print_error(msg, NULL, 2);
+			free(msg);
+			return (token);
+		}
+		tmp = tmp->next;
+	}
+	token->exit_value = 0;
+	return (token);
 }

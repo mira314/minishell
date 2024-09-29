@@ -6,35 +6,11 @@
 /*   By: vrandria <vrandria@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/25 10:13:53 by vrandria          #+#    #+#             */
-/*   Updated: 2024/09/29 11:14:39 by vrandria         ###   ########.fr       */
+/*   Updated: 2024/09/29 12:52:26 by vrandria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parse.h"
-/*
-int is_built_in_cmd(char *cmd)
-{
-    if (ft_strncmp(cmd, "cd", 2) == 0)
-        return (1);
-    if (ft_strncmp(cmd, "cd..", 4) == 0)
-        return (1);
-    if (ft_strncmp(cmd, "pwd", 3) == 0)
-        return (1);
-    if (ft_strncmp(cmd, "echo", 4) == 0)
-        return (1);
-    return (0);
-}
-
-void exec_mini_built(char *cmd)
-{
-    if (ft_strncmp(cmd, "pwd",ft_strlen(cmd)) == 0)
-        ft_pwd();
-    if (ft_strncmp(cmd, "echo", 4) == 0)
-        ft_echo(&cmd);// a modifier apres split
-    if (ft_strncmp(cmd, "cd", 2) == 0)
-        mini_cd(NULL);
-}
-*/
 
 int handles_bultin(t_data *data)
 {
