@@ -6,11 +6,13 @@
 /*   By: vrandria <vrandria@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/24 10:56:40 by vrandria          #+#    #+#             */
-/*   Updated: 2024/09/29 11:40:58 by vrandria         ###   ########.fr       */
+/*   Updated: 2024/09/29 16:14:18 by vrandria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+int g_last_val;
 
 int print_token(int token)
 {
@@ -71,10 +73,8 @@ int main(int argc, char *argv[], char **env)
 	(void)argc;
 	(void)argv;
 	t_data data;
-	int exit;
 	(void)env;
 
-	exit = 0;
 	if(!init_data(&data, env))////vrandria working on it;
 		return (1);
 	while (1)
@@ -83,7 +83,7 @@ int main(int argc, char *argv[], char **env)
 		data.exit_value = 0;
 		if (*data.input)
 			parse_data_input(&data);
+		printf("%d\n", g_last_val);
 	}
-	(void)exit;
 	return 0;
 }

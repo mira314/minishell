@@ -3,13 +3,13 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: vrandria <vrandria@student.42.fr>          +#+  +:+       +#+         #
+#    By: vrandria <vrandria@student.42antananari    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/25 10:09:05 by vrandria          #+#    #+#              #
-#    Updated: 2024/03/23 16:00:51 by vrandria         ###   ########.fr        #
+#    Updated: 2024/09/29 14:41:54 by vrandria         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
-NAME	= libft.a
+
 SRCSLIB_DIR = ./libft/
 SRCSPR_DIR = ./libft/printf/
 SRCSLIB	= $(addprefix $(SRCSLIB_DIR),\

@@ -22,6 +22,8 @@
 # include <readline/readline.h>
 # include <errno.h>
 
+extern int g_last_val;
+
 # define EMPTY 0
 # define SPACES 1
 # define WORD 2
@@ -37,6 +39,8 @@
 # define FAIL 1
 # define SUCCESS 0
 
+
 /***************utils.c*********************** */
 int print_error(char *str, char *msg, int code);
+
 #endif

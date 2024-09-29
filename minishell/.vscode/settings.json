@@ -2,6 +2,7 @@
     "files.associations": {
         "readline.h": "c",
         "parse.h": "c",
-        "minishell.h": "c"
+        "minishell.h": "c",
+        "history.h": "c"
     }
 }

@@ -6,7 +6,7 @@
 /*   By: vrandria <vrandria@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/28 09:11:02 by vrandria          #+#    #+#             */
-/*   Updated: 2024/09/29 11:41:50 by vrandria         ###   ########.fr       */
+/*   Updated: 2024/09/29 15:46:51 by vrandria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,26 @@ char *get_var_env(t_data *data, char *str, int size_var)
             i++;
     }
     result = ft_strdup(data->env[i]);
-    result = &result[size_var + 1];
+    result = &result[size_var + 1];// decalage +1 or +0 a revoir si bug
     return (result);
+}
+
+char *exit_var_value(t_data *data, t_token *token, char *str)
+{
+    char *exit_val;
+    char *var;
+
+    var = get_type_var(str, 0);
+    if (var && ft_varchr(data, var) == 0)
+    {
+        if (token)
+            token->check_var = 1;
+        exit_val = get_var_env(data, str, ft_strlen(str));
+    }
+    else if (var && var[0] == '?')
+        exit_val =  ft_itoa(g_last_val);
+    else
+        exit_val = 0;
+    free(var);
+    return (exit_val);
 }

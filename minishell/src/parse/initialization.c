@@ -6,7 +6,7 @@
 /*   By: vrandria <vrandria@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/03 07:31:00 by vrandria          #+#    #+#             */
-/*   Updated: 2024/09/28 17:06:50 by vrandria         ###   ########.fr       */
+/*   Updated: 2024/09/29 16:16:53 by vrandria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ int init_data(t_data *data, char **env)
     data->token = 0;
     data->exit_value = 1;
     data->env = dup_env(env);
+    g_last_val = 0;
     return (1);
 }
 
@@ -42,7 +43,7 @@ int init_token(t_data *data, char *input, int flag)
     {
         if (flag == DOUBLE_QUOTE || flag == ONE_QUOTE)
         {
-            data->exit_value = print_error("error: missing terminating quote", NULL, 127);
+            data->exit_value = print_error("error: missing terminating quote", NULL, 2);
             return(1);
         }
     }
