@@ -6,7 +6,7 @@
 /*   By: vrandria <vrandria@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/13 13:30:17 by vrandria          #+#    #+#             */
-/*   Updated: 2024/09/28 07:09:37 by vrandria         ###   ########.fr       */
+/*   Updated: 2024/09/29 11:19:26 by vrandria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,22 +19,24 @@ t_token *def_var_on_token(t_token *token)
 	tmp = token;
 	if (tmp->type_token == PIPE)
 	{
-		printf("error unexpected value %s\n",tmp->str);
-		token->exit_value = FAIL;
+        char *str;
+
+        str = "syntax error near unexpected token\'|\'";
+		token->exit_value = print_error(str, "", 2);
 		return (token);
 	}
 	while (tmp)
     {
         tmp = var_check(tmp);
         tmp = check_double(tmp);
-        if (tmp->exit_value == FAIL)
+        if (tmp->exit_value == 2)
             {
-                token->exit_value = FAIL;
+                token->exit_value = 2;
                 return (token);
             }
         tmp = tmp->next;
     }
-    token->exit_value = SUCCESS;
+    token->exit_value = 0;
 	return (token);
 }
 
@@ -79,16 +81,18 @@ t_token *check_double(t_token *token)
 {
     t_token *tmp;
     tmp = token;
-    while(tmp)
+    char *msg;
+
+    msg = "syntax error near unexpected token \'newline\'";
+    while (tmp)
     {
         if (check_double_helpers(tmp) == 1)
         {
-            printf("syntax error in token (double)\n");
-            token->exit_value = FAIL;
+            token->exit_value = print_error(msg, 0, 2);
             return (token);
         }
         tmp = tmp->next;
     }
-    token->exit_value = SUCCESS;
+    token->exit_value = 0;
     return (token);
 }

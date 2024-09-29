@@ -6,7 +6,7 @@
 /*   By: vrandria <vrandria@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/25 10:13:53 by vrandria          #+#    #+#             */
-/*   Updated: 2024/09/28 16:31:31 by vrandria         ###   ########.fr       */
+/*   Updated: 2024/09/29 11:14:39 by vrandria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ int handles_bultin(t_data *data)
     else if (ft_strncmp(cmd->cmd, "pwd", 3) == 0)
         exit = ft_pwd();
     else
-        exit = print_error("command not found: ", cmd->cmd, 127);
+        exit = print_error(cmd->cmd, ": command not found", 127);
     data->exit_value = exit;
     return (exit);
 }

@@ -6,7 +6,7 @@
 /*   By: vrandria <vrandria@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/25 10:30:04 by vrandria          #+#    #+#             */
-/*   Updated: 2024/09/28 09:32:55 by vrandria         ###   ########.fr       */
+/*   Updated: 2024/09/29 11:41:57 by vrandria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,6 @@ int sep_next_char(char c);
 int double_quote_is_close(char *str, int i);
 /*************var_proces_utils.c********************** */
 int ft_varchr(t_data *data, char *str);
-char *get_var_env(t_data *data, char *str, int size);
+char *get_var_env(t_data *data, char *str, int size_var);
 #endif
 
