@@ -57,9 +57,8 @@ int double_quote_is_close(char *str, int i)
 int var_process(t_data *data, t_token *token)
 {
     int i;
-    char *a_del;
+    char *exit_val;
 
-    a_del = data->input;
     while (token)
     {
         if (token->type_token == VAR)
@@ -71,7 +70,8 @@ int var_process(t_data *data, t_token *token)
                 if (token->str[i] == '$' && double_quote_is_close(token->str, i) == 0 && sep_next_char(token->str[i + 1] == 0)
                 && (token->flag == EMPTY || token->flag == DOUBLE_QUOTE))//il le faut dans une fonctionne
                 {
-                    printf("remplacement %s de variable var_precces.c\n ",a_del);
+                    exit_val = exit_var_value(data, token, &(token->str[i]));//a revoir si correct
+                    token = var_conversion(token, exit_val, i);
                     i++;
                 }
                 else

@@ -72,3 +72,62 @@ char *get_type_var(char *var, int start)
     free(var);
     return (str);
 }
+
+t_token *sub_var(t_token *token, char *str, int i, int size)
+{
+    int j;
+    int y;
+    char *new;
+
+    j = 0;
+    y = 0;
+    size = size - size_var(&str[i]);
+    new = (char *)malloc(sizeof(char) + size + 1);
+    if (!new)
+        return (0);
+    while (str[j])
+    {
+        if (str[j] == '$' && i == j)
+        {
+            j = size_var(&str[i]) + j + 1;
+            if (str[j] == 0)
+                break ;
+        }
+        new[y] = str[j];
+        y++;
+        j++;
+    }
+    new[y] = 0;
+    free(token->str);
+    token->str = new;
+    return (token);
+}
+
+t_token *sub_var_replace(t_token *token, char *str_new, char *str, int i)
+{
+    char *new;
+    int size;
+
+    size = ft_strlen(str) - size_var(&str[i]) + ft_strlen(str_new);
+    new = get_str_token(str, str_new, size, i);//to do
+    if (token)
+    {
+        free(token->str);
+        token->str = new;
+    }
+    return (token);
+}
+
+t_token *var_conversion(t_token *token, char *str, int i)
+{
+    int size;
+
+    size = ft_strlen(token->str);
+    if (str == 0)
+        token = sub_var(token, token->str, i,  size);
+    else
+        token = sub_var_replace(token, token->str, str, i);
+   free(str);
+   str = 0;
+   return (token);
+}

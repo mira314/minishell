@@ -71,11 +71,15 @@ int double_quote_is_close(char *str, int i);
 /*************var_proces_utils.c********************** */
 int ft_varchr(t_data *data, char *str);
 char *get_var_env(t_data *data, char *str, int size_var);
+char *exit_var_value(t_data *data, t_token *token, char *str);
 
 /*************var_proces_utils_2.c********************** */
 char *get_type_var(char *var, int start);
 int is_correct_type_var(char c);
 int size_var(char *var);
+t_token *sub_var(t_token *token, char *str, int i, int size);
+t_token *var_conversion(t_token *token, char *str, int i);
+t_token *sub_var_replace(t_token *token, char *str_new, char *str, int i);
 
 #endif
 
