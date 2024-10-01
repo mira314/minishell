@@ -41,7 +41,6 @@ void test(t_token *test)
 int parse_data_input(t_data *data)
 {
 	int exit;
-
 	exit = 0;
 	if (init_token(data, data->input, 0)!= 0)
 		exit = data->exit_value;

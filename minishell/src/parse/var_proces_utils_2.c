@@ -31,18 +31,16 @@ int size_var(char *var)
 
     i = 0;
     size = 0;
-
     while (var[i] != '$')
         i++;
     if (var[i + 1] == '?' || ft_isdigit(var[i + 1]) == 1)
         return (1);
-    i++;
+    i = 1;
     while (var[i])
     {
         if (is_correct_type_var(var[i]) == 0)
             return (size);
-        else
-            size++;
+        size++;
         i++;
     }
     return (size);
@@ -53,6 +51,7 @@ char *get_type_var(char *var, int start)
     char *str;
     int i;
     int size;
+    char *var_env;
 
     i = 0;
     while (var[i])
@@ -62,18 +61,21 @@ char *get_type_var(char *var, int start)
             start = i + 1;
             break ;
         }
-        else
-            i++;
+        i++;
     }
     size = size_var(var);
     str = ft_substr(var, start, size);
     if (!str)
         return (0);
-    free(var);
-    return (str);
+    var_env = (char *)malloc(sizeof(char) * ft_strlen(str) + 2);
+    ft_strlcpy(var_env, str, ft_strlen(str) + 1);
+    var_env[ft_strlen(str)] = '=';
+    var_env[ft_strlen(str) + 1] = 0;
+    free(str);
+    return (var_env);
 }
 
-t_token *sub_var(t_token *token, char *str, int i, int size)
+int sub_var(t_token *token, char *str, int i, int size)
 {
     int j;
     int y;
@@ -81,6 +83,7 @@ t_token *sub_var(t_token *token, char *str, int i, int size)
 
     j = 0;
     y = 0;
+
     size = size - size_var(&str[i]);
     new = (char *)malloc(sizeof(char) + size + 1);
     if (!new)
@@ -99,23 +102,26 @@ t_token *sub_var(t_token *token, char *str, int i, int size)
     }
     new[y] = 0;
     free(token->str);
+    token->str = 0;
     token->str = new;
-    return (token);
+    return (0);
 }
 
-t_token *sub_var_replace(t_token *token, char *str_new, char *str, int i)
+int sub_var_replace(t_token *token, char *str_new, char *str, int i)
 {
     char *new;
     int size;
-
-    size = ft_strlen(str) - size_var(&str[i]) + ft_strlen(str_new);
-    new = get_str_token(str, str_new, size, i);//to do
+    int len_var;
+    len_var = size_var(&str_new[i]);
+    size = ft_strlen(str) -  len_var + ft_strlen(str_new);
+    new = get_str_token(str, str_new, size, i);
     if (token)
     {
         free(token->str);
         token->str = new;
     }
-    return (token);
+
+    return (1);
 }
 
 t_token *var_conversion(t_token *token, char *str, int i)
@@ -124,10 +130,50 @@ t_token *var_conversion(t_token *token, char *str, int i)
 
     size = ft_strlen(token->str);
     if (str == 0)
-        token = sub_var(token, token->str, i,  size);
+        sub_var(token, token->str, i,  size);
     else
-        token = sub_var_replace(token, token->str, str, i);
-   free(str);
-   str = 0;
+        sub_var_replace(token, token->str, str, i);
    return (token);
+}
+
+int var_copy(char *dest, char *src, int i)
+{
+    int j;
+
+    j = 0;
+    while (src[j])
+    {
+        dest[i] = src[j];
+        j++;
+        i++;
+    }
+    return (i);
+}
+
+char *get_str_token(char *str, char *str_new, int size, int i)
+{
+    char *str_token;
+    int j;
+    int y;
+
+    j = 0;
+    y = 0;
+    str_token = (char *)malloc(sizeof(char) * size + 1);
+    if (!str_token)
+        return (0);
+    while (str[j])
+    {
+        if (str[j] == '$' && j == i)
+        {
+            y = var_copy(str_token, str_new, y);
+            j = size_var(&str[i]) + j + 1;
+            if (str[j] == 0)
+                break ;
+        }
+        str_token[y] = str[j];
+        j++;
+        y++;
+    }
+    str_token[y] = 0;
+    return(str_token);
 }

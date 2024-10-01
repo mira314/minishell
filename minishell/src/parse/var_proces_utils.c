@@ -43,7 +43,7 @@ char *get_var_env(t_data *data, char *str, int size_var)
             i++;
     }
     result = ft_strdup(data->env[i]);
-    result = &result[size_var + 1];// decalage +1 or +0 a revoir si bug
+    result = &result[size_var];
     return (result);
 }
 
@@ -51,15 +51,17 @@ char *exit_var_value(t_data *data, t_token *token, char *str)
 {
     char *exit_val;
     char *var;
+    int size;
 
     var = get_type_var(str, 0);
-    if (var && ft_varchr(data, var) == 0)
+    if (var && ft_varchr(data, var) == 1)
     {
         if (token)
             token->check_var = 1;
-        exit_val = get_var_env(data, str, ft_strlen(str));
+        size = ft_strlen(var);
+        exit_val = get_var_env(data, var, size);
     }
-    else if (var && var[0] == '?')
+    else if (var && var[0] == '?' && var[1] == '=')
         exit_val =  ft_itoa(g_last_val);
     else
         exit_val = 0;

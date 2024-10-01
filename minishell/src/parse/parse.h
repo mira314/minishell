@@ -77,9 +77,11 @@ char *exit_var_value(t_data *data, t_token *token, char *str);
 char *get_type_var(char *var, int start);
 int is_correct_type_var(char c);
 int size_var(char *var);
-t_token *sub_var(t_token *token, char *str, int i, int size);
+int sub_var(t_token *token, char *str, int i, int size);
 t_token *var_conversion(t_token *token, char *str, int i);
-t_token *sub_var_replace(t_token *token, char *str_new, char *str, int i);
+int sub_var_replace(t_token *token, char *str_new, char *str, int i);
+int var_copy(char *dest, char *src, int i);
+char *get_str_token(char *str, char *str_new, int size, int i);
 
 #endif
 
