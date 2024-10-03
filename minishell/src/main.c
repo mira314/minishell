@@ -52,6 +52,9 @@ int parse_data_input(t_data *data)
 				exit = data->token->exit_value;
 				data->exit_value = exit;
 			}
+			/// to do
+		//if (data->exit_value == 0)
+			//data->exit_value = check_var(data->token);
 	}
 	if (data->exit_value == 0)
 	{
@@ -67,21 +70,48 @@ int parse_data_input(t_data *data)
 	return (exit);
 }
 
+int check_only_space(char *str)
+{
+	int i;
+
+	i = 0;
+	while (str[i])
+	{
+		if (str[i] != 32 || (str[i] < 9 && str[i] > 13))
+			return(0);
+		i++;
+	}
+	return (1);
+}
+
+int check_input(t_data *data)
+{
+	if (ft_strlen(data->input) == 0)
+		return (0);
+	if (check_only_space(data->input))
+		return (0);
+	return(1);
+}
+
 int main(int argc, char *argv[], char **env)
 {
+	t_data data;
+
 	(void)argc;
 	(void)argv;
-	t_data data;
-	(void)env;
-
+	
 	if(!init_data(&data, env))////vrandria working on it;
 		return (1);
 	while (1)
 	{
 		(&data)->input = readline("minishell$");
 		data.exit_value = 0;
-		if (*data.input)
+		if (*data.input && check_input(&data))
+		{
+			if (data.input)
+				add_history(data.input);
 			parse_data_input(&data);
+		}
 		printf("%d\n", g_last_val);
 	}
 	return 0;
