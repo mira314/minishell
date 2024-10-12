@@ -6,7 +6,7 @@
 /*   By: derakoto <derakoto@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 15:31:09 by derakoto          #+#    #+#             */
-/*   Updated: 2024/09/17 06:32:06 by derakoto         ###   ########.fr       */
+/*   Updated: 2024/09/21 10:56:32 by derakoto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,22 +42,6 @@ int	is_same_key(char *env1, char *env2)
 	return (0);
 }
 
-int	env_key_space(char *env)
-{
-	size_t	i;
-
-	if (env == NULL)
-		return (1);
-	i = 0;
-	while (env[i] != 0 && env[i] != '=')
-	{
-		if (env[i] == ' ')
-			return (0);
-		i++;
-	}
-	return (1);
-}
-
 int	is_value_present(char *env)
 {
 	size_t	i;
@@ -72,17 +56,6 @@ int	is_value_present(char *env)
 		i++;
 	}
 	return (-1);
-}
-
-int	is_key_valid(char *env)
-{
-	if (env == NULL)
-		return (-1);
-	if (env_key_len(env) == 0)
-		return (-1);
-	if (env_key_space(env) == 0)
-		return (-1);
-	return (0);
 }
 
 int	is_key_env_valid(char *key)
