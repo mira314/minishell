@@ -6,7 +6,7 @@
 /*   By: derakoto <derakoto@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/24 10:56:40 by vrandria          #+#    #+#             */
-/*   Updated: 2024/10/12 13:15:19 by derakoto         ###   ########.fr       */
+/*   Updated: 2024/10/12 14:27:04 by derakoto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,7 +113,7 @@ int main(int argc, char *argv[], char **env)
 			parse_data_input(&data);
 		}
 		else
-			g_last_val = 127;
+			g_last_val = 0;
 		printf("%d\n", g_last_val);
 	}
 	return 0;

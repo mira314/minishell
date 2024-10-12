@@ -5,6 +5,7 @@ void	exec_one_cmd(t_data	*data)
 	char	*path;
 	char	*total_path;
 	int		pid;
+	int		status;
 
 	if (handles_bultin(data) == SUCCESS)
 		return ;
@@ -13,6 +14,11 @@ void	exec_one_cmd(t_data	*data)
 	{
 		total_path = build_path(path, data->cmd->cmd);
 		free(path);
+		if (total_path == NULL)
+		{
+			g_last_val = 1;
+			return ;
+		}
 		pid = fork();
 		if (pid == 0)
 		{
@@ -20,7 +26,8 @@ void	exec_one_cmd(t_data	*data)
 				free(total_path);
 		}else
 		{
-			wait(NULL);
+			wait(&status);
+			g_last_val = WEXITSTATUS(status);
 			free(total_path);
 		}
 		return ;
