@@ -7,6 +7,7 @@
 # include <errno.h>
 # include <unistd.h>
 # include <dirent.h>
+# include <sys/wait.h>
 
 void    exec();
 int		ft_echo(char **args);
