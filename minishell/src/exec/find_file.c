@@ -45,12 +45,12 @@ char *is_in_path_env(char *file_name, char **envs)
         if (is_file_in(splitted_path[i], file_name) == 0)
         {
             result = ft_strdup(splitted_path[i]);
-            ft_tbl_free(splitted_path);
+            mini_tbl_free(splitted_path);
             return (result);
         }
         i++;
     }
-    ft_tbl_free(splitted_path);
+    mini_tbl_free(splitted_path);
     return (NULL);
 }
 

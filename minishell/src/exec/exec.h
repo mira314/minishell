@@ -1,13 +1,14 @@
 #ifndef EXEC_H
 # define EXEC_H
 
-# include "libft.h"
+# include "../../src/minishell.h"
 # include <stdlib.h>
 # include <stdio.h>
 # include <errno.h>
 # include <unistd.h>
 # include <dirent.h>
 
+void    exec();
 int		ft_echo(char **args);
 int	    ft_pwd(void);
 int		mini_tbl_len(char **tbl);
