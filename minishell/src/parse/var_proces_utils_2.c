@@ -6,7 +6,7 @@
 /*   By: vrandria <vrandria@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/29 14:41:39 by vrandria          #+#    #+#             */
-/*   Updated: 2024/09/29 15:45:24 by vrandria         ###   ########.fr       */
+/*   Updated: 2024/10/12 10:25:05 by vrandria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,18 +124,6 @@ int sub_var_replace(t_token *token, char *str_new, char *str, int i)
     return (1);
 }
 
-t_token *var_conversion(t_token *token, char *str, int i)
-{
-    int size;
-
-    size = ft_strlen(token->str);
-    if (str == 0)
-        sub_var(token, token->str, i,  size);
-    else
-        sub_var_replace(token, token->str, str, i);
-   return (token);
-}
-
 int var_copy(char *dest, char *src, int i)
 {
     int j;
@@ -176,4 +164,16 @@ char *get_str_token(char *str, char *str_new, int size, int i)
     }
     str_token[y] = 0;
     return(str_token);
+}
+
+t_token *var_conversion(t_token *token, char *str, int i)
+{
+    int size;
+
+    size = ft_strlen(token->str);
+    if (str == 0)
+        sub_var(token, token->str, i,  size);
+    else
+        sub_var_replace(token, token->str, str, i);
+   return (token);
 }

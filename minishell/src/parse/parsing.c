@@ -6,7 +6,7 @@
 /*   By: vrandria <vrandria@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 10:00:24 by vrandria          #+#    #+#             */
-/*   Updated: 2024/09/29 13:41:12 by vrandria         ###   ########.fr       */
+/*   Updated: 2024/10/12 10:41:17 by vrandria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ t_token *echo_parsing_arg(t_token *token, t_cmd *cmd)
 		if (token->inner_join == 1)
 			printf("il echo parsing dans var non gere \n");// to do
 		else
-			cmd->args[i] = ft_strdup(token->temp);
+			cmd->args[i] = ft_strdup(token->str);
 		i++;
 		token = token->next;
 	}
