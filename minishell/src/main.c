@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: derakoto <derakoto@student.42antananari    +#+  +:+       +#+        */
+/*   By: vrandria <vrandria@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/24 10:56:40 by vrandria          #+#    #+#             */
-/*   Updated: 2024/10/12 14:27:04 by derakoto         ###   ########.fr       */
+/*   Updated: 2024/10/13 10:52:57 by vrandria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,16 +105,19 @@ int main(int argc, char *argv[], char **env)
 	while (1)
 	{
 		(&data)->input = readline("minishell$");
+		//(&data)->input = ft_strdup("echo $USER");
 		data.exit_value = 0;
 		if (*data.input && check_input(&data))
 		{
 			if (data.input)
 				add_history(data.input);
 			parse_data_input(&data);
+			//clean_cmd(&data);
 		}
 		else
 			g_last_val = 0;
 		printf("%d\n", g_last_val);
+		break ;
 	}
 	return 0;
 }

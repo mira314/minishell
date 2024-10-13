@@ -6,7 +6,7 @@
 /*   By: vrandria <vrandria@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/25 10:30:04 by vrandria          #+#    #+#             */
-/*   Updated: 2024/09/29 15:54:15 by vrandria         ###   ########.fr       */
+/*   Updated: 2024/10/13 10:57:39 by vrandria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,11 +77,12 @@ char *exit_var_value(t_data *data, t_token *token, char *str);
 char *get_type_var(char *var, int start);
 int is_correct_type_var(char c);
 int size_var(char *var);
+int sub_var_replace(t_token *token, char *str_new, char *str, int i);
+
+/*************var_proces_utils_2.c********************** */
 int sub_var(t_token *token, char *str, int i, int size);
 t_token *var_conversion(t_token *token, char *str, int i);
-int sub_var_replace(t_token *token, char *str_new, char *str, int i);
 int var_copy(char *dest, char *src, int i);
 char *get_str_token(char *str, char *str_new, int size, int i);
-
 #endif
 

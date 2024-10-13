@@ -43,4 +43,6 @@ extern int g_last_val;
 /***************utils.c*********************** */
 int print_error(char *str, char *msg, int code);
 
+/****************clear.c  ******************* */
+void clean_cmd(t_data *data);
 #endif
