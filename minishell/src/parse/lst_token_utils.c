@@ -58,6 +58,7 @@ t_token	*lst_del_token(t_token *token)
 	tmp = token->next;
 	free(token->str);
 	free(token->temp);
+	token->temp = 0;
 	free(token);
 	return (tmp);
 }

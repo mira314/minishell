@@ -60,6 +60,10 @@ t_token *split_args(t_token *token, t_cmd *cmd);
 int arg_count(t_token *token);
 t_token *ft_split_echo(t_token *token, t_cmd *cmd);
 char **ft_split_expansion(int len, t_token *token, t_cmd *cmd, char **tab);
+t_token *new_args_for_other_cmd(t_token *token , t_cmd *cmd);
+int count_word(t_token *token);
+char **copy_new_tab(int len, char **str, t_token *token, t_cmd *cmd);
+t_token *add_args_for_other_cmd(t_token *token, t_cmd *cmd);
 /*******************mini_commande_pars.c***********************/
 int parse_commande(t_data *data);
 int handles_bultin(t_data *data);

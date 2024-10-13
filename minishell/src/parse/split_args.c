@@ -47,11 +47,94 @@ t_token *ft_split_echo(t_token *token, t_cmd *cmd)
 	return (token);
 }
 
+//creation d autre ficchier pour les autre commande
+
+int count_word(t_token *token)
+{
+	int count;
+
+	count = 0;
+	while (token && (token->type_token == WORD || token->type_token == VAR))
+	{
+		count++;
+		token = token->next;
+	}
+	return (count);
+}
+
+t_token *new_args_for_other_cmd(t_token *token , t_cmd *cmd)
+{
+	int i;
+	t_token *tmp;
+
+	i = 0;
+
+	tmp = token;
+	cmd->args = malloc(sizeof(char) * (count_word(tmp) + 2));
+	if (!cmd->args)
+		return (0);
+	cmd->args[i] = ft_strdup(cmd->cmd);
+	i++;
+	while (tmp->type_token == WORD || tmp->type_token == VAR)
+	{
+		cmd->args[i] = ft_strdup(tmp->str);
+		i++;
+		tmp = tmp->next;
+	}
+	cmd->args[i] = 0;
+	return (tmp);
+}
+
+char **copy_new_tab(int len, char **str, t_token *token, t_cmd *cmd)
+{
+	int i;
+
+	i = 0;
+	while (i < len)
+	{
+		str[i] = cmd->args[i];
+		i++;
+	}
+	while (token->type_token == WORD || token->type_token == VAR)
+	{
+		str[i] = ft_strdup(token->str);
+		i++;
+		token = token->next;
+	}
+	str[i] = 0;
+	return (str);
+} 
+
+t_token *add_args_for_other_cmd(t_token *token, t_cmd *cmd)
+{
+	int i;
+	int len;
+	char **new_chain;
+	t_token *old;
+
+	i = 0;
+	len = 0;
+	old = token;
+	while (token->type_token == WORD || token->type_token == VAR)
+	{
+		i++;
+		token = token->next;
+	}
+	while (cmd->args[len])
+		len++;
+	new_chain = malloc(sizeof(char) * (i + len + 1));
+	if (!new_chain)
+		return (0);
+	new_chain = copy_new_tab(len, new_chain, token, cmd);
+	free(cmd->args);
+	cmd->args = new_chain;
+	return (token);
+}
+
 t_token *split_args(t_token *token, t_cmd *cmd)
 {
 	if (ft_strncmp(cmd->cmd, "echo", 4) == 0)
 	{
-		//printf("(parsing)parsing des argument echo car la commande est '%s'\n", cmd->cmd);
 		if (cmd->args == 0)
 		{
 			token = echo_parsing_arg(token, cmd);
@@ -59,7 +142,6 @@ t_token *split_args(t_token *token, t_cmd *cmd)
 		}
 		else
 		{
-			printf("%s\n","spliter_arg_else ok ");
 			token = ft_split_echo(token, cmd);
 			return(token);
 		}
@@ -68,13 +150,13 @@ t_token *split_args(t_token *token, t_cmd *cmd)
 	{
 		if (!cmd->args)
 		{
-			printf("la commande n est pas echo sans argument mais '%s' (parsing.c)\n", cmd->cmd);
-			return(token->next);
+			token = new_args_for_other_cmd(token, cmd);
+			return(token);
 		}
 		else
 		{
-			printf("la commande n est pas echo avec argument mais '%s' (parsing.c)\n", cmd->cmd);
-			return(token->next);
+			token = add_args_for_other_cmd(token, cmd);
+			return(token);
 		}
 		printf("cas non gere -split_args.c\n");
 	}

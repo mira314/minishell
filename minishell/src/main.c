@@ -117,7 +117,6 @@ int main(int argc, char *argv[], char **env)
 		else
 			g_last_val = 0;
 		printf("%d\n", g_last_val);
-		break ;
 	}
 	return 0;
 }
