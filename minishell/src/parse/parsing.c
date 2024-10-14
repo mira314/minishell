@@ -57,7 +57,6 @@ t_token *parsins_word(t_cmd *cmd, t_token *token)
 		}
 		
 	}
-	///printf("la commade est [%s]\n", cmd->cmd);
 	return (token);
 }
 

@@ -74,6 +74,8 @@ void fill_cmd(t_data *data, t_token *token)
             data->cmd = lst_add_back_cmd(data->cmd, new_cmd());
         if (tmp->type_token == WORD || tmp->type_token == VAR)
             tmp = parsins_word(data->cmd, tmp);
+        else if (tmp->type_token == PIPE)
+            tmp = parsing_pipe(data->cmd, tmp);
         else if (token->type_token == END)
             break ;
     }
