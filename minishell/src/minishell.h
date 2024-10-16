@@ -45,4 +45,5 @@ int print_error(char *str, char *msg, int code);
 
 /****************clear.c  ******************* */
 void clean_cmd(t_data *data);
+void clear_env(char **env);
 #endif

@@ -6,7 +6,7 @@
 /*   By: vrandria <vrandria@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/24 10:56:40 by vrandria          #+#    #+#             */
-/*   Updated: 2024/10/13 10:52:57 by vrandria         ###   ########.fr       */
+/*   Updated: 2024/10/16 09:48:17 by vrandria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,5 +118,6 @@ int main(int argc, char *argv[], char **env)
 			g_last_val = 0;
 		printf("%d\n", g_last_val);
 	}
+	clear_env((&data)->env);
 	return 0;
 }

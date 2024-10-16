@@ -6,13 +6,11 @@
 /*   By: vrandria <vrandria@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 07:35:00 by vrandria          #+#    #+#             */
-/*   Updated: 2024/10/13 11:04:28 by vrandria         ###   ########.fr       */
+/*   Updated: 2024/10/16 09:28:07 by vrandria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parse.h"
-
-/**flag is for to check is quote in the str*/
 
 int	check_quote(int flag, int input)
 {

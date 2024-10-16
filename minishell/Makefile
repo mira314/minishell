@@ -47,5 +47,5 @@ re: fclean all
 	make re -C lib
 
 test :
-	valgrind --suppressions=.leak_ignore.sup --leak-check=full --show-leak-kinds=all ./minishell
+	valgrind --suppressions=leak_ignore.sup --leak-check=full --show-leak-kinds=all ./minishell
 

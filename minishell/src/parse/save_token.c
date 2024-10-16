@@ -6,17 +6,17 @@
 /*   By: vrandria <vrandria@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 09:13:20 by vrandria          #+#    #+#             */
-/*   Updated: 2024/09/14 09:50:41 by vrandria         ###   ########.fr       */
+/*   Updated: 2024/10/16 09:36:13 by vrandria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parse.h"
 
-int token_word(t_token **token, char *str, int i, int start)
+int	token_word(t_token **token, char *str, int i, int start)
 {
-	int j;
-	char *arg;
-	t_token *new;
+	int		j;
+	char	*arg;
+	t_token	*new;
 
 	j = 0;
 	arg = (char *)malloc(sizeof(char) * (i - start) + 1);
@@ -34,10 +34,10 @@ int token_word(t_token **token, char *str, int i, int start)
 	return (0);
 }
 
-int token_other(t_token **token, char *str, int i, int type_token)
+int	token_other(t_token **token, char *str, int i, int type_token)
 {
-	char *arg;
-	t_token *new;
+	char	*arg;
+	t_token	*new;
 
 	if (type_token == APPEND || type_token == HEREDOC)
 	{
@@ -51,12 +51,13 @@ int token_other(t_token **token, char *str, int i, int type_token)
 	else
 	{
 		arg = (char *)malloc(2);
-			if (!arg)
-		return (1);
+		if (!arg)
+			return (1);
 		arg[0] = str[i];
 		arg[1] = 0;
 	}
 	new = new_token(arg, 0, type_token);
 	(*token) = lst_add_back_token((*token), new);
+	free(arg);
 	return (0);
 }
