@@ -4,7 +4,9 @@ SRCS_DIR = ./src/
 PARSE_FILE = split_args.c var_processing.c lst_cmd_utils.c lexing_check.c parsing.c \
 			mini_commande_parse.c token.c initialization.c exce_builtin.c \
 			lst_token_utils.c save_token.c lexing.c var_proces_utils.c \
-			var_proces_utils_2.c var_proces_utils_3.c pipe_proces.c
+			var_proces_utils_2.c var_proces_utils_3.c pipe_proces.c \
+			split_args_other.c
+
 EXEC_FILE = exec.c find_file.c ft_echo.c ft_pwd.c mini_cd.c mini_exec_utils.c env.c env_utils.c unset.c export.c export_utils.c
 
 DIR_PARSE = $(SRCS_DIR)parse/
@@ -23,7 +25,7 @@ FLAGS = -Wall -Wextra -Werror -g
 
 all: $(NAME)
 
-%.o: %.c/home/vrandria/gitmy/R3/minishell/minishell/src/minishell.h
+%.o: %.c
 	@$(CC) $(FLAGS) -o $@ -c $<
 
 $(NAME): $(OBJS) $(LIBFT)

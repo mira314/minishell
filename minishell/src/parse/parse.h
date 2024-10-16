@@ -6,7 +6,7 @@
 /*   By: vrandria <vrandria@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/25 10:30:04 by vrandria          #+#    #+#             */
-/*   Updated: 2024/10/13 10:57:39 by vrandria         ###   ########.fr       */
+/*   Updated: 2024/10/16 08:45:09 by vrandria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,10 +60,7 @@ t_token *split_args(t_token *token, t_cmd *cmd);
 int arg_count(t_token *token);
 t_token *ft_split_echo(t_token *token, t_cmd *cmd);
 char **ft_split_expansion(int len, t_token *token, t_cmd *cmd, char **tab);
-t_token *new_args_for_other_cmd(t_token *token , t_cmd *cmd);
-int count_word(t_token *token);
 char **copy_new_tab(int len, char **str, t_token *token, t_cmd *cmd);
-t_token *add_args_for_other_cmd(t_token *token, t_cmd *cmd);
 /*******************mini_commande_pars.c***********************/
 int parse_commande(t_data *data);
 int handles_bultin(t_data *data);
@@ -88,5 +85,11 @@ int sub_var(t_token *token, char *str, int i, int size);
 t_token *var_conversion(t_token *token, char *str, int i);
 int var_copy(char *dest, char *src, int i);
 char *get_str_token(char *str, char *str_new, int size, int i);
+/********************split_args_other.c*********************/
+int count_word(t_token *token);
+t_token *new_args_for_other_cmd(t_token *token , t_cmd *cmd);
+t_token *add_args_for_other_cmd(t_token *token, t_cmd *cmd);
+/********************pipe_process*********************** */
+t_token *parsing_pipe(t_data *data, t_token *token);
 #endif
 

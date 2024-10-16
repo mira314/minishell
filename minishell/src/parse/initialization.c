@@ -6,7 +6,7 @@
 /*   By: vrandria <vrandria@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/03 07:31:00 by vrandria          #+#    #+#             */
-/*   Updated: 2024/09/29 16:16:53 by vrandria         ###   ########.fr       */
+/*   Updated: 2024/10/16 08:50:25 by vrandria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ void fill_cmd(t_data *data, t_token *token)
         if (tmp->type_token == WORD || tmp->type_token == VAR)
             tmp = parsins_word(data->cmd, tmp);
         else if (tmp->type_token == PIPE)
-            tmp = parsing_pipe(data->cmd, tmp);
+            tmp = parsing_pipe(data, tmp);
         else if (token->type_token == END)
             break ;
     }
