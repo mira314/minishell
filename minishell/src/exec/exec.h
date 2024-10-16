@@ -37,6 +37,6 @@ char    *get_env_value(char **envs, char *key);
 char    *is_in_path_env(char *file_name, char **envs);
 char    *build_path(char *path, char *file_name);
 void	exec_one_cmd(t_data	*data);
-
+int		mini_env(char **args, char **envs);
 
 #endif

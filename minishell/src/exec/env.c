@@ -6,7 +6,7 @@
 /*   By: derakoto <derakoto@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 15:43:58 by derakoto          #+#    #+#             */
-/*   Updated: 2024/10/12 09:50:32 by derakoto         ###   ########.fr       */
+/*   Updated: 2024/10/16 11:28:49 by derakoto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,28 @@ int	is_key_of(char *key, char *env)
 	{
 		if (key[i] != env[i])
 			return (1);
+		i++;
+	}
+	return (0);
+}
+
+int		mini_env(char **args, char **envs)
+{
+	int	i;
+
+	if (args == NULL)
+		return (1);
+	if (mini_tbl_len(args) > 1)
+	{
+		print_error(args[0], ": too many arguments", 1);
+		return (1);
+	}
+	if (envs == NULL)
+		return (1);
+	i = 0;
+	while (envs[i] != 0)
+	{
+		printf("%s\n", envs[i]);
 		i++;
 	}
 	return (0);
