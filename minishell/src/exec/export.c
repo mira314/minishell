@@ -85,3 +85,16 @@ void	export_one_env(char *env)
 	}
 	write(1, "\"\n", 2);
 }
+
+int	mini_export(char **args, char ***envs)
+{
+	if (args == NULL || envs == NULL)
+		return (1);
+	if (mini_tbl_len(args) == 1)
+	{
+		export(*envs);
+		return (0);
+	}
+	*envs = add_env(*envs, args + 1);
+	return (0);
+}
