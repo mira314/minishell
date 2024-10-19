@@ -6,7 +6,7 @@
 /*   By: vrandria <vrandria@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 08:46:57 by vrandria          #+#    #+#             */
-/*   Updated: 2024/10/19 07:47:15 by vrandria         ###   ########.fr       */
+/*   Updated: 2024/10/19 10:46:10 by vrandria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,10 @@ t_token	*new_token(char *str, int flag, int type_token)
 	token->str = str;
 	token->temp = ft_strdup(str);
 	if (type_token != WORD)
-		token->temp = 0;
+		{
+			free(token->temp);
+			token->temp = 0;
+		}
 	token->check_var = 0;
 	token->inner_join = 0;
 	token->type_token = type_token;

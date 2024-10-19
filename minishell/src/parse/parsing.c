@@ -6,7 +6,7 @@
 /*   By: vrandria <vrandria@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 10:00:24 by vrandria          #+#    #+#             */
-/*   Updated: 2024/10/12 10:41:17 by vrandria         ###   ########.fr       */
+/*   Updated: 2024/10/19 10:43:01 by vrandria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,12 @@ t_token *echo_parsing_arg(t_token *token, t_cmd *cmd)
 	int i;
 
 	i = 0;
+	argc = 0;
 	argc = arg_count(token);
-	cmd->args = (char **)malloc(sizeof(char) * (argc + 1));
+	cmd->args = (char **)malloc(sizeof(char *) * (argc + 2));
 	if (!cmd->args)
 		return (0);
-	cmd->args[i] = ft_strdup(cmd->cmd);
-	i++;
+	cmd->args[i++] = ft_strdup(cmd->cmd);
 	while (token->type_token == VAR || token->type_token == WORD)
 	{
 		if (token->inner_join == 1)

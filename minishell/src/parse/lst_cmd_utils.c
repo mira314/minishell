@@ -6,7 +6,7 @@
 /*   By: vrandria <vrandria@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 07:51:18 by vrandria          #+#    #+#             */
-/*   Updated: 2024/10/19 09:44:30 by vrandria         ###   ########.fr       */
+/*   Updated: 2024/10/19 10:55:44 by vrandria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ static t_cmd *lst_del_cmd(t_cmd *cmd)
     free(cmd->cmd);
     free(cmd->history);
     cmd->history = 0;
+    free(cmd->args);
     cmd->args = 0;
     cmd->cmd = 0;
     return (tmp);

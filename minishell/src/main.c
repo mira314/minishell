@@ -6,7 +6,7 @@
 /*   By: vrandria <vrandria@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/24 10:56:40 by vrandria          #+#    #+#             */
-/*   Updated: 2024/10/19 09:51:44 by vrandria         ###   ########.fr       */
+/*   Updated: 2024/10/19 11:00:09 by vrandria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ int parse_data_input(t_data *data)
 		clear_lst_cmd(data);
 	}
 		free(data->input);
-		test(data->token);
+		//test(data->token);
 		lst_clear_all_token(data->token);
 		data->token = 0;
 	return (exit);
@@ -112,7 +112,8 @@ int main(int argc, char *argv[], char **env)
 			if (data.input)
 				add_history(data.input);
 			parse_data_input(&data);
-			//clean_cmd(&data);
+			clear_lst_cmd(&data);
+			free((&data)->cmd);
 			break ;
 		}
 		else
