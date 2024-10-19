@@ -6,7 +6,7 @@
 /*   By: vrandria <vrandria@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/24 10:56:40 by vrandria          #+#    #+#             */
-/*   Updated: 2024/10/19 11:03:28 by vrandria         ###   ########.fr       */
+/*   Updated: 2024/10/19 14:57:15 by vrandria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,10 +61,9 @@ int parse_data_input(t_data *data)
 		var_process(data, data->token);
 		fill_cmd(data, data->token);
 		exec_one_cmd(data);
-		clear_lst_cmd(data);
 	}
 		free(data->input);
-		//test(data->token);
+		test(data->token);
 		lst_clear_all_token(data->token);
 		data->token = 0;
 	return (exit);
@@ -105,19 +104,18 @@ int main(int argc, char *argv[], char **env)
 	while (1)
 	{
 		(&data)->input = readline("minishell$");
-		//(&data)->input = ft_strdup("echo $USER");
 		data.exit_value = 0;
 		if (*data.input && check_input(&data))
 		{
 			if (data.input)
 				add_history(data.input);
 			parse_data_input(&data);
-			clear_lst_cmd(&data);
-			free((&data)->cmd);
 		}
 		else
 			g_last_val = 0;
 		printf("%d\n", g_last_val);
+		clear_lst_cmd(&data);
+		break ;
 	}
 	clear_env((&data)->env);
 	return 0;

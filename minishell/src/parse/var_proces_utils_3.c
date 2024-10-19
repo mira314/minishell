@@ -6,7 +6,7 @@
 /*   By: vrandria <vrandria@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/13 10:54:54 by vrandria          #+#    #+#             */
-/*   Updated: 2024/10/13 10:57:45 by vrandria         ###   ########.fr       */
+/*   Updated: 2024/10/19 14:41:34 by vrandria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,5 +95,6 @@ char *get_str_token(char *str, char *str_new, int size, int i)
         y++;
     }
     str_token[y] = 0;
+    free(str);
     return(str_token);
 }

@@ -6,7 +6,7 @@
 /*   By: vrandria <vrandria@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 08:46:57 by vrandria          #+#    #+#             */
-/*   Updated: 2024/10/19 10:46:10 by vrandria         ###   ########.fr       */
+/*   Updated: 2024/10/19 13:30:44 by vrandria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ t_token	*new_token(char *str, int flag, int type_token)
 	token = (t_token *)malloc(sizeof(t_token));
 	if (!token)
 		return (0);
-	token->str = str;
+	token->str = ft_strdup(str);
 	token->temp = ft_strdup(str);
 	if (type_token != WORD)
 		{
@@ -33,6 +33,7 @@ t_token	*new_token(char *str, int flag, int type_token)
 	token->exit_value = 0;
 	token->prev = 0;
 	token->next = 0;
+	free(str);
 	return (token);
 }
 
@@ -59,7 +60,7 @@ t_token	*lst_del_token(t_token *token)
 	t_token *tmp;
 
 	tmp = token->next;
-	//free(token->str);
+	free(token->str);
 	free(token->temp);
 	token->temp = 0;
 	free(token);

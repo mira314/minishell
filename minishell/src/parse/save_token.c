@@ -6,7 +6,7 @@
 /*   By: vrandria <vrandria@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 09:13:20 by vrandria          #+#    #+#             */
-/*   Updated: 2024/10/16 09:36:13 by vrandria         ###   ########.fr       */
+/*   Updated: 2024/10/19 13:29:44 by vrandria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,12 @@ int	token_word(t_token **token, char *str, int i, int start)
 	}
 	arg[j] = 0;
 	new = new_token(arg, 0, WORD);
+	if (!new)
+	{
+		free(arg);
+		return (1);
+	}
+	
 	(*token) = lst_add_back_token((*token), new);
 	return (0);
 }
@@ -58,6 +64,5 @@ int	token_other(t_token **token, char *str, int i, int type_token)
 	}
 	new = new_token(arg, 0, type_token);
 	(*token) = lst_add_back_token((*token), new);
-	free(arg);
 	return (0);
 }

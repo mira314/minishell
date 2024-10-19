@@ -6,7 +6,7 @@
 /*   By: vrandria <vrandria@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/28 09:11:02 by vrandria          #+#    #+#             */
-/*   Updated: 2024/10/12 10:28:03 by vrandria         ###   ########.fr       */
+/*   Updated: 2024/10/19 14:37:46 by vrandria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ char *get_var_env(t_data *data, char *str, int size_var)
 {
     char *result;
     int i;
+    char *sub;
 
     i = 0;
     while (data->env[i])
@@ -43,8 +44,9 @@ char *get_var_env(t_data *data, char *str, int size_var)
             i++;
     }
     result = ft_strdup(data->env[i]);
-    result = &result[size_var];
-    return (result);
+    sub = ft_substr(result, size_var, ft_strlen(result));
+    free(result);
+    return (sub);
 }
 
 char *exit_var_value(t_data *data, t_token *token, char *str)
