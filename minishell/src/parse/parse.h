@@ -6,7 +6,7 @@
 /*   By: vrandria <vrandria@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/25 10:30:04 by vrandria          #+#    #+#             */
-/*   Updated: 2024/10/16 08:45:09 by vrandria         ###   ########.fr       */
+/*   Updated: 2024/10/19 09:04:44 by vrandria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,5 +91,7 @@ t_token *new_args_for_other_cmd(t_token *token , t_cmd *cmd);
 t_token *add_args_for_other_cmd(t_token *token, t_cmd *cmd);
 /********************pipe_process*********************** */
 t_token *parsing_pipe(t_data *data, t_token *token);
+/********************input_process*********************** */
+t_token *parsing_input(t_cmd *cmd, t_token *token);
 #endif
 
