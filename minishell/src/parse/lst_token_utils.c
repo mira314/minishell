@@ -6,7 +6,7 @@
 /*   By: vrandria <vrandria@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 08:46:57 by vrandria          #+#    #+#             */
-/*   Updated: 2024/10/13 10:42:06 by vrandria         ###   ########.fr       */
+/*   Updated: 2024/10/19 07:47:15 by vrandria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ t_token	*lst_del_token(t_token *token)
 	t_token *tmp;
 
 	tmp = token->next;
-	free(token->str);
+	//free(token->str);
 	free(token->temp);
 	token->temp = 0;
 	free(token);
