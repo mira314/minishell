@@ -6,7 +6,7 @@
 /*   By: vrandria <vrandria@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 10:00:24 by vrandria          #+#    #+#             */
-/*   Updated: 2024/10/19 10:43:01 by vrandria         ###   ########.fr       */
+/*   Updated: 2024/10/19 15:08:49 by vrandria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ t_token *parsins_word(t_cmd *cmd, t_token *token)
 			if (token->type_token == VAR && (ft_strchr(token->str, 32)))
 				printf("il faut spliter car espace trouve");
 			else
-				cmd->cmd =ft_strdup(token->str);// a freee e
+				cmd->cmd = ft_strdup(token->str);
 			token = token->next;
 		}
 		else
