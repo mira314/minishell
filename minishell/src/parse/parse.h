@@ -49,6 +49,7 @@ int check_double_helpers(t_token *token);
 int token_word(t_token **token, char *str, int i, int start);
 int token_other(t_token **token, char *str, int i, int type_token);
 /*******************parsing.c **********************************/
+void split_token(t_cmd *cmd, t_token *token);
 t_token *parsins_word(t_cmd *cmd, t_token *token);
 t_token *echo_parsing_arg(t_token *token, t_cmd *cmd);
 /*********************lst_cmd_utils.c************************ */

@@ -12,7 +12,7 @@
 
 #include "minishell.h"
 
-void clear_env(char **env)
+void clear_tab(char **env)
 {
     int i;
 

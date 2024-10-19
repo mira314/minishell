@@ -115,8 +115,7 @@ int main(int argc, char *argv[], char **env)
 			g_last_val = 0;
 		printf("%d\n", g_last_val);
 		clear_lst_cmd(&data);
-		break ;
 	}
-	clear_env((&data)->env);
+	clear_tab((&data)->env);
 	return 0;
 }
