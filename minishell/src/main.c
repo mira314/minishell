@@ -6,7 +6,7 @@
 /*   By: vrandria <vrandria@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/24 10:56:40 by vrandria          #+#    #+#             */
-/*   Updated: 2024/10/19 11:00:09 by vrandria         ###   ########.fr       */
+/*   Updated: 2024/10/19 11:03:28 by vrandria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,7 +114,6 @@ int main(int argc, char *argv[], char **env)
 			parse_data_input(&data);
 			clear_lst_cmd(&data);
 			free((&data)->cmd);
-			break ;
 		}
 		else
 			g_last_val = 0;
