@@ -6,7 +6,7 @@
 /*   By: vrandria <vrandria@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 07:51:18 by vrandria          #+#    #+#             */
-/*   Updated: 2024/09/25 09:16:25 by vrandria         ###   ########.fr       */
+/*   Updated: 2024/10/19 09:44:30 by vrandria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,13 +48,11 @@ static t_cmd *lst_del_cmd(t_cmd *cmd)
     t_cmd *tmp;
 
     tmp = cmd->next;
-    free(cmd->args);///non gere actuellement pour **
     free(cmd->cmd);
     free(cmd->history);
     cmd->history = 0;
     cmd->args = 0;
     cmd->cmd = 0;
-
     return (tmp);
 }
 

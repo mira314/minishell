@@ -6,7 +6,7 @@
 /*   By: vrandria <vrandria@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 07:35:00 by vrandria          #+#    #+#             */
-/*   Updated: 2024/10/16 09:28:07 by vrandria         ###   ########.fr       */
+/*   Updated: 2024/10/19 09:36:52 by vrandria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int	what_is_sep(char *str, int i)
 		return (HEREDOC);
 	if (str[i] == '>' && str[i + 1] == '>')
 		return (APPEND);
-	if (str[i] == 0)
+	if (str[i] == '\0')
 		return (END);
 	if (str[i] == '|')
 		return (PIPE);
