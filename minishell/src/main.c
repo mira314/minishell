@@ -24,8 +24,13 @@ int print_token(int token)
 		printf("[VAR]");
 	if (token ==  END)
 		printf("[END]");
+	if (token ==  PIPE)
+		printf("[PIPE]");
+	if (token ==  TRUNC)
+		printf("[TRUNC]");
 	return (0);
 }
+
 void test(t_token *test)
 {
     while(test)
@@ -63,7 +68,7 @@ int parse_data_input(t_data *data)
 		exec_one_cmd(data);
 	}
 		free(data->input);
-		test(data->token);
+		//test(data->token);
 		lst_clear_all_token(data->token);
 		data->token = 0;
 	return (exit);

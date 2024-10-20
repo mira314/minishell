@@ -28,6 +28,7 @@ int init_data(t_data *data, char **env);
 int init_token(t_data *data, char *input, int flag);
 t_cmd *init_cmd(t_cmd *cmd);
 void fill_cmd(t_data *data, t_token *token);
+void init_input_output(t_cmd *cmd);
 /*****token.c***************************/
 int token_split_word_and_sep(char *str, int start, t_data *data, int *i);
 int what_is_sep(char *str, int i);

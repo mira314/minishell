@@ -45,6 +45,7 @@ t_cmd *init_cmd(t_cmd *cmd)
     cmd->args = 0;
     cmd->output = 0;
     cmd->prev = 0;
+    cmd->io = 0;
     cmd->next = 0;
     cmd->history = 0;
     return (cmd);
@@ -74,4 +75,24 @@ void fill_cmd(t_data *data, t_token *token)
         data->exit_value = parse_commande(data);
     else
         data->exit_value = 1;
+}
+
+void init_input_output(t_cmd *cmd)
+{
+    t_io_fd *io;
+    if (cmd->io == 0)
+    {
+        cmd->io = (t_io_fd *)malloc(sizeof(t_io_fd));
+        if (!cmd->io)
+            return ;
+        io = cmd->io;
+        io->input_file = 0;
+        io->output_file = 0;
+        io->input_fd = -1;
+        io->output_fd = -1;
+        io->stdin = -1;
+        io->stdout = -1;
+        io->delim_heredoc = 0;
+        io->quote_status = 0;
+    }
 }

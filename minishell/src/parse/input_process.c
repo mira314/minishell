@@ -14,7 +14,9 @@
 
 t_token *parsing_input(t_cmd *cmd, t_token *token)
 {
-    (void)cmd;
     (void)token;
+    while (cmd)
+        cmd = cmd->next;
+    init_input_output(cmd);
     return (0);
 }
