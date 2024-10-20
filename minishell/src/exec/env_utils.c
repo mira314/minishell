@@ -6,7 +6,7 @@
 /*   By: derakoto <derakoto@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 15:31:09 by derakoto          #+#    #+#             */
-/*   Updated: 2024/09/21 10:56:32 by derakoto         ###   ########.fr       */
+/*   Updated: 2024/10/20 09:39:05 by derakoto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,8 @@ int	is_key_env_valid(char *key)
 	int	i;
 
 	if (key == NULL)
+		return (-1);
+	if (env_key_len(key) == 0)
 		return (-1);
 	if (ft_isdigit(key[0]) == 1)
 		return (-1);
