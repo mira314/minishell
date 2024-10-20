@@ -6,7 +6,7 @@
 /*   By: derakoto <derakoto@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/20 08:55:38 by derakoto          #+#    #+#             */
-/*   Updated: 2024/10/20 09:22:01 by derakoto         ###   ########.fr       */
+/*   Updated: 2024/10/20 10:06:27 by derakoto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ static void set_pwd(t_data *data)
 		return ;
 	data->env = add_one_env(data->env, new_pwd);
 	free(new_pwd);
+	signal(SIGQUIT, sig_quit_handler);
 }
 
 int	msh_start_up(t_data *data, char **env)

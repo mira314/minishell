@@ -21,6 +21,7 @@
 # include <readline/history.h>
 # include <readline/readline.h>
 # include <errno.h>
+# include <signal.h>
 
 extern int g_last_val;
 
@@ -39,12 +40,13 @@ extern int g_last_val;
 # define FAIL 1
 # define SUCCESS 0
 
-
 /***************utils.c*********************** */
 int print_error(char *str, char *msg, int code);
 
 /****************clear.c  ******************* */
-void clean_cmd(t_data *data);
-void clear_tab(char **env);
-int	msh_start_up(t_data *data, char **env);
+void    clean_cmd(t_data *data);
+void    clear_tab(char **env);
+int	    msh_start_up(t_data *data, char **env);
+void    sig_quit_handler(int sig_num);
+
 #endif

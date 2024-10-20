@@ -6,7 +6,7 @@
 /*   By: derakoto <derakoto@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/24 10:56:40 by vrandria          #+#    #+#             */
-/*   Updated: 2024/10/20 09:05:15 by derakoto         ###   ########.fr       */
+/*   Updated: 2024/10/20 10:12:46 by derakoto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,9 @@ int main(int argc, char *argv[], char **env)
 		return (1);
 	while (1)
 	{
-		(&data)->input = readline("msh$");
+		data.input = readline("msh$");
+		if (data.input == NULL)
+			mini_exit(&data);
 		data.exit_value = 0;
 		if (*data.input && check_input(&data))
 		{
