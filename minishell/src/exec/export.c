@@ -60,8 +60,8 @@ int	export(char **env)
 	sort_env(env_dup);
 	while (env[i] != 0)
 	{
-		if (is_value_present(env[i]) == 0)
-			export_one_env(env[i]);
+		if (is_value_present(env_dup[i]) == 0)
+			export_one_env(env_dup[i]);
 		i++;
 	}
 	mini_tbl_free(env_dup);

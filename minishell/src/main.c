@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vrandria <vrandria@student.42antananari    +#+  +:+       +#+        */
+/*   By: derakoto <derakoto@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/24 10:56:40 by vrandria          #+#    #+#             */
-/*   Updated: 2024/10/19 14:57:15 by vrandria         ###   ########.fr       */
+/*   Updated: 2024/10/20 08:25:52 by derakoto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,6 +116,5 @@ int main(int argc, char *argv[], char **env)
 		printf("%d\n", g_last_val);
 		clear_lst_cmd(&data);
 	}
-	clear_tab((&data)->env);
 	return 0;
 }

@@ -6,7 +6,7 @@
 /*   By: derakoto <derakoto@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/20 05:19:02 by derakoto          #+#    #+#             */
-/*   Updated: 2024/10/20 05:24:58 by derakoto         ###   ########.fr       */
+/*   Updated: 2024/10/20 08:24:40 by derakoto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 void    mini_exit(t_data *data)
 {
-    (void)data;
-    //resource allocated at startup should be freed here
-    exit(1);
+    mini_tbl_free(data->env);
+    exit(0);
 }
