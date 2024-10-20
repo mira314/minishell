@@ -6,7 +6,7 @@
 /*   By: derakoto <derakoto@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 15:43:58 by derakoto          #+#    #+#             */
-/*   Updated: 2024/10/16 11:28:49 by derakoto         ###   ########.fr       */
+/*   Updated: 2024/10/20 04:38:32 by derakoto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ char	**try_update(char **o_env, char *env)
 		}
 		i++;
 	}
-	return (0);
+	return (o_env);
 }
 
 char *get_env_value(char **envs, char *key)
@@ -70,6 +70,22 @@ char *get_env_value(char **envs, char *key)
 	{
 		if (is_env_key(envs[i], key) == 0)
 			return (ft_strdup(envs[i] + env_key_len(envs[i]) + 1));
+		i++;
+	}
+	return (NULL);
+}
+
+char *get_env(char **envs, char *key)
+{
+	int	i;
+
+	if (envs == NULL || key == NULL)
+		return (NULL);
+	i = 0;
+	while (envs[i] != 0)
+	{
+		if (is_env_key(envs[i], key) == 0)
+			return (ft_strdup(envs[i]));
 		i++;
 	}
 	return (NULL);
