@@ -47,6 +47,6 @@ int print_error(char *str, char *msg, int code);
 void    clean_cmd(t_data *data);
 void    clear_tab(char **env);
 int	    msh_start_up(t_data *data, char **env);
-void    sig_quit_handler(int sig_num);
+void    sig_int_handler(int sig_num);
 
 #endif
