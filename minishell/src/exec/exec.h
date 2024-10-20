@@ -41,5 +41,6 @@ char    *build_path(char *path, char *file_name);
 void	exec_one_cmd(t_data	*data);
 int		mini_env(char **args, char **envs);
 int	    mini_export(char **args, char ***envs);
+void    mini_exit(t_data *data);
 
 #endif
