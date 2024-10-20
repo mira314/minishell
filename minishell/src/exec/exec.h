@@ -26,7 +26,7 @@ int		is_env_duplicated(char **envs, int index);
 char	**add_one_env(char **o_env, char *env);
 char	**try_update(char **o_env, char *env);
 void    unset_one_env(char **o_env, char *env);
-void    unset(char **o_env, char **env);
+int		mini_unset(char **o_env, char **env);
 int		is_env_key(char *env, char *str);
 int 	ft_strcmp(const char *str1, const char *str2);
 void	sort_env(char **env);

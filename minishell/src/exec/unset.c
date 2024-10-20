@@ -18,18 +18,19 @@ int is_env_key(char *env, char *str)
     return (-1);
 }
 
-void    unset(char **o_env, char **env)
+int    mini_unset(char **o_env, char **env)
 {
     int i;
 
     if (env == NULL || o_env == NULL)
-        return ;
+        return (1);
     i = 0;
     while (env[i] != 0)
     {
         unset_one_env(o_env, env[i]);
         i++;
     }
+    return (0);
 }
 
 void    unset_one_env(char **o_env, char *env)

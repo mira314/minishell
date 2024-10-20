@@ -6,7 +6,7 @@
 /*   By: derakoto <derakoto@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/12 14:25:50 by derakoto          #+#    #+#             */
-/*   Updated: 2024/10/20 04:35:22 by derakoto         ###   ########.fr       */
+/*   Updated: 2024/10/20 05:05:19 by derakoto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,14 +44,14 @@ static void update_pwd_env(t_data	*data)
 		ft_putstr_fd("Error Updating PWD env\n", STDERR_FILENO);
 		return ;
 	}
-	data->env = try_update(data->env, old_pwd);
+	data->env = add_one_env(data->env, old_pwd);
 	free(old_pwd);
 	if (getcwd(pwd_buffer, PWD_MAX_LEN) == NULL)
 		return ;
 	new_pwd = ft_strjoin("PWD=", pwd_buffer);
 	if (new_pwd == NULL)
 		return ;
-	data->env = try_update(data->env, new_pwd);
+	data->env = add_one_env(data->env, new_pwd);
 	free(new_pwd);
 }
 int	mini_cd(t_data *data)
