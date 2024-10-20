@@ -6,7 +6,7 @@
 /*   By: vrandria <vrandria@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/13 13:30:17 by vrandria          #+#    #+#             */
-/*   Updated: 2024/10/19 10:17:42 by vrandria         ###   ########.fr       */
+/*   Updated: 2024/10/20 12:37:05 by vrandria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,17 +40,20 @@ t_token	*def_var_on_token(t_token *token)
 	return (token);
 }
 
-t_token	*var_check(t_token *token)
+t_token *var_check(t_token *token)
 {
-	int	i;
+	int i;
 
 	i = 0;
+	if (!token || !token->str)
+		return (token);
 	while (token->str[i] != '\0')
 	{
 		if (token->str[i] == '$')
 		{
+
 			if (token->prev && token->prev->type_token == HEREDOC)
-				break ;
+				return (token);
 			token->type_token = VAR;
 			return (token);
 		}

@@ -6,7 +6,7 @@
 /*   By: vrandria <vrandria@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 08:42:40 by vrandria          #+#    #+#             */
-/*   Updated: 2024/10/16 08:08:20 by vrandria         ###   ########.fr       */
+/*   Updated: 2024/10/20 12:29:06 by vrandria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,7 +116,7 @@ char **ft_split_expansion(int len, t_token *token, t_cmd *cmd, char **tab)
 	{
 		if (token->inner_join == 1)
 		{	
-			printf("%s\n", "var non gere sur ft_split_expansion");//////////////////
+			printf("%s\n", "var non gere sur ft_split_expansion");
 		}
 		else
 			tab[i] = ft_strdup(token->str);

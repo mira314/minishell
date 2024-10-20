@@ -6,7 +6,7 @@
 /*   By: vrandria <vrandria@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 07:28:22 by vrandria          #+#    #+#             */
-/*   Updated: 2024/10/16 08:15:09 by vrandria         ###   ########.fr       */
+/*   Updated: 2024/10/20 12:49:04 by vrandria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,26 +25,37 @@ int count_word(t_token *token)
 	return (count);
 }
 
-t_token *new_args_for_other_cmd(t_token *token , t_cmd *cmd)
+t_token *new_args_for_other_cmd(t_token *token, t_cmd *cmd)
 {
 	int i;
 	t_token *tmp;
-
+	
 	i = 0;
-
 	tmp = token;
-	cmd->args = malloc(sizeof(char) * (count_word(tmp) + 2));
+	int arg_count = count_word(tmp) + 2;
+	cmd->args = malloc(sizeof(char *) * arg_count);
 	if (!cmd->args)
-		return (0);
+		return (NULL);
 	cmd->args[i] = ft_strdup(cmd->cmd);
-	i++;
-	while (tmp->type_token == WORD || tmp->type_token == VAR)
+	if (!cmd->args[i++])
+	{
+		free(cmd->args);
+		return NULL;
+	}
+	while (tmp && (tmp->type_token == WORD || tmp->type_token == VAR))
 	{
 		cmd->args[i] = ft_strdup(tmp->str);
+		if (!cmd->args[i])
+		{
+			while (i > 0)
+				free(cmd->args[--i]);
+			free(cmd->args);
+			return NULL;
+		}
 		i++;
 		tmp = tmp->next;
 	}
-	cmd->args[i] = 0;
+	cmd->args[i] = NULL;
 	return (tmp);
 }
 

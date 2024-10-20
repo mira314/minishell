@@ -6,7 +6,7 @@
 /*   By: vrandria <vrandria@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/29 14:41:39 by vrandria          #+#    #+#             */
-/*   Updated: 2024/10/13 10:57:56 by vrandria         ###   ########.fr       */
+/*   Updated: 2024/10/20 12:29:30 by vrandria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,7 @@ int sub_var_replace(t_token *token, char *str_new, char *str, int i)
     char *new;
     int size;
     int len_var;
+
     len_var = size_var(&str_new[i]);
     size = ft_strlen(str) -  len_var + ft_strlen(str_new);
     new = get_str_token(str, str_new, size, i);
@@ -89,6 +90,5 @@ int sub_var_replace(t_token *token, char *str_new, char *str, int i)
         free(token->str);
         token->str = new;
     }
-
     return (1);
 }
