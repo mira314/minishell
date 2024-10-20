@@ -6,7 +6,7 @@
 /*   By: derakoto <derakoto@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/24 10:56:40 by vrandria          #+#    #+#             */
-/*   Updated: 2024/10/20 08:25:52 by derakoto         ###   ########.fr       */
+/*   Updated: 2024/10/20 09:05:15 by derakoto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,11 +99,12 @@ int main(int argc, char *argv[], char **env)
 	(void)argc;
 	(void)argv;
 	
-	if(!init_data(&data, env))////vrandria working on it;
+	
+	if (msh_start_up(&data, env) == 1)
 		return (1);
 	while (1)
 	{
-		(&data)->input = readline("minishell$");
+		(&data)->input = readline("msh$");
 		data.exit_value = 0;
 		if (*data.input && check_input(&data))
 		{
@@ -113,7 +114,6 @@ int main(int argc, char *argv[], char **env)
 		}
 		else
 			g_last_val = 0;
-		printf("%d\n", g_last_val);
 		clear_lst_cmd(&data);
 	}
 	return 0;

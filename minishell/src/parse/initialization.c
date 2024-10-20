@@ -3,25 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   initialization.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vrandria <vrandria@student.42antananari    +#+  +:+       +#+        */
+/*   By: derakoto <derakoto@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/03 07:31:00 by vrandria          #+#    #+#             */
-/*   Updated: 2024/10/19 14:56:14 by vrandria         ###   ########.fr       */
+/*   Updated: 2024/10/20 08:58:48 by derakoto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parse.h"
-
-int init_data(t_data *data, char **env)
-{
-    data->input = 0;
-    data->cmd = 0;
-    data->token = 0;
-    data->exit_value = 1;
-    data->env = dup_env(env);
-    g_last_val = 0;
-    return (1);
-}
 
 int init_token(t_data *data, char *input, int flag)
 {

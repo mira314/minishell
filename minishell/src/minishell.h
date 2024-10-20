@@ -46,4 +46,5 @@ int print_error(char *str, char *msg, int code);
 /****************clear.c  ******************* */
 void clean_cmd(t_data *data);
 void clear_tab(char **env);
+int	msh_start_up(t_data *data, char **env);
 #endif
