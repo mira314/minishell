@@ -6,7 +6,7 @@
 /*   By: vrandria <vrandria@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 07:51:18 by vrandria          #+#    #+#             */
-/*   Updated: 2024/09/25 09:16:25 by vrandria         ###   ########.fr       */
+/*   Updated: 2024/10/19 14:55:21 by vrandria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,18 @@
 t_cmd *new_cmd(void)
 {
     t_cmd *new;
+    t_cmd *tmp;
 
     new = (t_cmd *)malloc(sizeof(t_cmd));
     if (!new)
         return (0);
-    new = init_cmd(new);
-    return (new);
+    tmp = init_cmd(new);
+    if (!tmp)
+    {
+        free(new);
+        return (0);
+    }
+    return (tmp);
 }
 
 t_cmd *lst_add_back_cmd(t_cmd *cmd, t_cmd *new_cmd)
@@ -45,25 +51,40 @@ t_cmd *lst_add_back_cmd(t_cmd *cmd, t_cmd *new_cmd)
 }
 static t_cmd *lst_del_cmd(t_cmd *cmd)
 {
-    t_cmd *tmp;
+    t_cmd *current = cmd;
+    int i;
 
-    tmp = cmd->next;
-    free(cmd->args);///non gere actuellement pour **
-    free(cmd->cmd);
-    free(cmd->history);
-    cmd->history = 0;
-    cmd->args = 0;
-    cmd->cmd = 0;
+    i = 0;
+    while (current)
+    {
+        t_cmd *next_cmd = current->next;
 
-    return (tmp);
+        if (current->args)
+        {
+            while (current->args[i])
+            {
+                free(current->args[i]);
+                i++;
+            }
+        }
+        free(current->args);
+        free(current->cmd);
+        free(current->history);
+        free(current);
+        current = next_cmd; 
+    }
+
+    return NULL;
 }
+
 
 void clear_lst_cmd(t_data *data)
 {
-    t_cmd *cmd;
-
-    cmd = data->cmd;
-    while (cmd)
-        cmd = lst_del_cmd(cmd);
-    data->cmd = 0;
+    if (data->cmd != 0)
+    {
+        lst_del_cmd(data->cmd);
+        data->cmd = NULL;
+    }
 }
+
+

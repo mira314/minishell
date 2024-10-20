@@ -1,26 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   clear.c                                            :+:      :+:    :+:   */
+/*   input_process.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vrandria <vrandria@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/13 10:45:06 by vrandria          #+#    #+#             */
-/*   Updated: 2024/10/19 11:11:11 by vrandria         ###   ########.fr       */
+/*   Created: 2024/10/19 08:24:27 by vrandria          #+#    #+#             */
+/*   Updated: 2024/10/19 09:05:23 by vrandria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "parse.h"
 
-void clear_tab(char **env)
+t_token *parsing_input(t_cmd *cmd, t_token *token)
 {
-    int i;
-
-    i = 0;
-    while (env[i])
-    {
-        free(env[i]);
-        i++;
-    }
-    free(env);
+    (void)cmd;
+    (void)token;
+    return (0);
 }

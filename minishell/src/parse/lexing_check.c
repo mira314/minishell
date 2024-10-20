@@ -6,7 +6,7 @@
 /*   By: vrandria <vrandria@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/13 13:30:17 by vrandria          #+#    #+#             */
-/*   Updated: 2024/09/29 13:04:07 by vrandria         ###   ########.fr       */
+/*   Updated: 2024/10/19 10:17:42 by vrandria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ t_token	*def_var_on_token(t_token *token)
 		free(str);
 		return (token);
 	}
-	while (tmp)
+	while (tmp->next != 0)
 	{
 		tmp = var_check(tmp);
 		tmp = check_double(tmp);
@@ -45,7 +45,7 @@ t_token	*var_check(t_token *token)
 	int	i;
 
 	i = 0;
-	while (token->str[i])
+	while (token->str[i] != '\0')
 	{
 		if (token->str[i] == '$')
 		{

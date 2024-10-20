@@ -6,7 +6,7 @@
 /*   By: vrandria <vrandria@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/03 07:31:00 by vrandria          #+#    #+#             */
-/*   Updated: 2024/10/16 08:50:25 by vrandria         ###   ########.fr       */
+/*   Updated: 2024/10/19 14:56:14 by vrandria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int init_token(t_data *data, char *input, int flag)
             start = token_split_word_and_sep(input, start, data, &i);
         i++;
     }
-    if (flag != EMPTY)
+    if (flag != EMPTY) 
     {
         if (flag == DOUBLE_QUOTE || flag == ONE_QUOTE)
         {
@@ -76,6 +76,8 @@ void fill_cmd(t_data *data, t_token *token)
             tmp = parsins_word(data->cmd, tmp);
         else if (tmp->type_token == PIPE)
             tmp = parsing_pipe(data, tmp);
+        else if (tmp->type_token == INPUT)
+            tmp = parsing_input(data->cmd, tmp);
         else if (token->type_token == END)
             break ;
     }
