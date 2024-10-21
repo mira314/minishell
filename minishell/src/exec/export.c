@@ -53,12 +53,13 @@ int	export(char **env)
 {
 	char **env_dup;
 	int	i;
-
+	
 	env_dup = dup_env(env);
 	if (env_dup == 0)
 		return (-1);
 	sort_env(env_dup);
-	while (env[i] != 0)
+	i = 0;
+	while (env_dup[i] != 0)
 	{
 		if (is_value_present(env_dup[i]) == 0)
 			export_one_env(env_dup[i]);
