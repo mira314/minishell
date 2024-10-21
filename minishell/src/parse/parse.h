@@ -94,6 +94,8 @@ t_token *add_args_for_other_cmd(t_token *token, t_cmd *cmd);
 /********************pipe_process*********************** */
 t_token *parsing_pipe(t_data *data, t_token *token);
 /********************input_process*********************** */
+t_file *lst_new_file(t_file *io, char *str);
 t_token *parsing_input(t_cmd *cmd, t_token *token);
+void clear_lst_file(t_file *file);
 #endif
 
