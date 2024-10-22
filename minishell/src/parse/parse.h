@@ -97,5 +97,6 @@ t_token *parsing_pipe(t_data *data, t_token *token);
 t_file *lst_new_file(t_file *io, char *str);
 t_token *parsing_input(t_cmd *cmd, t_token *token);
 void clear_lst_file(t_file *file);
+//int acces_file(t_io_fd *in_out, char *name, char *files);
 #endif
 

@@ -45,6 +45,18 @@ t_file *lst_new_file(t_file *io, char *str)
     new->next = new;
     return (cur);
 }
+/*
+int files_operation(t_io_fd *in_outm int files)
+{
+
+    
+}
+int acces_file(t_io_fd *in_out, char *name, char *files)
+{
+    
+    return (1);
+}
+*/
 
 t_token *parsing_input(t_cmd *cmd, t_token *token)
 {
