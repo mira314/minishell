@@ -16,7 +16,7 @@ static int	is_path(char *str)
 	return (-1);
 }
 
-static void	exec_with_fork(char *path, char **args, char **envs)
+static int	exec_with_fork(char *path, char **args, char **envs)
 {
 	int	pid;
 	int	status;
@@ -25,17 +25,18 @@ static void	exec_with_fork(char *path, char **args, char **envs)
 	if (pid == -1)
 	{
 		perror("Forking");
-		return ;
+		return (1);
 	}
 	if (pid == 0)
 	{
 		if(execve(path, args, envs) == -1)
-			exit(1);
+		perror(path);
+		exit(127);
 	}else
 	{
 		wait(&status);
-		g_last_val = WEXITSTATUS(status);
 	}
+	return (WEXITSTATUS(status));
 }
 void	exec_one_cmd(t_data	*data)
 {
@@ -54,12 +55,12 @@ void	exec_one_cmd(t_data	*data)
 			g_last_val = 1;
 			return ;
 		}
-		exec_with_fork(total_path, data->cmd->args, data->env); 
+		g_last_val = exec_with_fork(total_path, data->cmd->args, data->env); 
 		free(total_path);
 		return ;
 	}
 	else if (is_path(data->cmd->cmd) == 0)
-		exec_with_fork(data->cmd->cmd, data->cmd->args, data->env);
+		g_last_val = exec_with_fork(data->cmd->cmd, data->cmd->args, data->env);
 	else
 		print_error(data->cmd->cmd, ": command not found\n", 127);
 }
