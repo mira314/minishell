@@ -38,11 +38,19 @@ static int	exec_with_fork(char *path, char **args, char **envs)
 	}
 	return (WEXITSTATUS(status));
 }
+
+static void	handle_redir(t_data *data)
+{
+	(void)data;
+	printf("I am handling the input and output redirection\n");
+}
+
 void	exec_one_cmd(t_data	*data)
 {
 	char	*path;
 	char	*total_path;
 
+	handle_redir(data);
 	if (handles_bultin(data) == SUCCESS)
 		return ;
 	path = is_in_path_env(data->cmd->cmd, data->env);
