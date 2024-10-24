@@ -34,7 +34,7 @@ int token_split_word_and_sep(char *str, int start, t_data *data, int *i);
 int what_is_sep(char *str, int i);
 int check_quote(int flag, int input);
 
-/******************lst_token_utils.c   ******************************/
+/******************lst_token_utils.c******************************/
 
 t_token	*new_token(char *str, int flag, int type_token);
 
