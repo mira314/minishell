@@ -59,6 +59,7 @@ t_cmd *lst_add_back_cmd(t_cmd *cmd, t_cmd *new_cmd);
 void clear_lst_cmd(t_data *data);
 /*********************split_args.c *************************** */
 t_token *split_args(t_token *token, t_cmd *cmd);
+char *combin_var(t_token **token);
 int arg_count(t_token *token);
 t_token *ft_split_echo(t_token *token, t_cmd *cmd);
 char **ft_split_expansion(int len, t_token *token, t_cmd *cmd, char **tab);

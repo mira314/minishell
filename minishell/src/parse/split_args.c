@@ -41,7 +41,7 @@ t_token *ft_split_echo(t_token *token, t_cmd *cmd)
 		return (0);
 	result = ft_split_expansion(len_arg, token, cmd, result);
 	free(cmd->args);
-	cmd->args = 0;
+	cmd->args = result;
 	while (token->type_token || VAR || token->type_token == WORD)
 		token = token->next;
 	return (token);
@@ -122,4 +122,12 @@ char **ft_split_expansion(int len, t_token *token, t_cmd *cmd, char **tab)
 	}
 	tab[i] = 0;
 	return (tab);
+}
+
+char *combin_var(t_token **token)
+{
+	char *var;
+
+	var = ft_strdup(*token->str)
+	
 }
