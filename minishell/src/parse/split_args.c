@@ -47,9 +47,6 @@ t_token *ft_split_echo(t_token *token, t_cmd *cmd)
 	return (token);
 }
 
-//creation d autre ficchier pour les autre commande
-
-
 char **copy_new_tab(int len, char **str, t_token *token, t_cmd *cmd)
 {
 	int i;
