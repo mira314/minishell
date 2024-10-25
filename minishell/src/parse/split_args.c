@@ -6,7 +6,7 @@
 /*   By: vrandria <vrandria@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 08:42:40 by vrandria          #+#    #+#             */
-/*   Updated: 2024/10/20 12:29:06 by vrandria         ###   ########.fr       */
+/*   Updated: 2024/10/25 08:14:01 by vrandria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,14 +41,11 @@ t_token *ft_split_echo(t_token *token, t_cmd *cmd)
 		return (0);
 	result = ft_split_expansion(len_arg, token, cmd, result);
 	free(cmd->args);
-	cmd->args = 0;
+	cmd->args = result;
 	while (token->type_token || VAR || token->type_token == WORD)
 		token = token->next;
 	return (token);
 }
-
-//creation d autre ficchier pour les autre commande
-
 
 char **copy_new_tab(int len, char **str, t_token *token, t_cmd *cmd)
 {
@@ -114,15 +111,26 @@ char **ft_split_expansion(int len, t_token *token, t_cmd *cmd, char **tab)
 	}
 	while (token->type_token == VAR || token->type_token == WORD)
 	{
+		tab[i] = ft_strdup(token->str);
 		if (token->inner_join == 1)
-		{	
-			printf("%s\n", "var non gere sur ft_split_expansion");
-		}
-		else
-			tab[i] = ft_strdup(token->str);
+			token = combin_var(token, &tab[i]);
 		i++;
 		token = token->next;
 	}
 	tab[i] = 0;
 	return (tab);
+}
+
+t_token *combin_var(t_token *token, char **var)
+{
+	char *tmp;
+
+	tmp = *var;
+	while (token->type_token == VAR && token->next->type_token == VAR && token->next->inner_join == 1)
+	{
+		*var = ft_strjoin(tmp, token->next->str);
+		free(tmp);
+		token = token->next;
+	}
+	return (token);
 }

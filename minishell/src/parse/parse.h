@@ -6,7 +6,7 @@
 /*   By: vrandria <vrandria@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/25 10:30:04 by vrandria          #+#    #+#             */
-/*   Updated: 2024/10/19 09:04:44 by vrandria         ###   ########.fr       */
+/*   Updated: 2024/10/25 07:57:02 by vrandria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int token_split_word_and_sep(char *str, int start, t_data *data, int *i);
 int what_is_sep(char *str, int i);
 int check_quote(int flag, int input);
 
-/******************lst_token_utils.c   ******************************/
+/******************lst_token_utils.c******************************/
 
 t_token	*new_token(char *str, int flag, int type_token);
 
@@ -59,6 +59,7 @@ t_cmd *lst_add_back_cmd(t_cmd *cmd, t_cmd *new_cmd);
 void clear_lst_cmd(t_data *data);
 /*********************split_args.c *************************** */
 t_token *split_args(t_token *token, t_cmd *cmd);
+t_token *combin_var(t_token *token, char **var);
 int arg_count(t_token *token);
 t_token *ft_split_echo(t_token *token, t_cmd *cmd);
 char **ft_split_expansion(int len, t_token *token, t_cmd *cmd, char **tab);

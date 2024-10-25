@@ -65,5 +65,5 @@ int	token_split_word_and_sep(char *str, int start, t_data *data, int *i)
 		}
 		start = (*i) + 1;
 	}
-	return start;
+	return (start);
 }
