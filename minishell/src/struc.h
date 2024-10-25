@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   struc.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vrandria <vrandria@student.42antananari    +#+  +:+       +#+        */
+/*   By: derakoto <derakoto@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 08:13:10 by vrandria          #+#    #+#             */
-/*   Updated: 2024/09/25 08:54:54 by vrandria         ###   ########.fr       */
+/*   Updated: 2024/10/25 05:20:56 by derakoto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,3 +66,28 @@ typedef struct s_data
 } t_data;
 
 #endif
+
+/****** suggestion */
+
+/*typedef struct s_input
+{
+    int mode;
+    char    *filename;
+}   t_input;
+
+typedef struct s_output
+{
+    int mode;
+    char    *filename;
+}   t_output;
+
+typedef struct s_cmd
+{
+    char        *cmd;
+    char        **args;
+    t_input     *inputs;
+    t_output    *outputs; 
+}t_cmd;
+*/
+
+/********************/

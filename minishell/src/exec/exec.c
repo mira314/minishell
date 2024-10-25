@@ -39,10 +39,22 @@ static int	exec_with_fork(char *path, char **args, char **envs)
 	return (WEXITSTATUS(status));
 }
 
-static void	handle_redir(t_data *data)
+static void redir_input(t_data *data)
 {
 	(void)data;
-	printf("I am handling the input and output redirection\n");
+	printf("I am handling the input redirection\n");
+}
+
+static void redir_output(t_data *data)
+{
+	(void)data;	
+	printf("I am handling the output redirection\n");
+}
+
+static void	handle_redir(t_data *data)
+{
+	redir_input(data);
+	redir_output(data);
 }
 
 void	exec_one_cmd(t_data	*data)
