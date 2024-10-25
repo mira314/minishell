@@ -6,7 +6,7 @@
 /*   By: vrandria <vrandria@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/25 10:30:04 by vrandria          #+#    #+#             */
-/*   Updated: 2024/10/19 09:04:44 by vrandria         ###   ########.fr       */
+/*   Updated: 2024/10/25 07:57:02 by vrandria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ t_cmd *lst_add_back_cmd(t_cmd *cmd, t_cmd *new_cmd);
 void clear_lst_cmd(t_data *data);
 /*********************split_args.c *************************** */
 t_token *split_args(t_token *token, t_cmd *cmd);
-char *combin_var(t_token **token);
+t_token *combin_var(t_token *token, char **var);
 int arg_count(t_token *token);
 t_token *ft_split_echo(t_token *token, t_cmd *cmd);
 char **ft_split_expansion(int len, t_token *token, t_cmd *cmd, char **tab);
