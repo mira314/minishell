@@ -6,7 +6,7 @@
 /*   By: derakoto <derakoto@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/24 10:56:40 by vrandria          #+#    #+#             */
-/*   Updated: 2024/10/20 10:45:49 by derakoto         ###   ########.fr       */
+/*   Updated: 2024/10/25 05:52:02 by derakoto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ int parse_data_input(t_data *data)
 	{
 		var_process(data, data->token);
 		fill_cmd(data, data->token);
-		exec_one_cmd(data);
+		exec_with_redir(data);
 	}
 		free(data->input);
 		//test(data->token);

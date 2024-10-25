@@ -44,5 +44,6 @@ int	    mini_export(char **args, char ***envs);
 void    mini_exit(t_data *data);
 char	**update_env(char **o_env, char *env);
 int	    mini_is_numeric(char *str);
+void	exec_with_redir(t_data *data);
 
 #endif

@@ -48,7 +48,27 @@ static void redir_input(t_data *data)
 static void redir_output(t_data *data)
 {
 	(void)data;	
-	printf("I am handling the output redirection\n");
+	char	*file[]={"out1", "out2", NULL};
+	int	fd;
+	int	i;
+
+	printf("D'ont worry, the output has just been redirected\n");
+	i = 0;
+	while(file[i] != 0)
+	{
+		if (file[i + 1] != NULL)
+		{
+			fd = open(file[i], O_WRONLY | O_CREAT, 0644);
+			close(fd);
+		}
+		else
+		{
+			fd = open(file[i], O_WRONLY | O_CREAT | O_TRUNC, 0644);
+			dup2(fd, 1);
+			close (fd);
+		}
+		i++;
+	}
 }
 
 static void	handle_redir(t_data *data)
@@ -62,7 +82,6 @@ void	exec_one_cmd(t_data	*data)
 	char	*path;
 	char	*total_path;
 
-	handle_redir(data);
 	if (handles_bultin(data) == SUCCESS)
 		return ;
 	path = is_in_path_env(data->cmd->cmd, data->env);
@@ -83,4 +102,15 @@ void	exec_one_cmd(t_data	*data)
 		g_last_val = exec_with_fork(data->cmd->cmd, data->cmd->args, data->env);
 	else
 		print_error(data->cmd->cmd, ": command not found\n", 127);
+}
+
+void	exec_with_redir(t_data *data)
+{
+	//int		fd_in_backup;
+	int		fd_out_backup;
+
+	fd_out_backup = dup(1);
+	handle_redir(data);
+	exec_one_cmd(data);
+	dup2(fd_out_backup, 1);
 }
