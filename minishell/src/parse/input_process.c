@@ -6,7 +6,7 @@
 /*   By: vrandria <vrandria@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/19 08:24:27 by vrandria          #+#    #+#             */
-/*   Updated: 2024/10/19 09:05:23 by vrandria         ###   ########.fr       */
+/*   Updated: 2024/10/25 08:31:30 by vrandria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,5 +64,10 @@ t_token *parsing_input(t_cmd *cmd, t_token *token)
     while (cmd)
         cmd = cmd->next;
     init_input_output(cmd);
-    return (0);
+   printf("input_process.c\n");
+    if (token->next->next)
+        token = token->next->next->next;
+    else
+        token = token->next;
+    return (token);
 }

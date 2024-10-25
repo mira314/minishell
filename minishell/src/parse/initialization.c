@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   initialization.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: derakoto <derakoto@student.42antananari    +#+  +:+       +#+        */
+/*   By: vrandria <vrandria@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/03 07:31:00 by vrandria          #+#    #+#             */
-/*   Updated: 2024/10/20 08:58:48 by derakoto         ###   ########.fr       */
+/*   Updated: 2024/10/25 08:33:36 by vrandria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,8 @@ void fill_cmd(t_data *data, t_token *token)
 void init_input_output(t_cmd *cmd)
 {
     t_io_fd *io;
-    if (cmd->io == 0)
+
+    if (!cmd->io)
     {
         cmd->io = (t_io_fd *)malloc(sizeof(t_io_fd));
         if (!cmd->io)
