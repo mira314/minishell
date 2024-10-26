@@ -6,7 +6,7 @@
 /*   By: vrandria <vrandria@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 08:13:10 by vrandria          #+#    #+#             */
-/*   Updated: 2024/10/26 09:57:06 by vrandria         ###   ########.fr       */
+/*   Updated: 2024/10/26 10:14:37 by vrandria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,22 @@
 # define STRUCT_H
 # include "minishell.h"
 
+typedef struct s_input
+{
+    int mode;
+    char    *filename;
+}   t_input;
+
+typedef struct s_output
+{
+    int mode;
+    char    *filename;
+}   t_output;
 
 typedef struct s_io_fd
 {
-    char *inputs;
-    char *outputs;
+    t_input *inputs;
+    t_output *outputs;
     int input_fd;
     int output_fd;
     int mode_inputs;
@@ -78,7 +89,7 @@ typedef struct s_output
     char    *filename;
 }   t_output;
 
-typedef struct s_cmd
+typedef struct s_cmdd
 {
     char        *cmd;
     char        **args;

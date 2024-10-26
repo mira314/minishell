@@ -6,7 +6,7 @@
 /*   By: vrandria <vrandria@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/03 07:31:00 by vrandria          #+#    #+#             */
-/*   Updated: 2024/10/26 10:00:41 by vrandria         ###   ########.fr       */
+/*   Updated: 2024/10/26 10:15:09 by vrandria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,8 +91,8 @@ void init_input_output(t_cmd *cmd)
         if (!cmd->io)
             return ;
         io = cmd->io;
-        io->inputs = 0;
-        io->outputs = 0;
+        io->inputs = malloc(sizeof(t_input));
+        io->outputs = malloc(sizeof(t_input));
         io->input_fd = -1;
         io->output_fd = -1;
         io->stdin = -1;
