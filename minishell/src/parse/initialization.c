@@ -6,7 +6,7 @@
 /*   By: vrandria <vrandria@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/03 07:31:00 by vrandria          #+#    #+#             */
-/*   Updated: 2024/10/25 08:33:36 by vrandria         ###   ########.fr       */
+/*   Updated: 2024/10/26 10:00:41 by vrandria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,11 @@ void fill_cmd(t_data *data, t_token *token)
             tmp = parsing_input(data->cmd, tmp);
         else if (token->type_token == END)
             break ;
+        else
+        {
+            printf("fillcmd\n");
+            break ;
+        }
     }
     if (data && data->cmd)
         data->exit_value = parse_commande(data);
@@ -80,15 +85,14 @@ void fill_cmd(t_data *data, t_token *token)
 void init_input_output(t_cmd *cmd)
 {
     t_io_fd *io;
-
-    if (!cmd->io)
+    if (cmd->io == 0)
     {
         cmd->io = (t_io_fd *)malloc(sizeof(t_io_fd));
         if (!cmd->io)
             return ;
         io = cmd->io;
-        io->input_file = 0;
-        io->output_file = 0;
+        io->inputs = 0;
+        io->outputs = 0;
         io->input_fd = -1;
         io->output_fd = -1;
         io->stdin = -1;

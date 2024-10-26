@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   struc.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: derakoto <derakoto@student.42antananari    +#+  +:+       +#+        */
+/*   By: vrandria <vrandria@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 08:13:10 by vrandria          #+#    #+#             */
-/*   Updated: 2024/10/25 05:20:56 by derakoto         ###   ########.fr       */
+/*   Updated: 2024/10/26 09:57:06 by vrandria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,15 @@
 # define STRUCT_H
 # include "minishell.h"
 
-typedef struct s_file
-{
-    struct s_file *next;
-    char *file;
-} t_file;
 
 typedef struct s_io_fd
 {
-    t_file *input_file;
-    t_file *output_file;
+    char *inputs;
+    char *outputs;
     int input_fd;
     int output_fd;
+    int mode_inputs;
+    int mode_outputs;
     int stdin;
     int stdout;
     char *delim_heredoc;
