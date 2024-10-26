@@ -6,7 +6,7 @@
 /*   By: vrandria <vrandria@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/24 10:56:40 by vrandria          #+#    #+#             */
-/*   Updated: 2024/10/26 12:30:53 by vrandria         ###   ########.fr       */
+/*   Updated: 2024/10/26 13:28:12 by vrandria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void test_1(t_cmd *cmd)
 	int i;
 	i = 0;
 
-	while (cmd->io->inputs[i].filename)
+	while (cmd->io->inputs[i].filename != 0)
 	{
 		printf("input %s\n",cmd->io->inputs[i].filename);
 		i++;
