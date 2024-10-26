@@ -6,67 +6,65 @@
 /*   By: vrandria <vrandria@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/19 08:24:27 by vrandria          #+#    #+#             */
-/*   Updated: 2024/10/26 10:15:59 by vrandria         ###   ########.fr       */
+/*   Updated: 2024/10/26 12:30:36 by vrandria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parse.h"
 
-
-
-int files_operation(t_io_fd *in_out, int files)
+static void create_file(t_cmd *cmd, t_token *token)
 {
-    if (files == 1 && in_out->inputs->filename)
-    {
-        if (in_out->input_fd == -1 || (in_out->outputs->filename && in_out->output_fd == -1)) // ajoute de mode plus tard
-            return (0);
-        if (in_out->delim_heredoc != NULL)
-        {
-            free(in_out->delim_heredoc);
-            unlink(in_out->inputs->filename);
-        }
-        free(in_out->inputs->filename);
-        close(in_out->input_fd);
-    }
-    else if (files == 0 && in_out->outputs->filename)
-    {
-        if (in_out->output_fd == -1 || (in_out->inputs->filename && in_out->input_fd == -1))
-            return (0);
-        free(in_out->outputs->filename);
-        close(in_out->output_fd);
-    }
-    return (1);
-
-    
-}
-int acces_file(t_io_fd *in_out, char *name, char *files)
-{
-    if (files_operation(in_out, 1) == 0)
-        return (0);
-    in_out->inputs->filename = ft_strdup(name);
-    if (in_out->inputs->filename && in_out->inputs->filename[0] == 0)
-    {
-        print_error(files, "ambiguous redirect",1);
-        return (0);
-    }
-    in_out->input_fd = open(in_out->inputs->filename, O_RDONLY);
-    if (in_out->input_fd == -1)
-    {
-        print_error(files, "ambiguous redirect",1);
-        free(in_out->inputs->filename);
-    }
-    return (1);
+    cmd->io->inputs[0].filename = ft_strdup(token->str);
+    cmd->io->inputs[0].mode = INPUT;
 }
 
+static t_input *add_file(t_cmd *cmd, t_token *token)
+{
+    int i;
+    int count;
+    t_input *tmp;
+    t_input *new;
+
+    i = 0;
+    count = 0;
+    tmp = cmd->io->inputs;
+    while (tmp[i].filename)
+        i++;
+    new = malloc(sizeof(t_input) * (i + 1));
+    if (!new)
+        return (0);
+    while (count < i)
+    {
+        new[count].filename = tmp[count].filename;
+        free(tmp[count].filename);
+        new[count].mode = tmp[count].mode;
+        count++;
+    }
+    count++;
+        new[count].filename = ft_strdup(token->str);
+        new[count].mode = INPUT;
+        new[count + 1].filename = 0;
+    return (new);
+}
 
 t_token *parsing_input(t_cmd *cmd, t_token *token)
 {
+    t_input *tmp;
+
+    tmp = cmd->io->inputs;
     while (cmd->next)
         cmd = cmd->next;
-    init_input_output(cmd);
-    acces_file(cmd->io, token->next->str, token->next->temp);
+    if (cmd->io->inputs[0].filename == 0)
+        create_file(cmd, token->next);
+    else
+        {
+            cmd->io->inputs = add_file(cmd, token->next);
+            free(tmp);
+        }
     if (token->next->next)
-        token = token->next->next->next;
+    {
+        token = token->next->next;
+    }
     else
         token = token->next;
     return (token);

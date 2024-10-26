@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   initialization.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: derakoto <derakoto@student.42antananari    +#+  +:+       +#+        */
+/*   By: vrandria <vrandria@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/03 07:31:00 by vrandria          #+#    #+#             */
-/*   Updated: 2024/10/26 10:34:39 by derakoto         ###   ########.fr       */
+/*   Updated: 2024/10/26 12:34:45 by vrandria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ t_cmd *init_cmd(t_cmd *cmd)
     cmd->io = 0;
     cmd->next = 0;
     cmd->history = 0;
+    init_input_output(cmd);
     return (cmd);
 }
 
@@ -68,7 +69,7 @@ void fill_cmd(t_data *data, t_token *token)
             tmp = parsing_pipe(data, tmp);
         else if (tmp->type_token == INPUT)
             tmp = parsing_input(data->cmd, tmp);
-        else if (token->type_token == END)
+        else if (tmp->type_token == END)
             break ;
         else
         {
@@ -76,8 +77,13 @@ void fill_cmd(t_data *data, t_token *token)
             break ;
         }
     }
-    if (data && data->cmd)
-        data->exit_value = parse_commande(data);
+    if (data && data->cmd && data->cmd->cmd != 0)
+    {
+        ft_printf("ici\n");
+        data->exit_value = parse_commande(data); 
+
+    }
+          
     else
         data->exit_value = 1;
 }
@@ -91,8 +97,12 @@ void init_input_output(t_cmd *cmd)
         if (!cmd->io)
             return ;
         io = cmd->io;
-        io->inputs = malloc(sizeof(t_input));
-        io->outputs = malloc(sizeof(t_input));
+        io->inputs = malloc(sizeof(t_input) * 2);
+        io->inputs[0].filename = 0;
+        io->inputs[1].filename = 0;
+        io->outputs = malloc(sizeof(t_output) * 2);
+        io->outputs[0].filename = 0;
+        io->outputs[1].filename = 0;
         io->input_fd = -1;
         io->output_fd = -1;
         io->stdin = -1;

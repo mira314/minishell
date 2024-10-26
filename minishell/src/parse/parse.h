@@ -6,7 +6,7 @@
 /*   By: vrandria <vrandria@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/25 10:30:04 by vrandria          #+#    #+#             */
-/*   Updated: 2024/10/26 07:38:58 by vrandria         ###   ########.fr       */
+/*   Updated: 2024/10/26 10:52:18 by vrandria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,5 @@ t_token *add_args_for_other_cmd(t_token *token, t_cmd *cmd);
 t_token *parsing_pipe(t_data *data, t_token *token);
 /********************input_process*********************** */
 t_token *parsing_input(t_cmd *cmd, t_token *token);
-//int acces_file(t_io_fd *in_out, char *name, char *files);
 #endif
 

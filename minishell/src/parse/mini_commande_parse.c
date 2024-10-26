@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mini_commande_parse.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: derakoto <derakoto@student.42antananari    +#+  +:+       +#+        */
+/*   By: vrandria <vrandria@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/25 10:13:53 by vrandria          #+#    #+#             */
-/*   Updated: 2024/10/21 09:18:45 by derakoto         ###   ########.fr       */
+/*   Updated: 2024/10/26 12:21:41 by vrandria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
