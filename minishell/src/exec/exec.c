@@ -39,8 +39,31 @@ static int	exec_with_fork(char *path, char **args, char **envs)
 	return (WEXITSTATUS(status));
 }
 
+static int	is_delimiter(char *delimiter, char *str)
+{
+	size_t	i;
+	size_t	len;
+
+	if (delimiter == NULL && str == NULL)
+		return (0);
+	if (delimiter == NULL || str == NULL)
+		return (1);
+	len = ft_strlen(str) - 1;
+	if ( len != ft_strlen(delimiter))
+		return(1);
+	i = 0;
+	while (i < len)
+	{
+		if (delimiter[i] != str[i])
+			return (1);
+		i++;
+	}
+	return (0);
+}
+
 static char	*handle_heredoc(char *delim)
 {
+	
 	char	*result;
 	char	*tmp;
 	char	*result_tmp;
@@ -49,17 +72,23 @@ static char	*handle_heredoc(char *delim)
 	result_tmp = NULL;
 	while (1)
 	{
+		write(1, ">", 1);
 		tmp = get_next_line(0);
-		if (ft_strcmp(tmp, delim) == 0)
+		if (tmp == NULL)
+		{
+			ft_putstr_fd("\nThere is an error\n", 2);
+			return (result);	
+		}
+		if (is_delimiter(delim, tmp) == 0)
 		{
 			free(tmp);
-			free(result_tmp);
 			return (result);
 		}
 		result_tmp = result;
 		if (result_tmp == NULL)
 			result = ft_strdup(tmp);
-		
+		else
+			result = ft_strjoin(result_tmp, tmp);
 		free(tmp);
 		free(result_tmp);
 		if (result == NULL)
@@ -72,7 +101,7 @@ static void redir_input(t_data *data)
 {
 	(void)data;
 	/*******temporary data******/
-	char	*file[]={"Makefile", "heredoc" ,"test.txt", NULL};
+	char	*file[]={"heredoc" ,"heredoc", "heredoc","Makefile",NULL};
 	/***************************/
 	int		fd;
 	int		i;
@@ -83,7 +112,10 @@ static void redir_input(t_data *data)
 	{
 		if (ft_strcmp(file[i], "heredoc") == 0)
 		{
-			heredoc_result = handle_heredoc("delimiter");
+			heredoc_result = handle_heredoc("del");
+			if (heredoc_result != NULL)
+				printf("%s\n", heredoc_result);
+			free(heredoc_result);
 		}
 		else if (file[i + 1] == NULL)
 		{
