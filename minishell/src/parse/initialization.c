@@ -6,7 +6,7 @@
 /*   By: vrandria <vrandria@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/03 07:31:00 by vrandria          #+#    #+#             */
-/*   Updated: 2024/10/26 12:34:45 by vrandria         ###   ########.fr       */
+/*   Updated: 2024/10/26 14:59:03 by vrandria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,6 @@ void fill_cmd(t_data *data, t_token *token)
     {
         ft_printf("ici\n");
         data->exit_value = parse_commande(data); 
-
     }
           
     else
