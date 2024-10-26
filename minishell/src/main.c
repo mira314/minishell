@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vrandria <vrandria@student.42antananari    +#+  +:+       +#+        */
+/*   By: derakoto <derakoto@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/24 10:56:40 by vrandria          #+#    #+#             */
-/*   Updated: 2024/10/26 10:03:39 by vrandria         ###   ########.fr       */
+/*   Updated: 2024/10/26 10:50:51 by derakoto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,8 +65,8 @@ int parse_data_input(t_data *data)
 	{
 		var_process(data, data->token);
 		fill_cmd(data, data->token);
-		exec_one_cmd(data);
-		//exec_with_redir(data);
+		//exec_one_cmd(data);
+		exec_with_redir(data);
 	}
 		free(data->input);
 		//test(data->token);
