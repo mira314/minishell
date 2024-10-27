@@ -6,7 +6,7 @@
 /*   By: vrandria <vrandria@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/25 10:30:04 by vrandria          #+#    #+#             */
-/*   Updated: 2024/10/27 11:07:55 by vrandria         ###   ########.fr       */
+/*   Updated: 2024/10/27 12:06:29 by vrandria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,5 +98,9 @@ t_token *parsing_pipe(t_data *data, t_token *token);
 t_token *parsing_input(t_cmd *cmd, t_token *token);
 /********************trunc_process.c*********************** */
 t_token *parsing_trunc(t_cmd *cmd, t_token *token);
+/***********************herdoc_process.c  *************** */
+t_token *parsing_heredoc(t_cmd *cmd, t_token *token);
+/**********************append_process.c ******************/
+t_token *parsing_append(t_cmd *cmd, t_token *token);
 #endif
 

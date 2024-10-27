@@ -6,7 +6,7 @@
 /*   By: vrandria <vrandria@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/03 07:31:00 by vrandria          #+#    #+#             */
-/*   Updated: 2024/10/27 11:16:46 by vrandria         ###   ########.fr       */
+/*   Updated: 2024/10/27 12:07:01 by vrandria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,22 +69,22 @@ void fill_cmd(t_data *data, t_token *token)
             tmp = parsing_pipe(data, tmp);
         else if (tmp->type_token == INPUT)
             tmp = parsing_input(data->cmd, tmp);
+        else if (tmp->type_token == HEREDOC)
+            tmp = parsing_heredoc(data->cmd, tmp);
         else if (tmp->type_token == TRUNC)
             tmp = parsing_trunc(data->cmd, tmp);
+        else if (tmp->type_token == APPEND)
+            tmp = parsing_append(data->cmd, tmp);
         else if (tmp->type_token == END)
             break ;
         else
         {
-            printf("fillcmd %d = %d %s", token->type_token, TRUNC, token->str);
+            printf("fillcmd condition non prise en charge %d = %d %s", token->type_token, TRUNC, token->str);
             break ;
         }
     }
     if (data && data->cmd && data->cmd->cmd != 0)
-    {
-        ft_printf("code not implementeon initialisation\n");
         data->exit_value = parse_commande(data); 
-    }
-          
     else
         data->exit_value = 1;
 }
@@ -101,6 +101,7 @@ void init_input_output(t_cmd *cmd)
         io->inputs = malloc(sizeof(t_input) * 2);
         io->inputs[0].filename = 0;
         io->inputs[1].filename = 0;
+        io->inputs[0].delim_heredoc = 0;
         io->outputs = malloc(sizeof(t_output) * 2);
         io->outputs[0].filename = 0;
         io->outputs[1].filename = 0;
@@ -108,7 +109,6 @@ void init_input_output(t_cmd *cmd)
         io->output_fd = -1;
         io->stdin = -1;
         io->stdout = -1;
-        io->delim_heredoc = 0;
         io->quote_status = 0;
     }
 }

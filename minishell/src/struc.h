@@ -6,7 +6,7 @@
 /*   By: vrandria <vrandria@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 08:13:10 by vrandria          #+#    #+#             */
-/*   Updated: 2024/10/26 10:14:37 by vrandria         ###   ########.fr       */
+/*   Updated: 2024/10/27 11:57:38 by vrandria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ typedef struct s_input
 {
     int mode;
     char    *filename;
+    char *delim_heredoc;
 }   t_input;
 
 typedef struct s_output
@@ -36,7 +37,6 @@ typedef struct s_io_fd
     int mode_outputs;
     int stdin;
     int stdout;
-    char *delim_heredoc;
     int quote_status;
 }t_io_fd;
 
