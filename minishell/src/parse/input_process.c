@@ -6,7 +6,7 @@
 /*   By: vrandria <vrandria@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/19 08:24:27 by vrandria          #+#    #+#             */
-/*   Updated: 2024/10/26 13:55:29 by vrandria         ###   ########.fr       */
+/*   Updated: 2024/10/27 11:04:10 by vrandria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static t_input *add_file(t_cmd *cmd, t_token *token)
     tmp = cmd->io->inputs;
     while (tmp[i].filename)
         i++;
-    new = malloc((sizeof(t_input) * (i))+ sizeof(t_input));
+    new = malloc((sizeof(t_input) * (i + 2)));
     if (!new)
         return (0);
     while (count < i)

@@ -3,16 +3,40 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: derakoto <derakoto@student.42antananari    +#+  +:+       +#+        */
+/*   By: vrandria <vrandria@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/24 10:56:40 by vrandria          #+#    #+#             */
-/*   Updated: 2024/10/26 12:30:53 by vrandria         ###   ########.fr       */
+/*   Updated: 2024/10/27 11:35:51 by vrandria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 int g_last_val;
+
+void test_1(t_cmd *cmd)
+{
+	int i;
+	i = 0;
+
+	while (cmd->io->inputs[i].filename != 0)
+	{
+		printf("input %s\n",cmd->io->inputs[i].filename);
+		i++;
+	}
+}
+
+void test_2(t_cmd *cmd)
+{
+	int i;
+	i = 0;
+
+	while (cmd->io->outputs[i].filename != 0)
+	{
+		printf("output %s\n",cmd->io->outputs[i].filename);
+		i++;
+	}
+}
 
 int print_token(int token)
 {
@@ -35,7 +59,7 @@ void test(t_token *test)
 {
     while(test)
     {
-    printf("[%s]",test->str);
+    printf("[%s] origin [%s]",test->str, test->temp);
 	print_token(test->type_token);
     test = test->next;
 	printf("\n");
@@ -43,17 +67,6 @@ void test(t_token *test)
 
 }
 
-void test_1(t_cmd *cmd)
-{
-	int i;
-	i = 0;
-
-	while (cmd->io->inputs[i].filename != 0)
-	{
-		printf("input %s\n",cmd->io->inputs[i].filename);
-		i++;
-	}
-}
 
 int parse_data_input(t_data *data)
 {
@@ -78,13 +91,14 @@ int parse_data_input(t_data *data)
 	{
 		var_process(data, data->token);
 		fill_cmd(data, data->token);
-		test_1(data->cmd);
+		//test_1(data->cmd);
+		//test_2(data->cmd);
 		//printf("%s" , data->cmd->cmd);
 		exec_one_cmd(data);
 		//exec_with_redir(data);
 	}
 		free(data->input);
-		//test(data->token);
+		test(data->token);
 		lst_clear_all_token(data->token);
 		data->token = 0;
 	return (exit);

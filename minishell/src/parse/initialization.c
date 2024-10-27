@@ -6,7 +6,7 @@
 /*   By: vrandria <vrandria@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/03 07:31:00 by vrandria          #+#    #+#             */
-/*   Updated: 2024/10/26 15:02:17 by vrandria         ###   ########.fr       */
+/*   Updated: 2024/10/27 11:16:46 by vrandria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,11 +69,13 @@ void fill_cmd(t_data *data, t_token *token)
             tmp = parsing_pipe(data, tmp);
         else if (tmp->type_token == INPUT)
             tmp = parsing_input(data->cmd, tmp);
+        else if (tmp->type_token == TRUNC)
+            tmp = parsing_trunc(data->cmd, tmp);
         else if (tmp->type_token == END)
             break ;
         else
         {
-            printf("fillcmd\n");
+            printf("fillcmd %d = %d %s", token->type_token, TRUNC, token->str);
             break ;
         }
     }
