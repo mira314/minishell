@@ -6,7 +6,7 @@
 /*   By: vrandria <vrandria@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 07:51:18 by vrandria          #+#    #+#             */
-/*   Updated: 2024/10/19 14:55:21 by vrandria         ###   ########.fr       */
+/*   Updated: 2024/10/27 14:27:54 by vrandria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,9 +54,9 @@ static t_cmd *lst_del_cmd(t_cmd *cmd)
     t_cmd *current = cmd;
     int i;
 
-    i = 0;
     while (current)
     {
+		i = 0;
         t_cmd *next_cmd = current->next;
 
         if (current->args)
@@ -69,6 +69,9 @@ static t_cmd *lst_del_cmd(t_cmd *cmd)
         }
         free(current->args);
         free(current->cmd);
+		free(current->io->inputs);
+		free(current->io->outputs);
+		free(current->io);
         free(current->history);
         free(current);
         current = next_cmd; 
