@@ -6,7 +6,7 @@
 /*   By: vrandria <vrandria@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/24 10:56:40 by vrandria          #+#    #+#             */
-/*   Updated: 2024/10/27 11:35:51 by vrandria         ###   ########.fr       */
+/*   Updated: 2024/10/27 11:37:22 by vrandria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,8 +91,8 @@ int parse_data_input(t_data *data)
 	{
 		var_process(data, data->token);
 		fill_cmd(data, data->token);
-		//test_1(data->cmd);
-		//test_2(data->cmd);
+		test_1(data->cmd);
+		test_2(data->cmd);
 		//printf("%s" , data->cmd->cmd);
 		exec_one_cmd(data);
 		//exec_with_redir(data);
