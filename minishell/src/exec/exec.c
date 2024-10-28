@@ -101,11 +101,12 @@ static void redir_input(t_data *data)
 {
 	(void)data;
 	/*******temporary data******/
-	char	*file[]={"heredoc" ,"heredoc", "heredoc","Makefile",NULL};
+	char	*file[]={"heredoc", "heredoc", "heredoc",NULL};
 	/***************************/
 	int		fd;
 	int		i;
 	char	*heredoc_result;
+	int		fds[2];
 
 	i = 0;
 	while(file[i] != 0)
@@ -113,8 +114,17 @@ static void redir_input(t_data *data)
 		if (ft_strcmp(file[i], "heredoc") == 0)
 		{
 			heredoc_result = handle_heredoc("del");
-			if (heredoc_result != NULL)
-				printf("%s\n", heredoc_result);
+			if (file[i + 1] == NULL)
+			{
+				pipe(fds);
+				if (heredoc_result == NULL)
+					write(fds[1], "", 1);
+				else
+					write(fds[1], heredoc_result, ft_strlen(heredoc_result));
+				close(fds[1]);
+				dup2(fds[0], 0);
+				close (fds[0]);	
+			}
 			free(heredoc_result);
 		}
 		else if (file[i + 1] == NULL)

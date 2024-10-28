@@ -15,11 +15,11 @@ int main(void)
         perror("Piping");
         return (0);
     }
-    write(fd[0], str, strlen(str));
-    n_read = read(fd[1], buffer_out, 99);
+    write(fd[1], str, strlen(str));
+    close(fd[1]);
+    n_read = read(fd[0], buffer_out, 99);
+    close(fd[0]);
     buffer_out[n_read] = 0;
     printf("%s", buffer_out);
-    close(fd[0]);
-    close(fd[1]);
     return (0);
 }
