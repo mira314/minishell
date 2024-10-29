@@ -20,6 +20,6 @@ int main(void)
     n_read = read(fd[0], buffer_out, 99);
     close(fd[0]);
     buffer_out[n_read] = 0;
-    printf("%s", buffer_out);
+    printf("%s\n", buffer_out);
     return (0);
 }
