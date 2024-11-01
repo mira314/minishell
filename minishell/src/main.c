@@ -3,14 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: derakoto <derakoto@student.42antananari    +#+  +:+       +#+        */
+/*   By: vrandria <vrandria@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/24 10:56:40 by vrandria          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2024/11/01 10:37:23 by vrandria         ###   ########.fr       */
-=======
-/*   Updated: 2024/10/27 20:17:58 by derakoto         ###   ########.fr       */
->>>>>>> 24cd2180dab20b098226d8d2b31625563d75304a
+/*   Updated: 2024/11/01 10:40:37 by vrandria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -156,10 +152,6 @@ int main(int argc, char *argv[], char **env)
 		else
 			g_last_val = 0;
 		clear_lst_cmd(&data);
-<<<<<<< HEAD
-=======
-		//break ;
->>>>>>> 24cd2180dab20b098226d8d2b31625563d75304a
 	}
 	clear_tab(data.env);
 	return 0;
