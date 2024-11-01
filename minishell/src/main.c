@@ -3,10 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vrandria <vrandria@student.42antananari    +#+  +:+       +#+        */
+/*   By: derakoto <derakoto@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/24 10:56:40 by vrandria          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2024/11/01 10:37:23 by vrandria         ###   ########.fr       */
+=======
+/*   Updated: 2024/10/27 20:17:58 by derakoto         ###   ########.fr       */
+>>>>>>> 24cd2180dab20b098226d8d2b31625563d75304a
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,8 +98,8 @@ int parse_data_input(t_data *data)
 	//test_1(data->cmd);
 	//	test_2(data->cmd);
 		//printf("%s" , data->cmd->cmd);
-		exec_one_cmd(data);
-		//exec_with_redir(data);
+		//exec_one_cmd(data);
+		exec_with_redir(data);
 	}
 		free(data->input);
 	//	test(data->token);
@@ -152,6 +156,10 @@ int main(int argc, char *argv[], char **env)
 		else
 			g_last_val = 0;
 		clear_lst_cmd(&data);
+<<<<<<< HEAD
+=======
+		//break ;
+>>>>>>> 24cd2180dab20b098226d8d2b31625563d75304a
 	}
 	clear_tab(data.env);
 	return 0;

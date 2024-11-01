@@ -97,25 +97,52 @@ static char	*handle_heredoc(char *delim)
 	return result;
 }
 
+void exit_fork(int signum)
+{
+	write(1,"oh\n", 3);
+	exit(signum);
+}
+
 static void redir_input(t_data *data)
 {
 	(void)data;
 	/*******temporary data******/
-	char	*file[]={"heredoc" ,"heredoc", "heredoc","Makefile",NULL};
+	char	*file[]={"heredoc","heredoc","heredoc",NULL};
 	/***************************/
 	int		fd;
 	int		i;
 	char	*heredoc_result;
+	int		fds[2];
+	//char	buffer[100];
+	//int		n_read;
 
 	i = 0;
 	while(file[i] != 0)
 	{
 		if (ft_strcmp(file[i], "heredoc") == 0)
 		{
-			heredoc_result = handle_heredoc("del");
-			if (heredoc_result != NULL)
-				printf("%s\n", heredoc_result);
-			free(heredoc_result);
+			pipe(fds);
+			if (fork() == 0)
+			{
+				signal(SIGINT, exit_fork);
+				close(fds[0]);
+				heredoc_result = handle_heredoc("del");
+				if (heredoc_result == NULL)
+					write(fds[1], "", 1);
+				else
+					write(fds[1], heredoc_result, ft_strlen(heredoc_result));
+				close(fds[1]);
+				free(heredoc_result);
+				exit(0);
+			}
+			else
+			{
+				wait(NULL);
+				close(fds[1]);
+				if (file[i + 1] == NULL)
+					dup2(fds[0], 0);
+				close (fds[0]);	
+			}
 		}
 		else if (file[i + 1] == NULL)
 		{

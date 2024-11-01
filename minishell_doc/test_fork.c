@@ -1,21 +1,24 @@
 #include <sys/types.h>
 #include <unistd.h>
 #include <stdio.h>
+#include <stdlib.h>
+#include <sys/wait.h>
 
-int	g_i;
+char	*str;
 
 int	main(void)
 {
-	g_i = 6;
+	str = malloc(sizeof(char));
 	if (fork() == 0)
 	{
-		printf("%d\n", g_i);
-		g_i ++;
-		printf("%d\n", g_i);
+		*str = 'A';
+		exit(0);
 	}
 	else
 	{
+		wait(NULL);
 		sleep(1);
-		printf("%d\n", g_i);
+		free(str);
 	}
+	return(0);
 }
