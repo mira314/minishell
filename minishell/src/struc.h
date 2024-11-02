@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   struc.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vrandria <vrandria@student.42antananari    +#+  +:+       +#+        */
+/*   By: derakoto <derakoto@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 08:13:10 by vrandria          #+#    #+#             */
-/*   Updated: 2024/10/27 11:57:38 by vrandria         ###   ########.fr       */
+/*   Updated: 2024/11/02 09:48:35 by derakoto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ typedef struct s_cmd
 typedef struct s_data
 {
     char **env;
+    char **var;
     char    *input;
     t_cmd   *cmd;
     t_token *token;
