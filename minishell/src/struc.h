@@ -6,7 +6,7 @@
 /*   By: derakoto <derakoto@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 08:13:10 by vrandria          #+#    #+#             */
-/*   Updated: 2024/11/02 11:37:29 by derakoto         ###   ########.fr       */
+/*   Updated: 2024/11/02 14:28:33 by derakoto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ typedef struct s_cmd
 {
     char *cmd;
     char **args;
+    int     offset;
     char *history;
     int output;
     t_io_fd *io;
