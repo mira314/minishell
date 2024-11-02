@@ -61,7 +61,7 @@ static int	is_delimiter(char *delimiter, char *str)
 	return (0);
 }
 
-static char	*handle_heredoc(char *delim)
+static char	*get_doc(char *delim)
 {
 	
 	char	*result;
@@ -96,7 +96,7 @@ static char	*handle_heredoc(char *delim)
 	}
 	return result;
 }
-static int	handle_here_doc(int	*fds)
+static int	handle_here_doc(int	*fds, char *del)
 {
 	char	*heredoc_result;
 	int		exit_status;
@@ -106,7 +106,7 @@ static int	handle_here_doc(int	*fds)
 	{
 		signal(SIGINT, SIG_DFL);
 		close(fds[0]);
-		heredoc_result = handle_heredoc("del");
+		heredoc_result = get_doc(del);
 		if (heredoc_result == NULL)
 			write(fds[1], "", 1);
 		else
@@ -129,36 +129,32 @@ static int	handle_here_doc(int	*fds)
 	return (0);
 }
 
-static int redir_input(t_data *data)
+static int redir_input(t_input *file)
 {
-	(void)data;
-	/*******temporary data******/
-	char	*file[]={"heredoc", "heredoc",NULL};
-	/***************************/
 	int		fd;
 	int		i;
 	int		fds[2];
 
 	i = 0;
-	while(file[i] != 0)
+	while(file[i].filename != 0)
 	{
-		if (ft_strcmp(file[i], "heredoc") == 0)
+		if (file[i].mode == HEREDOC)
 		{
 			pipe(fds);
-			if (handle_here_doc(fds) == -1)
+			if (handle_here_doc(fds, file[i].filename) == -1)
 			{
 				close(fds[0]);
 				close(fds[1]);
 				return (-1);
 			};
 			close(fds[1]);
-			if (file[i + 1] == NULL)
+			if (file[i + 1].filename == NULL)
 				dup2(fds[0], 0);
 			close (fds[0]);	
 		}
-		else if (file[i + 1] == NULL)
+		else if (file[i + 1].filename == NULL)
 		{
-			fd = open(file[i], O_RDONLY);
+			fd = open(file[i].filename, O_RDONLY);
 			dup2(fd, 0);
 			close (fd);
 		}
@@ -167,26 +163,20 @@ static int redir_input(t_data *data)
 	return (0);
 }
 
-/*static void redir_output(t_data *data)
+static void redir_output(t_output *file)
 {
-	(void)data;	
-	
-	char	*file[]={"out1", "out2", NULL};
-	int		mode = 1;
-	
 	int	open_mode;
 	int	fd;
 	int	i;
 
-	printf("D'ont worry, the output has just been redirected\n");
 	i = 0;
-	while(file[i] != 0)
+	while(file[i].filename != 0)
 	{
 		open_mode = O_WRONLY | O_CREAT | O_TRUNC;
-		if (mode == 1)
+		if (file[i].mode == APPEND)
 			open_mode = O_WRONLY | O_CREAT | O_APPEND;
-		fd = open(file[i], open_mode, 0644);
-		if (file[i + 1] != NULL)
+		fd = open(file[i].filename, open_mode, 0644);
+		if (file[i + 1].filename != NULL)
 			close(fd);
 		else
 		{
@@ -195,13 +185,13 @@ static int redir_input(t_data *data)
 		}
 		i++;
 	}
-}*/
+}
 
-static int	handle_redir(t_data *data)
+static int	handle_redir(t_io_fd *io)
 {
-	if (redir_input(data))
+	if (redir_input(io->inputs))
 		return (-1);
-	//redir_output(data);
+	redir_output(io->outputs);
 	return (0);
 }
 
@@ -240,7 +230,7 @@ void	exec_with_redir(t_data *data)
 
 	fd_out_backup = dup(1);
 	fd_in_backup = dup(0);
-	if (handle_redir(data) == -1)
+	if (handle_redir(data->cmd->io) == -1)
 		return ;
 	exec_one_cmd(data);
 	dup2(fd_out_backup, 1);
