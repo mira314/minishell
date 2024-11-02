@@ -131,7 +131,7 @@ static int	handle_here_doc(int	*fds, char *del)
 
 static int redir_input(t_input *file)
 {
-	int		fd;
+	int		input;
 	int		i;
 	int		fds[2];
 
@@ -146,18 +146,24 @@ static int redir_input(t_input *file)
 				close(fds[0]);
 				close(fds[1]);
 				return (-1);
-			};
+			}
 			close(fds[1]);
-			if (file[i + 1].filename == NULL)
-				dup2(fds[0], 0);
-			close (fds[0]);	
+			input = fds[0];	
 		}
-		else if (file[i + 1].filename == NULL)
+		else if (file[i].mode == INPUT)
 		{
-			fd = open(file[i].filename, O_RDONLY);
-			dup2(fd, 0);
-			close (fd);
+			input = open(file[i].filename, O_RDONLY);
+			if (input == -1)
+			{
+				perror(file[i].filename);
+				return (-1);
+			}
 		}
+		else
+			printf("Unkown input mode\n");
+		if (file[i + 1].filename == NULL)
+				dup2(input, 0);
+			close (input);
 		i++;
 	}
 	return (0);
@@ -200,6 +206,8 @@ void	exec_one_cmd(t_data	*data)
 	char	*path;
 	char	*total_path;
 
+	if (data->cmd->cmd == NULL)
+		return ;
 	if (handles_bultin(data) == SUCCESS)
 		return ;
 	path = is_in_path_env(data->cmd->cmd, data->env);
@@ -226,7 +234,6 @@ void	exec_with_redir(t_data *data)
 {
 	int		fd_in_backup;
 	int		fd_out_backup;
-
 
 	fd_out_backup = dup(1);
 	fd_in_backup = dup(0);
