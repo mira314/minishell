@@ -201,13 +201,53 @@ static int	handle_redir(t_io_fd *io)
 	return (0);
 }
 
-void	exec_one_cmd(t_data	*data)
+/*void	exec_one_cmd(t_data	*data)
 {
 	char	*path;
 	char	*total_path;
 
 	if (data->cmd->cmd == NULL)
 		return ;
+	if (is_var_assignement(data->cmd->args[0]) == 0)
+	{
+		printf("It is an assignement\n");
+		return ;
+	}
+	if (handles_bultin(data) == SUCCESS)
+		return ;
+	path = is_in_path_env(data->cmd->cmd, data->env);
+	if (path != NULL)
+	{
+		total_path = build_path(path, data->cmd->cmd);
+		free(path);
+		if (total_path == NULL)
+		{
+			g_last_val = 1;
+			return ;
+		}
+		g_last_val = exec_with_fork(total_path, data->cmd->args, data->env); 
+		free(total_path);
+		return ;
+	}
+	else if (is_path(data->cmd->cmd) == 0)
+		g_last_val = exec_with_fork(data->cmd->cmd, data->cmd->args, data->env);
+	else
+		print_error(data->cmd->cmd, ": command not found\n", 127);
+}*/
+
+void	exec_one_cmd(t_data	*data,  t_cmd *cmd)
+{
+	char	*path;
+	char	*total_path;
+	(void)cmd;
+
+	if (data->cmd->cmd == NULL)
+		return ;
+	if (is_var_assignement(data->cmd->args[0]) == 0)
+	{
+		printf("It is an assignement\n");
+		return ;
+	}
 	if (handles_bultin(data) == SUCCESS)
 		return ;
 	path = is_in_path_env(data->cmd->cmd, data->env);
@@ -230,7 +270,7 @@ void	exec_one_cmd(t_data	*data)
 		print_error(data->cmd->cmd, ": command not found\n", 127);
 }
 
-void	exec_with_redir(t_data *data)
+void	exec_with_redir(t_data *data, t_cmd *cmd)
 {
 	int		fd_in_backup;
 	int		fd_out_backup;
@@ -239,7 +279,7 @@ void	exec_with_redir(t_data *data)
 	fd_in_backup = dup(0);
 	if (handle_redir(data->cmd->io) == -1)
 		return ;
-	exec_one_cmd(data);
+	exec_one_cmd(data, cmd);
 	dup2(fd_out_backup, 1);
 	dup2(fd_in_backup, 0);
 }

@@ -6,7 +6,7 @@
 /*   By: derakoto <derakoto@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/20 05:19:02 by derakoto          #+#    #+#             */
-/*   Updated: 2024/10/21 05:43:21 by derakoto         ###   ########.fr       */
+/*   Updated: 2024/11/02 11:40:16 by derakoto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 void    mini_exit(t_data *data)
 {
     mini_tbl_free(data->env);
+    mini_tbl_free(data->var);
     printf("exit\n");
     if (data->cmd == NULL)
         exit(0);

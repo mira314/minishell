@@ -38,12 +38,14 @@ char    *get_env_value(char **envs, char *key);
 char	*get_env(char **envs, char *key);
 char    *is_in_path_env(char *file_name, char **envs);
 char    *build_path(char *path, char *file_name);
-void	exec_one_cmd(t_data	*data);
+void	exec_one_cmd(t_data *data, t_cmd *cmd);
 int		mini_env(char **args, char **envs);
 int	    mini_export(char **args, char ***envs);
 void    mini_exit(t_data *data);
 char	**update_env(char **o_env, char *env);
 int	    mini_is_numeric(char *str);
-void	exec_with_redir(t_data *data);
+void	exec_with_redir(t_data *data, t_cmd *cmd);
+int     is_var_assignement(char *str);
+
 
 #endif

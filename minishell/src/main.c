@@ -6,7 +6,7 @@
 /*   By: derakoto <derakoto@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/24 10:56:40 by vrandria          #+#    #+#             */
-/*   Updated: 2024/11/02 09:47:41 by derakoto         ###   ########.fr       */
+/*   Updated: 2024/11/02 12:03:03 by derakoto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ int parse_data_input(t_data *data)
 	//	test_2(data->cmd);
 		//printf("%s" , data->cmd->cmd);
 		//exec_one_cmd(data);
-		exec_with_redir(data);
+		exec_with_redir(data, data->cmd);
 	}
 		free(data->input);
 	//	test(data->token);
@@ -153,6 +153,5 @@ int main(int argc, char *argv[], char **env)
 			g_last_val = 0;
 		clear_lst_cmd(&data);
 	}
-	clear_tab(data.env);
 	return 0;
 }

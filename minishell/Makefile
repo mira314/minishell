@@ -8,7 +8,7 @@ PARSE_FILE = split_args.c var_processing.c lst_cmd_utils.c lexing_check.c parsin
 			split_args_other.c input_process.c append_process.c \
 			herdoc_process.c  output_process.c 	trunc_process.c		
 
-EXEC_FILE = exec.c find_file.c ft_echo.c ft_pwd.c mini_cd.c mini_exec_utils.c env.c env_utils.c unset.c export.c export_utils.c mini_exit.c
+EXEC_FILE = exec.c find_file.c ft_echo.c ft_pwd.c mini_cd.c mini_exec_utils.c env.c env_utils.c unset.c export.c export_utils.c mini_exit.c var.c
 
 DIR_PARSE = $(SRCS_DIR)parse/
 DIR_EXEC = $(SRCS_DIR)exec/
