@@ -240,13 +240,13 @@ void	exec_one_cmd(t_data	*data,  t_cmd *cmd)
 	char	*path;
 	char	*total_path;
 	int		assign_count;
-
+	
 	(void)cmd;
 
 	if (data->cmd->cmd == NULL)
 		return ;
-	//if (handle_var(data->cmd->args, &data->var, &assign_count) == SUCCESS)
-	//	return ;
+	if (handle_var(data->cmd->args, &data->var, &assign_count) == SUCCESS)
+		return ;
 	if (handles_bultin(data) == SUCCESS)
 		return ;
 	path = is_in_path_env(data->cmd->cmd, data->env);
