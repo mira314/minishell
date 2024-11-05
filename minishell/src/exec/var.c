@@ -6,7 +6,7 @@
 /*   By: derakoto <derakoto@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/02 10:34:21 by derakoto          #+#    #+#             */
-/*   Updated: 2024/11/02 14:44:11 by derakoto         ###   ########.fr       */
+/*   Updated: 2024/11/04 17:06:23 by derakoto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ int handle_var(char **tbl, char ***var, int *assign_count)
     if (tbl[*assign_count] == NULL)
     {
         printf("Execute assignement\n");
-        //add_env(*var, tbl);
+        *var = add_env(*var, tbl);
         return (SUCCESS);
     }
     return (FAIL);

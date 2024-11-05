@@ -201,70 +201,108 @@ static int	handle_redir(t_io_fd *io)
 	return (0);
 }
 
-/*void	exec_one_cmd(t_data	*data)
+static void close_pipe(int *fds)
 {
-	char	*path;
-	char	*total_path;
+    close(fds[0]);
+    close(fds[1]);
+}
 
-	if (data->cmd->cmd == NULL)
-		return ;
-	if (is_var_assignement(data->cmd->args[0]) == 0)
-	{
-		printf("It is an assignement\n");
-		return ;
-	}
-	if (handles_bultin(data) == SUCCESS)
-		return ;
-	path = is_in_path_env(data->cmd->cmd, data->env);
-	if (path != NULL)
-	{
-		total_path = build_path(path, data->cmd->cmd);
-		free(path);
-		if (total_path == NULL)
-		{
-			g_last_val = 1;
-			return ;
-		}
-		g_last_val = exec_with_fork(total_path, data->cmd->args, data->env); 
-		free(total_path);
-		return ;
-	}
-	else if (is_path(data->cmd->cmd) == 0)
-		g_last_val = exec_with_fork(data->cmd->cmd, data->cmd->args, data->env);
-	else
-		print_error(data->cmd->cmd, ": command not found\n", 127);
-}*/
+static int  on_forking_error_pipe(int *fds)
+{
+    perror("Forking");
+    close_pipe(fds);
+    return (1);
+}   
+
+static void fork_fun(int *input, int *output, t_data *data, t_cmd *cmd)
+{
+    if (input != NULL)
+    {
+        close(input[1]);
+        dup2(input[0], 0);
+        close(input[0]);
+    }
+    close(output[0]);
+    if (cmd->next != NULL)
+        dup2(output[1], 1);
+    close(output[1]);
+    exec_with_redir(data, cmd);
+    exit(0);
+}
+
+int    pipe_loop(t_data *data, t_cmd *cmd, int *pipe_in)
+{
+    int     output[2];
+    int     pid;
+    int     status;
+
+    if (pipe(output) == -1)
+    {
+        perror("piping");
+        return (1);
+    }
+    pid = fork();
+    if (pid == -1)
+        on_forking_error_pipe(output);   
+    if (pid == 0)
+        fork_fun(pipe_in, output, data, cmd);
+    else
+    {
+        if (pipe_in != NULL)
+            close_pipe(pipe_in);
+        if (cmd->next != NULL)
+        {
+            pipe_loop(data, cmd->next, output);
+            wait(NULL);
+        }
+        else
+        {
+            wait(&status);
+            if (WIFEXITED(status));
+                //printf("%d\n", WEXITSTATUS(status));
+            else if(WIFSIGNALED(status))
+                printf("Terminated by signal %d\n", WTERMSIG(status));
+            fflush(stdout);
+        }
+    }
+	return (0);
+}
+
+void	exec(t_data *data)
+{
+	t_cmd *cmd;
+
+	cmd = data->cmd;
+	pipe_loop(data, cmd, NULL);
+}
 
 void	exec_one_cmd(t_data	*data,  t_cmd *cmd)
 {
 	char	*path;
 	char	*total_path;
-	int		assign_count;
 	
-	(void)cmd;
-
 	if (data->cmd->cmd == NULL)
 		return ;
-	if (handle_var(data->cmd->args, &data->var, &assign_count) == SUCCESS)
+	if (handle_var(data->cmd->args, &data->var, &cmd->offset) == SUCCESS)
 		return ;
 	if (handles_bultin(data) == SUCCESS)
 		return ;
-	path = is_in_path_env(data->cmd->cmd, data->env);
+	path = is_in_path_env(cmd->args[cmd->offset], data->env);
 	if (path != NULL)
 	{
-		total_path = build_path(path, data->cmd->cmd);
+		total_path = build_path(path, cmd->args[cmd->offset]);
 		free(path);
 		if (total_path == NULL)
 		{
 			g_last_val = 1;
 			return ;
 		}
-		g_last_val = exec_with_fork(total_path, data->cmd->args, data->env); 
+		g_last_val = exec_with_fork(total_path, cmd->args + cmd->offset, data->env); 
 		free(total_path);
 		return ;
 	}
-	else if (is_path(data->cmd->cmd) == 0)
-		g_last_val = exec_with_fork(data->cmd->cmd, data->cmd->args, data->env);
+	else if (is_path(cmd->args[cmd->offset]) == 0)
+		g_last_val = exec_with_fork(cmd->args[cmd->offset], cmd->args + cmd->offset, data->env);
 	else
 		print_error(data->cmd->cmd, ": command not found\n", 127);
 }
