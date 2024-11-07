@@ -102,5 +102,8 @@ t_token *parsing_trunc(t_cmd *cmd, t_token *token);
 t_token *parsing_heredoc(t_cmd *cmd, t_token *token);
 /**********************append_process.c ******************/
 t_token *parsing_append(t_cmd *cmd, t_token *token);
+/*********************quote_process**********************/
+void quote_process(t_data *data);
+t_token *trim_quote(t_token *token, int j);
 #endif
 

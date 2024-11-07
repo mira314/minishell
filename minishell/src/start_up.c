@@ -42,7 +42,7 @@ int	msh_start_up(t_data *data, char **env)
 int init_data(t_data *data, char **env)
 {
 	data->var = NULL;
-	data->var = (char **)malloc(sizeof(char *));
+	data->var = (char **)malloc(sizeof(char *) + 1);
 	if (data->var == NULL)
 		return (1);
 	*data->var = NULL;
