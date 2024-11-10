@@ -6,7 +6,7 @@
 /*   By: vrandria <vrandria@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/28 09:11:02 by vrandria          #+#    #+#             */
-/*   Updated: 2024/10/19 14:37:46 by vrandria         ###   ########.fr       */
+/*   Updated: 2024/11/02 13:28:14 by vrandria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,13 @@ int ft_varchr(t_data *data, char *str)
 
     i = 0;
     size = ft_strlen(str);
+    while (data->var[i])
+    {
+        if (ft_strncmp(data->var[i], str , size) == 0)
+            return (1);
+        i++;
+    }     
+    i = 0;
     while (data->env[i])
     {
         if (ft_strncmp(data->env[i], str , size) == 0)
