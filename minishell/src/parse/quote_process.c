@@ -12,6 +12,42 @@
 
 #include "parse.h"
 
+int check_quote_flag(t_token *token, int i)
+{
+	if (token->str[i] == 39 && token->flag == EMPTY)
+		return (1);
+	if (token->str[i] == 34 && token->flag == EMPTY)
+		return (1);
+	return (0);
+}
+
+int switch_flag_token(int i, t_token *token)
+{
+	if (token->str[i] == 34)
+		token->flag = DOUBLE_QUOTE;
+	if (token->str[i] == 39)
+		token->flag = ONE_QUOTE;
+	i++;
+	return (i);
+}
+
+int switch_flag_token_empty(int i, t_token *token)
+{
+	if (token->str[i] == 39 && token->flag == ONE_QUOTE)
+	{
+		token->flag = EMPTY;
+		i++;
+		return (i);
+	}
+	else if (token->str[i] == 34 && token->flag == DOUBLE_QUOTE)
+	{
+		token->flag = EMPTY;
+		i++;
+		return (i);
+	}
+	return (i);
+}
+
 int count_str_betweenquote(char *str, int count, int flag)
 {
 	int i;
@@ -37,8 +73,8 @@ int count_str_betweenquote(char *str, int count, int flag)
 			i++;
 			count++;
 		}
-		return (count);
 	}
+	return (count);
 	
 }
 
@@ -70,7 +106,22 @@ t_token *trim_quote(t_token *token, int j)
 	new = malloc(sizeof(char) * len + 1);
 	if (!new)
 		return (0);
-	
+	while (token->str[i])
+	{
+		if (check_quote_flag(token, i) == 1)
+		{
+			i = switch_flag_token(i ,token);
+			continue ;
+		}
+		else if (switch_flag_token_empty(i, token) != i)
+			continue ;
+		new[j++] = token->str[i++];
+	}
+	new[j] = 0;
+	free(token->str);
+	token->str = new;
+	token->inner_join = 1;
+	return (token);
 }
 
 void quote_process(t_data *data)

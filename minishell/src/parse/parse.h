@@ -33,6 +33,7 @@ void init_input_output(t_cmd *cmd);
 int token_split_word_and_sep(char *str, int start, t_data *data, int *i);
 int what_is_sep(char *str, int i);
 int check_quote(int flag, int input);
+int switch_flag_token_empty(int i, t_token *token);
 
 /******************lst_token_utils.c******************************/
 
@@ -105,5 +106,7 @@ t_token *parsing_append(t_cmd *cmd, t_token *token);
 /*********************quote_process**********************/
 void quote_process(t_data *data);
 t_token *trim_quote(t_token *token, int j);
+int check_quote_flag(t_token *token, int i);
+int switch_flag_token (int i, t_token *token);
 #endif
 
