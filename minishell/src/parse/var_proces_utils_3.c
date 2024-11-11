@@ -67,28 +67,28 @@ int	var_copy(char *dest, char *src, int i)
 	return (i);
 }
 
-char	*get_str_token(char *str, char *str_new, int size, int i)
+char	*get_str_token(char *str, char *str_new, int size, int id)
 {
 	char	*str_token;
-	int		j;
+	int		i;
 	int		y;
 
-	j = 0;
+	i = 0;
 	y = 0;
 	str_token = (char *)malloc(sizeof(char) * size + 1);
 	if (!str_token)
 		return (0);
-	while (str[j])
+	while (str[i])
 	{
-		if (str[j] == '$' && j == i)
+		if (str[i] == '$' && i == id)
 		{
 			y = var_copy(str_token, str_new, y);
-			j = size_var(&str[i]) + j + 1;
-			if (str[j] == 0)
+			i = size_var(&str[id]) + i + 1;
+			if (str[i] == 0)
 				break ;
 		}
-		str_token[y] = str[j];
-		j++;
+		str_token[y] = str[i];
+		i++;
 		y++;
 	}
 	str_token[y] = 0;

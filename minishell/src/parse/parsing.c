@@ -39,6 +39,22 @@ void split_token(t_cmd *cmd, t_token *token)
 	clear_tab(tab);
 }
 
+char *adding_var(t_token **token_ptr)
+{
+	char *str;
+	t_token *token;
+
+	token = *token_ptr;
+	str = ft_strdup(token->str);
+	while (token->type_token == VAR && token->next->type_token == VAR && token->next->type_token == 1)
+	{
+		str = ft_strjoin(str, token->next->str);
+		token = token->next;
+	}
+	*token_ptr = token;
+	return (str);
+}
+
 t_token *echo_parsing_arg(t_token *token, t_cmd *cmd)
 {
 	int argc;
@@ -54,7 +70,7 @@ t_token *echo_parsing_arg(t_token *token, t_cmd *cmd)
 	while (token->type_token == VAR || token->type_token == WORD)
 	{
 		if (token->inner_join == 1)
-			printf("il echo parsing dans var non gere \n");// to do
+			cmd->args[i] = adding_var(&token);
 		else
 			cmd->args[i] = ft_strdup(token->str);
 		i++;
@@ -79,10 +95,7 @@ t_token *parsins_word(t_cmd *cmd, t_token *token)
 			token = token->next;
 		}
 		else
-		{
 			token = split_args(token, cmd);
-		}
-		
 	}
 	return (token);
 }

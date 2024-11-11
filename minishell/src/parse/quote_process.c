@@ -31,21 +31,21 @@ int switch_flag_token(int i, t_token *token)
 	return (i);
 }
 
-int switch_flag_token_empty(int i, t_token *token)
+int switch_flag_token_empty(int *i, t_token *token)
 {
-	if (token->str[i] == 39 && token->flag == ONE_QUOTE)
+	if (token->str[*i] == 39 && token->flag == ONE_QUOTE)
 	{
 		token->flag = EMPTY;
-		i++;
-		return (i);
+		(*i)++;
+		return (*i);
 	}
-	else if (token->str[i] == 34 && token->flag == DOUBLE_QUOTE)
+	else if (token->str[*i] == 34 && token->flag == DOUBLE_QUOTE)
 	{
 		token->flag = EMPTY;
-		i++;
-		return (i);
+		(*i)++;
+		return (*i);
 	}
-	return (i);
+	return (*i);
 }
 
 int count_str_betweenquote(char *str, int count, int flag)
@@ -113,7 +113,7 @@ t_token *trim_quote(t_token *token, int j)
 			i = switch_flag_token(i ,token);
 			continue ;
 		}
-		else if (switch_flag_token_empty(i, token) != i)
+		else if (switch_flag_token_empty(&i, token) != i)
 			continue ;
 		new[j++] = token->str[i++];
 	}
