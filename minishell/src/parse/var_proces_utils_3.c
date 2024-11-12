@@ -78,20 +78,19 @@ char	*get_str_token(char *str, char *str_new, int size, int id)
 	str_token = (char *)malloc(sizeof(char) * size + 1);
 	if (!str_token)
 		return (0);
-	while (str[i])
+	while (str_new[i])
 	{
-		if (str[i] == '$' && i == id)
+		if (str_new[i] == '$' && i == id)
 		{
-			y = var_copy(str_token, str_new, y);
-			i = size_var(&str[id]) + i + 1;
-			if (str[i] == 0)
+			y = var_copy(str_token, str, y);
+			i = size_var(&str_new[id]) + i + 1;
+			if (str_new[i] == 0)
 				break ;
 		}
-		str_token[y] = str[i];
+		str_token[y] = str_new[i];
 		i++;
 		y++;
 	}
 	str_token[y] = 0;
-	free(str);
 	return (str_token);
 }
