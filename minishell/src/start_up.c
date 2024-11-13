@@ -6,7 +6,7 @@
 /*   By: derakoto <derakoto@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/20 08:55:38 by derakoto          #+#    #+#             */
-/*   Updated: 2023/11/22 00:24:15 by derakoto         ###   ########.fr       */
+/*   Updated: 2023/11/22 01:10:47 by derakoto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,6 @@ int	msh_start_up(t_data *data, char **env)
 int init_data(t_data *data, char **env)
 {
 	data->var = NULL;
-<<<<<<< HEAD
 	data->term_backup.keybord_backup = dup(0);
 	if (data->term_backup.keybord_backup == -1)
 		return (1);
@@ -50,9 +49,6 @@ int init_data(t_data *data, char **env)
 	if (data->term_backup.term_backup == -1)
 		return (1);
 	data->var = (char **)malloc(sizeof(char *));
-=======
-	data->var = (char **)malloc(sizeof(char *) + 1);
->>>>>>> f8653a5be84ad106bc47f7c8fd060adc30bac743
 	if (data->var == NULL)
 		return (1);
 	*data->var = NULL;

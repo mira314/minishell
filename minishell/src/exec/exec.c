@@ -309,7 +309,7 @@ void	exec_one_cmd(t_data	*data,  t_cmd *cmd)
 	else if (is_path(cmd->args[cmd->offset]) == 0)
 		g_last_val = exec_with_fork(cmd->args[cmd->offset], cmd->args + cmd->offset, data->env);
 	else
-		print_error(data->cmd->cmd, ": command not found\n", 127);
+		print_error(cmd->args[cmd->offset], ": command not found\n", 127);
 }
 
 void	exec_with_redir(t_data *data, t_cmd *cmd)
