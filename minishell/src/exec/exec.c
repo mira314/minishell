@@ -42,9 +42,7 @@ static int	exec_with_fork(char *path, char **args, char **envs)
 		if (WIFEXITED(status))
 			exit_status = WEXITSTATUS(status);
 		else if (WIFSIGNALED(status))
-		{
 			exit_status = 130;
-		}
 	}
 	return (exit_status);
 }
@@ -306,7 +304,7 @@ int	exec_one_cmd(t_data	*data,  t_cmd *cmd)
 {
 	char	*path;
 	char	*total_path;
-	char 	exit_status;
+	int 	exit_status;
 
 	if (cmd->cmd == NULL)
 		return (0);
@@ -339,7 +337,7 @@ void	exec_with_redir(t_data *data, t_cmd *cmd)
 {
 	int		fd_in_backup;
 	int		fd_out_backup;
-	unsigned int		exit_status;
+	int		exit_status;
 
 	fd_out_backup = dup(1);
 	fd_in_backup = dup(0);
@@ -354,5 +352,5 @@ void	exec_with_redir(t_data *data, t_cmd *cmd)
 	exit_status = exec_one_cmd(data, cmd);
 	dup2(fd_out_backup, 1);
 	dup2(fd_in_backup, 0);
-	printf("exit status : %d\n", exit_status);
+	data->exit_value = exit_status;
 }
