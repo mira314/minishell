@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vrandria <vrandria@student.42antananari    +#+  +:+       +#+        */
+/*   By: derakoto <derakoto@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/25 10:30:04 by vrandria          #+#    #+#             */
-/*   Updated: 2024/10/27 12:06:29 by vrandria         ###   ########.fr       */
+/*   Updated: 2024/11/02 14:34:03 by derakoto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ void init_input_output(t_cmd *cmd);
 int token_split_word_and_sep(char *str, int start, t_data *data, int *i);
 int what_is_sep(char *str, int i);
 int check_quote(int flag, int input);
-
 /******************lst_token_utils.c******************************/
 
 t_token	*new_token(char *str, int flag, int type_token);
@@ -52,6 +51,7 @@ int token_other(t_token **token, char *str, int i, int type_token);
 /*******************parsing.c **********************************/
 void split_token(t_cmd *cmd, t_token *token);
 t_token *parsins_word(t_cmd *cmd, t_token *token);
+char *adding_var(t_token **token_ptr);
 t_token *echo_parsing_arg(t_token *token, t_cmd *cmd);
 /*********************lst_cmd_utils.c************************ */
 t_cmd *new_cmd(void);
@@ -102,5 +102,11 @@ t_token *parsing_trunc(t_cmd *cmd, t_token *token);
 t_token *parsing_heredoc(t_cmd *cmd, t_token *token);
 /**********************append_process.c ******************/
 t_token *parsing_append(t_cmd *cmd, t_token *token);
+/*********************quote_process**********************/
+void quote_process(t_data *data);
+t_token *trim_quote(t_token *token, int j);
+int check_quote_flag(t_token *token, int i);
+int switch_flag_token(int i, t_token *token);
+int switch_flag_token_empty(int *i, t_token *token);
 #endif
 

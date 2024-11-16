@@ -6,7 +6,7 @@
 /*   By: derakoto <derakoto@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/24 10:56:40 by vrandria          #+#    #+#             */
-/*   Updated: 2024/11/02 12:03:03 by derakoto         ###   ########.fr       */
+/*   Updated: 2024/11/04 17:18:35 by derakoto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,15 +90,15 @@ int parse_data_input(t_data *data)
 	if (data->exit_value == 0)
 	{
 		var_process(data, data->token);
+		quote_process(data);
 		fill_cmd(data, data->token);
 	//test_1(data->cmd);
 	//	test_2(data->cmd);
 		//printf("%s" , data->cmd->cmd);
-		//exec_one_cmd(data);
-		exec_with_redir(data, data->cmd);
+		//exec_with_redir(data, data->cmd);
+		exec(data);
 	}
 		free(data->input);
-	//	test(data->token);
 		lst_clear_all_token(data->token);
 		data->token = 0;
 	return (exit);
