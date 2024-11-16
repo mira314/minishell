@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   initialization.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vrandria <vrandria@student.42antananari    +#+  +:+       +#+        */
+/*   By: derakoto <derakoto@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/03 07:31:00 by vrandria          #+#    #+#             */
-/*   Updated: 2024/10/27 12:07:01 by vrandria         ###   ########.fr       */
+/*   Updated: 2024/11/16 15:01:08 by derakoto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parse.h"
 
-int init_token(t_data *data, char *input, int flag)
+int init_token(t_data *data, char *input, int flag, int *exit)
 {
     int i;
     int start;
@@ -32,7 +32,7 @@ int init_token(t_data *data, char *input, int flag)
     {
         if (flag == DOUBLE_QUOTE || flag == ONE_QUOTE)
         {
-            data->exit_value = print_error("error: missing terminating quote", NULL, 2);
+            *exit = print_error("error: missing terminating quote", NULL, 2);
             return(1);
         }
     }

@@ -6,7 +6,7 @@
 /*   By: derakoto <derakoto@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/25 10:30:04 by vrandria          #+#    #+#             */
-/*   Updated: 2023/11/22 00:54:08 by derakoto         ###   ########.fr       */
+/*   Updated: 2024/11/16 15:00:08 by derakoto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ char *ft_strtok(char *str, const char *delim);
 int parse_from_prompt(t_data *data);
 /**************initialisation************** */
 int init_data(t_data *data, char **env);
-int init_token(t_data *data, char *input, int flag);
+int init_token(t_data *data, char *input, int flag, int *exit);
 t_cmd *init_cmd(t_cmd *cmd);
 void fill_cmd(t_data *data, t_token *token);
 void init_input_output(t_cmd *cmd);

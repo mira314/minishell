@@ -6,7 +6,7 @@
 /*   By: derakoto <derakoto@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/24 10:56:40 by vrandria          #+#    #+#             */
-/*   Updated: 2024/11/15 01:10:25 by derakoto         ###   ########.fr       */
+/*   Updated: 2024/11/16 15:13:55 by derakoto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,21 +73,17 @@ int parse_data_input(t_data *data)
 	int exit;
 
 	exit = 0;
-	if (init_token(data, data->input, 0)!= 0)
-		exit = data->exit_value;
-	if (data->exit_value == 0)
+	init_token(data, data->input, 0, &exit);
+	if (exit == 0)
 	{
 		data->token = def_var_on_token(data->token);
 		if (data->token->exit_value != 0)
-			{
-				exit = data->token->exit_value;
-				data->exit_value = exit;
-			}
+			data->exit_value = data->token->exit_value;
 			/// to do
 		//if (data->exit_value == 0)
 			//data->exit_value = check_var(data->token);
 	}
-	if (data->exit_value == 0)
+	if (exit == 0 && data->token->exit_value == 0)
 	{
 		var_process(data, data->token);
 		quote_process(data);
@@ -142,7 +138,6 @@ int main(int argc, char *argv[], char **env)
 		data.input = readline("msh$");
 		if (data.input == NULL)
 			mini_exit(&data);
-		data.exit_value = 0;
 		if (*data.input && check_input(&data))
 		{
 			add_history(data.input);
