@@ -6,7 +6,7 @@
 /*   By: derakoto <derakoto@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 08:13:10 by vrandria          #+#    #+#             */
-/*   Updated: 2024/11/02 14:28:33 by derakoto         ###   ########.fr       */
+/*   Updated: 2023/11/22 00:17:02 by derakoto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,11 @@ typedef struct s_cmd
     struct s_cmd *next;
 }t_cmd;
 
+typedef struct s_term{
+    int term_backup;
+    int keybord_backup;
+}   t_term;
+
 typedef struct s_data
 {
     char **env;
@@ -73,7 +78,10 @@ typedef struct s_data
     t_cmd   *cmd;
     t_token *token;
     int exit_value;
+    t_term term_backup;
 } t_data;
+
+
 
 #endif
 

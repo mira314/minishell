@@ -38,7 +38,7 @@ char    *get_env_value(char **envs, char *key);
 char	*get_env(char **envs, char *key);
 char    *is_in_path_env(char *file_name, char **envs);
 char    *build_path(char *path, char *file_name);
-void	exec_one_cmd(t_data *data, t_cmd *cmd);
+int 	exec_one_cmd(t_data *data, t_cmd *cmd);
 int		mini_env(char **args, char **envs);
 int	    mini_export(char **args, char ***envs);
 void    mini_exit(t_data *data);

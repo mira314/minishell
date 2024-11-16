@@ -6,7 +6,7 @@
 /*   By: derakoto <derakoto@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/24 10:56:40 by vrandria          #+#    #+#             */
-/*   Updated: 2024/11/04 17:18:35 by derakoto         ###   ########.fr       */
+/*   Updated: 2024/11/15 01:10:25 by derakoto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,8 +145,7 @@ int main(int argc, char *argv[], char **env)
 		data.exit_value = 0;
 		if (*data.input && check_input(&data))
 		{
-			if (data.input)
-				add_history(data.input);
+			add_history(data.input);
 			parse_data_input(&data);
 		}
 		else

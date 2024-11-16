@@ -6,22 +6,20 @@
 /*   By: derakoto <derakoto@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/25 10:13:53 by vrandria          #+#    #+#             */
-/*   Updated: 2024/11/02 14:37:13 by derakoto         ###   ########.fr       */
+/*   Updated: 2023/11/22 00:54:31 by derakoto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parse.h"
 
-int handles_bultin(t_data *data)
+int handles_bultin(t_data *data, t_cmd *cmd)
 {
-    t_cmd *cmd;
-    cmd = data->cmd;
     int exit;
 
     exit = 1;
     if (ft_strncmp(cmd->cmd, "echo", 5) == 0)
         exit = ft_echo(&(cmd->args[1]));
-    else if (ft_strncmp(cmd->cmd, "pwd", 4) == 0)
+     if (ft_strncmp(cmd->cmd, "pwd", 4) == 0)
         exit = ft_pwd();
     else if (ft_strncmp(cmd->cmd, "cd", 3) == 0)
         exit = mini_cd((data));
