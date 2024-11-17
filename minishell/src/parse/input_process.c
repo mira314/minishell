@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   input_process.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vrandria <vrandria@student.42antananari    +#+  +:+       +#+        */
+/*   By: derakoto <derakoto@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/19 08:24:27 by vrandria          #+#    #+#             */
-/*   Updated: 2024/10/27 11:04:10 by vrandria         ###   ########.fr       */
+/*   Updated: 2024/11/17 14:51:46 by derakoto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,9 +48,9 @@ static t_input *add_file(t_cmd *cmd, t_token *token)
 
 t_token *parsing_input(t_cmd *cmd, t_token *token)
 {
-    t_input *tmp;
+     //t_input *tmp;
 
-    tmp = cmd->io->inputs;
+    //tmp = cmd->io->inputs;
     while (cmd->next)
         cmd = cmd->next;
     if (cmd->io->inputs[0].filename == 0)
@@ -58,7 +58,7 @@ t_token *parsing_input(t_cmd *cmd, t_token *token)
     else
         {
             cmd->io->inputs = add_file(cmd, token->next);
-            free(tmp);
+            //free(tmp);
         }
     if (token->next->next)
     {

@@ -47,7 +47,7 @@ static int	exec_with_fork(char *path, char **args, char **envs)
 	return (exit_status);
 }
 
-static int	is_delimiter(char *delimiter, char *str)
+int	is_delimiter(char *delimiter, char *str)
 {
 	size_t	i;
 	size_t	len;
@@ -104,7 +104,7 @@ static char	*get_doc(char *delim)
 	}
 	return result;
 }
-static int	handle_here_doc(int	*fds, char *del, t_term *term)
+int	handle_here_doc(int	*fds, char *del, t_term *term)
 {
 	char	*heredoc_result;
 	int		exit_status;
@@ -143,34 +143,17 @@ static int redir_input(t_input *file, t_term *term)
 {
 	int		input;
 	int		i;
-	int		fds[2];
+	(void)term;
 
 	i = 0;
 	while(file[i].filename != 0)
 	{
-		if (file[i].mode == HEREDOC)
+		input = open(file[i].filename, O_RDONLY);
+		if (input == -1)
 		{
-			pipe(fds);
-			if (handle_here_doc(fds, file[i].filename, term) == -1)
-			{
-				close(fds[0]);
-				close(fds[1]);
-				return (-1);
-			}
-			close(fds[1]);
-			input = fds[0];	
+			perror(file[i].filename);
+			return (-1);
 		}
-		else if (file[i].mode == INPUT)
-		{
-			input = open(file[i].filename, O_RDONLY);
-			if (input == -1)
-			{
-				perror(file[i].filename);
-				return (-1);
-			}
-		}
-		else
-			printf("Unkown input mode\n");
 		if (file[i + 1].filename == NULL)
 				dup2(input, 0);
 			close (input);

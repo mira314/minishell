@@ -6,7 +6,7 @@
 /*   By: derakoto <derakoto@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/25 10:30:04 by vrandria          #+#    #+#             */
-/*   Updated: 2024/11/16 15:00:08 by derakoto         ###   ########.fr       */
+/*   Updated: 2024/11/17 11:18:25 by derakoto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int parse_from_prompt(t_data *data);
 int init_data(t_data *data, char **env);
 int init_token(t_data *data, char *input, int flag, int *exit);
 t_cmd *init_cmd(t_cmd *cmd);
-void fill_cmd(t_data *data, t_token *token);
+int fill_cmd(t_data *data, t_token *token);
 void init_input_output(t_cmd *cmd);
 /*****token.c***************************/
 int token_split_word_and_sep(char *str, int start, t_data *data, int *i);

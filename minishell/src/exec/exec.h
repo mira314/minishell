@@ -49,5 +49,6 @@ int     is_var_assignement(char *str);
 int     count_assignement(char **tbl);
 int     handle_var(char **tbl, char ***var, int *assign_count);
 void	exec(t_data *data);
+int	    is_delimiter(char *delimiter, char *str);
 
 #endif

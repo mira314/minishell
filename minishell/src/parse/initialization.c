@@ -6,7 +6,7 @@
 /*   By: derakoto <derakoto@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/03 07:31:00 by vrandria          #+#    #+#             */
-/*   Updated: 2024/11/16 15:01:08 by derakoto         ###   ########.fr       */
+/*   Updated: 2024/11/17 14:47:02 by derakoto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ int init_token(t_data *data, char *input, int flag, int *exit)
 
 t_cmd *init_cmd(t_cmd *cmd)
 {
+    cmd->output = 0;
     cmd->cmd = 0;
     cmd->args = 0;
     cmd->output = 0;
@@ -52,14 +53,14 @@ t_cmd *init_cmd(t_cmd *cmd)
     return (cmd);
 }
 
-void fill_cmd(t_data *data, t_token *token)
+int fill_cmd(t_data *data, t_token *token)
 {
     t_token *tmp;
 
     tmp = token;
     if (tmp->type_token == END)
-        return ;
-    while (tmp->next)
+        return (0);
+    while (tmp && tmp->next)
     {
         if (tmp == token)
             data->cmd = lst_add_back_cmd(data->cmd, new_cmd());
@@ -82,11 +83,14 @@ void fill_cmd(t_data *data, t_token *token)
             printf("fillcmd condition non prise en charge %d = %d %s", token->type_token, TRUNC, token->str);
             break ;
         }
+        if (tmp == NULL)
+            return (-1);
     }
     if (data && data->cmd && data->cmd->cmd != 0)
         data->exit_value = parse_commande(data); 
     else
         data->exit_value = 1;
+    return (0);
 }
 
 void init_input_output(t_cmd *cmd)

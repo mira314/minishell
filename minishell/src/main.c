@@ -6,7 +6,7 @@
 /*   By: derakoto <derakoto@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/24 10:56:40 by vrandria          #+#    #+#             */
-/*   Updated: 2024/11/16 15:13:55 by derakoto         ###   ########.fr       */
+/*   Updated: 2024/11/17 14:46:07 by derakoto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,24 +79,14 @@ int parse_data_input(t_data *data)
 		data->token = def_var_on_token(data->token);
 		if (data->token->exit_value != 0)
 			data->exit_value = data->token->exit_value;
-			/// to do
-		//if (data->exit_value == 0)
-			//data->exit_value = check_var(data->token);
 	}
 	if (exit == 0 && data->token->exit_value == 0)
 	{
 		var_process(data, data->token);
 		quote_process(data);
-		fill_cmd(data, data->token);
-	//test_1(data->cmd);
-	//	test_2(data->cmd);
-		//printf("%s" , data->cmd->cmd);
-		//exec_with_redir(data, data->cmd);
-		exec(data);
+		if (fill_cmd(data, data->token) == -1)
+			exit = 1;
 	}
-		free(data->input);
-		lst_clear_all_token(data->token);
-		data->token = 0;
 	return (exit);
 }
 
@@ -126,7 +116,6 @@ int check_input(t_data *data)
 int main(int argc, char *argv[], char **env)
 {
 	t_data data;
-
 	(void)argc;
 	(void)argv;
 	
@@ -141,10 +130,18 @@ int main(int argc, char *argv[], char **env)
 		if (*data.input && check_input(&data))
 		{
 			add_history(data.input);
-			parse_data_input(&data);
+			if (parse_data_input(&data) == 1)
+			{
+				lst_clear_all_token(data.token);
+				data.token = 0;
+				free(data.input);
+				continue ;
+			}
+			exec(&data);
+			lst_clear_all_token(data.token);
+			data.token = 0;
 		}
-		else
-			g_last_val = 0;
+		free(data.input);
 		clear_lst_cmd(&data);
 	}
 	return 0;

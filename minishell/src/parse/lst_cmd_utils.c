@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lst_cmd_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vrandria <vrandria@student.42antananari    +#+  +:+       +#+        */
+/*   By: derakoto <derakoto@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 07:51:18 by vrandria          #+#    #+#             */
-/*   Updated: 2024/10/27 14:27:54 by vrandria         ###   ########.fr       */
+/*   Updated: 2024/11/17 14:35:19 by derakoto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
