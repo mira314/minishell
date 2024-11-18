@@ -6,7 +6,7 @@
 /*   By: derakoto <derakoto@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 15:42:25 by vrandria          #+#    #+#             */
-/*   Updated: 2024/11/18 04:51:17 by derakoto         ###   ########.fr       */
+/*   Updated: 2024/11/18 05:39:10 by derakoto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,11 +57,11 @@ char *create_file_name(char *path)
     file_name = (char *)malloc(sizeof(char) * 10);
     if (file_name == NULL)
         return (NULL);
-    file_name[0] = 'a';
+    file_name[0] = '.';
     i = 1;
     while (i < 9)
     {
-        file_name[i] = '.';
+        file_name[i] = 'a';
         i++;
     }
     file_name[i] = 0;
@@ -130,8 +130,6 @@ t_token *parsing_heredoc(t_cmd *cmd, t_token *token)
     {
         wait(&status);
         close(fd);
-        if (WIFSIGNALED(status))
-            return (NULL);
         //tmp = cmd->io->inputs;
         while (cmd->next)
             cmd = cmd->next;
@@ -142,6 +140,8 @@ t_token *parsing_heredoc(t_cmd *cmd, t_token *token)
             cmd->io->inputs = add_file(cmd, file);
             //free(tmp);
         }
+        if (WIFSIGNALED(status))
+            return (NULL);
         if (token->next->next)
             token = token->next->next;
         else
@@ -165,5 +165,17 @@ void    clear_doc(t_input *inputs)
                 perror("Heredoc deletetion");
         }
         i++;
+    }
+}
+
+void    clear_all_doc(t_cmd *top_cmd)
+{
+    t_cmd *cmd;
+
+    cmd = top_cmd;
+    while (cmd)
+    {
+        clear_doc(cmd->io->inputs);
+        cmd = cmd->next;
     }
 }

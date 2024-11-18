@@ -6,7 +6,7 @@
 /*   By: derakoto <derakoto@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/24 10:56:40 by vrandria          #+#    #+#             */
-/*   Updated: 2024/11/17 14:46:07 by derakoto         ###   ########.fr       */
+/*   Updated: 2024/11/18 05:43:55 by derakoto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,14 +124,20 @@ int main(int argc, char *argv[], char **env)
 		return (1);
 	while (1)
 	{
+		signal(SIGINT, sig_int_handler);
 		data.input = readline("msh$");
 		if (data.input == NULL)
 			mini_exit(&data);
 		if (*data.input && check_input(&data))
 		{
 			add_history(data.input);
+			signal(SIGINT, SIG_IGN);
 			if (parse_data_input(&data) == 1)
 			{
+				data.exit_value = 130;
+				write(1, "\n", 1);
+				clear_all_doc(data.cmd);
+				clear_lst_cmd(&data);
 				lst_clear_all_token(data.token);
 				data.token = 0;
 				free(data.input);

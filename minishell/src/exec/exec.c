@@ -30,6 +30,7 @@ static int	exec_with_fork(char *path, char **args, char **envs)
 	}
 	if (pid == 0)
 	{
+		signal(SIGINT, SIG_DFL);
 		if(execve(path, args, envs) == -1)
 		perror(path);
 		if (errno == EACCES)
