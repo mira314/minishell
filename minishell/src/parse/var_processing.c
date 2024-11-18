@@ -59,7 +59,6 @@ int var_process(t_data *data, t_token *token)
     int i;
     char *exit_val;
     char *tmp;
-    char *cur;
 
     while (token)
     {
@@ -73,12 +72,6 @@ int var_process(t_data *data, t_token *token)
                 && (token->flag == EMPTY || token->flag == DOUBLE_QUOTE))//il le faut dans une fonctionne
                 {
                     tmp = token->str;
-                    if (token->str[0] == '$' && token->str[1] == '+')
-                    {
-                        cur = ft_strjoin("$", token->str);
-                        free(token->str);
-                        token->str = cur;
-                    }
                     exit_val = exit_var_value(data, token, &tmp[i]);
                     token = var_conversion(token, exit_val, i);
                     i++;

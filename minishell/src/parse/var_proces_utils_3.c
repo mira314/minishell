@@ -26,7 +26,7 @@ int	sub_var(t_token *token, char *str, int i, int size)
 		return (0);
 	while (str[j])
 	{
-		if (str[j] == '$' && i == j)
+		if (str[j] == '$' && i == j && (ft_isalpha(str[i+1])))
 		{
 			j = size_var(&str[i]) + j + 1;
 			if (str[j] == 0)
