@@ -6,7 +6,7 @@
 /*   By: derakoto <derakoto@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/25 10:30:04 by vrandria          #+#    #+#             */
-/*   Updated: 2024/11/17 11:18:25 by derakoto         ###   ########.fr       */
+/*   Updated: 2024/11/18 04:30:13 by derakoto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,7 @@ t_token *parsing_input(t_cmd *cmd, t_token *token);
 t_token *parsing_trunc(t_cmd *cmd, t_token *token);
 /***********************herdoc_process.c  *************** */
 t_token *parsing_heredoc(t_cmd *cmd, t_token *token);
+void    clear_doc(t_input *inputs);
 /**********************append_process.c ******************/
 t_token *parsing_append(t_cmd *cmd, t_token *token);
 /*********************quote_process**********************/

@@ -329,10 +329,11 @@ void	exec_with_redir(t_data *data, t_cmd *cmd)
 		data->exit_value = 1;
 		dup2(fd_out_backup, 1);
 		dup2(fd_in_backup, 0);
-		printf("exit status : 1\n");
+		clear_doc(cmd->io->inputs);
 		return ;
 	}
 	exit_status = exec_one_cmd(data, cmd);
+	clear_doc(cmd->io->inputs);
 	dup2(fd_out_backup, 1);
 	dup2(fd_in_backup, 0);
 	data->exit_value = exit_status;

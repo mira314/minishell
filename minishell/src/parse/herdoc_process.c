@@ -6,7 +6,7 @@
 /*   By: derakoto <derakoto@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 15:42:25 by vrandria          #+#    #+#             */
-/*   Updated: 2024/11/17 17:49:56 by derakoto         ###   ########.fr       */
+/*   Updated: 2024/11/18 04:39:30 by derakoto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,4 +147,22 @@ t_token *parsing_heredoc(t_cmd *cmd, t_token *token)
             token = token->next;
     }
     return (token);
+}
+
+void    clear_doc(t_input *inputs)
+{
+    int i;
+
+    if (inputs == 0)
+        return ;
+    i = 0;
+    while (inputs[i].filename != NULL)
+    {
+        if (inputs[i].mode == HEREDOC)
+        {
+            if (unlink(inputs[i].filename) == -1)
+                perror("Heredoc deletetion");
+        }
+        i++;
+    }
 }
