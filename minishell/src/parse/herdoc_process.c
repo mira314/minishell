@@ -6,7 +6,7 @@
 /*   By: derakoto <derakoto@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 15:42:25 by vrandria          #+#    #+#             */
-/*   Updated: 2024/11/18 04:39:30 by derakoto         ###   ########.fr       */
+/*   Updated: 2024/11/18 04:51:17 by derakoto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,14 +57,15 @@ char *create_file_name(char *path)
     file_name = (char *)malloc(sizeof(char) * 10);
     if (file_name == NULL)
         return (NULL);
-    i = 0;
+    file_name[0] = 'a';
+    i = 1;
     while (i < 9)
     {
-        file_name[i] = 'a';
+        file_name[i] = '.';
         i++;
     }
     file_name[i] = 0;
-    index_to_change = 0;
+    index_to_change = 1;
     while (is_file_in(path, file_name) == 0)
     {
         file_name[index_to_change]++;
