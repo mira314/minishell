@@ -74,6 +74,7 @@ int sep_next_char(char c);
 int double_quote_is_close(char *str, int i);
 /*************var_proces_utils.c********************** */
 int ft_varchr(t_data *data, char *str);
+char *get_var_var(t_data *data, char *str, int size_var);
 char *get_var_env(t_data *data, char *str, int size_var);
 char *exit_var_value(t_data *data, t_token *token, char *str);
 

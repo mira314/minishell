@@ -12,7 +12,6 @@
 
 #include "parse.h"
 
-
 int ft_varchr(t_data *data, char *str)
 {
     int i;
@@ -30,10 +29,30 @@ int ft_varchr(t_data *data, char *str)
     while (data->env[i])
     {
         if (ft_strncmp(data->env[i], str , size) == 0)
-            return (1);
+            return (2);
         i++;
     }
     return (0);
+}
+
+char *get_var_var(t_data *data, char *str, int size_var)
+{
+    char *result;
+    int i;
+    char *sub;
+
+    i = 0;
+    while (data->var[i])
+    {
+        if (ft_strncmp(data->var[i], str, size_var) == 0)
+            break ;
+        else
+            i++;
+    }
+    result = ft_strdup(data->var[i]);
+    sub = ft_substr(result, size_var, ft_strlen(result));
+    free(result);
+    return (sub);
 }
 
 char *get_var_env(t_data *data, char *str, int size_var)
@@ -63,12 +82,15 @@ char *exit_var_value(t_data *data, t_token *token, char *str)
     int size;
 
     var = get_type_var(str, 0);
-    if (var && ft_varchr(data, var) == 1)
+    if (var && ft_varchr(data, var) != 0)
     {
         if (token)
             token->check_var = 1;
         size = ft_strlen(var);
-        exit_val = get_var_env(data, var, size);
+        if (ft_varchr(data, var) == 1)
+            exit_val = get_var_var(data, var, size);
+        else if (ft_varchr(data, var) == 2)
+            exit_val = get_var_env(data, var, size);
     }
     else if (var && var[0] == '?' && var[1] == '=')
         exit_val =  ft_itoa(data->exit_value);
