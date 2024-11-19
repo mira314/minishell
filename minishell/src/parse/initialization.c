@@ -6,7 +6,7 @@
 /*   By: derakoto <derakoto@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/03 07:31:00 by vrandria          #+#    #+#             */
-/*   Updated: 2024/11/18 05:35:31 by derakoto         ###   ########.fr       */
+/*   Updated: 2024/11/19 05:58:42 by derakoto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,6 @@ t_cmd *init_cmd(t_cmd *cmd)
     cmd->prev = 0;
     cmd->io = 0;
     cmd->next = 0;
-    cmd->history = 0;
     init_input_output(cmd);
     return (cmd);
 }
@@ -93,6 +92,27 @@ int fill_cmd(t_data *data, t_token *token)
     return (0);
 }
 
+t_input *init_input(t_input **input)
+{
+    *input = (t_input *)malloc(sizeof(t_input));
+    if (*input == NULL)
+        return (NULL);
+    (*input)->filename = NULL;
+    (*input)->delim_heredoc = NULL;
+    (*input)->mode = INPUT;
+    return (*input);
+}
+
+t_output *init_output(t_output **output)
+{
+    *output = (t_output *)malloc(sizeof(t_output));
+    if (*output == NULL)
+        return (NULL);
+    (*output)->filename = NULL;
+    (*output)->mode = TRUNC;
+    return (*output);    
+}
+
 void init_input_output(t_cmd *cmd)
 {
     t_io_fd *io;
@@ -102,13 +122,15 @@ void init_input_output(t_cmd *cmd)
         if (!cmd->io)
             return ;
         io = cmd->io;
-        io->inputs = malloc(sizeof(t_input) * 2);
+        /*io->inputs = malloc(sizeof(t_input) * 2);
         io->inputs[0].filename = 0;
         io->inputs[1].filename = 0;
         io->inputs[0].delim_heredoc = 0;
         io->outputs = malloc(sizeof(t_output) * 2);
         io->outputs[0].filename = 0;
-        io->outputs[1].filename = 0;
+        io->outputs[1].filename = 0;*/
+        init_input(&io->inputs);
+        init_output(&io->outputs);
         io->input_fd = -1;
         io->output_fd = -1;
         io->stdin = -1;

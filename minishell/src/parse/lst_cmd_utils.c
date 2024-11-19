@@ -6,7 +6,7 @@
 /*   By: derakoto <derakoto@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 07:51:18 by vrandria          #+#    #+#             */
-/*   Updated: 2024/11/17 14:35:19 by derakoto         ###   ########.fr       */
+/*   Updated: 2024/11/19 05:09:07 by derakoto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,30 +49,56 @@ t_cmd *lst_add_back_cmd(t_cmd *cmd, t_cmd *new_cmd)
     }
     return(cmd);
 }
+
+void clear_inputs(t_input *input)
+{
+    int i;
+
+    if (input == 0)
+        return ;
+    i = 0;
+    while (input[i].filename != NULL)
+    {
+        free(input[i].filename);
+        i++;
+    }
+}
+
+void clear_outputs(t_output *output)
+{
+    int i;
+
+    if (output == NULL)
+        return ;
+    i = 0;
+    while (output[i].filename != NULL)
+    {
+        free(output[i].filename);
+        i++;
+    }
+}
+void clear_io(t_io_fd *io)
+{
+    if (io == NULL)
+        return ;
+    clear_inputs(io->inputs);
+    free(io->inputs);
+    clear_outputs(io->outputs);
+    free(io->outputs);
+}
+
 static t_cmd *lst_del_cmd(t_cmd *cmd)
 {
     t_cmd *current = cmd;
-    int i;
+    t_cmd *next_cmd;
 
     while (current)
     {
-		i = 0;
-        t_cmd *next_cmd = current->next;
-
-        if (current->args)
-        {
-            while (current->args[i])
-            {
-                free(current->args[i]);
-                i++;
-            }
-        }
-        free(current->args);
+        next_cmd = current->next;
+        mini_tbl_free(current->args);
         free(current->cmd);
-		free(current->io->inputs);
-		free(current->io->outputs);
+        clear_io(current->io);
 		free(current->io);
-        free(current->history);
         free(current);
         current = next_cmd; 
     }
