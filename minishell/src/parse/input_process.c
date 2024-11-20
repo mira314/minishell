@@ -6,7 +6,7 @@
 /*   By: derakoto <derakoto@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/19 08:24:27 by vrandria          #+#    #+#             */
-/*   Updated: 2024/11/19 05:59:46 by derakoto         ###   ########.fr       */
+/*   Updated: 2024/11/20 04:03:25 by derakoto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,14 +54,6 @@ t_token *parsing_input(t_cmd *cmd, t_token *token)
         return (NULL);
     while (cmd->next)
         cmd = cmd->next;
-/*    if (cmd->io->inputs[0].filename == 0)
-        create_file(cmd, token->next);
-    else
-        {
-            cmd->io->inputs = add_file(cmd, token->next);
-            //free(tmp);
-        }
-*/
     cmd->io->inputs = add_file(cmd, token->next);
     if (token->next->next)
     {
