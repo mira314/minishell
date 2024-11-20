@@ -6,7 +6,7 @@
 /*   By: derakoto <derakoto@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/25 10:30:04 by vrandria          #+#    #+#             */
-/*   Updated: 2024/11/18 05:39:44 by derakoto         ###   ########.fr       */
+/*   Updated: 2024/11/20 04:54:10 by derakoto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,5 +111,8 @@ t_token *trim_quote(t_token *token, int j);
 int check_quote_flag(t_token *token, int i);
 int switch_flag_token(int i, t_token *token);
 int switch_flag_token_empty(int *i, t_token *token);
+
+t_output *add_output(t_cmd *cmd, t_token *token, int mode);
+t_input *add_input(t_cmd *cmd, char *filename, int mode);
 #endif
 

@@ -3,22 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   append_process.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vrandria <vrandria@student.42antananari    +#+  +:+       +#+        */
+/*   By: derakoto <derakoto@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 15:41:59 by vrandria          #+#    #+#             */
-/*   Updated: 2024/10/27 12:05:51 by vrandria         ###   ########.fr       */
+/*   Updated: 2024/11/20 04:48:22 by derakoto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parse.h"
 
-static void create_file(t_cmd *cmd, t_token *token)
-{
-    cmd->io->outputs[0].filename = ft_strdup(token->str);
-    cmd->io->outputs[0].mode = APPEND;
-}
-
-static t_output *add_file(t_cmd *cmd, t_token *token)
+t_output *add_output(t_cmd *cmd, t_token *token, int mode)
 {
     int i;
     int count;
@@ -32,34 +26,27 @@ static t_output *add_file(t_cmd *cmd, t_token *token)
         i++;
     new = malloc((sizeof(t_output) * (i + 2)));
     if (!new)
-        return (0);
+        return (NULL);
     while (count < i)
     {
-        new[count].filename = ft_strdup(tmp[count].filename);
-        free(tmp[count].filename);
+        new[count].filename = tmp[count].filename;
         new[count].mode = tmp[count].mode;
         count++;
     }
-        new[count].filename = ft_strdup(token->str);
-        new[count].mode = APPEND;
-        new[count + 1].filename = 0;
+    new[count].filename = ft_strdup(token->str);
+    new[count].mode = mode;
+    new[count + 1].filename = NULL;
+    free(tmp);
     return (new);
 }
 
 t_token *parsing_append(t_cmd *cmd, t_token *token)
 {
-    t_output *tmp;
-
-    tmp = cmd->io->outputs;
+    if (cmd == NULL || token == NULL)
+        return (NULL);
     while (cmd->next)
         cmd = cmd->next;
-    if (cmd->io->outputs[0].filename == 0)
-        create_file(cmd, token->next);
-    else
-        {
-            cmd->io->outputs = add_file(cmd, token->next);
-            free(tmp);
-        }
+    cmd->io->outputs = add_output(cmd, token->next, APPEND);
     if (token->next->next)
     {
         token = token->next->next;

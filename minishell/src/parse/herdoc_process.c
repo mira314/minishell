@@ -6,13 +6,13 @@
 /*   By: derakoto <derakoto@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 15:42:25 by vrandria          #+#    #+#             */
-/*   Updated: 2024/11/20 04:27:01 by derakoto         ###   ########.fr       */
+/*   Updated: 2024/11/20 04:54:38 by derakoto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parse.h"
 
-static t_input *add_file(t_cmd *cmd, char *filename)
+t_input *add_input(t_cmd *cmd, char *filename, int mode)
 {
     int i;
     int count;
@@ -34,7 +34,7 @@ static t_input *add_file(t_cmd *cmd, char *filename)
         count++;
     }
     new[count].filename = filename;
-    new[count].mode = HEREDOC;
+    new[count].mode = mode;
     new[count + 1].filename = NULL;
     free(tmp);
     return (new);
@@ -125,7 +125,7 @@ t_token *parsing_heredoc(t_cmd *cmd, t_token *token)
         close(fd);
         while (cmd->next)
             cmd = cmd->next;
-        cmd->io->inputs = add_file(cmd, file);
+        cmd->io->inputs = add_input(cmd, file, HEREDOC);
         if (WIFSIGNALED(status))
             return (NULL);
         if (token->next->next)
