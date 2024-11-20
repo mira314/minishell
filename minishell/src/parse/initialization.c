@@ -6,7 +6,7 @@
 /*   By: derakoto <derakoto@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/03 07:31:00 by vrandria          #+#    #+#             */
-/*   Updated: 2024/11/19 05:58:42 by derakoto         ###   ########.fr       */
+/*   Updated: 2024/11/20 04:26:50 by derakoto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,6 @@ t_input *init_input(t_input **input)
     if (*input == NULL)
         return (NULL);
     (*input)->filename = NULL;
-    (*input)->delim_heredoc = NULL;
     (*input)->mode = INPUT;
     return (*input);
 }
