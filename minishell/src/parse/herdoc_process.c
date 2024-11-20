@@ -6,18 +6,11 @@
 /*   By: derakoto <derakoto@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 15:42:25 by vrandria          #+#    #+#             */
-/*   Updated: 2024/11/19 05:24:48 by derakoto         ###   ########.fr       */
+/*   Updated: 2024/11/20 04:27:01 by derakoto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parse.h"
-
-static void create_file(t_cmd *cmd, char *filename)
-{
-    cmd->io->inputs[0].filename = filename;
-    cmd->io->inputs[0].mode = HEREDOC;
-    cmd->io->inputs[1].filename = 0;
-}
 
 static t_input *add_file(t_cmd *cmd, char *filename)
 {
@@ -33,17 +26,17 @@ static t_input *add_file(t_cmd *cmd, char *filename)
         i++;
     new = malloc((sizeof(t_input) * (i + 2)));
     if (!new)
-        return (0);
+        return (NULL);
     while (count < i)
     {
         new[count].filename = tmp[count].filename;
         new[count].mode = tmp[count].mode;
         count++;
     }
-        new[count].filename = filename;
-        new[count].mode = HEREDOC;
-        new[count + 1].filename = NULL;
-        free(tmp);
+    new[count].filename = filename;
+    new[count].mode = HEREDOC;
+    new[count + 1].filename = NULL;
+    free(tmp);
     return (new);
 }
 
@@ -83,7 +76,6 @@ char *create_file_name(char *path)
 
 t_token *parsing_heredoc(t_cmd *cmd, t_token *token)
 {
-    //t_input *tmp;
     char    *file;
     int     fd;
     char    *str;
@@ -131,16 +123,9 @@ t_token *parsing_heredoc(t_cmd *cmd, t_token *token)
     {
         wait(&status);
         close(fd);
-        //tmp = cmd->io->inputs;
         while (cmd->next)
             cmd = cmd->next;
-        if (cmd->io->inputs[0].filename == 0)
-            create_file(cmd, file);
-        else
-        {
-            cmd->io->inputs = add_file(cmd, file);
-            //free(tmp);
-        }
+        cmd->io->inputs = add_file(cmd, file);
         if (WIFSIGNALED(status))
             return (NULL);
         if (token->next->next)

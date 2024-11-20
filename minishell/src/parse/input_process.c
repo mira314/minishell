@@ -6,18 +6,11 @@
 /*   By: derakoto <derakoto@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/19 08:24:27 by vrandria          #+#    #+#             */
-/*   Updated: 2024/11/20 04:03:25 by derakoto         ###   ########.fr       */
+/*   Updated: 2024/11/20 04:27:12 by derakoto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parse.h"
-
-void create_file(t_cmd *cmd, t_token *token)
-{
-    cmd->io->inputs[0].filename = ft_strdup(token->str);
-    cmd->io->inputs[0].delim_heredoc = NULL;
-    cmd->io->inputs[0].mode = INPUT;
-}
 
 static t_input *add_file(t_cmd *cmd, t_token *token)
 {
@@ -41,7 +34,6 @@ static t_input *add_file(t_cmd *cmd, t_token *token)
         count++;
     }
         new[count].filename = ft_strdup(token->str);
-        new[count].delim_heredoc = NULL;
         new[count].mode = INPUT;
         new[count + 1].filename = 0;
         free(tmp);

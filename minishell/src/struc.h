@@ -6,7 +6,7 @@
 /*   By: derakoto <derakoto@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 08:13:10 by vrandria          #+#    #+#             */
-/*   Updated: 2024/11/19 05:35:40 by derakoto         ###   ########.fr       */
+/*   Updated: 2024/11/20 04:27:17 by derakoto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ typedef struct s_input
 {
     int mode;
     char    *filename;
-    char *delim_heredoc;
 }   t_input;
 
 typedef struct s_output
