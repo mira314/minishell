@@ -6,15 +6,16 @@
 /*   By: derakoto <derakoto@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/19 08:24:27 by vrandria          #+#    #+#             */
-/*   Updated: 2024/11/17 14:51:46 by derakoto         ###   ########.fr       */
+/*   Updated: 2024/11/20 04:03:25 by derakoto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parse.h"
 
-static void create_file(t_cmd *cmd, t_token *token)
+void create_file(t_cmd *cmd, t_token *token)
 {
     cmd->io->inputs[0].filename = ft_strdup(token->str);
+    cmd->io->inputs[0].delim_heredoc = NULL;
     cmd->io->inputs[0].mode = INPUT;
 }
 
@@ -35,31 +36,25 @@ static t_input *add_file(t_cmd *cmd, t_token *token)
         return (0);
     while (count < i)
     {
-        new[count].filename = ft_strdup(tmp[count].filename);
-        free(tmp[count].filename);
+        new[count].filename = tmp[count].filename;
         new[count].mode = tmp[count].mode;
         count++;
     }
         new[count].filename = ft_strdup(token->str);
+        new[count].delim_heredoc = NULL;
         new[count].mode = INPUT;
         new[count + 1].filename = 0;
+        free(tmp);
     return (new);
 }
 
 t_token *parsing_input(t_cmd *cmd, t_token *token)
 {
-     //t_input *tmp;
-
-    //tmp = cmd->io->inputs;
+    if (cmd == NULL)
+        return (NULL);
     while (cmd->next)
         cmd = cmd->next;
-    if (cmd->io->inputs[0].filename == 0)
-        create_file(cmd, token->next);
-    else
-        {
-            cmd->io->inputs = add_file(cmd, token->next);
-            //free(tmp);
-        }
+    cmd->io->inputs = add_file(cmd, token->next);
     if (token->next->next)
     {
         token = token->next->next;
