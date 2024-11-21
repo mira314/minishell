@@ -14,3 +14,10 @@ BUILT-IN
   - unset 
   - pwd ok
 
+Remarque : -Sao dia afaka esorina ilay variable exit ao amin'ny pars_input?
+          - Tsy possible misy erreur ve ao amin'ny var_process sy quote_process?
+          - Maninona raha tsy mampiasa cmd->cmd intsony tsika?
+
+
+Test : 
+  assignement + built-in

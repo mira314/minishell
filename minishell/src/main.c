@@ -6,7 +6,7 @@
 /*   By: derakoto <derakoto@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/24 10:56:40 by vrandria          #+#    #+#             */
-/*   Updated: 2024/11/18 05:43:55 by derakoto         ###   ########.fr       */
+/*   Updated: 2024/11/21 06:08:21 by derakoto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,8 @@ int parse_data_input(t_data *data)
 	int exit;
 
 	exit = 0;
-	init_token(data, data->input, 0, &exit);
+	if (init_token(data, data->input, 0, &exit) == 1)
+		return (1);
 	if (exit == 0)
 	{
 		data->token = def_var_on_token(data->token);
@@ -127,12 +128,12 @@ int main(int argc, char *argv[], char **env)
 		signal(SIGINT, sig_int_handler);
 		data.input = readline("msh$");
 		if (data.input == NULL)
-			mini_exit(&data);
+			mini_exit(&data, NULL);
 		if (*data.input && check_input(&data))
 		{
 			add_history(data.input);
 			signal(SIGINT, SIG_IGN);
-			if (parse_data_input(&data) == 1)
+			if (parse_data_input(&data) != 0)
 			{
 				data.exit_value = 130;
 				write(1, "\n", 1);
@@ -143,8 +144,8 @@ int main(int argc, char *argv[], char **env)
 				free(data.input);
 				continue ;
 			}
-			exec(&data);
 			lst_clear_all_token(data.token);
+			exec(&data);
 			data.token = 0;
 		}
 		free(data.input);

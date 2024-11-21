@@ -20,10 +20,11 @@ static void fork_fun(int *input, int *output, char ***cmds)
     }
     close(output[0]);
     if (cmds[1] != 0)
+    {
         dup2(output[1], 1);
+    }
     close(output[1]);
     execve(cmds[0][0], cmds[0], NULL);
-    exit(5);
 }
 
 static int  on_forking_error_pipe(int *fds)
@@ -60,22 +61,24 @@ int    pipe_loop(char ***cmds, int *input)
         }
         else
         {
-            wait(&status);
-            if (WIFEXITED(status))
+            wait(NULL);
+            /*if (WIFEXITED(status))
                 printf("Exited with status %d\n", WEXITSTATUS(status));
             else if(WIFSIGNALED(status))
                 printf("Terminated by signal %d\n", WTERMSIG(status));
-            fflush(stdout);
+            fflush(stdout);*/
         }
     }
 }
 
 int main(int argc, char **argv)
 {
-    char    *cmd0[]={"ping", NULL};
+    char    *cmd0[]={"/usr/bin/cat", "output", NULL};
+    char    *cmd1[]={"/usr/bin/cat", NULL};
     char    **cmds[3]={NULL, NULL, NULL};
 
     cmds[0] = cmd0;
+    //cmds[1] = cmd1;
     pipe_loop(cmds, NULL);
     return (0);
 }
