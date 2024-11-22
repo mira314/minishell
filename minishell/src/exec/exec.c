@@ -30,6 +30,7 @@ static int	exec_with_fork(char *path, char **args, char **envs)
 	}
 	if (pid == 0)
 	{
+		errno = 0;
 		signal(SIGINT, SIG_DFL);
 		if(execve(path, args, envs) == -1)
 		perror(path);
@@ -37,6 +38,8 @@ static int	exec_with_fork(char *path, char **args, char **envs)
 			exit(126);
 		else if (errno == ENOENT)
 			exit(127);
+		else 
+			exit(126);
 	}else
 	{
 		wait(&status);
@@ -284,6 +287,23 @@ void	exec(t_data *data)
 		pipe_loop(data, cmd, NULL);
 }
 
+static int execute_path(t_data *data, t_cmd *cmd, char *path)
+{
+	int 		result;
+	struct stat path_stat;
+	
+	if (stat(path, &path_stat) == -1)
+		return (1);
+	if (S_ISDIR(path_stat.st_mode))
+	{
+		ft_putstr_fd(path, 2);
+		ft_putstr_fd(": is a directory\n", 2);
+		return (126);
+	}
+	result = exec_with_fork(path, cmd->args + cmd->offset, data->env);
+	return (result);
+}
+
 int	exec_one_cmd(t_data	*data,  t_cmd *cmd)
 {
 	char	*path;
@@ -308,7 +328,7 @@ int	exec_one_cmd(t_data	*data,  t_cmd *cmd)
 		return (exit_status);
 	}
 	else if (is_path(cmd->args[cmd->offset]) == 0)
-		exit_status = exec_with_fork(cmd->args[cmd->offset], cmd->args + cmd->offset, data->env);
+		exit_status = execute_path(data, cmd, cmd->args[cmd->offset]);
 	else
 	{
 		exit_status = 127;
