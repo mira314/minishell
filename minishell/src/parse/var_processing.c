@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   var_processing.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vrandria <vrandria@student.42antananari    +#+  +:+       +#+        */
+/*   By: derakoto <derakoto@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/25 08:54:14 by vrandria          #+#    #+#             */
-/*   Updated: 2024/10/19 14:40:01 by vrandria         ###   ########.fr       */
+/*   Updated: 2024/11/22 05:27:30 by derakoto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,7 @@ int var_process(t_data *data, t_token *token)
                     tmp = token->str;
                     exit_val = exit_var_value(data, token, &tmp[i]);
                     token = var_conversion(token, exit_val, i);
+                    free(exit_val);
                     i++;
                 }
                 else
