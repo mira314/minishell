@@ -215,15 +215,17 @@ static void close_pipe(int *fds)
     close(fds[1]);
 }
 
-static int  on_forking_error_pipe(int *fds)
+int  on_forking_error_pipe(int *fds)
 {
     perror("Forking");
     close_pipe(fds);
     return (1);
 }   
 
-static void fork_fun(int *input, int *output, t_data *data, t_cmd *cmd)
+int fork_fun(int *input, int *output, t_data *data, t_cmd *cmd)
 {
+	int result;
+
     if (input != NULL)
     {
         close(input[1]);
@@ -234,47 +236,55 @@ static void fork_fun(int *input, int *output, t_data *data, t_cmd *cmd)
     if (cmd->next != NULL)
         dup2(output[1], 1);
     close(output[1]);
-    exec_with_redir(data, cmd);
-    exit(0);
+    result = exec_with_redir(data, cmd);
+	return (result);
 }
 
 int    pipe_loop(t_data *data, t_cmd *cmd, int *pipe_in)
 {
     int     pipe_out[2];
-    int     pid;
+    //int     pid;
     int     status;
+	//int		result;
 
-    if (pipe(pipe_out) == -1)
-    {
-        perror("piping");
-        return (1);
-    }
-    pid = fork();
-    if (pid == -1)
-        on_forking_error_pipe(pipe_out);   
-    if (pid == 0)
-        fork_fun(pipe_in, pipe_out, data, cmd);
-    else
-    {
-        if (pipe_in != NULL)
-            close_pipe(pipe_in);
-        if (cmd->next != NULL)
-        {
-            pipe_loop(data, cmd->next, pipe_out);
-            wait(NULL);
-        }
-        else
-        {
-            wait(&status);
-            if (WIFEXITED(status));
-                //printf("%d\n", WEXITSTATUS(status));
-            else if(WIFSIGNALED(status))
-                printf("Terminated by signal %d\n", WTERMSIG(status));
-            fflush(stdout);
-        }
-    }
-	return (0);
+	if (cmd->next == NULL)
+	{
+		if (fork() == 0)
+		{
+			status = fork_fun(pipe_in, pipe_out, data, cmd);
+			exit (status);
+		}
+		else
+		{
+			if (pipe_in != NULL)
+				close_pipe(pipe_in);
+			wait(&status);
+			return (WEXITSTATUS(status));
+		}
+	}
+	else
+	{
+		if (pipe(pipe_out) == -1)
+    	{
+        	perror("piping");
+        	return (1);
+   		}
+		if (fork() == 0)
+		{
+			status = fork_fun(pipe_in, pipe_out, data, cmd);
+			exit (status);
+		}
+		else
+		{
+			if (pipe_in != NULL)
+				close_pipe(pipe_in);
+			wait(NULL);
+			return (pipe_loop(data, cmd->next, pipe_out));
+		}
+		
+	}
 }
+
 
 void	exec(t_data *data)
 {
@@ -282,9 +292,12 @@ void	exec(t_data *data)
 
 	cmd = data->cmd;
 	if (cmd->next == NULL)
-		exec_with_redir(data, cmd);
+		data->exit_value = exec_with_redir(data, cmd);
 	else
-		pipe_loop(data, cmd, NULL);
+	{
+		data->exit_value = pipe_loop(data, cmd, NULL);
+		printf("data : %d\n", data->exit_value);
+	}
 }
 
 static int execute_path(t_data *data, t_cmd *cmd, char *path)
@@ -337,25 +350,24 @@ int	exec_one_cmd(t_data	*data,  t_cmd *cmd)
 	return (exit_status);
 }
 
-void	exec_with_redir(t_data *data, t_cmd *cmd)
+int	exec_with_redir(t_data *data, t_cmd *cmd)
 {
 	int		fd_in_backup;
 	int		fd_out_backup;
-	int		exit_status;
+	int		exit_status = 0;
 
 	fd_out_backup = dup(1);
 	fd_in_backup = dup(0);
 	if (handle_redir(cmd->io, data) == -1)
 	{
-		data->exit_value = 1;
 		dup2(fd_out_backup, 1);
 		dup2(fd_in_backup, 0);
 		clear_doc(cmd->io->inputs);
-		return ;
+		return (1);
 	}
 	exit_status = exec_one_cmd(data, cmd);
 	clear_doc(cmd->io->inputs);
 	dup2(fd_out_backup, 1);
 	dup2(fd_in_backup, 0);
-	data->exit_value = exit_status;
+	return (exit_status);
 }

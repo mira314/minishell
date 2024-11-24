@@ -45,7 +45,7 @@ int	    mini_export(char **args, char ***envs);
 void    mini_exit(t_data *data, t_cmd *cmd);
 char	**update_env(char **o_env, char *env);
 int	    mini_is_numeric(char *str);
-void	exec_with_redir(t_data *data, t_cmd *cmd);
+int 	exec_with_redir(t_data *data, t_cmd *cmd);
 int     is_var_assignement(char *str);
 int     count_assignement(char **tbl);
 int     handle_var(char **tbl, char ***var, int *assign_count);
