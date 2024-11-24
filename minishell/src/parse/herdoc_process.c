@@ -6,7 +6,7 @@
 /*   By: vrandria <vrandria@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 15:42:25 by vrandria          #+#    #+#             */
-/*   Updated: 2024/11/24 12:15:19 by vrandria         ###   ########.fr       */
+/*   Updated: 2024/11/24 12:35:22 by vrandria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ char *var_str_heredoc(t_data *data, char *str, int i)
     char tab[2];
 
     tab[1] = 0;
+    join = 0;
     tmp = ft_strdup("");
     while (str[i])
     {
@@ -185,8 +186,8 @@ t_token *parsing_heredoc(t_cmd *cmd, t_token *token, t_data *data)
     int     pid;
     int     status;
     char *tmp;
-
-    token->next->temp = trim_delim_heredoc(token->next->temp, cmd);
+    tmp = token->next->temp;
+    token->next->temp = trim_delim_heredoc(tmp, cmd);
     file = create_file_name(".");
     if(file == NULL)
     {
