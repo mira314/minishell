@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   herdoc_process.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: derakoto <derakoto@student.42antananari    +#+  +:+       +#+        */
+/*   By: vrandria <vrandria@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 15:42:25 by vrandria          #+#    #+#             */
-/*   Updated: 2024/11/20 04:54:38 by derakoto         ###   ########.fr       */
+/*   Updated: 2024/11/24 10:49:09 by vrandria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int size_str_not_var(char *str)
     i = 1;
     while (str[i])
     {
-        if (ft_isalpha((int)str[i + 1]) == 0)
+        if (ft_isalpha((int)str[i]) == 0)
             break ;
         i++;
     }
@@ -56,17 +56,15 @@ char *var_convert_her(char *str, char *var)
     return (new);
 }
 
-char *var_str_heredoc(t_data *data, char *str)
+char *var_str_heredoc(t_data *data, char *str, int i)
 {
-    int i;
     char *get_var;
     char *tmp;
     char *join;
     char tab[2];
 
-    i = 0;
     tab[1] = 0;
-    tmp = 0;
+    tmp = ft_strdup("");
     join = ft_strdup("");
     while (str[i])
     {
@@ -74,19 +72,16 @@ char *var_str_heredoc(t_data *data, char *str)
         {
             get_var = herdoc_var_handl(data, &str[i]);
             tmp = var_convert_her(join, get_var);
-            i += size_str_not_var(str);
+            i += size_str_not_var(&str[i]);
         }
         else
         {
-            if (!tmp)
-                tmp = ft_strdup("");
             tab[0] = str[i];
-            free(join);
             join = ft_strjoin(tmp, tab);
+            tmp = join;
             i++;
         }
     }
-    printf("fin %c %d et tab = %c\n",str[i], i, tab[0]);
     return (join);
 }
 
@@ -218,7 +213,7 @@ t_token *parsing_heredoc(t_cmd *cmd, t_token *token, t_data *data)
             if (is_delimiter(token->next->temp, str) == 0)
                 break;
             if (cmd->io->quote_status == 0 && ft_strrchr(str, '$') != 0)
-                str = var_str_heredoc(data, str);
+                str = var_str_heredoc(data, str, 0);
             write(fd, str, ft_strlen(str));
             free(str);
         }
