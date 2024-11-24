@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   var_proces_utils.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: derakoto <derakoto@student.42antananari    +#+  +:+       +#+        */
+/*   By: vrandria <vrandria@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/28 09:11:02 by vrandria          #+#    #+#             */
-/*   Updated: 2024/11/16 15:04:06 by derakoto         ###   ########.fr       */
+/*   Updated: 2024/11/24 11:56:13 by vrandria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ char *exit_var_value(t_data *data, t_token *token, char *str)
     else if (var && var[0] == '?' && var[1] == '=')
         exit_val =  ft_itoa(data->exit_value);
     else
-        exit_val = ft_strdup("0");
+        exit_val = 0;
     free(var);
     return (exit_val);
 }

@@ -6,7 +6,7 @@
 /*   By: vrandria <vrandria@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 15:42:25 by vrandria          #+#    #+#             */
-/*   Updated: 2024/11/24 10:49:09 by vrandria         ###   ########.fr       */
+/*   Updated: 2024/11/24 12:15:19 by vrandria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ char *herdoc_var_handl(t_data *data, char *str)
     else if (var && var[0] == '?' && var[1] == '=')
         exit_val =  ft_itoa(data->exit_value);
     else
-        exit_val = ft_strdup("0");
+        exit_val = 0;
     free(var);
     return (exit_val);   
 }
@@ -51,8 +51,11 @@ char *var_convert_her(char *str, char *var)
 {
     char *new;
 
+    if (!str)
+        str = ft_strdup("");
     new = ft_strjoin(str, var);
     free(var);
+    free(str);
     return (new);
 }
 
@@ -65,7 +68,6 @@ char *var_str_heredoc(t_data *data, char *str, int i)
 
     tab[1] = 0;
     tmp = ft_strdup("");
-    join = ft_strdup("");
     while (str[i])
     {
         if (str[i] == '$' && sep_next_char(str[i + 1] == 0))
@@ -78,6 +80,7 @@ char *var_str_heredoc(t_data *data, char *str, int i)
         {
             tab[0] = str[i];
             join = ft_strjoin(tmp, tab);
+            free(tmp);
             tmp = join;
             i++;
         }
@@ -181,6 +184,7 @@ t_token *parsing_heredoc(t_cmd *cmd, t_token *token, t_data *data)
     char    *str;
     int     pid;
     int     status;
+    char *tmp;
 
     token->next->temp = trim_delim_heredoc(token->next->temp, cmd);
     file = create_file_name(".");
@@ -212,8 +216,10 @@ t_token *parsing_heredoc(t_cmd *cmd, t_token *token, t_data *data)
             }
             if (is_delimiter(token->next->temp, str) == 0)
                 break;
+            tmp = str;
             if (cmd->io->quote_status == 0 && ft_strrchr(str, '$') != 0)
-                str = var_str_heredoc(data, str, 0);
+                str = var_str_heredoc(data, tmp, 0);
+            free(tmp);
             write(fd, str, ft_strlen(str));
             free(str);
         }
