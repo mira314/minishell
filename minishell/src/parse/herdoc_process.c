@@ -11,6 +11,111 @@
 /* ************************************************************************** */
 
 #include "parse.h"
+int size_str_not_var(char *str)
+{
+    int i;
+
+    i = 1;
+    while (str[i])
+    {
+        if (ft_isalpha((int)str[i + 1]) == 0)
+            break ;
+        i++;
+    }
+    return (i);
+}
+
+char *herdoc_var_handl(t_data *data, char *str)
+{
+    char *exit_val;
+    char *var;
+    int size;
+
+    var = get_type_var(str, 0);
+    if (var && ft_varchr(data, var) != 0)
+    {
+        size = ft_strlen(var);
+        if (ft_varchr(data, var) == 1)
+            exit_val = get_var_var(data, var, size);
+        else if (ft_varchr(data, var) == 2)
+            exit_val = get_var_env(data, var, size);
+    }
+    else if (var && var[0] == '?' && var[1] == '=')
+        exit_val =  ft_itoa(data->exit_value);
+    else
+        exit_val = ft_strdup("0");
+    free(var);
+    return (exit_val);   
+}
+char *var_convert_her(char *str, char *var)
+{
+    char *new;
+
+    new = ft_strjoin(str, var);
+    free(var);
+    return (new);
+}
+
+char *var_str_heredoc(t_data *data, char *str)
+{
+    int i;
+    char *get_var;
+    char *tmp;
+    char *join;
+    char tab[2];
+
+    i = 0;
+    tab[1] = 0;
+    tmp = 0;
+    join = ft_strdup("");
+    while (str[i])
+    {
+        if (str[i] == '$' && sep_next_char(str[i + 1] == 0))
+        {
+            get_var = herdoc_var_handl(data, &str[i]);
+            tmp = var_convert_her(join, get_var);
+            i += size_str_not_var(str);
+        }
+        else
+        {
+            if (!tmp)
+                tmp = ft_strdup("");
+            tab[0] = str[i];
+            free(join);
+            join = ft_strjoin(tmp, tab);
+            i++;
+        }
+    }
+    printf("fin %c %d et tab = %c\n",str[i], i, tab[0]);
+    return (join);
+}
+
+char *trim_delim_heredoc(char *del, t_cmd *cmd)
+{
+    int i;
+    int j;
+    char *new;
+
+    new = malloc (sizeof(char) * ft_strlen(del) + 1);
+    if (!new)
+        return (0);
+    i = 0;
+    j = 0;
+
+    while (del[i])
+    {
+        if (del[i] == 34 || del[i] == 39)
+        {
+            cmd->io->quote_status = 1;
+            i++;
+        }
+        else
+            new[j++] = del[i++];
+    }
+    new[j] = 0;
+    free(del);
+    return(new);
+}
 
 t_input *add_input(t_cmd *cmd, char *filename, int mode)
 {
@@ -74,14 +179,15 @@ char *create_file_name(char *path)
     return (file_name);
 }
 
-t_token *parsing_heredoc(t_cmd *cmd, t_token *token)
+t_token *parsing_heredoc(t_cmd *cmd, t_token *token, t_data *data)
 {
     char    *file;
     int     fd;
     char    *str;
     int     pid;
     int     status;
-    
+
+    token->next->temp = trim_delim_heredoc(token->next->temp, cmd);
     file = create_file_name(".");
     if(file == NULL)
     {
@@ -109,8 +215,10 @@ t_token *parsing_heredoc(t_cmd *cmd, t_token *token)
                 printf("There is an error\n");
                 break;
             }
-            if (is_delimiter(token->next->str, str) == 0)
+            if (is_delimiter(token->next->temp, str) == 0)
                 break;
+            if (cmd->io->quote_status == 0 && ft_strrchr(str, '$') != 0)
+                str = var_str_heredoc(data, str);
             write(fd, str, ft_strlen(str));
             free(str);
         }

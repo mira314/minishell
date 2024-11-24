@@ -100,7 +100,8 @@ t_token *parsing_input(t_cmd *cmd, t_token *token);
 /********************trunc_process.c*********************** */
 t_token *parsing_trunc(t_cmd *cmd, t_token *token);
 /***********************herdoc_process.c  *************** */
-t_token *parsing_heredoc(t_cmd *cmd, t_token *token);
+t_token *parsing_heredoc(t_cmd *cmd, t_token *token, t_data *data);
+char *herdoc_var(t_data *data, char *str);
 void    clear_doc(t_input *inputs);
 void    clear_all_doc(t_cmd *top_cmd);
 /**********************append_process.c ******************/

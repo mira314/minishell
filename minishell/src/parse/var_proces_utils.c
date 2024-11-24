@@ -95,7 +95,7 @@ char *exit_var_value(t_data *data, t_token *token, char *str)
     else if (var && var[0] == '?' && var[1] == '=')
         exit_val =  ft_itoa(data->exit_value);
     else
-        exit_val = 0;
+        exit_val = ft_strdup("0");
     free(var);
     return (exit_val);
 }

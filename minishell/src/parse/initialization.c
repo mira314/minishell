@@ -71,18 +71,13 @@ int fill_cmd(t_data *data, t_token *token)
         else if (tmp->type_token == INPUT)
             tmp = parsing_input(data->cmd, tmp);
         else if (tmp->type_token == HEREDOC)
-            tmp = parsing_heredoc(data->cmd, tmp);
+            tmp = parsing_heredoc(data->cmd, tmp, data);
         else if (tmp->type_token == TRUNC)
             tmp = parsing_trunc(data->cmd, tmp);
         else if (tmp->type_token == APPEND)
             tmp = parsing_append(data->cmd, tmp);
         else if (tmp->type_token == END)
             break ;
-        else
-        {
-            printf("fillcmd condition non prise en charge %d = %d %s", token->type_token, TRUNC, token->str);
-            break ;
-        }
         if (tmp == NULL)
         {
             data->exit_value = 130;
