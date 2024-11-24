@@ -395,6 +395,8 @@ void fork_and_execute(t_data *data, int **pipe_fds, t_cmd *current_cmd, int cmd_
 	int exit_code;
 
 	pid = fork();
+	if (pid == -1)
+		return ;
 	if (pid == 0)
 	{
 		close_unused_pipe(pipe_fds, cmd_count - 1, i);

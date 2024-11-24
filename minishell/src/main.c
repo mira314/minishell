@@ -6,7 +6,7 @@
 /*   By: derakoto <derakoto@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/24 10:56:40 by vrandria          #+#    #+#             */
-/*   Updated: 2024/11/24 14:14:30 by derakoto         ###   ########.fr       */
+/*   Updated: 2024/11/24 14:42:29 by derakoto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ int parse_data_input(t_data *data)
 		if (data->token->exit_value != 0)
 			exit = data->token->exit_value;
 	}
-	if (exit == 0 && data->token->exit_value == 0)
+	if (exit == 0)
 	{
 		var_process(data, data->token);
 		quote_process(data);
@@ -134,7 +134,7 @@ int main(int argc, char *argv[], char **env)
 		{
 			add_history(data.input);
 			signal(SIGINT, SIG_IGN);
-			data.exit_value = parse_data_input(&data); 
+			data.exit_value = parse_data_input(&data);
 			if ( data.exit_value != 0)
 			{
 				write(1, "\n", 1);
@@ -147,6 +147,8 @@ int main(int argc, char *argv[], char **env)
 			}
 			lst_clear_all_token(data.token);
 			exec(&data);
+			data.token = 0;
+			lst_clear_all_token(data.token);
 			data.token = 0;
 		}
 		free(data.input);
