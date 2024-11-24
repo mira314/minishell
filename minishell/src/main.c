@@ -6,7 +6,7 @@
 /*   By: derakoto <derakoto@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/24 10:56:40 by vrandria          #+#    #+#             */
-/*   Updated: 2024/11/21 06:08:21 by derakoto         ###   ########.fr       */
+/*   Updated: 2024/11/24 14:14:30 by derakoto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,14 +79,14 @@ int parse_data_input(t_data *data)
 	{
 		data->token = def_var_on_token(data->token);
 		if (data->token->exit_value != 0)
-			data->exit_value = data->token->exit_value;
+			exit = data->token->exit_value;
 	}
 	if (exit == 0 && data->token->exit_value == 0)
 	{
 		var_process(data, data->token);
 		quote_process(data);
 		if (fill_cmd(data, data->token) == -1)
-			exit = 1;
+			exit = 130;
 	}
 	return (exit);
 }
@@ -119,6 +119,7 @@ int main(int argc, char *argv[], char **env)
 	t_data data;
 	(void)argc;
 	(void)argv;
+	(void)env;
 	
 	
 	if (msh_start_up(&data, env) == 1)
@@ -133,9 +134,9 @@ int main(int argc, char *argv[], char **env)
 		{
 			add_history(data.input);
 			signal(SIGINT, SIG_IGN);
-			if (parse_data_input(&data) != 0)
+			data.exit_value = parse_data_input(&data); 
+			if ( data.exit_value != 0)
 			{
-				data.exit_value = 130;
 				write(1, "\n", 1);
 				clear_all_doc(data.cmd);
 				clear_lst_cmd(&data);

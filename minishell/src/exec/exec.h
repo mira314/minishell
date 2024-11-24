@@ -52,5 +52,6 @@ int     handle_var(char **tbl, char ***var, int *assign_count);
 void	exec(t_data *data);
 int	    is_delimiter(char *delimiter, char *str);
 void    clean_pipes(int **pipes, int size);
+void    free_and_exit(t_data *data, int exit_code);
 
 #endif

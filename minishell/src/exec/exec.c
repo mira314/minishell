@@ -388,12 +388,32 @@ void close_unused_pipe(int **pipe_fds, int size, int current_index)
 		i++;
 	}
 }
+
+void fork_and_execute(t_data *data, int **pipe_fds, t_cmd *current_cmd, int cmd_count, int i)
+{
+	int pid;
+	int exit_code;
+
+	pid = fork();
+	if (pid == 0)
+	{
+		close_unused_pipe(pipe_fds, cmd_count - 1, i);
+		if (i == 0)
+			exit_code = (fork_fun(NULL, pipe_fds[i],data, current_cmd));
+		else if (i == cmd_count -1)
+			exit_code = (fork_fun(pipe_fds[i - 1], NULL, data, current_cmd));
+		else
+			exit_code = (fork_fun(pipe_fds[i - 1], pipe_fds[i], data, current_cmd));
+		clean_pipes(pipe_fds, cmd_count - 1);
+		free_and_exit(data, exit_code);
+	}
+}
+
 int	pipe_loop(t_data *data)
 {
 	int cmd_count;
 	int	**pipe_fds;
 	int	i;
-	int	pid;
 	int	status;
 	t_cmd *current_cmd;
 
@@ -405,27 +425,14 @@ int	pipe_loop(t_data *data)
 	i = 0;
 	while(i < cmd_count)
 	{
-		pid = fork();
-		if (pid == 0)
-		{
-			close_unused_pipe(pipe_fds, cmd_count - 1, i);
-			if (i == 0)
-				exit(fork_fun(NULL, pipe_fds[i],data, current_cmd));
-			else if (i == cmd_count -1)
-				exit(fork_fun(pipe_fds[i - 1], NULL, data, current_cmd));
-			else
-				exit(fork_fun(pipe_fds[i - 1], pipe_fds[i], data, current_cmd));
-		}
+		fork_and_execute(data, pipe_fds, current_cmd, cmd_count, i);
 		current_cmd = current_cmd->next;
 		i++;
 	}
 	close_all_pipes(pipe_fds, cmd_count - 1);
-	i = 0;
-	while (i < cmd_count)
-	{
+	i = -1;
+	while (++i < cmd_count)
 		wait (&status);
-		i++;
-	}
 	clean_pipes(pipe_fds, cmd_count - 1);
 	return (WEXITSTATUS(status));
 }
