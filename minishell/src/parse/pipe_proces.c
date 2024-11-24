@@ -6,21 +6,21 @@
 /*   By: vrandria <vrandria@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/13 11:07:54 by vrandria          #+#    #+#             */
-/*   Updated: 2024/10/16 08:59:38 by vrandria         ###   ########.fr       */
+/*   Updated: 2024/11/24 10:59:08 by vrandria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include"parse.h"
+#include "parse.h"
 
-t_token *parsing_pipe(t_data *data, t_token *token)
+t_token	*parsing_pipe(t_data *data, t_token *token)
 {
-    t_cmd *cmd;
+	t_cmd	*cmd;
 
-    cmd = data->cmd;
-    while (cmd->next)
-        cmd = cmd->next;
-    cmd->output =  1;
-    cmd = lst_add_back_cmd(cmd, new_cmd());
-    token =  token->next;
-    return (token);
+	cmd = data->cmd;
+	while (cmd->next)
+		cmd = cmd->next;
+	cmd->output = 1;
+	cmd = lst_add_back_cmd(cmd, new_cmd());
+	token = token->next;
+	return (token);
 }
