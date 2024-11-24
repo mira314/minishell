@@ -11,7 +11,19 @@
 /* ************************************************************************** */
 
 #include "parse.h"
+int size_str_not_var(char *str)
+{
+    int i;
 
+    i = 1;
+    while (str[i])
+    {
+        if (ft_isalpha((int)str[i + 1]) == 0)
+            break ;
+        i++;
+    }
+    return (i);
+}
 
 char *herdoc_var_handl(t_data *data, char *str)
 {
@@ -31,15 +43,51 @@ char *herdoc_var_handl(t_data *data, char *str)
     else if (var && var[0] == '?' && var[1] == '=')
         exit_val =  ft_itoa(data->exit_value);
     else
-        exit_val = 0;
+        exit_val = ft_strdup("0");
     free(var);
-    return (exit_val);
+    return (exit_val);   
+}
+char *var_convert_her(char *str, char *var)
+{
+    char *new;
+
+    new = ft_strjoin(str, var);
+    free(var);
+    return (new);
 }
 
 char *var_str_heredoc(t_data *data, char *str)
 {
-    return (herdoc_var_handl(data, str));
+    int i;
+    char *get_var;
+    char *tmp;
+    char *join;
+    char tab[2];
 
+    i = 0;
+    tab[1] = 0;
+    tmp = 0;
+    join = ft_strdup("");
+    while (str[i])
+    {
+        if (str[i] == '$' && sep_next_char(str[i + 1] == 0))
+        {
+            get_var = herdoc_var_handl(data, &str[i]);
+            tmp = var_convert_her(join, get_var);
+            i += size_str_not_var(str);
+        }
+        else
+        {
+            if (!tmp)
+                tmp = ft_strdup("");
+            tab[0] = str[i];
+            free(join);
+            join = ft_strjoin(tmp, tab);
+            i++;
+        }
+    }
+    printf("fin %c %d et tab = %c\n",str[i], i, tab[0]);
+    return (join);
 }
 
 char *trim_delim_heredoc(char *del, t_cmd *cmd)
