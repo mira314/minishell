@@ -232,57 +232,202 @@ int fork_fun(int *input, int *output, t_data *data, t_cmd *cmd)
         dup2(input[0], 0);
         close(input[0]);
     }
-    close(output[0]);
-    if (cmd->next != NULL)
-        dup2(output[1], 1);
-    close(output[1]);
+	if (output != NULL)
+	{
+		close(output[0]);
+		dup2(output[1], 1);
+		close(output[1]);
+	}
     result = exec_with_redir(data, cmd);
 	return (result);
 }
 
-int    pipe_loop(t_data *data, t_cmd *cmd, int *pipe_in)
-{
-    int     pipe_out[2];
-    //int     pid;
-    int     status;
-	//int		result;
+// int    pipe_loop(t_data *data, t_cmd *cmd, int *pipe_in)
+// {
+//     int     pipe_out[2];
+//     //int     pid;
+//     int     status;
+// 	//int		result;
 
-	if (cmd->next == NULL)
-	{
-		if (fork() == 0)
-		{
-			status = fork_fun(pipe_in, pipe_out, data, cmd);
-			exit (status);
-		}
-		else
-		{
-			if (pipe_in != NULL)
-				close_pipe(pipe_in);
-			wait(&status);
-			return (WEXITSTATUS(status));
-		}
-	}
-	else
-	{
-		if (pipe(pipe_out) == -1)
-    	{
-        	perror("piping");
-        	return (1);
-   		}
-		if (fork() == 0)
-		{
-			status = fork_fun(pipe_in, pipe_out, data, cmd);
-			exit (status);
-		}
-		else
-		{
-			if (pipe_in != NULL)
-				close_pipe(pipe_in);
-			wait(NULL);
-			return (pipe_loop(data, cmd->next, pipe_out));
-		}
+// 	if (cmd->next == NULL)
+// 	{
+// 		if (fork() == 0)
+// 		{
+// 			status = fork_fun(pipe_in, pipe_out, data, cmd);
+// 			exit (status);
+// 		}
+// 		else
+// 		{
+// 			if (pipe_in != NULL)
+// 				close_pipe(pipe_in);
+// 			wait(&status);
+// 			return (WEXITSTATUS(status));
+// 		}
+// 	}
+// 	else
+// 	{
+// 		if (pipe(pipe_out) == -1)
+//     	{
+//         	perror("piping");
+//         	return (1);
+//    		}
+// 		if (fork() == 0)
+// 		{
+// 			status = fork_fun(pipe_in, pipe_out, data, cmd);
+// 			exit (status);
+// 		}
+// 		else
+// 		{
+// 			if (pipe_in != NULL)
+// 				close_pipe(pipe_in);
+// 			wait(NULL);
+// 			return (pipe_loop(data, cmd->next, pipe_out));
+// 		}
 		
+// 	}
+// }
+
+int	count_cmd (t_cmd *cmd)
+{
+	int result;
+
+	result = 0;
+	while (cmd)
+	{
+		result++;
+		cmd = cmd->next;
 	}
+	return (result);
+}
+
+void clean_pipes(int **pipes, int size)
+{
+	int	i;
+
+	if (pipes == NULL)
+		return ;
+	i = 0;
+	while (i < size)
+	{
+		free(pipes[i]);
+		i++;
+	}
+	free(pipes);
+}
+
+int	**create_pipes(int pipe_count)
+{
+	int	**result;
+	int	i;
+
+	result = (int **)malloc(sizeof(int *) * pipe_count);
+	if (result == NULL)
+		return (NULL);
+	i = 0;
+	while (i < pipe_count)
+	{
+		result[i] = (int *)malloc(sizeof(int) * 2);
+		if (result[i] == NULL)
+		{
+			clean_pipes(result, i);
+			return (NULL);
+		}
+		i++;
+	}
+	return (result);
+}
+void close_one_pipe_fd(int *fds)
+{
+	if (fds == NULL)
+		return ;
+	close(fds[0]);
+	close(fds[1]);
+}
+
+void close_all_pipes(int **pipe_fds, int size)
+{
+	int i;
+	
+	if (pipe_fds == NULL)
+		return ;
+	i = 0;
+	while (i < size)
+	{
+		close_one_pipe_fd(pipe_fds[i]);
+		i++;
+	}
+}
+int	init_pipes(int **pipe_fds, int size)
+{
+	int i;
+
+	if (pipe_fds == NULL)
+		return (-1);
+	i = 0;
+	while (i < size)
+	{
+		if (pipe(pipe_fds[i]) == -1)
+		{
+			close_all_pipes(pipe_fds, i);
+			return (-1);
+		}
+		i++;
+	}
+	return (0);
+}
+
+void close_unused_pipe(int **pipe_fds, int size, int current_index)
+{
+	int	i;
+
+	i = 0;
+	while (i < size)
+	{
+		if (i != current_index && i != current_index - 1)
+			close_one_pipe_fd(pipe_fds[i]);
+		i++;
+	}
+}
+int	pipe_loop(t_data *data)
+{
+	int cmd_count;
+	int	**pipe_fds;
+	int	i;
+	int	pid;
+	int	status;
+	t_cmd *current_cmd;
+
+	current_cmd = data->cmd;
+	cmd_count = count_cmd(current_cmd);
+	pipe_fds = create_pipes(cmd_count - 1);
+	if (init_pipes(pipe_fds, cmd_count - 1) == -1)
+		return (1);
+	i = 0;
+	while(i < cmd_count)
+	{
+		pid = fork();
+		if (pid == 0)
+		{
+			close_unused_pipe(pipe_fds, cmd_count - 1, i);
+			if (i == 0)
+				exit(fork_fun(NULL, pipe_fds[i],data, current_cmd));
+			else if (i == cmd_count -1)
+				exit(fork_fun(pipe_fds[i - 1], NULL, data, current_cmd));
+			else
+				exit(fork_fun(pipe_fds[i - 1], pipe_fds[i], data, current_cmd));
+		}
+		current_cmd = current_cmd->next;
+		i++;
+	}
+	close_all_pipes(pipe_fds, cmd_count - 1);
+	i = 0;
+	while (i < cmd_count)
+	{
+		wait (&status);
+		i++;
+	}
+	clean_pipes(pipe_fds, cmd_count - 1);
+	return (WEXITSTATUS(status));
 }
 
 
@@ -294,10 +439,7 @@ void	exec(t_data *data)
 	if (cmd->next == NULL)
 		data->exit_value = exec_with_redir(data, cmd);
 	else
-	{
-		data->exit_value = pipe_loop(data, cmd, NULL);
-		printf("data : %d\n", data->exit_value);
-	}
+		data->exit_value = pipe_loop(data);
 }
 
 static int execute_path(t_data *data, t_cmd *cmd, char *path)
