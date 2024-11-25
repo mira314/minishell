@@ -6,7 +6,7 @@
 /*   By: derakoto <derakoto@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 05:51:35 by derakoto          #+#    #+#             */
-/*   Updated: 2024/11/25 18:00:09 by derakoto         ###   ########.fr       */
+/*   Updated: 2024/11/25 18:14:35 by derakoto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,6 @@ int		count_cmd (t_cmd *cmd);
 int		**create_pipes(int pipe_count);
 int		init_pipes(int **pipe_fds, int size);
 int		on_forking_error_pipe(int *fds);
-void	fork_and_execute(t_data *data, int **pipe_fds, t_cmd *cmd, int i);
+void	fork_and_execute(t_data *data, int **pipe_fds, t_cmd *cmd, int cmd_count);
 
 #endif
