@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   exec.h                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: derakoto <derakoto@student.42antananari    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/11/25 05:51:35 by derakoto          #+#    #+#             */
+/*   Updated: 2024/11/25 17:32:53 by derakoto         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef EXEC_H
 # define EXEC_H
 
@@ -9,14 +21,14 @@
 # include <dirent.h>
 # include <sys/wait.h>
 # include <sys/stat.h>
-# define PWD_MAX_LEN 200
+# define PWD_MAX_LEN 199
 
 void    exec();
 int		ft_echo(char **args);
 int	    ft_pwd(void);
 int		mini_tbl_len(char **tbl);
 void	mini_tbl_free(char **tbl);
-int 	mini_cd(t_data *data);
+int 	mini_cd(t_data *data, t_cmd *cmd);
 char	**dup_env(char **f_env);
 char	**add_env(char **o_env, char **n_env);
 int		env_key_len(char *env);
@@ -53,5 +65,27 @@ void	exec(t_data *data);
 int	    is_delimiter(char *delimiter, char *str);
 void    clean_pipes(int **pipes, int size);
 void    free_and_exit(t_data *data, int exit_code);
+int	    handle_redir(t_io_fd *io, t_data *data);
+int	    redir_output(t_output *file);
+int		redir_input(t_input *file, t_term *term);
+int		is_path(char *str);
+int		execute_path(t_data *data, t_cmd *cmd, char *path);
+int		pipe_loop(t_data *data);
+void	close_unused_pipe(int **pipe_fds, int size, int current_index);
+int		fork_fun(int *input, int *output, t_data *data, t_cmd *cmd);
+int		exec_with_redir(t_data *data, t_cmd *cmd);
+int		exec_with_fork(char *path, char **args, char **envs);
+void	exit_error_code(void);
+int		get_exitstatus_code(int status);
+int		execute_tools(t_data *data, t_cmd *cmd, char *path);
+void	close_unused_pipe(int **pipe_fds, int size, int current_index);
+void	close_one_pipe_fd(int *fds);
+void	close_all_pipes(int **pipe_fds, int size);
+void	clean_pipes(int **pipes, int size);
+int		count_cmd (t_cmd *cmd);
+int		**create_pipes(int pipe_count);
+int		init_pipes(int **pipe_fds, int size);
+int		on_forking_error_pipe(int *fds);
+void	fork_and_execute(t_data *data, int **pipe_fds, t_cmd *cmd, int i);
 
 #endif

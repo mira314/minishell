@@ -1,22 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_pwd.c                                           :+:      :+:    :+:   */
+/*   heredoc_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: derakoto <derakoto@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/25 05:45:19 by derakoto          #+#    #+#             */
-/*   Updated: 2024/11/25 05:45:24 by derakoto         ###   ########.fr       */
+/*   Created: 2024/11/25 05:08:58 by derakoto          #+#    #+#             */
+/*   Updated: 2024/11/25 05:46:16 by derakoto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exec.h"
 
-int	ft_pwd(void)
+int	is_delimiter(char *delimiter, char *str)
 {
-	char	pwd_buffer[100];
+	size_t	i;
+	size_t	len;
 
-	if (getcwd(pwd_buffer, 100) != NULL)
-		printf("%s\n", pwd_buffer);
+	if (delimiter == NULL && str == NULL)
+		return (0);
+	if (delimiter == NULL || str == NULL)
+		return (1);
+	len = ft_strlen(str) - 1;
+	if (len != ft_strlen(delimiter))
+		return (1);
+	i = 0;
+	while (i < len)
+	{
+		if (delimiter[i] != str[i])
+			return (1);
+		i++;
+	}
 	return (0);
 }

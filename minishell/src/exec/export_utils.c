@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   export_utils.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: derakoto <derakoto@student.42antananari    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/11/25 05:37:16 by derakoto          #+#    #+#             */
+/*   Updated: 2024/11/25 05:37:32 by derakoto         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "exec.h"
 
 int	ft_strcmp(const char *str1, const char *str2)
@@ -21,6 +33,7 @@ void	sort_env(char **env)
 	int		i;
 	int		j;
 	char	*tmp;
+
 	i = 0;
 	while (env[i + 1] != NULL)
 	{

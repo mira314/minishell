@@ -6,55 +6,55 @@
 /*   By: derakoto <derakoto@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/02 10:34:21 by derakoto          #+#    #+#             */
-/*   Updated: 2024/11/19 04:08:03 by derakoto         ###   ########.fr       */
+/*   Updated: 2024/11/25 06:02:59 by derakoto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exec.h"
 
-int is_var_assignement(char *str)
+int	is_var_assignement(char *str)
 {
-    int i;
+	int	i;
 
-    if (str == NULL)
-        return (-1);
-    i = 0;
-    if (str[0] == '=')
-        return (-1);
-    while (ft_isalnum(str[i]) && str[i] != 0)
-        i++;
-    if (str[i] != '=')
-        return (-1);
-    return (0);
+	if (str == NULL)
+		return (-1);
+	i = 0;
+	if (str[0] == '=')
+		return (-1);
+	while (ft_isalnum(str[i]) && str[i] != 0)
+		i++;
+	if (str[i] != '=')
+		return (-1);
+	return (0);
 }
 
-int count_assignement(char **tbl)
+int	count_assignement(char **tbl)
 {
-    int i;
-    int result;
+	int	i;
+	int	result;
 
-    if (tbl == NULL)
-        return (-1);
-    i = 0;
-    result = 0;
-    while (tbl[i] != NULL)
-    {
-        if (is_var_assignement(tbl[i]) == 0)
-                result++ ;
-        i++;
-    }
-    return (result);
+	if (tbl == NULL)
+		return (-1);
+	i = 0;
+	result = 0;
+	while (tbl[i] != NULL)
+	{
+		if (is_var_assignement(tbl[i]) == 0)
+			result++ ;
+		i++;
+	}
+	return (result);
 }
 
-int handle_var(char **tbl, char ***var, int *assign_count)
+int	handle_var(char **tbl, char ***var, int *assign_count)
 {
-    *assign_count = count_assignement(tbl);
-    if (*assign_count == -1)
-        return (FAIL);
-    if (tbl[*assign_count] == NULL)
-    {
-        *var = add_env(*var, tbl);
-        return (SUCCESS);
-    }
-    return (FAIL);
+	*assign_count = count_assignement(tbl);
+	if (*assign_count == -1)
+		return (FAIL);
+	if (tbl[*assign_count] == NULL)
+	{
+		*var = add_env(*var, tbl);
+		return (SUCCESS);
+	}
+	return (FAIL);
 }

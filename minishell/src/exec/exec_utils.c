@@ -1,22 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_pwd.c                                           :+:      :+:    :+:   */
+/*   exec_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: derakoto <derakoto@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/25 05:45:19 by derakoto          #+#    #+#             */
-/*   Updated: 2024/11/25 05:45:24 by derakoto         ###   ########.fr       */
+/*   Created: 2024/11/25 05:12:08 by derakoto          #+#    #+#             */
+/*   Updated: 2024/11/25 06:04:15 by derakoto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exec.h"
 
-int	ft_pwd(void)
+void	exit_error_code(void)
 {
-	char	pwd_buffer[100];
+	if (errno == EACCES)
+		exit(126);
+	else if (errno == ENOENT)
+		exit(127);
+	else
+		exit(126);
+}
 
-	if (getcwd(pwd_buffer, 100) != NULL)
-		printf("%s\n", pwd_buffer);
+int	get_exitstatus_code(int status)
+{
+	if (WIFEXITED(status))
+		return (WEXITSTATUS(status));
+	else if (WIFSIGNALED(status))
+		return (130);
 	return (0);
 }

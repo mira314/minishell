@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   export.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: derakoto <derakoto@student.42antananari    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/11/25 05:37:52 by derakoto          #+#    #+#             */
+/*   Updated: 2024/11/25 05:39:21 by derakoto         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "exec.h"
 
 char	**add_env(char **o_env, char **n_env)
@@ -51,9 +63,9 @@ char	**add_one_env(char **o_env, char *env)
 
 int	export(char **env)
 {
-	char **env_dup;
-	int	i;
-	
+	char	**env_dup;
+	int		i;
+
 	env_dup = dup_env(env);
 	if (env_dup == 0)
 		return (-1);

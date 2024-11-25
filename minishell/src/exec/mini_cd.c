@@ -6,7 +6,7 @@
 /*   By: derakoto <derakoto@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/12 14:25:50 by derakoto          #+#    #+#             */
-/*   Updated: 2024/10/20 09:15:55 by derakoto         ###   ########.fr       */
+/*   Updated: 2024/11/25 05:54:38 by derakoto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,8 @@ static int	cd_to_home(void)
 		return (chdir(pwd));
 	return (1);
 }
-/*
-	should update env_var
-*/
-static void update_pwd_env(t_data	*data)
+
+static void	update_pwd_env(t_data	*data)
 {
 	char	*pwd_val;
 	char	*old_pwd;
@@ -34,7 +32,7 @@ static void update_pwd_env(t_data	*data)
 	pwd_val = get_env_value(data->env, "PWD");
 	if (pwd_val != NULL)
 	{
-		old_pwd = ft_strjoin("OLDPWD=",pwd_val);
+		old_pwd = ft_strjoin("OLDPWD=", pwd_val);
 		free(pwd_val);
 		if (old_pwd != NULL)
 		{
@@ -50,14 +48,14 @@ static void update_pwd_env(t_data	*data)
 	data->env = update_env(data->env, new_pwd);
 	free(new_pwd);
 }
-int	mini_cd(t_data *data)
+
+int	mini_cd(t_data *data, t_cmd *cmd)
 {
 	int		arg_len;
 	int		result;
 	char	**args;
 
-	args = data->cmd->args;
-	errno = 0;
+	args = cmd->args;
 	if (args == NULL)
 		return (cd_to_home());
 	arg_len = mini_tbl_len(args);
@@ -66,14 +64,12 @@ int	mini_cd(t_data *data)
 		print_error(args[0], ": too many arguments", 1);
 		return (1);
 	}
-	if (arg_len < 2)
-		return (cd_to_home());
-	if (ft_strlen(args[1]) == 0)
+	if (arg_len < 2 || ft_strlen(args[1]) == 0)
 		return (cd_to_home());
 	result = chdir(args[1]);
 	if (result == -1)
 	{
-		ft_putstr_fd("cd: ",STDERR_FILENO);
+		ft_putstr_fd("cd: ", STDERR_FILENO);
 		perror(args[1]);
 		return (1);
 	}

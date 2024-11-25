@@ -6,7 +6,7 @@
 /*   By: derakoto <derakoto@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/25 10:13:53 by vrandria          #+#    #+#             */
-/*   Updated: 2024/11/21 05:29:13 by derakoto         ###   ########.fr       */
+/*   Updated: 2024/11/25 05:50:33 by derakoto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int handles_bultin(t_data *data, t_cmd *cmd)
     else if (ft_strncmp(cmd->args[cmd->offset], "pwd", 4) == 0)
         exit = ft_pwd();
     else if (ft_strncmp(cmd->args[cmd->offset], "cd", 3) == 0)
-        exit = mini_cd((data));
+        exit = mini_cd(data, cmd);
     else if (ft_strncmp(cmd->args[cmd->offset], "env", 4) == 0)
         exit = mini_env(cmd->args, data->env);
     else if (ft_strncmp(cmd->args[cmd->offset], "export", 7) == 0)

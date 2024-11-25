@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env.c                                              :+:      :+:    :+:   */
+/*   get_env.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: derakoto <derakoto@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 15:43:58 by derakoto          #+#    #+#             */
-/*   Updated: 2024/10/20 08:18:24 by derakoto         ###   ########.fr       */
+/*   Updated: 2024/11/25 04:26:53 by derakoto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,57 +34,7 @@ char	**dup_env(char **f_env)
 	return (result);
 }
 
-char	**try_update(char **o_env, char *env)
-{
-	int		i;
-	char	*tmp;
-
-	i = 0;
-	while (o_env[i] != 0)
-	{
-		if (is_same_key(env, o_env[i]) == 0)
-		{
-			if (is_value_present(env) == 0)
-			{
-				tmp = ft_strdup(env);
-				if (tmp == 0)
-					return (o_env);
-				free(o_env[i]);
-				o_env[i] = tmp;
-			}
-			return (o_env);
-		}
-		i++;
-	}
-	return (0);
-}
-
-char	**update_env(char **o_env, char *env)
-{
-	int		i;
-	char	*tmp;
-
-	i = 0;
-	while (o_env[i] != 0)
-	{
-		if (is_same_key(env, o_env[i]) == 0)
-		{
-			if (is_value_present(env) == 0)
-			{
-				tmp = ft_strdup(env);
-				if (tmp == 0)
-					return (o_env);
-				free(o_env[i]);
-				o_env[i] = tmp;
-			}
-			return (o_env);
-		}
-		i++;
-	}
-	return (o_env);
-}
-
-char *get_env_value(char **envs, char *key)
+char	*get_env_value(char **envs, char *key)
 {
 	int	i;
 
@@ -100,7 +50,7 @@ char *get_env_value(char **envs, char *key)
 	return (NULL);
 }
 
-char *get_env(char **envs, char *key)
+char	*get_env(char **envs, char *key)
 {
 	int	i;
 
@@ -116,27 +66,7 @@ char *get_env(char **envs, char *key)
 	return (NULL);
 }
 
-int	is_key_of(char *key, char *env)
-{
-	int	key_len;
-	int	i;
-
-	if (key == NULL || env == NULL)
-		return (-1);
-	key_len = ft_strlen(key);
-	if (key_len != env_key_len(env))
-		return (1);
-	i = 0;
-	while (i < key_len)
-	{
-		if (key[i] != env[i])
-			return (1);
-		i++;
-	}
-	return (0);
-}
-
-int		mini_env(char **args, char **envs)
+int	mini_env(char **args, char **envs)
 {
 	int	i;
 

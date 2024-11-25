@@ -6,7 +6,7 @@
 /*   By: derakoto <derakoto@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 15:31:09 by derakoto          #+#    #+#             */
-/*   Updated: 2024/10/20 09:39:05 by derakoto         ###   ########.fr       */
+/*   Updated: 2024/11/25 04:26:11 by derakoto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,26 @@ int	is_key_env_valid(char *key)
 	{
 		if (ft_isalnum(key[i]) == 0)
 			return (-1);
+		i++;
+	}
+	return (0);
+}
+
+int	is_key_of(char *key, char *env)
+{
+	int	key_len;
+	int	i;
+
+	if (key == NULL || env == NULL)
+		return (-1);
+	key_len = ft_strlen(key);
+	if (key_len != env_key_len(env))
+		return (1);
+	i = 0;
+	while (i < key_len)
+	{
+		if (key[i] != env[i])
+			return (1);
 		i++;
 	}
 	return (0);
