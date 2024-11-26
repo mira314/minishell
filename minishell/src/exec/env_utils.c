@@ -6,7 +6,7 @@
 /*   By: derakoto <derakoto@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 15:31:09 by derakoto          #+#    #+#             */
-/*   Updated: 2024/11/25 04:26:11 by derakoto         ###   ########.fr       */
+/*   Updated: 2024/11/26 05:31:58 by derakoto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ int	is_key_env_valid(char *key)
 	i = 0;
 	while (key[i] != 0 && key[i] != '=')
 	{
-		if (ft_isalnum(key[i]) == 0)
+		if (ft_isalnum(key[i]) == 0 && key[i] != '_')
 			return (-1);
 		i++;
 	}

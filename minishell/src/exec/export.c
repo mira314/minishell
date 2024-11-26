@@ -6,13 +6,13 @@
 /*   By: derakoto <derakoto@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 05:37:52 by derakoto          #+#    #+#             */
-/*   Updated: 2024/11/25 05:39:21 by derakoto         ###   ########.fr       */
+/*   Updated: 2024/11/26 06:02:13 by derakoto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exec.h"
 
-char	**add_env(char **o_env, char **n_env)
+char	**add_env(char **o_env, char **n_env, int *status)
 {
 	size_t	i;
 	char	**result;
@@ -23,8 +23,12 @@ char	**add_env(char **o_env, char **n_env)
 	{
 		if (is_key_env_valid(n_env[i]) != 0)
 		{
-			printf("Error env\n");
+			ft_putstr_fd("export: \"", 2);
+			ft_putstr_fd(n_env[i], 2);
+			ft_putstr_fd("\" : invalid key\n", 2);
 			i++;
+			if (status != NULL)
+				*status = 1;
 			continue ;
 		}
 		if (is_env_duplicated(n_env, i) != 0)
@@ -73,8 +77,7 @@ int	export(char **env)
 	i = 0;
 	while (env_dup[i] != 0)
 	{
-		if (is_value_present(env_dup[i]) == 0)
-			export_one_env(env_dup[i]);
+		export_one_env(env_dup[i]);
 		i++;
 	}
 	mini_tbl_free(env_dup);
@@ -96,11 +99,16 @@ void	export_one_env(char *env)
 			write(1, "\"", 1);
 		i++;
 	}
-	write(1, "\"\n", 2);
+	if (is_value_present(env) == 0)
+		write(1, "\"", 1);
+	write(1, "\n", 1);
 }
 
 int	mini_export(char **args, char ***envs)
 {
+	int	result;
+
+	result = 0;
 	if (args == NULL || envs == NULL)
 		return (1);
 	if (mini_tbl_len(args) == 1)
@@ -108,6 +116,6 @@ int	mini_export(char **args, char ***envs)
 		export(*envs);
 		return (0);
 	}
-	*envs = add_env(*envs, args + 1);
-	return (0);
+	*envs = add_env(*envs, args + 1, &result);
+	return (result);
 }

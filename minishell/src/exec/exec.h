@@ -6,7 +6,7 @@
 /*   By: derakoto <derakoto@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 05:51:35 by derakoto          #+#    #+#             */
-/*   Updated: 2024/11/25 19:46:17 by derakoto         ###   ########.fr       */
+/*   Updated: 2024/11/26 05:58:04 by derakoto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int		mini_tbl_len(char **tbl);
 void	mini_tbl_free(char **tbl);
 int		mini_cd(t_data *data, t_cmd *cmd);
 char	**dup_env(char **f_env);
-char	**add_env(char **o_env, char **n_env);
+char	**add_env(char **o_env, char **n_env, int *status);
 int		env_key_len(char *env);
 int		is_same_key(char *env1, char *env2);
 int		is_value_present(char *env);

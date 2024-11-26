@@ -6,7 +6,7 @@
 /*   By: derakoto <derakoto@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 15:43:58 by derakoto          #+#    #+#             */
-/*   Updated: 2024/11/25 04:26:53 by derakoto         ###   ########.fr       */
+/*   Updated: 2024/11/26 05:51:09 by derakoto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,8 @@ int	mini_env(char **args, char **envs)
 	i = 0;
 	while (envs[i] != 0)
 	{
-		printf("%s\n", envs[i]);
+		if (is_value_present(envs[i]) == 0)
+			printf("%s\n", envs[i]);
 		i++;
 	}
 	return (0);

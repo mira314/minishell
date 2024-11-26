@@ -6,21 +6,11 @@
 /*   By: derakoto <derakoto@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/12 14:25:50 by derakoto          #+#    #+#             */
-/*   Updated: 2024/11/25 05:54:38 by derakoto         ###   ########.fr       */
+/*   Updated: 2024/11/26 05:56:21 by derakoto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exec.h"
-
-static int	cd_to_home(void)
-{
-	char	*pwd;
-
-	pwd = getenv("HOME");
-	if (pwd != 0)
-		return (chdir(pwd));
-	return (1);
-}
 
 static void	update_pwd_env(t_data	*data)
 {
@@ -49,6 +39,30 @@ static void	update_pwd_env(t_data	*data)
 	free(new_pwd);
 }
 
+static int	cd_to_home(t_data *data)
+{
+	char	*pwd;
+	int		result;
+
+	pwd = get_env_value(data->env, "HOME");
+	if (pwd != 0)
+	{
+		result = chdir(pwd);
+		if (result == -1)
+		{
+			ft_putstr_fd("cd: ", STDERR_FILENO);
+			perror(pwd);
+			free(pwd);
+			return (1);
+		}
+		free(pwd);
+		update_pwd_env(data);
+		return (0);
+	}
+	ft_putstr_fd("cd: \"HOME\" is undefined\n", 2);
+	return (1);
+}
+
 int	mini_cd(t_data *data, t_cmd *cmd)
 {
 	int		arg_len;
@@ -57,7 +71,7 @@ int	mini_cd(t_data *data, t_cmd *cmd)
 
 	args = cmd->args;
 	if (args == NULL)
-		return (cd_to_home());
+		return (cd_to_home(data));
 	arg_len = mini_tbl_len(args);
 	if (arg_len > 2)
 	{
@@ -65,7 +79,7 @@ int	mini_cd(t_data *data, t_cmd *cmd)
 		return (1);
 	}
 	if (arg_len < 2 || ft_strlen(args[1]) == 0)
-		return (cd_to_home());
+		return (cd_to_home(data));
 	result = chdir(args[1]);
 	if (result == -1)
 	{

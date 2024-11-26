@@ -6,13 +6,13 @@
 /*   By: derakoto <derakoto@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/24 10:56:40 by vrandria          #+#    #+#             */
-/*   Updated: 2024/11/24 14:42:29 by derakoto         ###   ########.fr       */
+/*   Updated: 2024/11/26 04:27:29 by derakoto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int g_last_val;
+int g_last_val = 0;
 
 void test_1(t_cmd *cmd)
 {
@@ -128,6 +128,11 @@ int main(int argc, char *argv[], char **env)
 	{
 		signal(SIGINT, sig_int_handler);
 		data.input = readline("msh$");
+		if (g_last_val != 0)
+		{
+			data.exit_value = g_last_val;
+			g_last_val = 0;
+		}
 		if (data.input == NULL)
 			mini_exit(&data, NULL);
 		if (*data.input && check_input(&data))
