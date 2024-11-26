@@ -6,7 +6,7 @@
 /*   By: vrandria <vrandria@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 07:35:00 by vrandria          #+#    #+#             */
-/*   Updated: 2024/10/20 12:27:19 by vrandria         ###   ########.fr       */
+/*   Updated: 2024/11/26 07:57:23 by vrandria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,16 +48,16 @@ int	what_is_sep(char *str, int i)
 
 int	token_split_word_and_sep(char *str, int start, t_data *data, int *i)
 {
-	int type_token;
+	int	type_token;
 
 	type_token = what_is_sep(str, (*i));
 	if (type_token)
 	{
 		if ((*i) != 0 && (what_is_sep(str, (*i) - 1)) == 0)
 			token_word(&data->token, str, (*i), start);
-		if (type_token == HEREDOC || type_token == PIPE || 
-		    type_token == APPEND || type_token == END || 
-		    type_token == TRUNC || type_token == INPUT)
+		if (type_token == HEREDOC || type_token == PIPE
+			||type_token == APPEND || type_token == END
+			||type_token == TRUNC || type_token == INPUT)
 		{
 			token_other(&data->token, str, (*i), type_token);
 			if (type_token == HEREDOC || type_token == APPEND)

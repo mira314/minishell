@@ -6,7 +6,7 @@
 /*   By: vrandria <vrandria@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/13 10:54:54 by vrandria          #+#    #+#             */
-/*   Updated: 2024/10/19 15:18:55 by vrandria         ###   ########.fr       */
+/*   Updated: 2024/11/26 07:53:48 by vrandria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	sub_var(t_token *token, char *str, int i, int size)
 		return (0);
 	while (str[j])
 	{
-		if (str[j] == '$' && i == j && (ft_isalpha(str[i+1])))
+		if (str[j] == '$' && i == j && (ft_isalpha(str[i + 1])))
 		{
 			j = size_var(&str[i]) + j + 1;
 			if (str[j] == 0)
