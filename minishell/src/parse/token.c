@@ -6,7 +6,7 @@
 /*   By: vrandria <vrandria@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 07:35:00 by vrandria          #+#    #+#             */
-/*   Updated: 2024/11/26 07:57:23 by vrandria         ###   ########.fr       */
+/*   Updated: 2024/11/26 09:16:29 by vrandria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int	what_is_sep(char *str, int i)
 	return (0);
 }
 
-int	token_split_word_and_sep(char *str, int start, t_data *data, int *i)
+int	split_word_and_sep(char *str, int start, t_data *data, int *i)
 {
 	int	type_token;
 

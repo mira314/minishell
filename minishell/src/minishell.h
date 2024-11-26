@@ -1,12 +1,12 @@
 /* ************************************************************************** */
-/*                                    data                                        */
+/*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: derakoto <derakoto@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/18 13:32:50 by vrandria          #+#    #+#             */
-/*   Updated: 2024/09/03 11:14:14 by derakoto         ###   ########.fr       */
+/*   Updated: 2024/11/26 10:24:28 by vrandria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 # include <errno.h>
 # include <signal.h>
 
-extern int g_last_val;
+extern int	g_last_val;
 
 # define EMPTY 0
 # define SPACES 1
@@ -41,12 +41,11 @@ extern int g_last_val;
 # define SUCCESS 0
 
 /***************utils.c*********************** */
-int print_error(char *str, char *msg, int code);
+int		print_error(char *str, char *msg, int code);
 
 /****************clear.c  ******************* */
-void    clean_cmd(t_data *data);
-void    clear_tab(char **env);
-int	    msh_start_up(t_data *data, char **env);
-void    sig_int_handler(int sig_num);
-
+void	clean_cmd(t_data *data);
+void	clear_tab(char **env);
+int		msh_start_up(t_data *data, char **env);
+void	sig_int_handler(int sig_num);
 #endif

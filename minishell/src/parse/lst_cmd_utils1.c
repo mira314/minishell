@@ -6,16 +6,16 @@
 /*   By: vrandria <vrandria@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/24 11:03:07 by vrandria          #+#    #+#             */
-/*   Updated: 2024/11/24 11:10:02 by vrandria         ###   ########.fr       */
+/*   Updated: 2024/11/26 10:11:47 by vrandria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parse.h"
 
-static t_cmd *lst_del_cmd(t_cmd *cmd)
+static t_cmd	*lst_del_cmd(t_cmd *cmd)
 {
-	t_cmd *current;
-	t_cmd *next_cmd;
+	t_cmd	*current;
+	t_cmd	*next_cmd;
 
 	current = cmd;
 	while (current)
@@ -26,9 +26,8 @@ static t_cmd *lst_del_cmd(t_cmd *cmd)
 		clear_io(current->io);
 		free(current->io);
 		free(current);
-		current = next_cmd; 
+		current = next_cmd;
 	}
-
 	return (NULL);
 }
 

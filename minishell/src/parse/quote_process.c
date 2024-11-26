@@ -6,32 +6,13 @@
 /*   By: vrandria <vrandria@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 07:27:36 by vrandria          #+#    #+#             */
-/*   Updated: 2024/10/26 07:28:09 by vrandria         ###   ########.fr       */
+/*   Updated: 2024/11/26 09:11:58 by vrandria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parse.h"
 
-int check_quote_flag(t_token *token, int i)
-{
-	if (token->str[i] == 39 && token->flag == EMPTY)
-		return (1);
-	if (token->str[i] == 34 && token->flag == EMPTY)
-		return (1);
-	return (0);
-}
-
-int switch_flag_token(int i, t_token *token)
-{
-	if (token->str[i] == 34)
-		token->flag = DOUBLE_QUOTE;
-	if (token->str[i] == 39)
-		token->flag = ONE_QUOTE;
-	i++;
-	return (i);
-}
-
-int switch_flag_token_empty(int *i, t_token *token)
+int	switch_flag_token_empty(int *i, t_token *token)
 {
 	if (token->str[*i] == 39 && token->flag == ONE_QUOTE)
 	{
@@ -48,9 +29,9 @@ int switch_flag_token_empty(int *i, t_token *token)
 	return (*i);
 }
 
-int count_str_betweenquote(char *str, int count, int flag)
+int	count_str_betweenquote(char *str, int count, int flag)
 {
-	int i;
+	int	i;
 
 	i = count;
 	while (str[i])
@@ -61,27 +42,23 @@ int count_str_betweenquote(char *str, int count, int flag)
 				flag = DOUBLE_QUOTE;
 			if (str[i] == 39)
 				flag = ONE_QUOTE;
-			i++;
 		}
-		else if ((str[i] == 39 && flag == ONE_QUOTE) || (str[i] == 34 && DOUBLE_QUOTE))
+		else if ((str[i] == 39 && flag == ONE_QUOTE)
+			|| (str[i] == 34 && DOUBLE_QUOTE))
 		{
 			flag = EMPTY;
-			i++;
 		}
 		else
-		{
-			i++;
 			count++;
-		}
+		i++;
 	}
 	return (count);
-	
 }
 
-static int quote_between_str(t_token *token)
+static int	quote_between_str(t_token *token)
 {
-	char *str;
-	int i;
+	char	*str;
+	int		i;
 
 	i = 0;
 	str = token->str;
@@ -94,12 +71,11 @@ static int quote_between_str(t_token *token)
 	return (0);
 }
 
-t_token *trim_quote(t_token *token, int j)
+t_token	*trim_quote(t_token *token, int j)
 {
-	char *new;
-	int i;
-	int len;
-
+	char	*new;
+	int		i;
+	int		len;
 
 	i = 0;
 	len = count_str_betweenquote(token->str, i, 0);
@@ -110,7 +86,7 @@ t_token *trim_quote(t_token *token, int j)
 	{
 		if (check_quote_flag(token, i) == 1)
 		{
-			i = switch_flag_token(i ,token);
+			i = switch_flag_token(i, token);
 			continue ;
 		}
 		else if (switch_flag_token_empty(&i, token) != i)
@@ -124,9 +100,9 @@ t_token *trim_quote(t_token *token, int j)
 	return (token);
 }
 
-void quote_process(t_data *data)
+void	quote_process(t_data *data)
 {
-	t_token *current;
+	t_token	*current;
 
 	current = data->token;
 	while (current)

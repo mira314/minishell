@@ -6,32 +6,11 @@
 /*   By: vrandria <vrandria@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 08:42:40 by vrandria          #+#    #+#             */
-/*   Updated: 2024/11/24 11:17:50 by vrandria         ###   ########.fr       */
+/*   Updated: 2024/11/26 09:28:45 by vrandria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parse.h"
-
-int	arg_count(t_token *token)
-{
-	int	count;
-
-	count = 0;
-	while (token && (token->type_token == WORD || token->type_token == VAR))
-	{
-		if (token->type_token == VAR && token->inner_join == 1)
-		{
-			while (token->type_token == VAR && token->inner_join == 1)
-				token = token->next;
-		}
-		else
-		{
-			count++;
-			token = token->next;
-		}
-	}
-	return (count);
-}
 
 t_token	*ft_split_echo(t_token *token, t_cmd *cmd)
 {
@@ -46,7 +25,7 @@ t_token	*ft_split_echo(t_token *token, t_cmd *cmd)
 	result = (char **)malloc(sizeof(char *) * (argc + len_arg) + 1);
 	if (!result)
 		return (0);
-	result = ft_split_expansion(len_arg, token, cmd, result);
+	result = split_expansion(len_arg, token, cmd, result);
 	free(cmd->args);
 	cmd->args = result;
 	while (token->type_token || VAR || token->type_token == WORD)
@@ -79,33 +58,21 @@ t_token	*split_args(t_token *token, t_cmd *cmd)
 	if (ft_strncmp(cmd->cmd, "echo", 4) == 0)
 	{
 		if (cmd->args == 0)
-		{
-			token = echo_parsing_arg(token, cmd);
-			return (token);
-		}
+			return (echo_parsing_arg(token, cmd));
 		else
-		{
-			token = ft_split_echo(token, cmd);
-			return (token);
-		}
+			return (ft_split_echo(token, cmd));
 	}
 	else
 	{
 		if (!cmd->args)
-		{
-			token = new_args_for_other_cmd(token, cmd);
-			return (token);
-		}
+			return (args_other_cmd(token, cmd, 0, 0));
 		else
-		{
-			token = add_args_for_other_cmd(token, cmd);
-			return (token);
-		}
+			return (add_args_for_other_cmd(token, cmd));
 	}
 	return (token);
 }
 
-char	**ft_split_expansion(int len, t_token *token, t_cmd *cmd, char **tab)
+char	**split_expansion(int len, t_token *token, t_cmd *cmd, char **tab)
 {
 	int	i;
 
@@ -132,8 +99,8 @@ t_token	*combin_var(t_token *token, char **var)
 	char	*tmp;
 
 	tmp = *var;
-	while (token->type_token == VAR && token->next->type_token == VAR &&
-	token->next->inner_join == 1)
+	while (token->type_token == VAR && token->next->type_token == VAR
+		&& token->next->inner_join == 1)
 	{
 		*var = ft_strjoin(tmp, token->next->str);
 		free(tmp);

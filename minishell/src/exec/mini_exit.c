@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mini_exit.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: derakoto <derakoto@student.42antananari    +#+  +:+       +#+        */
+/*   By: vrandria <vrandria@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/20 05:19:02 by derakoto          #+#    #+#             */
-/*   Updated: 2024/11/25 05:57:56 by derakoto         ###   ########.fr       */
+/*   Updated: 2024/11/26 10:01:15 by vrandria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

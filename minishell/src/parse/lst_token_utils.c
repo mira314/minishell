@@ -6,7 +6,7 @@
 /*   By: vrandria <vrandria@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 08:46:57 by vrandria          #+#    #+#             */
-/*   Updated: 2024/10/19 13:30:44 by vrandria         ###   ########.fr       */
+/*   Updated: 2024/11/26 09:42:06 by vrandria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 t_token	*new_token(char *str, int flag, int type_token)
 {
-	t_token *token;
+	t_token	*token;
 
 	token = (t_token *)malloc(sizeof(t_token));
 	if (!token)
@@ -22,10 +22,10 @@ t_token	*new_token(char *str, int flag, int type_token)
 	token->str = ft_strdup(str);
 	token->temp = ft_strdup(str);
 	if (type_token != WORD)
-		{
-			free(token->temp);
-			token->temp = 0;
-		}
+	{
+		free(token->temp);
+		token->temp = 0;
+	}
 	token->check_var = 0;
 	token->inner_join = 0;
 	token->type_token = type_token;
@@ -39,12 +39,12 @@ t_token	*new_token(char *str, int flag, int type_token)
 
 t_token	*lst_add_back_token(t_token *token, t_token *new_token)
 {
-	t_token *tmp;
+	t_token	*tmp;
 
 	tmp = token;
 	if (!tmp)
 		return (new_token);
-	if(tmp && new_token)
+	if (tmp && new_token)
 	{
 		while (tmp->next)
 			tmp = tmp->next;
@@ -54,10 +54,9 @@ t_token	*lst_add_back_token(t_token *token, t_token *new_token)
 	return (token);
 }
 
-//it's possible to free all value token here, to check if it's necessary
 t_token	*lst_del_token(t_token *token)
 {
-	t_token *tmp;
+	t_token	*tmp;
 
 	tmp = token->next;
 	free(token->str);
@@ -67,7 +66,7 @@ t_token	*lst_del_token(t_token *token)
 	return (tmp);
 }
 
-void lst_clear_all_token(t_token *token)
+void	lst_clear_all_token(t_token *token)
 {
 	while (token)
 		token = lst_del_token(token);

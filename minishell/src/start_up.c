@@ -6,13 +6,13 @@
 /*   By: derakoto <derakoto@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/20 08:55:38 by derakoto          #+#    #+#             */
-/*   Updated: 2024/11/21 04:34:43 by derakoto         ###   ########.fr       */
+/*   Updated: 2024/11/26 10:09:02 by vrandria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void set_pwd(t_data *data)
+static void	set_pwd(t_data *data)
 {
 	char	pwd_buffer[200];
 	char	*new_pwd;
@@ -39,7 +39,7 @@ int	msh_start_up(t_data *data, char **env)
 	return (0);
 }
 
-int init_data(t_data *data, char **env)
+int	init_data(t_data *data, char **env)
 {
 	data->var = NULL;
 	data->term_backup.keybord_backup = dup(0);
@@ -52,16 +52,16 @@ int init_data(t_data *data, char **env)
 	if (data->var == NULL)
 		return (1);
 	*data->var = NULL;
-    data->input = 0;
-    data->cmd = 0;
-    data->token = 0;
-    data->exit_value = 1;
-    data->env = dup_env(env);
+	data->input = 0;
+	data->cmd = 0;
+	data->token = 0;
+	data->exit_value = 1;
+	data->env = dup_env(env);
 	if (data->env == NULL)
 	{
 		free(data->var);
 		return (1);
 	}
-    g_last_val = 0;
-    return (0);
+	g_last_val = 0;
+	return (0);
 }
