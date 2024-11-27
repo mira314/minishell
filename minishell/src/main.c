@@ -6,7 +6,7 @@
 /*   By: derakoto <derakoto@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/24 10:56:40 by vrandria          #+#    #+#             */
-/*   Updated: 2024/11/26 18:21:35 by derakoto         ###   ########.fr       */
+/*   Updated: 2024/11/27 05:27:54 by derakoto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ int	g_last_val = 0;
 
 void	clean_tmp(t_data *data)
 {
-	lst_clear_all_token(data->token);
 	data->token = 0;
 	free(data->input);
 	clear_lst_cmd(data);
@@ -29,6 +28,7 @@ void	process_input(t_data *data)
 		add_history(data->input);
 		signal(SIGINT, SIG_IGN);
 		data->exit_value = parse_data_input(data);
+		lst_clear_all_token(data->token);
 		if (data->exit_value == 0)
 			exec(data);
 		else

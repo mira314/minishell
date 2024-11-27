@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vrandria <vrandria@student.42antananari    +#+  +:+       +#+        */
+/*   By: derakoto <derakoto@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/25 10:30:04 by vrandria          #+#    #+#             */
-/*   Updated: 2024/11/26 09:27:57 by vrandria         ###   ########.fr       */
+/*   Updated: 2024/11/27 14:59:08 by derakoto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,4 +118,14 @@ int			check_quote_flag(t_token *token, int i);
 int			switch_flag_token(int i, t_token *token);
 t_output	*add_output(t_cmd *cmd, t_token *token, int mode);
 t_input		*add_input(t_cmd *cmd, char *filename, int mode);
+char	    *create_file_name(char *path);
+int			prepare_heredoc_file(t_cmd *cmd);
+void		get_doc_content(t_data *data, t_cmd *cmd, t_token *token, int fd);
+void		get_doc(t_data *data, t_cmd *cmd, t_token *token, int fd);
+int			size_str_not_var(char *str);
+char		*herdoc_var_handl(t_data *data, char *str);
+char		*var_convert_her(char *str, char *var);
+char		*var_str_heredoc(t_data *data, char *str, int i);
+char		*trim_delim_heredoc(char *del, t_cmd *cmd);
+
 #endif
