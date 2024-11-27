@@ -10,7 +10,7 @@ static void close_pipe(int *fds)
     close(fds[1]);
 }
 
-static void fork_fun(int *input, int *output, char ***cmds)
+void    fork_fun(int *input, int *output, char ***cmds)
 {
     if (input != NULL)
     {

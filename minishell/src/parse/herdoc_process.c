@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   herdoc_process.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vrandria <vrandria@student.42antananari    +#+  +:+       +#+        */
+/*   By: derakoto <derakoto@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 15:42:25 by vrandria          #+#    #+#             */
-/*   Updated: 2024/11/26 10:14:29 by vrandria         ###   ########.fr       */
+/*   Updated: 2024/11/26 18:34:11 by derakoto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -226,6 +226,7 @@ t_token	*parsing_heredoc(t_cmd *cmd, t_token *token, t_data *data)
 			write(fd, str, ft_strlen(str));
 			free(str);
 		}
+		free(str);
 		close(fd);
 		free(file);
 		lst_clear_all_token(data->token);

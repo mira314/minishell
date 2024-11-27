@@ -1,0 +1,167 @@
+// int    pipe_loop(t_data *data, t_cmd *cmd, int *pipe_in)
+// {
+//     int     pipe_out[2];
+//     //int     pid;
+//     int     status;
+// 	//int		result;
+
+// 	if (cmd->next == NULL)
+// 	{
+// 		if (fork() == 0)
+// 		{
+// 			status = fork_fun(pipe_in, pipe_out, data, cmd);
+// 			exit (status);
+// 		}
+// 		else
+// 		{
+// 			if (pipe_in != NULL)
+// 				close_pipe(pipe_in);
+// 			wait(&status);
+// 			return (WEXITSTATUS(status));
+// 		}
+// 	}
+// 	else
+// 	{
+// 		if (pipe(pipe_out) == -1)
+//     	{
+//         	perror("piping");
+//         	return (1);
+//    		}
+// 		if (fork() == 0)
+// 		{
+// 			status = fork_fun(pipe_in, pipe_out, data, cmd);
+// 			exit (status);
+// 		}
+// 		else
+// 		{
+// 			if (pipe_in != NULL)
+// 				close_pipe(pipe_in);
+// 			wait(NULL);
+// 			return (pipe_loop(data, cmd->next, pipe_out));
+// 		}
+		
+// 	}
+// }
+
+static char	*get_doc(char *delim)
+{
+	
+	char	*result;
+	char	*tmp;
+	char	*result_tmp;
+
+	result = NULL;
+	result_tmp = NULL;
+	while (1)
+	{
+		write(1, ">", 1);
+		tmp = get_next_line(0);
+		if (tmp == NULL)
+		{
+			ft_putstr_fd("\nThere is an error\n", 2);
+			return (result);	
+		}
+		if (is_delimiter(delim, tmp) == 0)
+		{
+			free(tmp);
+			return (result);
+		}
+		result_tmp = result;
+		if (result_tmp == NULL)
+			result = ft_strdup(tmp);
+		else
+			result = ft_strjoin(result_tmp, tmp);
+		free(tmp);
+		free(result_tmp);
+		if (result == NULL)
+			return (NULL);
+	}
+	return result;
+}
+int	handle_here_doc(int	*fds, char *del, t_term *term)
+{
+	char	*heredoc_result;
+	int		exit_status;
+
+	signal(SIGINT, SIG_IGN);
+	if (fork() == 0)
+	{
+		signal(SIGINT, SIG_DFL);
+		close(fds[0]);
+		dup2(term->keybord_backup, 0);
+		dup2(term->term_backup, 1);
+		heredoc_result = get_doc(del);
+		if (heredoc_result == NULL)
+			write(fds[1], "", 1);
+		else
+			write(fds[1], heredoc_result, ft_strlen(heredoc_result));
+		close(fds[1]);
+		free(heredoc_result);
+		exit(0);
+	}
+	else
+	{
+		wait(&exit_status);
+		if (WIFSIGNALED(exit_status))
+		{
+			signal(SIGINT, sig_int_handler);
+			write(1,"\n", 1);
+			return (-1);
+		}	
+	}
+	signal(SIGINT, sig_int_handler);
+	return (0);
+}
+
+void test_1(t_cmd *cmd)
+{
+	int i;
+	i = 0;
+
+	while (cmd->io->inputs[i].filename != 0)
+	{
+		printf("input %s\n",cmd->io->inputs[i].filename);
+		i++;
+	}
+}
+
+void test_2(t_cmd *cmd)
+{
+	int i;
+	i = 0;
+
+	while (cmd->io->outputs[i].filename != 0)
+	{
+		printf("output %s\n",cmd->io->outputs[i].filename);
+		i++;
+	}
+}
+
+int print_token(int token)
+{
+	if (token ==  WORD)
+		printf("[word]");
+	if (token == HEREDOC)
+		printf("[HEREDOC]");
+	if (token ==  VAR)
+		printf("[VAR]");
+	if (token ==  END)
+		printf("[END]");
+	if (token ==  PIPE)
+		printf("[PIPE]");
+	if (token ==  TRUNC)
+		printf("[TRUNC]");
+	return (0);
+}
+
+void test(t_token *test)
+{
+    while(test)
+    {
+    printf("[%s] origin [%s]",test->str, test->temp);
+	print_token(test->type_token);
+    test = test->next;
+	printf("\n");
+    }
+
+}
