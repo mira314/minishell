@@ -6,7 +6,7 @@
 /*   By: derakoto <derakoto@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/18 13:32:50 by vrandria          #+#    #+#             */
-/*   Updated: 2024/11/26 18:25:56 by derakoto         ###   ########.fr       */
+/*   Updated: 2024/11/27 16:19:22 by derakoto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,12 +44,12 @@ extern int	g_last_val;
 int		print_error(char *str, char *msg, int code);
 
 /****************clear.c  ******************* */
-int	    main(int argc, char *argv[], char **env);
-int 	check_input(t_data *data);
+int		main(int argc, char *argv[], char **env);
+int		check_input(t_data *data);
 void	clear_tab(char **env);
 int		msh_start_up(t_data *data, char **env);
-int 	check_only_space(char *str);
-int 	parse_data_input(t_data *data);
+int		check_only_space(char *str);
+int		parse_data_input(t_data *data);
 void	check_g_value(t_data *data);
 void	sig_int_handler(int sig_num);
 #endif

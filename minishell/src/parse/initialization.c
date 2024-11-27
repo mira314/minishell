@@ -3,14 +3,31 @@
 /*                                                        :::      ::::::::   */
 /*   initialization.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vrandria <vrandria@student.42antananari    +#+  +:+       +#+        */
+/*   By: derakoto <derakoto@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/03 07:31:00 by vrandria          #+#    #+#             */
-/*   Updated: 2024/11/26 09:29:07 by vrandria         ###   ########.fr       */
+/*   Updated: 2024/11/27 16:17:47 by derakoto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parse.h"
+
+static t_token	*convert_token(t_data *data, t_token *token)
+{
+	if (token->type_token == WORD || token->type_token == VAR)
+		token = parsins_word(data->cmd, token);
+	else if (token->type_token == PIPE)
+		token = parsing_pipe(data, token);
+	else if (token->type_token == INPUT)
+		token = parsing_input(data->cmd, token);
+	else if (token->type_token == HEREDOC)
+		token = parsing_heredoc(data->cmd, token, data);
+	else if (token->type_token == TRUNC)
+		token = parsing_trunc(data->cmd, token);
+	else if (token->type_token == APPEND)
+		token = parsing_append(data->cmd, token);
+	return (token);
+}
 
 int	init_token(t_data *data, char *input, int flag, int *exit)
 {
@@ -64,25 +81,14 @@ int	fill_cmd(t_data *data, t_token *token)
 	{
 		if (tmp == token)
 			data->cmd = lst_add_back_cmd(data->cmd, new_cmd());
-		if (tmp->type_token == WORD || tmp->type_token == VAR)
-			tmp = parsins_word(data->cmd, tmp);
-		else if (tmp->type_token == PIPE)
-			tmp = parsing_pipe(data, tmp);
-		else if (tmp->type_token == INPUT)
-			tmp = parsing_input(data->cmd, tmp);
-		else if (tmp->type_token == HEREDOC)
-			tmp = parsing_heredoc(data->cmd, tmp, data);
-		else if (tmp->type_token == TRUNC)
-			tmp = parsing_trunc(data->cmd, tmp);
-		else if (tmp->type_token == APPEND)
-			tmp = parsing_append(data->cmd, tmp);
-		else if (tmp->type_token == END)
-			break ;
+		tmp = convert_token(data, tmp);
 		if (tmp == NULL)
 		{
 			data->exit_value = 130;
 			return (-1);
 		}
+		if (tmp->type_token == END)
+			break ;
 	}
 	if (data && data->cmd && data->cmd->cmd != 0)
 		data->exit_value = parse_commande(data);

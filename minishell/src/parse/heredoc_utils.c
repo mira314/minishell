@@ -5,93 +5,12 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: derakoto <derakoto@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/27 14:52:53 by derakoto          #+#    #+#             */
-/*   Updated: 2024/11/27 15:31:05 by derakoto         ###   ########.fr       */
+/*   Created: 2024/11/27 15:44:45 by derakoto          #+#    #+#             */
+/*   Updated: 2024/11/27 15:47:26 by derakoto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parse.h"
-
-int	size_str_not_var(char *str)
-{
-	int	i;
-
-	i = 1;
-	while (str[i])
-	{
-		if (ft_isalpha((int)str[i]) == 0)
-			break ;
-		i++;
-	}
-	return (i);
-}
-
-char	*herdoc_var_handl(t_data *data, char *str)
-{
-	char	*exit_val;
-	char	*var;
-	int		size;
-
-	var = get_type_var(str, 0);
-	if (var && ft_varchr(data, var) != 0)
-	{
-		size = ft_strlen(var);
-		if (ft_varchr(data, var) == 1)
-			exit_val = get_var_var(data, var, size);
-		else if (ft_varchr(data, var) == 2)
-			exit_val = get_var_env(data, var, size);
-	}
-	else if (var && var[0] == '?' && var[1] == '=')
-		exit_val = ft_itoa(data->exit_value);
-	else
-		exit_val = 0;
-	free(var);
-	return (exit_val);
-}
-
-char	*var_convert_her(char *str, char *var)
-{
-	char	*new;
-
-	if (!str)
-		str = ft_strdup("");
-	new = ft_strjoin(str, var);
-	free(var);
-	free(str);
-	return (new);
-}
-
-char	*var_str_heredoc(t_data *data, char *str, int i)
-{
-	char	*get_var;
-	char	*tmp;
-	char	*join;
-	char	tab[2];
-
-	tab[1] = 0;
-	join = 0;
-	tmp = ft_strdup("");
-	while (str[i])
-	{
-		if (str[i] == '$' && sep_next_char(str[i + 1] == 0))
-		{
-			get_var = herdoc_var_handl(data, &str[i]);
-			free(tmp);
-			tmp = var_convert_her(join, get_var);
-			i += size_str_not_var(&str[i]);
-		}
-		else
-		{
-			tab[0] = str[i];
-			join = ft_strjoin(tmp, tab);
-			free(tmp);
-			tmp = join;
-			i++;
-		}
-	}
-	free(tmp);
-	return (join);
-}
 
 char	*trim_delim_heredoc(char *del, t_cmd *cmd)
 {
@@ -117,4 +36,43 @@ char	*trim_delim_heredoc(char *del, t_cmd *cmd)
 	new[j] = 0;
 	free(del);
 	return (new);
+}
+
+t_token	*decide_next_token(t_token *token)
+{
+	if (token->next->next)
+		token = token->next->next;
+	else
+		token = token->next;
+	return (token);
+}
+
+void	clear_doc(t_input *inputs)
+{
+	int	i;
+
+	if (inputs == 0)
+		return ;
+	i = 0;
+	while (inputs[i].filename != NULL)
+	{
+		if (inputs[i].mode == HEREDOC)
+		{
+			if (unlink(inputs[i].filename) == -1)
+				perror("Heredoc deletetion");
+		}
+		i++;
+	}
+}
+
+void	clear_all_doc(t_cmd *top_cmd)
+{
+	t_cmd	*cmd;
+
+	cmd = top_cmd;
+	while (cmd)
+	{
+		clear_doc(cmd->io->inputs);
+		cmd = cmd->next;
+	}
 }
