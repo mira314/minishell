@@ -3,31 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   quote_process.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vrandria <vrandria@student.42antananari    +#+  +:+       +#+        */
+/*   By: derakoto <derakoto@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 07:27:36 by vrandria          #+#    #+#             */
-/*   Updated: 2024/11/26 09:11:58 by vrandria         ###   ########.fr       */
+/*   Updated: 2024/11/28 05:41:41 by derakoto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parse.h"
-
-int	switch_flag_token_empty(int *i, t_token *token)
-{
-	if (token->str[*i] == 39 && token->flag == ONE_QUOTE)
-	{
-		token->flag = EMPTY;
-		(*i)++;
-		return (*i);
-	}
-	else if (token->str[*i] == 34 && token->flag == DOUBLE_QUOTE)
-	{
-		token->flag = EMPTY;
-		(*i)++;
-		return (*i);
-	}
-	return (*i);
-}
 
 int	count_str_betweenquote(char *str, int count, int flag)
 {
@@ -71,27 +54,36 @@ static int	quote_between_str(t_token *token)
 	return (0);
 }
 
+int	is_quote(char c)
+{
+	if (c == '"')
+		return (DOUBLE_QUOTE);
+	else if (c == '\'')
+		return (ONE_QUOTE);
+	return (EMPTY);
+}
+
 t_token	*trim_quote(t_token *token, int j)
 {
 	char	*new;
 	int		i;
 	int		len;
+	int		quote;
 
-	i = 0;
-	len = count_str_betweenquote(token->str, i, 0);
+	len = count_str_betweenquote(token->str, 0, 0);
 	new = malloc(sizeof(char) * len + 1);
 	if (!new)
 		return (0);
-	while (token->str[i])
+	i = -1;
+	while (token->str[++i])
 	{
-		if (check_quote_flag(token, i) == 1)
-		{
-			i = switch_flag_token(i, token);
-			continue ;
-		}
-		else if (switch_flag_token_empty(&i, token) != i)
-			continue ;
-		new[j++] = token->str[i++];
+		quote = is_quote(token->str[i]);
+		if (quote != EMPTY && token->flag == quote)
+			token->flag = EMPTY;
+		else if (quote != EMPTY && token->flag == EMPTY)
+			token->flag = quote;
+		else
+			new[j++] = token->str[i];
 	}
 	new[j] = 0;
 	free(token->str);
