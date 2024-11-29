@@ -6,7 +6,7 @@
 /*   By: vrandria <vrandria@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/25 08:54:14 by vrandria          #+#    #+#             */
-/*   Updated: 2024/11/29 10:44:12 by vrandria         ###   ########.fr       */
+/*   Updated: 2024/11/29 10:59:31 by vrandria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,17 @@ int	double_quote_is_close(char *str, int i)
 	return (0);
 }
 
+static int	ft_strlen_cust(char *str)
+{
+	int	i;
+
+	i = 0;
+	if (!str)
+		return (1);
+	i = ft_strlen(str);
+	return (i);
+}
+
 int	var_process(t_data *data, t_token *token, int count)
 {
 	int		i;
@@ -74,7 +85,7 @@ int	var_process(t_data *data, t_token *token, int count)
 				{
 					exit_val = exit_var_value(data, token, &token->str[i]);
 					token = var_conversion(token, exit_val, i);
-					count = ft_strlen(exit_val);
+					count = ft_strlen_cust(exit_val);
 					free(exit_val);
 					i = count + i - 1;
 				}
