@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: derakoto <derakoto@student.42antananari    +#+  +:+       +#+        */
+/*   By: vrandria <vrandria@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/25 10:30:04 by vrandria          #+#    #+#             */
-/*   Updated: 2024/11/27 16:18:23 by derakoto         ###   ########.fr       */
+/*   Updated: 2024/11/29 10:36:01 by vrandria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,9 +71,8 @@ char		**copy_new_tab(int len, char **str, t_token *token, t_cmd *cmd);
 int			parse_commande(t_data *data);
 int			handles_bultin(t_data *data, t_cmd *cmd);
 /******************var_processing.c***********************/
-int			var_process(t_data *data, t_token *token);
+int			var_process(t_data *data, t_token *token, int count);
 t_token		*statu_quote_token(t_token *token, int c);
-int			sep_next_char(char c);
 int			double_quote_is_close(char *str, int i);
 /*************var_proces_utils.c********************** */
 int			ft_varchr(t_data *data, char *str);
@@ -90,6 +89,7 @@ int			sub_var(t_token *token, char *str, int i, int size);
 t_token		*var_conversion(t_token *token, char *str, int i);
 int			var_copy(char *dest, char *src, int i);
 char		*get_str_token(char *str, char *str_new, int size, int i);
+int			sep_next_char(char c);
 /********************split_args_other.c*********************/
 int			count_word(t_token *token);
 int			arg_count(t_token *token);

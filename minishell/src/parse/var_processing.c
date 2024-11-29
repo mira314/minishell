@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   var_processing.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: derakoto <derakoto@student.42antananari    +#+  +:+       +#+        */
+/*   By: vrandria <vrandria@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/25 08:54:14 by vrandria          #+#    #+#             */
-/*   Updated: 2024/11/29 05:11:04 by derakoto         ###   ########.fr       */
+/*   Updated: 2024/11/29 10:39:47 by vrandria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,17 +40,6 @@ t_token	*statu_quote_token(t_token *token, int c)
 	return (token);
 }
 
-int	sep_next_char(char c)
-{
-	if (c == '$')
-		return (1);
-	else if (c == 32)
-		return (1);
-	else if (c == 0)
-		return (1);
-	return (0);
-}
-
 int	double_quote_is_close(char *str, int i)
 {
 	int	prev;
@@ -68,11 +57,10 @@ int	double_quote_is_close(char *str, int i)
 	return (0);
 }
 
-int	var_process(t_data *data, t_token *token)
+int	var_process(t_data *data, t_token *token, int count)
 {
 	int		i;
 	char	*exit_val;
-	char	*tmp;
 
 	while (token)
 	{
@@ -84,10 +72,11 @@ int	var_process(t_data *data, t_token *token)
 				token = statu_quote_token(token, (int)(token->str[i]));
 				if (if_var_to_expanded(token, i) == 1)
 				{
-					tmp = token->str;
-					exit_val = exit_var_value(data, token, &tmp[i]);
+					exit_val = exit_var_value(data, token, &token->str[i]);
 					token = var_conversion(token, exit_val, i);
+					count = ft_strlen(exit_val);
 					free(exit_val);
+					i = count + i - 1;
 				}
 				i++;
 			}

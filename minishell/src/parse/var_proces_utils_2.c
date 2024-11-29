@@ -6,7 +6,7 @@
 /*   By: vrandria <vrandria@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/29 14:41:39 by vrandria          #+#    #+#             */
-/*   Updated: 2024/11/26 07:52:36 by vrandria         ###   ########.fr       */
+/*   Updated: 2024/11/29 10:35:32 by vrandria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,4 +90,15 @@ int	sub_var_replace(t_token *token, char *str_new, char *str, int i)
 		token->str = new;
 	}
 	return (1);
+}
+
+int	sep_next_char(char c)
+{
+	if (c == '$')
+		return (1);
+	else if (c == 32)
+		return (1);
+	else if (c == 0)
+		return (1);
+	return (0);
 }
