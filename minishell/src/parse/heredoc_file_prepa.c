@@ -6,7 +6,7 @@
 /*   By: vrandria <vrandria@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 14:50:54 by derakoto          #+#    #+#             */
-/*   Updated: 2024/11/29 08:18:48 by vrandria         ###   ########.fr       */
+/*   Updated: 2024/11/29 09:15:49 by vrandria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,7 @@ void	get_doc_content(t_data *data, t_cmd *cmd, t_token *token, int fd)
 		write(fd, str, ft_strlen(str));
 		free(str);
 	}
+	free(str);
 }
 
 void	get_doc(t_data *data, t_cmd *cmd, t_token *token, int fd)

@@ -6,7 +6,7 @@
 /*   By: vrandria <vrandria@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 14:52:53 by derakoto          #+#    #+#             */
-/*   Updated: 2024/11/29 09:05:25 by vrandria         ###   ########.fr       */
+/*   Updated: 2024/11/29 09:15:28 by vrandria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,5 +98,6 @@ char	*var_str_heredoc(t_data *data, char *str, int i)
 			i++;
 		}
 	}
+	free(str);
 	return (join);
 }
