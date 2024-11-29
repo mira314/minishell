@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc_file_prepa.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: derakoto <derakoto@student.42antananari    +#+  +:+       +#+        */
+/*   By: vrandria <vrandria@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 14:50:54 by derakoto          #+#    #+#             */
-/*   Updated: 2024/11/27 15:00:32 by derakoto         ###   ########.fr       */
+/*   Updated: 2024/11/29 08:18:48 by vrandria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,6 @@ void	get_doc_content(t_data *data, t_cmd *cmd, t_token *token, int fd)
 		write(fd, str, ft_strlen(str));
 		free(str);
 	}
-	free(str);
 }
 
 void	get_doc(t_data *data, t_cmd *cmd, t_token *token, int fd)

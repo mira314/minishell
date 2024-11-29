@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   herdoc_process.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: derakoto <derakoto@student.42antananari    +#+  +:+       +#+        */
+/*   By: vrandria <vrandria@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 15:42:25 by vrandria          #+#    #+#             */
-/*   Updated: 2024/11/27 15:47:19 by derakoto         ###   ########.fr       */
+/*   Updated: 2024/11/29 07:49:09 by vrandria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
