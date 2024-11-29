@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   var_proces_utils_3.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vrandria <vrandria@student.42antananari    +#+  +:+       +#+        */
+/*   By: derakoto <derakoto@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/13 10:54:54 by vrandria          #+#    #+#             */
-/*   Updated: 2024/11/26 07:53:48 by vrandria         ###   ########.fr       */
+/*   Updated: 2024/11/29 04:42:38 by derakoto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	sub_var(t_token *token, char *str, int i, int size)
 	j = 0;
 	y = 0;
 	size = size - size_var(&str[i]);
-	new = (char *)malloc(sizeof(char) + size + 1);
+	new = (char *)malloc(sizeof(char) * (size + 1));
 	if (!new)
 		return (0);
 	while (str[j])
@@ -75,7 +75,7 @@ char	*get_str_token(char *str, char *str_new, int size, int id)
 
 	i = 0;
 	y = 0;
-	str_token = (char *)malloc(sizeof(char) * size + 1);
+	str_token = (char *)malloc(sizeof(char) * (size + 1));
 	if (!str_token)
 		return (0);
 	while (str_new[i])

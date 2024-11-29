@@ -3,22 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   var_processing.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vrandria <vrandria@student.42antananari    +#+  +:+       +#+        */
+/*   By: derakoto <derakoto@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/25 08:54:14 by vrandria          #+#    #+#             */
-/*   Updated: 2024/11/26 07:48:57 by vrandria         ###   ########.fr       */
+/*   Updated: 2024/11/29 05:11:04 by derakoto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parse.h"
 
-static int	if_var_to_expanded(t_token *token, int i)
+int	if_var_to_expanded(t_token *token, int i)
 {
 	if (token->str[i] != '$')
 		return (0);
 	if (double_quote_is_close(token->str, i) != 0)
 		return (0);
-	if (sep_next_char(token->str[i + 1] != 0))
+	if (sep_next_char(token->str[i + 1]) != 0)
 		return (0);
 	if (token->flag == EMPTY || token->flag == DOUBLE_QUOTE)
 		return (1);
@@ -79,7 +79,7 @@ int	var_process(t_data *data, t_token *token)
 		if (token->type_token == VAR)
 		{
 			i = 0;
-			while (token->str[i])
+			while (token->str[0] != 0 && token->str[i])
 			{
 				token = statu_quote_token(token, (int)(token->str[i]));
 				if (if_var_to_expanded(token, i) == 1)
