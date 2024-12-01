@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pre_exec.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vrandria <vrandria@student.42antananari    +#+  +:+       +#+        */
+/*   By: derakoto <derakoto@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 18:19:51 by derakoto          #+#    #+#             */
-/*   Updated: 2024/11/29 10:29:45 by vrandria         ###   ########.fr       */
+/*   Updated: 2024/12/01 12:39:04 by derakoto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

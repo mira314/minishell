@@ -1,23 +1,30 @@
-GESTION DES ERREURS 
--Permissions
--Commandes non trouvées
+Erreur :
 
+- when variables are inside quotes
+-variable processing should be done before all other processing
+-minishell should always has PATH variable : if unset, set /usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin:/bin:/sbin:.
+-when there is no PATH env, print: "no such file or directory" instead of "command not found"
+-there is a problem in exec_path : it should display "no such file or directory"
+-there is a problem in cd when HOME=
+-inside a folder which doesn't exist anymore: Error handling in pwd
+-CDPATH env : to handle when cd
+-there are leaks in execute_path : when there is permission denied
+-SHLVL
+-when the value of exit extends exit 9223372036854775807: numeric arguments required
+-The return value of : 
+  *ls | exit is not true;
+  *cat Makefile | grep pr | head -n 5 | cd file_not_exist
 
+-There shouldn't be new line after command not found
 
-BUILT-IN
+-echo hola > a >>b echo que tal : SEG FAULT
 
+-redirection to "Docs/bonjour"
 
-  - cd
-  - echo 
-  - exit
-  - export
-  - unset 
-  - pwd ok
+-comportement redirection successives
 
-Remarque : -Sao dia afaka esorina ilay variable exit ao amin'ny pars_input?
-          - Tsy possible misy erreur ve ao amin'ny var_process sy quote_process?
-          - Maninona raha tsy mampiasa cmd->cmd intsony tsika?
+-output redirection sould be done before input
 
+-The input ouput structure is wrong
 
-Test : 
-  assignement + built-in
+-name of file put in variable : ambiguos redirec teset 706
