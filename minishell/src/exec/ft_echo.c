@@ -6,11 +6,48 @@
 /*   By: derakoto <derakoto@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 05:44:51 by derakoto          #+#    #+#             */
-/*   Updated: 2024/11/25 05:45:13 by derakoto         ###   ########.fr       */
+/*   Updated: 2024/11/29 18:07:34 by derakoto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exec.h"
+
+int	parse_option(char *option, int *nl)
+{
+	int	i;
+
+	if (option == NULL)
+		return (-1);
+	if (option[0] == '-')
+	{
+		i = 1;
+		while (option[i] != 0)
+		{
+			if (option[i] != 'n')
+				return (-1);
+			i++;
+		}
+		if (i != 1 && option[i] == '\0')
+		{
+			*nl = 0;
+			return (0);
+		}
+	}
+	return (-1);
+}
+
+int	treat_options(char **args, int *nl)
+{
+	int	result;
+
+	if (args == NULL)
+		return (0);
+	result = 0;
+	*nl = 1;
+	while (args[result] != NULL && parse_option(args[result], nl) == 0)
+		result ++;
+	return (result);
+}
 
 int	ft_echo(char **args)
 {
@@ -22,10 +59,7 @@ int	ft_echo(char **args)
 		write(1, "\n", 1);
 		return (0);
 	}
-	i = 0;
-	nl = ft_strncmp(args[0], "-n", 3);
-	if (nl == 0)
-		i = 1;
+	i = treat_options(args, &nl);
 	while (args[i])
 	{
 		printf("%s", args[i]);
