@@ -6,7 +6,7 @@
 /*   By: derakoto <derakoto@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 04:42:45 by derakoto          #+#    #+#             */
-/*   Updated: 2024/11/25 05:36:49 by derakoto         ###   ########.fr       */
+/*   Updated: 2024/12/02 07:01:07 by derakoto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,13 +33,14 @@ int	execute_path(t_data *data, t_cmd *cmd, char *path)
 	int			result;
 	struct stat	path_stat;
 
-	if (stat(path, &path_stat) == -1)
-		return (1);
-	if (S_ISDIR(path_stat.st_mode))
+	if (stat(path, &path_stat) != -1)
 	{
-		ft_putstr_fd(path, 2);
-		ft_putstr_fd(": is a directory\n", 2);
-		return (126);
+		if (S_ISDIR(path_stat.st_mode))
+		{
+			ft_putstr_fd(path, 2);
+			ft_putstr_fd(": is a directory\n", 2);
+			return (126);
+		}
 	}
 	result = exec_with_fork(path, cmd->args + cmd->offset, data->env);
 	return (result);

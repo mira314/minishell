@@ -6,7 +6,7 @@
 /*   By: derakoto <derakoto@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/12 14:25:50 by derakoto          #+#    #+#             */
-/*   Updated: 2024/11/26 05:56:21 by derakoto         ###   ########.fr       */
+/*   Updated: 2024/12/02 07:22:31 by derakoto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,16 +70,16 @@ int	mini_cd(t_data *data, t_cmd *cmd)
 	char	**args;
 
 	args = cmd->args;
-	if (args == NULL)
-		return (cd_to_home(data));
 	arg_len = mini_tbl_len(args);
 	if (arg_len > 2)
 	{
 		print_error(args[0], ": too many arguments", 1);
 		return (1);
 	}
-	if (arg_len < 2 || ft_strlen(args[1]) == 0)
+	if (arg_len == 1)
 		return (cd_to_home(data));
+	if (arg_len == 2 && ft_strlen(args[1]) == 0)
+		return (0);
 	result = chdir(args[1]);
 	if (result == -1)
 	{
