@@ -6,11 +6,29 @@
 /*   By: derakoto <derakoto@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 15:43:58 by derakoto          #+#    #+#             */
-/*   Updated: 2024/11/26 05:51:09 by derakoto         ###   ########.fr       */
+/*   Updated: 2024/12/02 04:19:29 by derakoto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exec.h"
+
+int	is_env_unset(char **envs, char *key)
+{
+	int	i;
+
+	if (envs == NULL)
+		return (0);
+	if (key == NULL)
+		return (1);
+	i = 0;
+	while (envs[i] != 0)
+	{
+		if (is_env_key(envs[i], key) == 0)
+			return (1);
+		i++;
+	}
+	return (0);
+}
 
 char	**dup_env(char **f_env)
 {

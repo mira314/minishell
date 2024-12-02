@@ -6,7 +6,7 @@
 /*   By: derakoto <derakoto@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/20 08:55:38 by derakoto          #+#    #+#             */
-/*   Updated: 2024/11/26 10:09:02 by vrandria         ###   ########.fr       */
+/*   Updated: 2024/12/02 05:03:19 by derakoto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,16 +42,12 @@ int	msh_start_up(t_data *data, char **env)
 int	init_data(t_data *data, char **env)
 {
 	data->var = NULL;
-	data->term_backup.keybord_backup = dup(0);
-	if (data->term_backup.keybord_backup == -1)
-		return (1);
-	data->term_backup.term_backup = dup(1);
-	if (data->term_backup.term_backup == -1)
-		return (1);
 	data->var = (char **)malloc(sizeof(char *));
 	if (data->var == NULL)
 		return (1);
 	*data->var = NULL;
+	if (is_env_unset(env, "PATH") == 0)
+		data->var = add_one_env(data->var, "PATH=/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin:/bin:/sbin:.");
 	data->input = 0;
 	data->cmd = 0;
 	data->token = 0;

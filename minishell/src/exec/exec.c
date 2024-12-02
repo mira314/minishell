@@ -6,7 +6,7 @@
 /*   By: derakoto <derakoto@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 05:30:50 by derakoto          #+#    #+#             */
-/*   Updated: 2024/11/25 17:59:59 by derakoto         ###   ########.fr       */
+/*   Updated: 2024/12/02 05:01:54 by derakoto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,9 @@ int	exec_one_cmd(t_data	*data, t_cmd *cmd)
 		return (0);
 	if (handles_bultin(data, cmd) == SUCCESS)
 		return (data->exit_value);
-	path = is_in_path_env(cmd->args[cmd->offset], data->env);
+	path = is_in_path_env(cmd->args[cmd->offset], data->var);
+	if (path == NULL)
+		path = is_in_path_env(cmd->args[cmd->offset], data->env);
 	if (path != NULL)
 		exit_status = execute_tools(data, cmd, path);
 	else if (is_path(cmd->args[cmd->offset]) == 0)

@@ -165,3 +165,30 @@ void test(t_token *test)
     }
 
 }
+
+int	init_data(t_data *data, char **env)
+{
+	data->var = NULL;
+	data->term_backup.keybord_backup = dup(0);
+	if (data->term_backup.keybord_backup == -1)
+		return (1);
+	data->term_backup.term_backup = dup(1);
+	if (data->term_backup.term_backup == -1)
+		return (1);
+	data->var = (char **)malloc(sizeof(char *));
+	if (data->var == NULL)
+		return (1);
+	*data->var = NULL;
+	data->input = 0;
+	data->cmd = 0;
+	data->token = 0;
+	data->exit_value = 1;
+	data->env = dup_env(env);
+	if (data->env == NULL)
+	{
+		free(data->var);
+		return (1);
+	}
+	g_last_val = 0;
+	return (0);
+}
