@@ -3,7 +3,7 @@ Erreur :
 - when variables are inside quotes
 -variable processing should be done before all other processing
 -minishell should always has PATH variable : if unset, set /usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin:/bin:/sbin:. OK
--when there is no PATH env, print: "no such file or directory" instead of "command not found"
+-when there is no PATH env, print: "no such file or directory" instead of "command not found" OK
 -there is a problem in exec_path : it should display "no such file or directory"
 -there is a problem in cd when HOME=
 -inside a folder which doesn't exist anymore: Error handling in pwd

@@ -6,7 +6,7 @@
 /*   By: derakoto <derakoto@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 05:30:50 by derakoto          #+#    #+#             */
-/*   Updated: 2024/12/02 05:01:54 by derakoto         ###   ########.fr       */
+/*   Updated: 2024/12/02 05:48:20 by derakoto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,10 @@ int	exec_one_cmd(t_data	*data, t_cmd *cmd)
 	else
 	{
 		exit_status = 127;
-		print_error(cmd->args[cmd->offset], ": command not found\n", 127);
+		if (is_env_unset(data->env, "PATH") == 0)
+			print_error(cmd->args[cmd->offset], ": no such file or directory\n", 127);
+		else
+			print_error(cmd->args[cmd->offset], ": command not found\n", 127);
 	}
 	return (exit_status);
 }
