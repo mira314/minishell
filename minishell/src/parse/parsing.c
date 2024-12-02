@@ -64,7 +64,7 @@ t_token	*echo_parsing_arg(t_token *token, t_cmd *cmd)
 	i = 0;
 	argc = 0;
 	argc = arg_count(token);
-	cmd->args = (char **)malloc(sizeof(char *) * (argc + 2));
+	cmd->args = (char **)malloc(sizeof(char *) * (argc + 3));
 	if (!cmd->args)
 		return (0);
 	cmd->args[i++] = ft_strdup(cmd->cmd);

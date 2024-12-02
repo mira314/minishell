@@ -22,7 +22,10 @@ int	arg_count(t_token *token)
 		if (token->type_token == VAR && token->inner_join == 1)
 		{
 			while (token->type_token == VAR && token->inner_join == 1)
-				token = token->next;
+				{
+					token = token->next;
+					count++;
+				}
 		}
 		else
 		{
