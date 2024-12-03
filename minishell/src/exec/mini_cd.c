@@ -6,7 +6,7 @@
 /*   By: derakoto <derakoto@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/12 14:25:50 by derakoto          #+#    #+#             */
-/*   Updated: 2024/12/02 07:22:31 by derakoto         ###   ########.fr       */
+/*   Updated: 2024/12/03 05:30:55 by derakoto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,31 @@ static int	cd_to_home(t_data *data)
 	return (1);
 }
 
+int	chdir_with_cdpath(char **env, char *path)
+{
+	char	*cd_path;
+	char	*path_joinned;
+	int		result;
+
+	path_joinned = path;
+	cd_path = get_env_value(env, "CDPATH");
+	if (cd_path != NULL)
+	{
+		path_joinned = ft_strjoin(cd_path, path);
+		free(cd_path);
+		if (path_joinned == NULL)
+			return (1);
+		printf("%s\n", path_joinned);
+		result = chdir(path_joinned);
+		free(path_joinned);
+		if (result == -1)
+		result = chdir(path);
+	}
+	else
+		result = chdir(path_joinned);
+	return (result);
+}
+
 int	mini_cd(t_data *data, t_cmd *cmd)
 {
 	int		arg_len;
@@ -80,7 +105,7 @@ int	mini_cd(t_data *data, t_cmd *cmd)
 		return (cd_to_home(data));
 	if (arg_len == 2 && ft_strlen(args[1]) == 0)
 		return (0);
-	result = chdir(args[1]);
+	result = chdir_with_cdpath(data->env, args[1]);
 	if (result == -1)
 	{
 		ft_putstr_fd("cd: ", STDERR_FILENO);
