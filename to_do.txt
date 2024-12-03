@@ -7,8 +7,8 @@ Erreur :
 -there is a problem in exec_path : it should display "no such file or directory" OK
 -there is a problem in cd when HOME= OK
 -inside a folder which doesn't exist anymore: Error handling in pwd / facultatif
--CDPATH env : to handle when cd
--there are leaks in execute_path : when there is permission denied
+-CDPATH env : to handle when cd : started but not finished / faculatatif
+-there are leaks in execute_path : when there is permission denied : OK
 -SHLVL
 -when the value of exit extends exit 9223372036854775807: numeric arguments required
 -The return value of : 

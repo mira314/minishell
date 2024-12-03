@@ -6,7 +6,7 @@
 /*   By: derakoto <derakoto@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 04:42:45 by derakoto          #+#    #+#             */
-/*   Updated: 2024/12/02 07:01:07 by derakoto         ###   ########.fr       */
+/*   Updated: 2024/12/03 06:00:01 by derakoto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int	execute_path(t_data *data, t_cmd *cmd, char *path)
 			return (126);
 		}
 	}
-	result = exec_with_fork(path, cmd->args + cmd->offset, data->env);
+	result = exec_with_fork(data, path, cmd->args + cmd->offset, data->env);
 	return (result);
 }
 
@@ -55,7 +55,7 @@ int	execute_tools(t_data *data, t_cmd *cmd, char *path)
 	free(path);
 	if (total_path == NULL)
 		return (1);
-	exit_status = exec_with_fork(total_path, cmd->args
+	exit_status = exec_with_fork(data, total_path, cmd->args
 			+ cmd->offset, data->env);
 	free(total_path);
 	return (exit_status);

@@ -6,7 +6,7 @@
 /*   By: derakoto <derakoto@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 05:51:35 by derakoto          #+#    #+#             */
-/*   Updated: 2024/12/02 04:19:53 by derakoto         ###   ########.fr       */
+/*   Updated: 2024/12/03 06:01:44 by derakoto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,8 +73,8 @@ int		pipe_loop(t_data *data);
 void	close_unused_pipe(int **pipe_fds, int size, int current_index);
 int		fork_fun(int *input, int *output, t_data *data, t_cmd *cmd);
 int		exec_with_redir(t_data *data, t_cmd *cmd);
-int		exec_with_fork(char *path, char **args, char **envs);
-void	exit_error_code(void);
+int		exec_with_fork(t_data *data, char *path, char **args, char **envs);
+int		get_error_code(void);
 int		get_exitstatus_code(int status);
 int		execute_tools(t_data *data, t_cmd *cmd, char *path);
 void	close_unused_pipe(int **pipe_fds, int size, int current_index);

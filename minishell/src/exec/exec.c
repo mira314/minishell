@@ -6,13 +6,13 @@
 /*   By: derakoto <derakoto@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 05:30:50 by derakoto          #+#    #+#             */
-/*   Updated: 2024/12/03 05:47:35 by derakoto         ###   ########.fr       */
+/*   Updated: 2024/12/03 06:18:38 by derakoto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exec.h"
 
-int	exec_with_fork(char *path, char **args, char **envs)
+int	exec_with_fork(t_data *data, char *path, char **args, char **envs)
 {
 	int	pid;
 	int	status;
@@ -30,7 +30,7 @@ int	exec_with_fork(char *path, char **args, char **envs)
 		signal(SIGINT, SIG_DFL);
 		if (execve(path, args, envs) == -1)
 			perror(path);
-		exit_error_code();
+		free_and_exit(data, get_error_code());
 	}
 	else
 	{
@@ -73,9 +73,9 @@ int	exec_one_cmd(t_data	*data, t_cmd *cmd)
 	{
 		exit_status = 127;
 		if (is_env_unset(data->env, "PATH") == 0)
-			print_error(cmd->args[cmd->offset], ": no such file or directory\n", 127);
+			print_error(cmd->args[cmd->offset], ": no such file or directory", 127);
 		else
-			print_error(cmd->args[cmd->offset], ": command not found\n", 127);
+			print_error(cmd->args[cmd->offset], ": command not found", 127);
 	}
 	return (exit_status);
 }
