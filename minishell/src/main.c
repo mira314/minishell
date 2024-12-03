@@ -6,7 +6,7 @@
 /*   By: derakoto <derakoto@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/24 10:56:40 by vrandria          #+#    #+#             */
-/*   Updated: 2024/11/27 05:27:54 by derakoto         ###   ########.fr       */
+/*   Updated: 2024/12/03 14:35:49 by derakoto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,11 @@ void	process_input(t_data *data)
 		data->exit_value = parse_data_input(data);
 		lst_clear_all_token(data->token);
 		if (data->exit_value == 0)
+		{
 			exec(data);
+			// for(int i = 0; data->cmd->args[i] != NULL; i++)
+			// 	printf("%s\n", data->cmd->args[i]);
+		}
 		else
 			clear_all_doc(data->cmd);
 	}
