@@ -27,12 +27,15 @@ void	process_input(t_data *data)
 	{
 		add_history(data->input);
 		signal(SIGINT, SIG_IGN);
-		data->exit_value = parse_data_input(data);
-		lst_clear_all_token(data->token);
-		if (data->exit_value == 0)
-			exec(data);
-		else
+		if (expand_simple_var(data))
+		{
+			data->exit_value = parse_data_input(data);
+			lst_clear_all_token(data->token);
+			if (data->exit_value == 0)
+				exec(data);
+			else
 			clear_all_doc(data->cmd);
+		}
 	}
 }
 
