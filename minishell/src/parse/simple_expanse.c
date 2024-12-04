@@ -1,7 +1,7 @@
 
 #include "parse.h"
 
-char *add_quote_handel(char *str, char *tmp, int flag)
+char *add_quote_handel(char *str, char *tmp)
 {
 	int i;
 	int j;
@@ -15,17 +15,12 @@ char *add_quote_handel(char *str, char *tmp, int flag)
 			tmp[j] = 39;
 			tmp[j + 1] = str[i];
 			j++;
-			flag = 1;
+            tmp[j + 1] = 39;
+            j++;
 		}
 		else
 		{
 			tmp[j] = str[i];
-			if (ft_isalpha(str[i + 1]) == 0 && flag == 1)
-				{
-					tmp[j+1] = 39;
-					j++;
-					flag = 0;
-				}
 		}
 		j++;
 		i++;
@@ -50,7 +45,7 @@ char *add_quote(char *str)
 	tmp = malloc(sizeof(char) * (ft_strlen(str) + (var * 2) + 1) );
 	if (!tmp)
 		return (0);
-	tmp = add_quote_handel(str, tmp, 0);
+	tmp = add_quote_handel(str, tmp);
 	free(str);
 	return (tmp);
 }
