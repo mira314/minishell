@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vrandria <vrandria@student.42antananari    +#+  +:+       +#+        */
+/*   By: derakoto <derakoto@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/25 10:30:04 by vrandria          #+#    #+#             */
-/*   Updated: 2024/11/29 10:36:01 by vrandria         ###   ########.fr       */
+/*   Updated: 2024/12/05 19:43:56 by derakoto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,5 +128,17 @@ char		*var_convert_her(char *str, char *var);
 char		*var_str_heredoc(t_data *data, char *str, int i);
 char		*trim_delim_heredoc(char *del, t_cmd *cmd);
 t_token		*decide_next_token(t_token *token);
+int			is_quote(char c);
+int			compute_new_input_len(t_var **var, char *str);
+char		*build_new_input(t_var **var, char *str, char *new_input);
+char		*var_expand(t_data *data, char *str);
+void		destroy_var(t_var *var);
+t_var		*build_var(t_data *data, char *str, int name_len, int *i);
+t_var		*new_var(t_data *data, char *str, int *i);
+t_var		**add_var(t_var **var, t_var *var_to_add);
+t_var		**identify_var(t_data *data, char *str);
+void		handle_quote(char *str, int *flag, int *i, int quote);
+void		handle_less_sign(char *str, int *i);
+void		take_all_vars(t_data *data, char *str, t_var ***var);
 
 #endif

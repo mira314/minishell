@@ -6,7 +6,7 @@
 /*   By: derakoto <derakoto@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/24 10:56:40 by vrandria          #+#    #+#             */
-/*   Updated: 2024/12/03 14:35:49 by derakoto         ###   ########.fr       */
+/*   Updated: 2024/12/05 17:47:33 by derakoto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,16 +25,11 @@ void	process_input(t_data *data)
 {
 	if (check_input(data))
 	{
-		add_history(data->input);
 		signal(SIGINT, SIG_IGN);
 		data->exit_value = parse_data_input(data);
 		lst_clear_all_token(data->token);
 		if (data->exit_value == 0)
-		{
 			exec(data);
-			// for(int i = 0; data->cmd->args[i] != NULL; i++)
-			// 	printf("%s\n", data->cmd->args[i]);
-		}
 		else
 			clear_all_doc(data->cmd);
 	}
@@ -52,11 +47,16 @@ int	main(int argc, char *argv[], char **env)
 	{
 		signal(SIGINT, sig_int_handler);
 		data.input = readline("msh$");
-		check_g_value(&data);
 		if (data.input == NULL)
 			mini_exit(&data, NULL);
-		process_input(&data);
-		clean_tmp(&data);
+		add_history(data.input);
+		check_g_value(&data);
+		data.input = var_expand(&data, data.input);
+		if (data.input != NULL)
+		{
+			process_input(&data);
+			clean_tmp(&data);
+		}
 	}
 	return (0);
 }
