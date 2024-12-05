@@ -3,16 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   struc.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vrandria <vrandria@student.42antananari    +#+  +:+       +#+        */
+/*   By: derakoto <derakoto@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 08:13:10 by vrandria          #+#    #+#             */
-/*   Updated: 2024/11/26 09:39:23 by vrandria         ###   ########.fr       */
+/*   Updated: 2024/12/05 17:37:47 by derakoto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STRUC_H
 # define STRUC_H
 # include "minishell.h"
+
+typedef	struct s_var
+{
+	char	*value;
+	char	*name;
+	int		name_len;
+	int		index;
+	int		value_len;
+}	t_var;
 
 typedef struct s_input
 {

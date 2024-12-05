@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   var_processing.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vrandria <vrandria@student.42antananari    +#+  +:+       +#+        */
+/*   By: derakoto <derakoto@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/25 08:54:14 by vrandria          #+#    #+#             */
-/*   Updated: 2024/11/29 10:59:31 by vrandria         ###   ########.fr       */
+/*   Updated: 2024/12/04 05:14:43 by derakoto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

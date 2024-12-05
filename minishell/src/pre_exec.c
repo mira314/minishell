@@ -6,7 +6,7 @@
 /*   By: derakoto <derakoto@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 18:19:51 by derakoto          #+#    #+#             */
-/*   Updated: 2024/12/01 12:39:04 by derakoto         ###   ########.fr       */
+/*   Updated: 2024/12/05 19:49:58 by derakoto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ int	parse_data_input(t_data *data)
 	}
 	if (exit == 0)
 	{
-		var_process(data, data->token, 0);
 		quote_process(data);
 		if (fill_cmd(data, data->token) == -1)
 			exit = 130;
