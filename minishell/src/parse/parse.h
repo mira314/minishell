@@ -6,7 +6,7 @@
 /*   By: derakoto <derakoto@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/25 10:30:04 by vrandria          #+#    #+#             */
-/*   Updated: 2024/12/05 19:49:15 by derakoto         ###   ########.fr       */
+/*   Updated: 2024/12/06 07:04:15 by derakoto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,7 +138,7 @@ char		*build_new_input(t_var **var, char *str, char *new_input);
 char		*var_expand(t_data *data, char *str);
 void		destroy_var(t_var *var);
 t_var		*build_var(t_data *data, char *str, int name_len, int *i);
-t_var		*new_var(t_data *data, char *str, int *i);
+t_var		*new_var(t_data *data, char *str, int *i, int flag);
 t_var		**add_var(t_var **var, t_var *var_to_add);
 t_var		**identify_var(t_data *data, char *str);
 void		handle_quote(char *str, int *flag, int *i, int quote);

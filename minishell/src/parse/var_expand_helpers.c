@@ -6,7 +6,7 @@
 /*   By: derakoto <derakoto@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 17:46:11 by derakoto          #+#    #+#             */
-/*   Updated: 2024/12/05 19:44:24 by derakoto         ###   ########.fr       */
+/*   Updated: 2024/12/06 07:07:56 by derakoto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ t_var	*build_var(t_data *data, char *str, int name_len, int *i)
 	return (result);
 }
 
-t_var	*new_var(t_data *data, char *str, int *i)
+t_var	*new_var(t_data *data, char *str, int *i, int flag)
 {
 	int		name_len;
 	int		j;
@@ -71,7 +71,7 @@ t_var	*new_var(t_data *data, char *str, int *i)
 			j = j + 1;
 		}
 	}
-	else if (str[j] == '\0' || str[j] == ' ')
+	else if (str[j] == '\0' || str[j] == ' ' || str[j] == '+' || (is_quote(str[j]) == flag) || (flag != EMPTY && is_quote(str[j])))
 		return (NULL);
 	result = build_var(data, str, name_len, i);
 	*i = *i + j;
@@ -121,7 +121,7 @@ void	take_all_vars(t_data *data, char *str, t_var ***var)
 		else if (str[i] == '$')
 		{
 			i++;
-			var_tmp = new_var(data, str + i, &i);
+			var_tmp = new_var(data, str + i, &i, flag);
 			if (var_tmp)
 				*var = add_var(*var, var_tmp);
 		}
