@@ -12,19 +12,15 @@ Erreur :
 -SHLVL
 -when the value of exit extends exit 9223372036854775807: numeric arguments required
 -The return value of : 
-  *ls | exit is not true;
-  *cat Makefile | grep pr | head -n 5 | cd file_not_exist
+  *ls | exit is not true; OK
+  *cat Makefile | grep pr | head -n 5 | cd file_not_exist OK
 
--There shouldn't be new line after command not found
+-There shouldn't be new line after command not found OK
 
--echo hola > a >>b echo que tal : SEG FAULT
+-echo hola > a >>b echo que tal : SEG FAULT OK
 
 -redirection to "Docs/bonjour"
 
--comportement redirection successives
-
--output redirection sould be done before input
-
--The input ouput structure is wrong
+-output redirection sould be done before input ; comportement redirection successives; The input ouput structure is wrong
 
 -name of file put in variable : ambiguos redirec teset 706

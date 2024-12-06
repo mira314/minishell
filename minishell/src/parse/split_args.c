@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   split_args.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vrandria <vrandria@student.42antananari    +#+  +:+       +#+        */
+/*   By: derakoto <derakoto@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 08:42:40 by vrandria          #+#    #+#             */
-/*   Updated: 2024/11/26 09:28:45 by vrandria         ###   ########.fr       */
+/*   Updated: 2024/12/05 21:35:44 by derakoto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ t_token	*ft_split_echo(t_token *token, t_cmd *cmd)
 	result = split_expansion(len_arg, token, cmd, result);
 	free(cmd->args);
 	cmd->args = result;
-	while (token->type_token || VAR || token->type_token == WORD)
+	while (token->type_token == VAR || token->type_token == WORD)
 		token = token->next;
 	return (token);
 }

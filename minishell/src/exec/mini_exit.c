@@ -6,7 +6,7 @@
 /*   By: derakoto <derakoto@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/20 05:19:02 by derakoto          #+#    #+#             */
-/*   Updated: 2024/12/03 06:14:26 by derakoto         ###   ########.fr       */
+/*   Updated: 2024/12/05 22:17:54 by derakoto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,10 +40,14 @@ void	mini_exit(t_data *data, t_cmd *cmd)
 				free_and_exit(data, 2);
 			}
 			else if (arg_len == 2)
+			{
+				printf("Exit status : %d\n", ft_atoi(args[1]));
 				free_and_exit(data, ft_atoi(args[1]));
+			}
 			ft_putstr_fd("exit: too many arguments\n", 2);
 			free_and_exit(data, 1);
 		}
 	}
+	printf("HERE\n");
 	free_and_exit(data, 0);
 }

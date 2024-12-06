@@ -6,7 +6,7 @@
 /*   By: derakoto <derakoto@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/12 14:25:50 by derakoto          #+#    #+#             */
-/*   Updated: 2024/12/03 05:30:55 by derakoto         ###   ########.fr       */
+/*   Updated: 2024/12/06 06:37:56 by derakoto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ int	chdir_with_cdpath(char **env, char *path)
 		result = chdir(path_joinned);
 		free(path_joinned);
 		if (result == -1)
-		result = chdir(path);
+			result = chdir(path);
 	}
 	else
 		result = chdir(path_joinned);
