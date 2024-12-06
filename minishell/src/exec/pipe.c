@@ -6,7 +6,7 @@
 /*   By: derakoto <derakoto@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 06:06:40 by derakoto          #+#    #+#             */
-/*   Updated: 2024/12/06 08:42:45 by derakoto         ###   ########.fr       */
+/*   Updated: 2024/12/06 11:49:27 by derakoto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,8 +66,7 @@ int	fork_and_execute(t_data *data, int **pipes, t_cmd *cmd, int cmd_count)
 		{
 			free(pids);
 			close_unused_pipe(pipes, cmd_count + 1, i);
-			exit_code = fork_fun(pipes[i - 1], pipes[i], data, cmd);
-			clean_pipes(pipes, cmd_count + 1);
+			exit_code = fork_fun(pipes, i, data, cmd);
 			free_and_exit(data, exit_code);
 		}
 		cmd = cmd->next;
@@ -77,10 +76,14 @@ int	fork_and_execute(t_data *data, int **pipes, t_cmd *cmd, int cmd_count)
 	return (wait_and_return_exit_status(pids, cmd_count));
 }
 
-int	fork_fun(int *input, int *output, t_data *data, t_cmd *cmd)
+int	fork_fun(int **pipes, int i, t_data *data, t_cmd *cmd)
 {
 	int	result;
+	int	*input;
+	int	*output;
 
+	input = pipes[i - 1];
+	output = pipes[i];
 	if (input != NULL)
 	{
 		close(input[1]);
@@ -93,6 +96,9 @@ int	fork_fun(int *input, int *output, t_data *data, t_cmd *cmd)
 		dup2(output[1], 1);
 		close(output[1]);
 	}
+	free(input);
+	free(output);
+	free(pipes);
 	result = exec_with_redir(data, cmd);
 	return (result);
 }

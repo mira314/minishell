@@ -6,7 +6,7 @@
 /*   By: derakoto <derakoto@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 06:09:38 by derakoto          #+#    #+#             */
-/*   Updated: 2024/12/06 08:22:58 by derakoto         ###   ########.fr       */
+/*   Updated: 2024/12/06 11:29:23 by derakoto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,10 @@ void	close_unused_pipe(int **pipe_fds, int size, int current_index)
 	while (i < size - 1)
 	{
 		if (i != current_index && i != current_index - 1)
+		{
 			close_one_pipe_fd(pipe_fds[i]);
+			free(pipe_fds[i]);
+		}
 		i++;
 	}
 }

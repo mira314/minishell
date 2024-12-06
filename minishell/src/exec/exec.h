@@ -6,7 +6,7 @@
 /*   By: derakoto <derakoto@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 05:51:35 by derakoto          #+#    #+#             */
-/*   Updated: 2024/12/06 06:28:28 by derakoto         ###   ########.fr       */
+/*   Updated: 2024/12/06 11:48:14 by derakoto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ int		is_path(char *str);
 int		execute_path(t_data *data, t_cmd *cmd, char *path);
 int		pipe_loop(t_data *data);
 void	close_unused_pipe(int **pipe_fds, int size, int current_index);
-int		fork_fun(int *input, int *output, t_data *data, t_cmd *cmd);
+int		fork_fun(int **pipes, int i, t_data *data, t_cmd *cmd);
 int		exec_with_redir(t_data *data, t_cmd *cmd);
 int		exec_with_fork(t_data *data, char *path, char **args, char **envs);
 int		get_error_code(void);
