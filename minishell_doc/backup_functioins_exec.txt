@@ -182,7 +182,7 @@ int	init_data(t_data *data, char **env)
 	data->input = 0;
 	data->cmd = 0;
 	data->token = 0;
-	data->exit_value = 1;
+	data->exit_value = 0;
 	data->env = dup_env(env);
 	if (data->env == NULL)
 	{

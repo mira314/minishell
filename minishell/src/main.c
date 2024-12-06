@@ -6,7 +6,7 @@
 /*   By: derakoto <derakoto@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/24 10:56:40 by vrandria          #+#    #+#             */
-/*   Updated: 2024/12/05 19:51:13 by derakoto         ###   ########.fr       */
+/*   Updated: 2024/12/06 14:52:18 by derakoto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	process_input(t_data *data)
 		if (data->exit_value == 0)
 			exec(data);
 		else
-		clear_all_doc(data->cmd);
+			clear_all_doc(data->cmd);
 	}
 }
 

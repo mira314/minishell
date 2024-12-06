@@ -6,7 +6,7 @@
 /*   By: derakoto <derakoto@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/12 14:25:50 by derakoto          #+#    #+#             */
-/*   Updated: 2024/12/06 06:37:56 by derakoto         ###   ########.fr       */
+/*   Updated: 2024/12/06 14:48:16 by derakoto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,8 @@ static int	cd_to_home(t_data *data)
 	pwd = get_env_value(data->env, "HOME");
 	if (pwd != 0)
 	{
+		if (ft_strlen(pwd) == 0)
+			return (0);
 		result = chdir(pwd);
 		if (result == -1)
 		{
