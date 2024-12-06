@@ -6,7 +6,7 @@
 /*   By: derakoto <derakoto@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/20 08:55:38 by derakoto          #+#    #+#             */
-/*   Updated: 2024/12/06 13:20:57 by derakoto         ###   ########.fr       */
+/*   Updated: 2024/12/06 15:53:07 by derakoto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,62 @@ int	msh_start_up(t_data *data, char **env)
 	return (0);
 }
 
+int	compute_shell_value(char *str)
+{
+	int	i;
+	int	sign;
+
+	sign = 1;
+	if (str == NULL)
+		return (0);
+	i = 0;
+	if (str[0] == '+' || str[0] == '-')
+	{
+		i = 1;
+		if (str[1] == '\0')
+			return (0);
+	}
+	if (str[0] == '-')
+		sign = -1;
+	while (str[i] != '\0')
+	{
+		if (!isdigit(str[i]))
+			return (0);
+		i++;
+	}
+	if (sign == -1)
+		return (-1);
+	return (ft_atoi(str));
+}
+
+char	**update_shell_level(char **env)
+{
+	char	*value;
+	char	*tmp;
+	int		int_value;
+
+	if (env == NULL)
+		return (NULL);
+	value = get_env_value(env, "SHLVL");
+	if (value == NULL)
+		int_value = 1;
+	else
+	{
+		int_value = compute_shell_value(value) + 1;
+		free(value);
+	}
+	value = ft_itoa(int_value);
+	if (value == NULL)
+		return (env);
+	tmp = ft_strjoin("SHLVL=", value);
+	free(value);
+	if (tmp == NULL)
+		return (env);
+	env = add_one_env(env, tmp);
+	free(tmp);
+	return (env);
+}
+
 int	init_data(t_data *data, char **env)
 {
 	data->var = NULL;
@@ -60,6 +116,7 @@ int	init_data(t_data *data, char **env)
 		free(data->var);
 		return (1);
 	}
+	data->env = update_shell_level(data->env);
 	g_last_val = 0;
 	return (0);
 }
