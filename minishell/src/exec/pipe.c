@@ -6,7 +6,7 @@
 /*   By: derakoto <derakoto@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 06:06:40 by derakoto          #+#    #+#             */
-/*   Updated: 2024/12/06 06:53:17 by derakoto         ###   ########.fr       */
+/*   Updated: 2024/12/06 08:42:45 by derakoto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,11 @@ int	pipe_loop(t_data *data)
 
 	current_cmd = data->cmd;
 	cmd_count = count_cmd(current_cmd);
-	pipe_fds = create_pipes(cmd_count - 1);
-	if (init_pipes(pipe_fds, cmd_count - 1) == -1)
+	pipe_fds = create_pipes(cmd_count + 1);
+	if (init_pipes(pipe_fds, cmd_count + 1) == -1)
 		return (1);
 	status = fork_and_execute(data, pipe_fds, current_cmd, cmd_count);
-	clean_pipes(pipe_fds, cmd_count - 1);
+	clean_pipes(pipe_fds, cmd_count + 1);
 	return (status);
 }
 
@@ -56,29 +56,24 @@ int	fork_and_execute(t_data *data, int **pipes, t_cmd *cmd, int cmd_count)
 	int	i;
 
 	pids = (int *)malloc(sizeof(int) * cmd_count);
-	i = 0;
-	while (i < cmd_count)
+	i = 1;
+	while (i < cmd_count + 1)
 	{
-		pids[i] = fork();
-		if (pids[i] == -1)
+		pids[i - 1] = fork();
+		if (pids[i - 1] == -1)
 			return (1);
-		if (pids[i] == 0)
+		if (pids[i - 1] == 0)
 		{
 			free(pids);
-			close_unused_pipe(pipes, cmd_count - 1, i);
-			if (i == 0)
-				exit_code = (fork_fun(NULL, pipes[i], data, cmd));
-			else if (i == cmd_count -1)
-				exit_code = (fork_fun(pipes[i - 1], NULL, data, cmd));
-			else
-				exit_code = fork_fun(pipes[i - 1], pipes[i], data, cmd);
-			clean_pipes(pipes, cmd_count - 1);
+			close_unused_pipe(pipes, cmd_count + 1, i);
+			exit_code = fork_fun(pipes[i - 1], pipes[i], data, cmd);
+			clean_pipes(pipes, cmd_count + 1);
 			free_and_exit(data, exit_code);
 		}
 		cmd = cmd->next;
 		i++;
 	}
-	close_all_pipes(pipes, cmd_count - 1);
+	close_all_pipes(pipes, cmd_count + 1);
 	return (wait_and_return_exit_status(pids, cmd_count));
 }
 

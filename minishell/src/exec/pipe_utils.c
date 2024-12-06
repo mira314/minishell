@@ -6,7 +6,7 @@
 /*   By: derakoto <derakoto@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 04:38:51 by derakoto          #+#    #+#             */
-/*   Updated: 2024/12/06 06:53:41 by derakoto         ###   ########.fr       */
+/*   Updated: 2024/12/06 08:42:31 by derakoto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,9 @@ int	**create_pipes(int pipe_count)
 	result = (int **)malloc(sizeof(int *) * pipe_count);
 	if (result == NULL)
 		return (NULL);
-	i = 0;
-	while (i < pipe_count)
+	result[0] = NULL;
+	i = 1;
+	while (i < pipe_count - 1)
 	{
 		result[i] = (int *)malloc(sizeof(int) * 2);
 		if (result[i] == NULL)
@@ -44,6 +45,7 @@ int	**create_pipes(int pipe_count)
 		}
 		i++;
 	}
+	result[i] = NULL;
 	return (result);
 }
 
@@ -53,12 +55,12 @@ int	init_pipes(int **pipe_fds, int size)
 
 	if (pipe_fds == NULL)
 		return (-1);
-	i = 0;
-	while (i < size)
+	i = 1;
+	while (i < size - 1)
 	{
 		if (pipe(pipe_fds[i]) == -1)
 		{
-			close_all_pipes(pipe_fds, i);
+			close_all_pipes(pipe_fds, i + 1);
 			return (-1);
 		}
 		i++;
