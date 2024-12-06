@@ -9,7 +9,7 @@ Erreur :
 -inside a folder which doesn't exist anymore: Error handling in pwd / facultatif
 -CDPATH env : to handle when cd : started but not finished / faculatatif
 -there are leaks in execute_path : when there is permission denied : OK
--SHLVL
+-SHLVL OK
 -when the value of exit extends exit 9223372036854775807: numeric arguments required
 -The return value of : 
   *ls | exit is not true; OK
@@ -19,7 +19,7 @@ Erreur :
 
 -echo hola > a >>b echo que tal : SEG FAULT OK
 
--redirection to "Docs/bonjour"
+-redirection to "Docs/bonjour" OK
 
 -output redirection sould be done before input ; comportement redirection successives; The input ouput structure is wrong
 
