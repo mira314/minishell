@@ -6,7 +6,7 @@
 /*   By: derakoto <derakoto@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 04:32:27 by derakoto          #+#    #+#             */
-/*   Updated: 2024/12/07 20:40:11 by derakoto         ###   ########.fr       */
+/*   Updated: 2024/12/07 20:54:23 by derakoto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,22 @@ int	redir_input(t_input *file)
 	return (0);
 }
 
+int	is_still_another(t_output *file, int mode1, int mode2)
+{
+	int	i;
+
+	if (file == NULL)
+		return (1);
+	i = 0;
+	while (file[i].filename != 0)
+	{
+		if (file[i].mode == mode1 || file[i].mode == mode2)
+			return (0);
+		i++;
+	}
+	return (1);
+}
+
 int	redir_output(t_output *file)
 {
 	int	open_mode;
@@ -46,21 +62,35 @@ int	redir_output(t_output *file)
 	i = 0;
 	while (file[i].filename != 0)
 	{
-		open_mode = O_WRONLY | O_CREAT | O_TRUNC;
-		if (file[i].mode == APPEND)
-			open_mode = O_WRONLY | O_CREAT | O_APPEND;
-		fd = open(file[i].filename, open_mode, 0644);
-		if (fd == -1)
-			return (on_redir_error(file[i].filename));
-		if (file[i + 1].filename != NULL)
-			close(fd);
-		else
+		if (file[i].mode == APPEND || file[i].mode == TRUNC)
 		{
-			if (dup2(fd, 1) == -1)
+			open_mode = O_WRONLY | O_CREAT | O_TRUNC;
+			if (file[i].mode == APPEND)
+				open_mode = O_WRONLY | O_CREAT | O_APPEND;
+			fd = open(file[i].filename, open_mode, 0644);
+			if (fd == -1)
 				return (on_redir_error(file[i].filename));
-			close (fd);
+			if (is_still_another(file + i + 1, APPEND, TRUNC) == 0)
+				close(fd);
+			else
+			{
+				if (dup2(fd, 1) == -1)
+					return (on_redir_error(file[i].filename));
+				close (fd);
+			}
+			i++;
 		}
-		i++;
+		else if (file[i].mode == INPUT || file[i].mode == HEREDOC)
+		{
+			fd = open(file[i].filename, O_RDONLY);
+			if (fd == -1)
+				return (on_redir_error(file[i].filename));
+			if (is_still_another(file + i + 1, INPUT, HEREDOC))
+				dup2(fd, 0);
+			close(fd);
+			i++;
+		}
+		
 	}
 	return (0);
 }
