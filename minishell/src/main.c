@@ -6,7 +6,7 @@
 /*   By: vrandria <vrandria@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/24 10:56:40 by vrandria          #+#    #+#             */
-/*   Updated: 2024/12/07 12:10:12 by vrandria         ###   ########.fr       */
+/*   Updated: 2024/12/07 14:33:58 by vrandria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int	main(int argc, char *argv[], char **env)
 		if (data.input == NULL)
 			mini_exit(&data, NULL);
 		if (check_input(&data) == 1)
-		{		
+		{
 			add_history(data.input);
 			check_g_value(&data);
 			data.input = var_expand(&data, data.input);

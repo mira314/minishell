@@ -6,7 +6,7 @@
 /*   By: derakoto <derakoto@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/25 10:30:04 by vrandria          #+#    #+#             */
-/*   Updated: 2024/12/06 07:04:15 by derakoto         ###   ########.fr       */
+/*   Updated: 2024/12/07 14:28:25 by vrandria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,9 +129,8 @@ char		*var_str_heredoc(t_data *data, char *str, int i);
 char		*trim_delim_heredoc(char *del, t_cmd *cmd);
 t_token		*decide_next_token(t_token *token);
 /***************hedeco_var********************************* */
-char        *append_char_to_str(char *tmp, char c);
-
-int			expand_simple_var(t_data * data);
+char		*append_char_to_str(char *tmp, char c);
+int			expand_simple_var(t_data *data);
 int			is_quote(char c);
 int			compute_new_input_len(t_var **var, char *str);
 char		*build_new_input(t_var **var, char *str, char *new_input);

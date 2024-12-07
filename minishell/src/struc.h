@@ -6,7 +6,7 @@
 /*   By: derakoto <derakoto@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 08:13:10 by vrandria          #+#    #+#             */
-/*   Updated: 2024/12/05 17:37:47 by derakoto         ###   ########.fr       */
+/*   Updated: 2024/12/07 14:35:26 by vrandria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define STRUC_H
 # include "minishell.h"
 
-typedef	struct s_var
+typedef struct s_var
 {
 	char	*value;
 	char	*name;
