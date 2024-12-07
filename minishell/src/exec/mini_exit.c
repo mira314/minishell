@@ -6,7 +6,7 @@
 /*   By: derakoto <derakoto@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/20 05:19:02 by derakoto          #+#    #+#             */
-/*   Updated: 2024/12/07 14:06:36 by derakoto         ###   ########.fr       */
+/*   Updated: 2024/12/07 15:21:33 by derakoto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	mini_exit(t_data *data, t_cmd *cmd)
 	char	**args;
 	int		arg_len;
 
-	printf("exit\n");
+	ft_putstr_fd("exit\n", 2);
 	if (data->input != NULL)
 	{
 		args = cmd->args + cmd->offset;
