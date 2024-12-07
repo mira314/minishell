@@ -6,7 +6,7 @@
 /*   By: derakoto <derakoto@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/20 05:19:02 by derakoto          #+#    #+#             */
-/*   Updated: 2024/12/06 08:51:26 by derakoto         ###   ########.fr       */
+/*   Updated: 2024/12/07 14:06:36 by derakoto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,5 +45,5 @@ void	mini_exit(t_data *data, t_cmd *cmd)
 			free_and_exit(data, 1);
 		}
 	}
-	free_and_exit(data, 0);
+	free_and_exit(data, data->exit_value);
 }

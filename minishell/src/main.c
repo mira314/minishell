@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vrandria <vrandria@student.42antananari    +#+  +:+       +#+        */
+/*   By: derakoto <derakoto@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/24 10:56:40 by vrandria          #+#    #+#             */
-/*   Updated: 2024/12/07 11:41:23 by vrandria         ###   ########.fr       */
+/*   Updated: 2024/12/07 13:58:28 by derakoto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,15 +23,19 @@ void	clean_tmp(t_data *data)
 
 void	process_input(t_data *data)
 {
+	int	flag;
 	if (check_input(data))
 	{
 		signal(SIGINT, SIG_IGN);
-		data->exit_value = parse_data_input(data);
+		flag = parse_data_input(data);
 		lst_clear_all_token(data->token);
-		if (data->exit_value == 0)
+		if (flag == 0)
 			exec(data);
 		else
+		{
+			data->exit_value = flag;
 			clear_all_doc(data->cmd);
+		}
 	}
 }
 
