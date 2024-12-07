@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   var_expand_helpers.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: derakoto <derakoto@student.42antananari    +#+  +:+       +#+        */
+/*   By: vrandria <vrandria@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 17:46:11 by derakoto          #+#    #+#             */
-/*   Updated: 2024/12/06 07:07:56 by derakoto         ###   ########.fr       */
+/*   Updated: 2024/12/07 14:33:11 by vrandria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,8 @@ t_var	*new_var(t_data *data, char *str, int *i, int flag)
 			j = j + 1;
 		}
 	}
-	else if (str[j] == '\0' || str[j] == ' ' || str[j] == '+' || (is_quote(str[j]) == flag) || (flag != EMPTY && is_quote(str[j])))
+	else if (str[j] == '\0' || str[j] == ' ' || str[j] == '+'
+		|| (is_quote(str[j]) == flag) || (flag != EMPTY && is_quote(str[j])))
 		return (NULL);
 	result = build_var(data, str, name_len, i);
 	*i = *i + j;

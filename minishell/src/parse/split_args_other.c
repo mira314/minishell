@@ -6,7 +6,7 @@
 /*   By: vrandria <vrandria@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 07:28:22 by vrandria          #+#    #+#             */
-/*   Updated: 2024/11/26 10:20:11 by vrandria         ###   ########.fr       */
+/*   Updated: 2024/12/07 14:25:30 by vrandria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,10 @@ int	arg_count(t_token *token)
 		if (token->type_token == VAR && token->inner_join == 1)
 		{
 			while (token->type_token == VAR && token->inner_join == 1)
-				{
-					token = token->next;
-					count++;
-				}
+			{
+				token = token->next;
+				count++;
+			}
 		}
 		else
 		{

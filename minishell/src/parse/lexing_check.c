@@ -6,7 +6,7 @@
 /*   By: vrandria <vrandria@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/13 13:30:17 by vrandria          #+#    #+#             */
-/*   Updated: 2024/11/26 10:16:24 by vrandria         ###   ########.fr       */
+/*   Updated: 2024/12/07 14:11:51 by vrandria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,13 +68,14 @@ int	check_double_helpers(t_token *token)
 	type = 0;
 	if (token->prev)
 	{
-		type = token->prev->type_token;
 		if (token->type_token == PIPE && type == PIPE)
 			return (1);
-		if (token->type_token > PIPE && type >= PIPE)
-			return (1);
+		if (token->type_token > PIPE && type == PIPE)
+			return (0);
+		if (token->type_token > PIPE && type > PIPE)
+			return (2);
 		if (token->type_token == END && type > PIPE)
-			return (1);
+			return (3);
 	}
 	return (0);
 }
@@ -87,7 +88,7 @@ t_token	*check_double(t_token *token)
 	tmp = token;
 	while (tmp)
 	{
-		if (check_double_helpers(tmp) == 1)
+		if (check_double_helpers(tmp) != 0)
 		{
 			msg = ft_strdup("syntax error near unexpected token \'newline\'");
 			token->exit_value = print_error(msg, NULL, 2);

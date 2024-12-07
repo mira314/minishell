@@ -6,7 +6,7 @@
 /*   By: vrandria <vrandria@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 08:42:40 by vrandria          #+#    #+#             */
-/*   Updated: 2024/12/07 11:55:14 by vrandria         ###   ########.fr       */
+/*   Updated: 2024/12/07 14:27:18 by vrandria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,10 +79,10 @@ char	**split_expansion(int len, t_token *token, t_cmd *cmd, char **tab)
 	i = 0;
 	while (len > i)
 	{
-    	if (cmd->args[i])
-        	tab[i] = cmd->args[i];
+		if (cmd->args[i])
+			tab[i] = cmd->args[i];
 		else
-    		tab[i] = 0;
+			tab[i] = 0;
 		i++;
 	}
 	while (token->type_token == VAR || token->type_token == WORD)
