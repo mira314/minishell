@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mini_commande_parse.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: derakoto <derakoto@student.42antananari    +#+  +:+       +#+        */
+/*   By: vrandria <vrandria@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/25 10:13:53 by vrandria          #+#    #+#             */
-/*   Updated: 2024/12/07 14:08:07 by derakoto         ###   ########.fr       */
+/*   Updated: 2024/12/07 14:43:32 by vrandria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,9 +51,13 @@ int	parse_commande(t_data *data)
 			cmd = cmd->next;
 		else
 		{
-			cmd->args = (char **)malloc(sizeof(char *) * 2);
-			cmd->args[0] = ft_strdup(cmd->cmd);
-			cmd->args[1] = 0;
+			if (cmd->cmd)
+			{
+				cmd->args = (char **)malloc(sizeof(char *) * 2);
+				cmd->args[0] = ft_strdup(cmd->cmd);
+				cmd->args[1] = 0;
+			}
+			cmd = cmd->next;
 		}
 	}
 	return (0);
