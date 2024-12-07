@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   quote_process.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: derakoto <derakoto@student.42antananari    +#+  +:+       +#+        */
+/*   By: vrandria <vrandria@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 07:27:36 by vrandria          #+#    #+#             */
-/*   Updated: 2024/11/28 05:41:41 by derakoto         ###   ########.fr       */
+/*   Updated: 2024/12/07 10:48:20 by vrandria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ t_token	*trim_quote(t_token *token, int j)
 	int		quote;
 
 	len = count_str_betweenquote(token->str, 0, 0);
-	new = malloc(sizeof(char) * len + 1);
+	new = malloc(sizeof(char) * len + 2);
 	if (!new)
 		return (0);
 	i = -1;
