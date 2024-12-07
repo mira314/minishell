@@ -6,7 +6,7 @@
 /*   By: vrandria <vrandria@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 05:44:51 by derakoto          #+#    #+#             */
-/*   Updated: 2024/12/07 11:14:59 by vrandria         ###   ########.fr       */
+/*   Updated: 2024/12/07 11:42:32 by vrandria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ int	ft_echo(char **args)
 	while (args[i])
 	{
 		printf("%s", args[i]);
-		if (args[i + 1] != 0)
+		if (args[i] && args[i + 1] != 0)
 			printf(" ");
 		i++;
 	}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   initialization.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: derakoto <derakoto@student.42antananari    +#+  +:+       +#+        */
+/*   By: vrandria <vrandria@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/03 07:31:00 by vrandria          #+#    #+#             */
-/*   Updated: 2024/11/27 16:17:47 by derakoto         ###   ########.fr       */
+/*   Updated: 2024/12/07 11:39:50 by vrandria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,6 @@ int	init_token(t_data *data, char *input, int flag, int *exit)
 
 t_cmd	*init_cmd(t_cmd *cmd)
 {
-	cmd->output = 0;
 	cmd->cmd = 0;
 	cmd->args = 0;
 	cmd->output = 0;
