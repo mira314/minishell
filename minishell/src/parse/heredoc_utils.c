@@ -6,7 +6,7 @@
 /*   By: derakoto <derakoto@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 15:44:45 by derakoto          #+#    #+#             */
-/*   Updated: 2024/11/27 15:47:26 by derakoto         ###   ########.fr       */
+/*   Updated: 2024/12/07 21:17:05 by derakoto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,18 +47,18 @@ t_token	*decide_next_token(t_token *token)
 	return (token);
 }
 
-void	clear_doc(t_input *inputs)
+void	clear_doc(t_output *outputs)
 {
 	int	i;
 
-	if (inputs == 0)
+	if (outputs == 0)
 		return ;
 	i = 0;
-	while (inputs[i].filename != NULL)
+	while (outputs[i].filename != NULL)
 	{
-		if (inputs[i].mode == HEREDOC)
+		if (outputs[i].mode == HEREDOC)
 		{
-			if (unlink(inputs[i].filename) == -1)
+			if (unlink(outputs[i].filename) == -1)
 				perror("Heredoc deletetion");
 		}
 		i++;
@@ -72,7 +72,7 @@ void	clear_all_doc(t_cmd *top_cmd)
 	cmd = top_cmd;
 	while (cmd)
 	{
-		clear_doc(cmd->io->inputs);
+		clear_doc(cmd->io->outputs);
 		cmd = cmd->next;
 	}
 }

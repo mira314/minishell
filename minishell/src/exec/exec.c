@@ -6,7 +6,7 @@
 /*   By: derakoto <derakoto@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 05:30:50 by derakoto          #+#    #+#             */
-/*   Updated: 2024/12/07 14:59:53 by derakoto         ###   ########.fr       */
+/*   Updated: 2024/12/07 21:18:51 by derakoto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,11 +93,11 @@ int	exec_with_redir(t_data *data, t_cmd *cmd)
 	{
 		dup2(fd_out_backup, 1);
 		dup2(fd_in_backup, 0);
-		clear_doc(cmd->io->inputs);
+		clear_doc(cmd->io->outputs);
 		return (1);
 	}
 	exit_status = exec_one_cmd(data, cmd);
-	clear_doc(cmd->io->inputs);
+	clear_doc(cmd->io->outputs);
 	dup2(fd_out_backup, 1);
 	dup2(fd_in_backup, 0);
 	return (exit_status);

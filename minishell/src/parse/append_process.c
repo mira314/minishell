@@ -6,7 +6,7 @@
 /*   By: derakoto <derakoto@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 15:41:59 by vrandria          #+#    #+#             */
-/*   Updated: 2024/12/07 20:29:14 by derakoto         ###   ########.fr       */
+/*   Updated: 2024/12/07 21:10:39 by derakoto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,10 @@ t_output	*add_output(t_cmd *cmd, char *filename, int mode)
 		new[count].mode = tmp[count].mode;
 		count++;
 	}
-	new[count].filename = ft_strdup(filename);
+	if (mode == HEREDOC || mode == INPUT)
+		new[count].filename = filename;
+	else
+		new[count].filename = ft_strdup(filename);
 	new[count].mode = mode;
 	new[count + 1].filename = NULL;
 	free(tmp);
