@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   split_args.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: derakoto <derakoto@student.42antananari    +#+  +:+       +#+        */
+/*   By: vrandria <vrandria@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 08:42:40 by vrandria          #+#    #+#             */
-/*   Updated: 2024/12/05 21:35:44 by derakoto         ###   ########.fr       */
+/*   Updated: 2024/12/07 11:11:35 by vrandria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ t_token	*ft_split_echo(t_token *token, t_cmd *cmd)
 	len_arg = 0;
 	while (cmd->args[len_arg])
 		len_arg++;
-	result = (char **)malloc(sizeof(char *) * (argc + len_arg) + 1);
+	result = (char **)malloc(sizeof(char *) * (argc + len_arg) + 3);
 	if (!result)
 		return (0);
 	result = split_expansion(len_arg, token, cmd, result);
@@ -90,7 +90,6 @@ char	**split_expansion(int len, t_token *token, t_cmd *cmd, char **tab)
 		i++;
 		token = token->next;
 	}
-	tab[i] = 0;
 	return (tab);
 }
 

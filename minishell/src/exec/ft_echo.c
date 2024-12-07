@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_echo.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: derakoto <derakoto@student.42antananari    +#+  +:+       +#+        */
+/*   By: vrandria <vrandria@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 05:44:51 by derakoto          #+#    #+#             */
-/*   Updated: 2024/11/29 18:07:34 by derakoto         ###   ########.fr       */
+/*   Updated: 2024/12/07 11:14:59 by vrandria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
