@@ -6,7 +6,7 @@
 /*   By: derakoto <derakoto@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 05:30:50 by derakoto          #+#    #+#             */
-/*   Updated: 2024/12/06 08:46:18 by derakoto         ###   ########.fr       */
+/*   Updated: 2024/12/07 14:36:45 by derakoto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,8 @@ int	exec_one_cmd(t_data	*data, t_cmd *cmd)
 	{
 		exit_status = 127;
 		if (is_env_unset(data->env, "PATH") == 0)
-			print_error(cmd->args[cmd->offset], NO_FILE_MSG, 0);
+				exit_status = execute_path(data, cmd, cmd->args[cmd->offset]);
+				//print_error(cmd->args[cmd->offset], NO_FILE_MSG, 0);
 		else
 			print_error(cmd->args[cmd->offset], ": command not found", 0);
 	}

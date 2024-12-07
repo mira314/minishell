@@ -6,7 +6,7 @@
 /*   By: derakoto <derakoto@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 19:38:26 by derakoto          #+#    #+#             */
-/*   Updated: 2024/12/05 19:42:13 by derakoto         ###   ########.fr       */
+/*   Updated: 2024/12/07 14:53:38 by derakoto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,13 @@ void	handle_quote(char *str, int *flag, int *i, int quote)
 	*i = *i + 1;
 	if (*flag == ONE_QUOTE)
 	{
-		while (str[*i] != '\'')
+		while (str[*i] != '\'' && str[*i] != '\0')
 			*i = *i + 1;
-		*flag = EMPTY;
-		*i = *i + 1;
+		if (str[*i] != '\0')
+		{
+			*flag = EMPTY;
+			*i = *i + 1;
+		}
 	}
 }
 
