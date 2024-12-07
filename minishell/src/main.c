@@ -6,7 +6,7 @@
 /*   By: vrandria <vrandria@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/24 10:56:40 by vrandria          #+#    #+#             */
-/*   Updated: 2024/12/07 11:41:23 by vrandria         ###   ########.fr       */
+/*   Updated: 2024/12/07 12:10:12 by vrandria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,13 +49,16 @@ int	main(int argc, char *argv[], char **env)
 		data.input = readline("msh$");
 		if (data.input == NULL)
 			mini_exit(&data, NULL);
-		add_history(data.input);
-		check_g_value(&data);
-		data.input = var_expand(&data, data.input);
-		if (data.input != NULL)
-		{
-			process_input(&data);
-			clean_tmp(&data);
+		if (check_input(&data) == 1)
+		{		
+			add_history(data.input);
+			check_g_value(&data);
+			data.input = var_expand(&data, data.input);
+			if (data.input != NULL)
+			{
+				process_input(&data);
+				clean_tmp(&data);
+			}
 		}
 	}
 	return (0);
