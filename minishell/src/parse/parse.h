@@ -6,7 +6,7 @@
 /*   By: derakoto <derakoto@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/25 10:30:04 by vrandria          #+#    #+#             */
-/*   Updated: 2024/12/07 14:28:25 by vrandria         ###   ########.fr       */
+/*   Updated: 2024/12/07 20:27:27 by derakoto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,7 +116,7 @@ int			switch_flag_token_empty(int *i, t_token *token);
 /***************quote_process_utils.c  **************** */
 int			check_quote_flag(t_token *token, int i);
 int			switch_flag_token(int i, t_token *token);
-t_output	*add_output(t_cmd *cmd, t_token *token, int mode);
+t_output	*add_output(t_cmd *cmd, char *filename, int mode);
 t_input		*add_input(t_cmd *cmd, char *filename, int mode);
 char		*create_file_name(char *path);
 int			prepare_heredoc_file(t_cmd *cmd);

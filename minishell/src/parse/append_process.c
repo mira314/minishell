@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   append_process.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vrandria <vrandria@student.42antananari    +#+  +:+       +#+        */
+/*   By: derakoto <derakoto@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 15:41:59 by vrandria          #+#    #+#             */
-/*   Updated: 2024/11/26 07:26:27 by vrandria         ###   ########.fr       */
+/*   Updated: 2024/12/07 20:29:14 by derakoto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parse.h"
 
-t_output	*add_output(t_cmd *cmd, t_token *token, int mode)
+t_output	*add_output(t_cmd *cmd, char *filename, int mode)
 {
 	int			i;
 	int			count;
@@ -33,7 +33,7 @@ t_output	*add_output(t_cmd *cmd, t_token *token, int mode)
 		new[count].mode = tmp[count].mode;
 		count++;
 	}
-	new[count].filename = ft_strdup(token->str);
+	new[count].filename = ft_strdup(filename);
 	new[count].mode = mode;
 	new[count + 1].filename = NULL;
 	free(tmp);
@@ -46,7 +46,7 @@ t_token	*parsing_append(t_cmd *cmd, t_token *token)
 		return (NULL);
 	while (cmd->next)
 		cmd = cmd->next;
-	cmd->io->outputs = add_output(cmd, token->next, APPEND);
+	cmd->io->outputs = add_output(cmd, token->next->str, APPEND);
 	if (token->next->next)
 	{
 		token = token->next->next;

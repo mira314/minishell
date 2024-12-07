@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc_file_prepa.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vrandria <vrandria@student.42antananari    +#+  +:+       +#+        */
+/*   By: derakoto <derakoto@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 14:50:54 by derakoto          #+#    #+#             */
-/*   Updated: 2024/11/29 09:15:49 by vrandria         ###   ########.fr       */
+/*   Updated: 2024/12/07 20:35:49 by derakoto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
