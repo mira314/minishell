@@ -6,12 +6,11 @@
 /*   By: derakoto <derakoto@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 05:30:50 by derakoto          #+#    #+#             */
-/*   Updated: 2024/12/07 14:36:45 by derakoto         ###   ########.fr       */
+/*   Updated: 2024/12/07 14:59:53 by derakoto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exec.h"
-#define NO_FILE_MSG ": no such file or directory"
 
 int	exec_with_fork(t_data *data, char *path, char **args, char **envs)
 {
@@ -74,8 +73,7 @@ int	exec_one_cmd(t_data	*data, t_cmd *cmd)
 	{
 		exit_status = 127;
 		if (is_env_unset(data->env, "PATH") == 0)
-				exit_status = execute_path(data, cmd, cmd->args[cmd->offset]);
-				//print_error(cmd->args[cmd->offset], NO_FILE_MSG, 0);
+			exit_status = execute_path(data, cmd, cmd->args[cmd->offset]);
 		else
 			print_error(cmd->args[cmd->offset], ": command not found", 0);
 	}
