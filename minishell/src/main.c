@@ -6,7 +6,7 @@
 /*   By: vrandria <vrandria@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/24 10:56:40 by vrandria          #+#    #+#             */
-/*   Updated: 2024/12/07 14:41:09 by vrandria         ###   ########.fr       */
+/*   Updated: 2024/12/07 14:44:17 by vrandria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ void	clean_tmp(t_data *data)
 void	process_input(t_data *data)
 {
 	int	flag;
+
 	if (check_input(data))
 	{
 		signal(SIGINT, SIG_IGN);
