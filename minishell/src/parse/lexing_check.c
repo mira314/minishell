@@ -6,7 +6,7 @@
 /*   By: derakoto <derakoto@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/13 13:30:17 by vrandria          #+#    #+#             */
-/*   Updated: 2024/12/08 13:59:10 by derakoto         ###   ########.fr       */
+/*   Updated: 2024/12/08 21:05:09 by derakoto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,20 +63,17 @@ t_token	*var_check(t_token *token)
 
 int	check_double_helpers(t_token *token)
 {
-	if (token->prev)
+	if (token->type_token == PIPE)
 	{
-		if (token->type_token == PIPE)
-		{
-			if (token->next->type_token == END)
-				return (1);
-		}
-		else if (token->type_token == APPEND || token->type_token == TRUNC
-			|| token->type_token == HEREDOC || token->type_token == INPUT)
-		{
-			if (token->next->type_token != VAR
-				&& token->next->type_token != WORD)
-				return (1);
-		}
+		if (token->next->type_token == END)
+			return (1);
+	}
+	else if (token->type_token == APPEND || token->type_token == TRUNC
+		|| token->type_token == HEREDOC || token->type_token == INPUT)
+	{
+		if (token->next->type_token != VAR
+			&& token->next->type_token != WORD)
+			return (1);
 	}
 	return (0);
 }
