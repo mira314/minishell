@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexing_check.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vrandria <vrandria@student.42antananari    +#+  +:+       +#+        */
+/*   By: derakoto <derakoto@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/13 13:30:17 by vrandria          #+#    #+#             */
-/*   Updated: 2024/12/07 14:11:51 by vrandria         ###   ########.fr       */
+/*   Updated: 2024/12/08 13:59:10 by derakoto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,19 +63,20 @@ t_token	*var_check(t_token *token)
 
 int	check_double_helpers(t_token *token)
 {
-	int	type;
-
-	type = 0;
 	if (token->prev)
 	{
-		if (token->type_token == PIPE && type == PIPE)
-			return (1);
-		if (token->type_token > PIPE && type == PIPE)
-			return (0);
-		if (token->type_token > PIPE && type > PIPE)
-			return (2);
-		if (token->type_token == END && type > PIPE)
-			return (3);
+		if (token->type_token == PIPE)
+		{
+			if (token->next->type_token == END)
+				return (1);
+		}
+		else if (token->type_token == APPEND || token->type_token == TRUNC
+			|| token->type_token == HEREDOC || token->type_token == INPUT)
+		{
+			if (token->next->type_token != VAR
+				&& token->next->type_token != WORD)
+				return (1);
+		}
 	}
 	return (0);
 }
@@ -83,16 +84,19 @@ int	check_double_helpers(t_token *token)
 t_token	*check_double(t_token *token)
 {
 	t_token	*tmp;
-	char	*msg;
 
 	tmp = token;
 	while (tmp)
 	{
 		if (check_double_helpers(tmp) != 0)
 		{
-			msg = ft_strdup("syntax error near unexpected token \'newline\'");
-			token->exit_value = print_error(msg, NULL, 2);
-			free(msg);
+			ft_putstr_fd("syntax error near unexpected token '", 2);
+			if (tmp->next->type_token == END)
+				ft_putstr_fd("newline", 2);
+			else
+				ft_putstr_fd(tmp->next->str, 2);
+			ft_putstr_fd("'\n", 2);
+			token->exit_value = 2;
 			return (token);
 		}
 		tmp = tmp->next;

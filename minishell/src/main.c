@@ -6,7 +6,7 @@
 /*   By: derakoto <derakoto@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/24 10:56:40 by vrandria          #+#    #+#             */
-/*   Updated: 2024/12/08 11:55:22 by derakoto         ###   ########.fr       */
+/*   Updated: 2024/12/08 14:18:46 by derakoto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,12 @@ void	process_input(t_data *data)
 	}
 }
 
+static void	compute_history(char *str)
+{
+	if (ft_strlen(str) > 0)
+		add_history(str);
+}
+
 int	main(int argc, char *argv[], char **env)
 {
 	t_data	data;
@@ -54,9 +60,9 @@ int	main(int argc, char *argv[], char **env)
 		data.input = readline("msh$");
 		if (data.input == NULL)
 			mini_exit(&data, NULL);
+		compute_history(data.input);
 		if (check_input(&data) == 1)
 		{
-			add_history(data.input);
 			check_g_value(&data);
 			data.input = var_expand(&data, data.input);
 			if (data.input != NULL)
