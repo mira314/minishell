@@ -6,15 +6,15 @@
 /*   By: derakoto <derakoto@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 08:27:39 by vrandria          #+#    #+#             */
-/*   Updated: 2024/12/08 06:58:36 by derakoto         ###   ########.fr       */
+/*   Updated: 2024/12/08 07:08:24 by derakoto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parse.h"
 
-t_output	*init_output(t_output **output)
+t_io_file	*init_output(t_io_file **output)
 {
-	*output = (t_output *)malloc(sizeof(t_output));
+	*output = (t_io_file *)malloc(sizeof(t_io_file));
 	if (*output == NULL)
 		return (NULL);
 	(*output)->filename = NULL;

@@ -6,25 +6,25 @@
 /*   By: derakoto <derakoto@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 15:41:59 by vrandria          #+#    #+#             */
-/*   Updated: 2024/12/07 21:27:53 by derakoto         ###   ########.fr       */
+/*   Updated: 2024/12/08 07:07:14 by derakoto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parse.h"
 
-t_output	*add_output(t_cmd *cmd, char *filename, int mode)
+t_io_file	*add_output(t_cmd *cmd, char *filename, int mode)
 {
 	int			i;
 	int			count;
-	t_output	*tmp;
-	t_output	*new;
+	t_io_file	*tmp;
+	t_io_file	*new;
 
 	i = 0;
 	count = 0;
 	tmp = cmd->io->outputs;
 	while (tmp[i].filename)
 		i++;
-	new = malloc((sizeof(t_output) * (i + 2)));
+	new = malloc((sizeof(t_io_file) * (i + 2)));
 	if (!new)
 		return (NULL);
 	while (count < i)

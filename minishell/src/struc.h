@@ -6,7 +6,7 @@
 /*   By: derakoto <derakoto@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 08:13:10 by vrandria          #+#    #+#             */
-/*   Updated: 2024/12/08 06:58:23 by derakoto         ###   ########.fr       */
+/*   Updated: 2024/12/08 07:11:57 by derakoto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,16 +23,15 @@ typedef struct s_var
 	int		value_len;
 }	t_var;
 
-
-typedef struct s_output
+typedef struct s_io_file
 {
 	int		mode;
 	char	*filename;
-}	t_output;
+}	t_io_file;
 
 typedef struct s_io_fd
 {
-	t_output	*outputs;
+	t_io_file	*outputs;
 	int			input_fd;
 	int			output_fd;
 	int			mode_outputs;

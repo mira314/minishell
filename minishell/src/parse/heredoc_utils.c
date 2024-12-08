@@ -6,7 +6,7 @@
 /*   By: derakoto <derakoto@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 15:44:45 by derakoto          #+#    #+#             */
-/*   Updated: 2024/12/07 21:17:05 by derakoto         ###   ########.fr       */
+/*   Updated: 2024/12/08 07:07:21 by derakoto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ t_token	*decide_next_token(t_token *token)
 	return (token);
 }
 
-void	clear_doc(t_output *outputs)
+void	clear_doc(t_io_file *outputs)
 {
 	int	i;
 

@@ -6,7 +6,7 @@
 /*   By: derakoto <derakoto@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 04:32:27 by derakoto          #+#    #+#             */
-/*   Updated: 2024/12/08 05:28:41 by derakoto         ###   ########.fr       */
+/*   Updated: 2024/12/08 07:06:50 by derakoto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static int	on_redir_error(char *filename)
 	return (-1);
 }
 
-int	is_still_another(t_output *file, int mode1, int mode2)
+int	is_still_another(t_io_file *file, int mode1, int mode2)
 {
 	int	i;
 
@@ -34,7 +34,7 @@ int	is_still_another(t_output *file, int mode1, int mode2)
 	return (1);
 }
 
-int	redir_input(t_output *file, int i)
+int	redir_input(t_io_file *file, int i)
 {
 	int		fd;
 
@@ -47,7 +47,7 @@ int	redir_input(t_output *file, int i)
 	return (0);
 }
 
-int	redir_output(t_output *file, int i)
+int	redir_output(t_io_file *file, int i)
 {
 	int	open_mode;
 	int	fd;
@@ -72,7 +72,7 @@ int	redir_output(t_output *file, int i)
 int	handle_redir(t_io_fd *io)
 {
 	int			i;
-	t_output	*file;
+	t_io_file	*file;
 
 	file = io->outputs;
 	if (file == NULL)

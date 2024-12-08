@@ -6,7 +6,7 @@
 /*   By: derakoto <derakoto@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 05:51:35 by derakoto          #+#    #+#             */
-/*   Updated: 2024/12/08 05:19:51 by derakoto         ###   ########.fr       */
+/*   Updated: 2024/12/08 07:06:12 by derakoto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,8 +65,8 @@ int		is_delimiter(char *delimiter, char *str);
 void	clean_pipes(int **pipes, int size);
 void	free_and_exit(t_data *data, int exit_code);
 int		handle_redir(t_io_fd *io);
-int		redir_output(t_output *file, int i);
-int		redir_input(t_output *file, int i);
+int		redir_output(t_io_file *file, int i);
+int		redir_input(t_io_file *file, int i);
 int		is_path(char *str);
 int		execute_path(t_data *data, t_cmd *cmd, char *path);
 int		pipe_loop(t_data *data);

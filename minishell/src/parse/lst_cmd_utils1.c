@@ -6,7 +6,7 @@
 /*   By: derakoto <derakoto@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/24 11:03:07 by vrandria          #+#    #+#             */
-/*   Updated: 2024/12/08 06:58:35 by derakoto         ###   ########.fr       */
+/*   Updated: 2024/12/08 07:09:20 by derakoto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static t_cmd	*lst_del_cmd(t_cmd *cmd)
 	return (NULL);
 }
 
-void	clear_outputs(t_output *output)
+void	clear_outputs(t_io_file *output)
 {
 	int	i;
 
