@@ -6,7 +6,7 @@
 /*   By: derakoto <derakoto@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/24 10:56:40 by vrandria          #+#    #+#             */
-/*   Updated: 2024/12/08 14:18:46 by derakoto         ###   ########.fr       */
+/*   Updated: 2024/12/08 19:22:50 by derakoto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,11 @@ void	process_input(t_data *data)
 {
 	int	flag;
 
+	if (ft_strlen(data->input) == 0)
+	{
+		data->exit_value = 0;
+		return ;
+	}
 	if (check_input(data))
 	{
 		signal(SIGINT, SIG_IGN);
