@@ -62,11 +62,6 @@ int    pipe_loop(char ***cmds, int *input)
         else
         {
             wait(NULL);
-            /*if (WIFEXITED(status))
-                printf("Exited with status %d\n", WEXITSTATUS(status));
-            else if(WIFSIGNALED(status))
-                printf("Terminated by signal %d\n", WTERMSIG(status));
-            fflush(stdout);*/
         }
     }
 }

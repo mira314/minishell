@@ -3,42 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   herdoc_process.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vrandria <vrandria@student.42antananari    +#+  +:+       +#+        */
+/*   By: derakoto <derakoto@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 15:42:25 by vrandria          #+#    #+#             */
-/*   Updated: 2024/11/29 07:49:09 by vrandria         ###   ########.fr       */
+/*   Updated: 2024/12/08 06:54:10 by derakoto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parse.h"
-
-t_input	*add_input(t_cmd *cmd, char *filename, int mode)
-{
-	int		i;
-	int		count;
-	t_input	*tmp;
-	t_input	*new;
-
-	i = 0;
-	count = 0;
-	tmp = cmd->io->inputs;
-	while (tmp[i].filename)
-		i++;
-	new = malloc((sizeof(t_input) * (i + 2)));
-	if (!new)
-		return (NULL);
-	while (count < i)
-	{
-		new[count].filename = tmp[count].filename;
-		new[count].mode = tmp[count].mode;
-		count++;
-	}
-	new[count].filename = filename;
-	new[count].mode = mode;
-	new[count + 1].filename = NULL;
-	free(tmp);
-	return (new);
-}
 
 t_token	*parsing_heredoc(t_cmd *cmd, t_token *token, t_data *data)
 {

@@ -3,24 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   init_int_and_out.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vrandria <vrandria@student.42antananari    +#+  +:+       +#+        */
+/*   By: derakoto <derakoto@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 08:27:39 by vrandria          #+#    #+#             */
-/*   Updated: 2024/11/26 08:30:51 by vrandria         ###   ########.fr       */
+/*   Updated: 2024/12/08 06:58:36 by derakoto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parse.h"
-
-t_input	*init_input(t_input **input)
-{
-	*input = (t_input *)malloc(sizeof(t_input));
-	if (*input == NULL)
-		return (NULL);
-	(*input)->filename = NULL;
-	(*input)->mode = INPUT;
-	return (*input);
-}
 
 t_output	*init_output(t_output **output)
 {
@@ -42,7 +32,6 @@ void	init_input_output(t_cmd *cmd)
 		if (!cmd->io)
 			return ;
 		io = cmd->io;
-		init_input(&io->inputs);
 		init_output(&io->outputs);
 		io->input_fd = -1;
 		io->output_fd = -1;
