@@ -6,7 +6,7 @@
 /*   By: derakoto <derakoto@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 14:50:54 by derakoto          #+#    #+#             */
-/*   Updated: 2024/12/07 20:37:49 by derakoto         ###   ########.fr       */
+/*   Updated: 2024/12/08 05:10:02 by derakoto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ int	prepare_heredoc_file(t_cmd *cmd)
 		while (cmd->next)
 			cmd = cmd->next;
 		cmd->io->outputs = add_output(cmd, file_name, HEREDOC);
+		free(file_name);
 	}
 	else
 		free(file_name);
