@@ -6,7 +6,7 @@
 /*   By: derakoto <derakoto@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 05:51:35 by derakoto          #+#    #+#             */
-/*   Updated: 2024/12/08 07:06:12 by derakoto         ###   ########.fr       */
+/*   Updated: 2024/12/08 12:42:25 by derakoto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ char	*build_path(char *path, char *file_name);
 int		exec_one_cmd(t_data *data, t_cmd *cmd);
 int		mini_env(char **args, char **envs);
 int		mini_export(char **args, char ***envs);
-void	mini_exit(t_data *data, t_cmd *cmd);
+int		mini_exit(t_data *data, t_cmd *cmd);
 char	**update_env(char **o_env, char *env);
 int		mini_is_numeric(char *str);
 int		exec_with_redir(t_data *data, t_cmd *cmd);

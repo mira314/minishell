@@ -6,7 +6,7 @@
 /*   By: derakoto <derakoto@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 05:39:34 by derakoto          #+#    #+#             */
-/*   Updated: 2024/12/02 04:47:29 by derakoto         ###   ########.fr       */
+/*   Updated: 2024/12/08 11:18:24 by derakoto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	is_file_in(char *path, char *file_name)
 		elem = readdir(directory);
 		if (elem == NULL)
 			break ;
-		if (ft_strcmp(elem->d_name, file_name) == 0)
+		if (ft_strncmp(elem->d_name, file_name, ft_strlen(file_name) + 1) == 0)
 		{
 			closedir(directory);
 			return (0);

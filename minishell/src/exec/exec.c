@@ -6,7 +6,7 @@
 /*   By: derakoto <derakoto@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 05:30:50 by derakoto          #+#    #+#             */
-/*   Updated: 2024/12/08 06:02:46 by derakoto         ###   ########.fr       */
+/*   Updated: 2024/12/08 12:15:18 by derakoto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,15 @@ void	exec(t_data *data)
 		data->exit_value = pipe_loop(data);
 }
 
+static int	did_not_find(t_data *data, t_cmd *cmd)
+{
+	if (is_env_unset(data->env, "PATH") == 0)
+		return (execute_path(data, cmd, cmd->args[cmd->offset]));
+	else
+		return (print_error(cmd->args[cmd->offset],
+				": command not found", 127));
+}
+
 int	exec_one_cmd(t_data	*data, t_cmd *cmd)
 {
 	char	*path;
@@ -60,6 +69,10 @@ int	exec_one_cmd(t_data	*data, t_cmd *cmd)
 		return (0);
 	if (handle_var(cmd->args, &data->var, &cmd->offset) == SUCCESS)
 		return (0);
+	if (ft_strncmp("..", cmd->args[cmd->offset], 3) == 0
+		|| ft_strncmp(".", cmd->args[cmd->offset], 2) == 0)
+		return (print_error(cmd->args[cmd->offset],
+				": command not found", 127));
 	if (handles_bultin(data, cmd, &exit_status) == SUCCESS)
 		return (exit_status);
 	path = is_in_path_env(cmd->args[cmd->offset], data->var);
@@ -70,13 +83,7 @@ int	exec_one_cmd(t_data	*data, t_cmd *cmd)
 	else if (is_path(cmd->args[cmd->offset]) == 0)
 		exit_status = execute_path(data, cmd, cmd->args[cmd->offset]);
 	else
-	{
-		exit_status = 127;
-		if (is_env_unset(data->env, "PATH") == 0)
-			exit_status = execute_path(data, cmd, cmd->args[cmd->offset]);
-		else
-			print_error(cmd->args[cmd->offset], ": command not found", 0);
-	}
+		exit_status = did_not_find(data, cmd);
 	return (exit_status);
 }
 
