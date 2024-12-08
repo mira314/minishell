@@ -6,7 +6,7 @@
 /*   By: derakoto <derakoto@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 04:32:27 by derakoto          #+#    #+#             */
-/*   Updated: 2024/12/08 07:06:50 by derakoto         ###   ########.fr       */
+/*   Updated: 2024/12/08 12:53:42 by derakoto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,8 @@ int	handle_redir(t_io_fd *io)
 		}
 		else if (file[i].mode == INPUT || file[i].mode == HEREDOC)
 		{
-			redir_input(file, i);
+			if (redir_input(file, i) == -1)
+				return (-1);
 		}
 		i++;
 	}
