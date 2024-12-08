@@ -6,7 +6,7 @@
 /*   By: derakoto <derakoto@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 05:54:57 by derakoto          #+#    #+#             */
-/*   Updated: 2024/11/25 05:55:45 by derakoto         ###   ########.fr       */
+/*   Updated: 2024/12/08 22:24:11 by derakoto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,33 @@ void	mini_tbl_free(char **tbl)
 	}
 	free(tbl[i]);
 	free(tbl);
+}
+
+int	in_long_range(char *str)
+{
+	int	result;
+
+	result = 0;
+	if (str == NULL)
+		return (-1);
+	str = ft_strtrim(str, " ");
+	if (str[0] == '-' || str[0] == '+')
+	{
+		if (ft_strlen(str) > 20)
+			result = 1;
+		else if (ft_strlen(str) < 20)
+			result = 0;
+		else if (str[0] == '+' && ft_strcmp(str + 1, "9223372036854775807") > 0)
+			result = 1;
+		else if (str[0] == '-' && ft_strcmp(str + 1, "9223372036854775808") > 0)
+			result = 1;
+		else
+			result = 0;
+	}
+	else if (ft_strcmp(str, "9223372036854775807") > 0)
+		result = 1;
+	free(str);
+	return (result);
 }
 
 int	mini_is_numeric(char *str)

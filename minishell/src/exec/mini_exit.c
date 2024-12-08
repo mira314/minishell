@@ -6,7 +6,7 @@
 /*   By: derakoto <derakoto@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/20 05:19:02 by derakoto          #+#    #+#             */
-/*   Updated: 2024/12/08 12:42:37 by derakoto         ###   ########.fr       */
+/*   Updated: 2024/12/08 22:03:40 by derakoto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	mini_exit(t_data *data, t_cmd *cmd)
 		arg_len = mini_tbl_len(args);
 		if (arg_len >= 2)
 		{
-			if (mini_is_numeric(args[1]) != 0)
+			if (mini_is_numeric(args[1]) != 0 || in_long_range(args[1]) == 1)
 			{
 				ft_putstr_fd("exit: ", 2);
 				ft_putstr_fd(args[1], 2);
