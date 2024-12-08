@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   initialization.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vrandria <vrandria@student.42antananari    +#+  +:+       +#+        */
+/*   By: derakoto <derakoto@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/03 07:31:00 by vrandria          #+#    #+#             */
-/*   Updated: 2024/12/07 11:39:50 by vrandria         ###   ########.fr       */
+/*   Updated: 2024/12/08 06:05:09 by derakoto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,6 @@ int	init_token(t_data *data, char *input, int flag, int *exit)
 		if (flag == DOUBLE_QUOTE || flag == ONE_QUOTE)
 		{
 			*exit = print_error("error: missing terminating quote", NULL, 2);
-			data->exit_value = 1;
 			return (1);
 		}
 	}
@@ -82,16 +81,14 @@ int	fill_cmd(t_data *data, t_token *token)
 			data->cmd = lst_add_back_cmd(data->cmd, new_cmd());
 		tmp = convert_token(data, tmp);
 		if (tmp == NULL)
-		{
-			data->exit_value = 130;
 			return (-1);
-		}
 		if (tmp->type_token == END)
 			break ;
 	}
 	if (data && data->cmd && data->cmd->cmd != 0)
-		data->exit_value = parse_commande(data);
-	else
-		data->exit_value = 1;
+		parse_commande(data);
+	//	data->exit_value = parse_commande(data);
+	//else
+	//	data->exit_value = 1;
 	return (0);
 }

@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   mini_commande_parse.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vrandria <vrandria@student.42antananari    +#+  +:+       +#+        */
+/*   By: derakoto <derakoto@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/25 10:13:53 by vrandria          #+#    #+#             */
-/*   Updated: 2024/12/07 14:43:32 by vrandria         ###   ########.fr       */
+/*   Updated: 2024/12/08 06:03:27 by derakoto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parse.h"
 
-int	handles_bultin(t_data *data, t_cmd *cmd)
+int	handles_bultin(t_data *data, t_cmd *cmd, int *exit_status)
 {
 	int	exit;
 
@@ -36,7 +36,7 @@ int	handles_bultin(t_data *data, t_cmd *cmd)
 		mini_exit(data, cmd);
 	else
 		return (FAIL);
-	data->exit_value = exit;
+	*exit_status = exit;
 	return (SUCCESS);
 }
 
