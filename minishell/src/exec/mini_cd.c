@@ -6,36 +6,52 @@
 /*   By: derakoto <derakoto@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/12 14:25:50 by derakoto          #+#    #+#             */
-/*   Updated: 2024/12/06 14:48:16 by derakoto         ###   ########.fr       */
+/*   Updated: 2024/12/11 09:46:08 by derakoto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exec.h"
 
-static void	update_pwd_env(t_data	*data)
+static void	update_old_pwd(t_data *data, char *pwd_val)
+{
+	char	*old_pwd;
+	char	*prev_old;
+
+	if (pwd_val == NULL)
+		pwd_val = get_env_value(data->var, "PWD");
+	if (pwd_val == NULL)
+		old_pwd = ft_strdup("OLDPWD=");
+	else
+		old_pwd = ft_strjoin("OLDPWD=", pwd_val);
+	free(pwd_val);
+	prev_old = get_env_value(data->env, "OLDPWD");
+	if (prev_old == NULL)
+		data->var = add_one_env(data->var, old_pwd);
+	else
+		data->env = add_one_env(data->env, old_pwd);
+	free(old_pwd);
+	free(prev_old);
+}
+
+static void	update_pwd_env(t_data *data)
 {
 	char	*pwd_val;
-	char	*old_pwd;
 	char	*new_pwd;
 	char	pwd_buffer[PWD_MAX_LEN];
 
-	pwd_val = get_env_value(data->env, "PWD");
-	if (pwd_val != NULL)
-	{
-		old_pwd = ft_strjoin("OLDPWD=", pwd_val);
-		free(pwd_val);
-		if (old_pwd != NULL)
-		{
-			data->env = update_env(data->env, old_pwd);
-			free(old_pwd);
-		}
-	}
 	if (getcwd(pwd_buffer, PWD_MAX_LEN) == NULL)
 		return ;
 	new_pwd = ft_strjoin("PWD=", pwd_buffer);
 	if (new_pwd == NULL)
 		return ;
-	data->env = update_env(data->env, new_pwd);
+	pwd_val = get_env_value(data->env, "PWD");
+	update_old_pwd(data, pwd_val);
+	pwd_val = get_env_value(data->env, "PWD");
+	if (pwd_val != NULL)
+		data->env = add_one_env(data->env, new_pwd);
+	else
+		data->var = add_one_env(data->var, new_pwd);
+	free(pwd_val);
 	free(new_pwd);
 }
 
