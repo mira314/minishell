@@ -6,7 +6,7 @@
 /*   By: derakoto <derakoto@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 06:06:40 by derakoto          #+#    #+#             */
-/*   Updated: 2024/12/06 11:49:27 by derakoto         ###   ########.fr       */
+/*   Updated: 2024/12/11 10:46:08 by derakoto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	pipe_loop(t_data *data)
 	return (status);
 }
 
-int	wait_and_return_exit_status(int *pids, int cmd_count)
+static int	wait_and_return_exit_status(int *pids, int cmd_count)
 {
 	int	status;
 	int	i;

@@ -6,7 +6,7 @@
 /*   By: derakoto <derakoto@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/12 14:25:50 by derakoto          #+#    #+#             */
-/*   Updated: 2024/12/11 09:46:08 by derakoto         ###   ########.fr       */
+/*   Updated: 2024/12/11 10:44:08 by derakoto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ static int	cd_to_home(t_data *data)
 	return (1);
 }
 
-int	chdir_with_cdpath(char **env, char *path)
+static int	chdir_with_cdpath(char **env, char *path)
 {
 	char	*cd_path;
 	char	*path_joinned;

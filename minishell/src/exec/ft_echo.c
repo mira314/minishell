@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_echo.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vrandria <vrandria@student.42antananari    +#+  +:+       +#+        */
+/*   By: derakoto <derakoto@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 05:44:51 by derakoto          #+#    #+#             */
-/*   Updated: 2024/12/07 11:42:32 by vrandria         ###   ########.fr       */
+/*   Updated: 2024/12/11 10:39:29 by derakoto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exec.h"
 
-int	parse_option(char *option, int *nl)
+static int	parse_option(char *option, int *nl)
 {
 	int	i;
 
@@ -36,7 +36,7 @@ int	parse_option(char *option, int *nl)
 	return (-1);
 }
 
-int	treat_options(char **args, int *nl)
+static int	treat_options(char **args, int *nl)
 {
 	int	result;
 

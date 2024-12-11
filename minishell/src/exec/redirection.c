@@ -6,7 +6,7 @@
 /*   By: derakoto <derakoto@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 04:32:27 by derakoto          #+#    #+#             */
-/*   Updated: 2024/12/08 13:29:55 by derakoto         ###   ########.fr       */
+/*   Updated: 2024/12/11 10:46:42 by derakoto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static int	on_redir_error(char *filename)
 	return (-1);
 }
 
-int	is_still_another(t_io_file *file, int mode1, int mode2)
+static int	is_still_another(t_io_file *file, int mode1, int mode2)
 {
 	int	i;
 

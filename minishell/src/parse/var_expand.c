@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   var_expand.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: derakoto <derakoto@student.42antananari    +#+  +:+       +#+        */
+/*   By: vrandria <vrandria@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 17:44:39 by derakoto          #+#    #+#             */
-/*   Updated: 2024/12/05 19:43:32 by derakoto         ###   ########.fr       */
+/*   Updated: 2024/12/11 10:37:52 by vrandria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

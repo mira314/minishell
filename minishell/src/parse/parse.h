@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: derakoto <derakoto@student.42antananari    +#+  +:+       +#+        */
+/*   By: vrandria <vrandria@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/25 10:30:04 by vrandria          #+#    #+#             */
-/*   Updated: 2024/12/08 07:09:54 by derakoto         ###   ########.fr       */
+/*   Updated: 2024/12/11 10:41:58 by vrandria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,8 +102,6 @@ t_token		*parsing_trunc(t_cmd *cmd, t_token *token);
 /***********************herdoc_process.c  *************** */
 t_token		*parsing_heredoc(t_cmd *cmd, t_token *token, t_data *data);
 char		*herdoc_var(t_data *data, char *str);
-void		clear_doc(t_io_file *inputs);
-void		clear_all_doc(t_cmd *top_cmd);
 /**********************append_process.c ******************/
 t_token		*parsing_append(t_cmd *cmd, t_token *token);
 /*********************quote_process**********************/
@@ -115,30 +113,38 @@ int			switch_flag_token_empty(int *i, t_token *token);
 int			check_quote_flag(t_token *token, int i);
 int			switch_flag_token(int i, t_token *token);
 t_io_file	*add_output(t_cmd *cmd, char *filename, int mode);
+/***************heredoc_file_prepa.c******************/
 char		*create_file_name(char *path);
 int			prepare_heredoc_file(t_cmd *cmd);
 void		get_doc_content(t_data *data, t_cmd *cmd, t_token *token, int fd);
 void		get_doc(t_data *data, t_cmd *cmd, t_token *token, int fd);
+/***************heredoc_var.c***********************************/
 int			size_str_not_var(char *str);
 char		*herdoc_var_handl(t_data *data, char *str);
 char		*var_convert_her(char *str, char *var);
 char		*var_str_heredoc(t_data *data, char *str, int i);
+/***************heredoc_utils.c**********************/
 char		*trim_delim_heredoc(char *del, t_cmd *cmd);
 t_token		*decide_next_token(t_token *token);
+void		clear_doc(t_io_file *inputs);
+void		clear_all_doc(t_cmd *top_cmd);
 /***************hedeco_var********************************* */
 char		*append_char_to_str(char *tmp, char c);
 int			expand_simple_var(t_data *data);
 int			is_quote(char c);
-int			compute_new_input_len(t_var **var, char *str);
-char		*build_new_input(t_var **var, char *str, char *new_input);
-char		*var_expand(t_data *data, char *str);
+/***************var_expand_helpers.c******************************/
 void		destroy_var(t_var *var);
 t_var		*build_var(t_data *data, char *str, int name_len, int *i);
 t_var		*new_var(t_data *data, char *str, int *i, int flag);
 t_var		**add_var(t_var **var, t_var *var_to_add);
+void		take_all_vars(t_data *data, char *str, t_var ***var);
+/**************var_expand.c************************************ */
 t_var		**identify_var(t_data *data, char *str);
+int			compute_new_input_len(t_var **var, char *str);
+char		*build_new_input(t_var **var, char *str, char *new_input);
+char		*var_expand(t_data *data, char *str);
+/************** var_identify_helper.c********************************/
 void		handle_quote(char *str, int *flag, int *i, int quote);
 void		handle_less_sign(char *str, int *i);
-void		take_all_vars(t_data *data, char *str, t_var ***var);
 
 #endif

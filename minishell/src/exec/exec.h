@@ -6,7 +6,7 @@
 /*   By: derakoto <derakoto@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 05:51:35 by derakoto          #+#    #+#             */
-/*   Updated: 2024/12/08 21:51:18 by derakoto         ###   ########.fr       */
+/*   Updated: 2024/12/11 12:54:16 by derakoto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@
 # include <sys/wait.h>
 # include <sys/stat.h>
 # define PWD_MAX_LEN 199
+# define LONG_MAX_STR "9223372036854775807"
+# define LONG_MIN_STR "9223372036854775808"
 
 int		ft_echo(char **args);
 int		ft_pwd(void);
