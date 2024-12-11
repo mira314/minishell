@@ -6,7 +6,7 @@
 /*   By: derakoto <derakoto@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 05:37:52 by derakoto          #+#    #+#             */
-/*   Updated: 2024/11/26 06:02:13 by derakoto         ###   ########.fr       */
+/*   Updated: 2024/12/11 10:13:18 by derakoto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ char	**add_env(char **o_env, char **n_env, int *status)
 		{
 			ft_putstr_fd("export: \"", 2);
 			ft_putstr_fd(n_env[i], 2);
-			ft_putstr_fd("\" : invalid key\n", 2);
+			ft_putstr_fd("\" : not a valid identifier\n", 2);
 			i++;
 			if (status != NULL)
 				*status = 1;

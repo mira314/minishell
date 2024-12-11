@@ -6,7 +6,7 @@
 /*   By: derakoto <derakoto@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/20 05:19:02 by derakoto          #+#    #+#             */
-/*   Updated: 2024/12/08 22:03:40 by derakoto         ###   ########.fr       */
+/*   Updated: 2024/12/11 10:12:17 by derakoto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int	mini_exit(t_data *data, t_cmd *cmd)
 			{
 				ft_putstr_fd("exit: ", 2);
 				ft_putstr_fd(args[1], 2);
-				ft_putstr_fd(": Argument should be numeric\n", 2);
+				ft_putstr_fd(": numeric argument required\n", 2);
 				free_and_exit(data, 2);
 			}
 			else if (arg_len == 2)
