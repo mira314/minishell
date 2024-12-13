@@ -6,7 +6,7 @@
 /*   By: derakoto <derakoto@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 19:38:26 by derakoto          #+#    #+#             */
-/*   Updated: 2024/12/07 14:53:38 by derakoto         ###   ########.fr       */
+/*   Updated: 2024/12/12 22:41:04 by derakoto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,12 @@ void	handle_quote(char *str, int *flag, int *i, int quote)
 	}
 }
 
-void	handle_less_sign(char *str, int *i)
+void	handle_less_sign(t_data *data, int *i, int flag, t_var ***var)
 {
+	t_var	*var_tmp;
+	char	*str;
+
+	str = data->input;
 	*i = *i + 1;
 	if (str[*i] == '<')
 	{
@@ -40,6 +44,16 @@ void	handle_less_sign(char *str, int *i)
 		while (str[*i] == ' ')
 			*i = *i + 1;
 		while (str[*i] != ' ' && str[*i] != '\0')
-			*i = *i + 1;
+		{
+			if (str[*i] == '$' && is_quote(str[*i + 1]) != EMPTY)
+			{
+				*i = *i + 1;
+				var_tmp = new_var(data, str + *i, i, flag);
+				if (var_tmp)
+					*var = add_var(*var, var_tmp);
+			}
+			else
+				*i = *i + 1;
+		}
 	}
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vrandria <vrandria@student.42antananari    +#+  +:+       +#+        */
+/*   By: derakoto <derakoto@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/25 10:30:04 by vrandria          #+#    #+#             */
-/*   Updated: 2024/12/11 10:41:58 by vrandria         ###   ########.fr       */
+/*   Updated: 2024/12/12 22:41:25 by derakoto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,6 +145,6 @@ char		*build_new_input(t_var **var, char *str, char *new_input);
 char		*var_expand(t_data *data, char *str);
 /************** var_identify_helper.c********************************/
 void		handle_quote(char *str, int *flag, int *i, int quote);
-void		handle_less_sign(char *str, int *i);
+void		handle_less_sign(t_data *data, int *i, int flag, t_var ***var);
 
 #endif

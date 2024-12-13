@@ -6,7 +6,7 @@
 /*   By: derakoto <derakoto@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 17:46:11 by derakoto          #+#    #+#             */
-/*   Updated: 2024/12/07 14:56:38 by derakoto         ###   ########.fr       */
+/*   Updated: 2024/12/12 22:38:38 by derakoto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,7 +127,7 @@ void	take_all_vars(t_data *data, char *str, t_var ***var)
 				*var = add_var(*var, var_tmp);
 		}
 		else if (str[i] == '<')
-			handle_less_sign(str, &i);
+			handle_less_sign(data, &i, flag, var);
 		else
 			i++;
 	}
