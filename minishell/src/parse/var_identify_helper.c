@@ -6,7 +6,7 @@
 /*   By: derakoto <derakoto@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 19:38:26 by derakoto          #+#    #+#             */
-/*   Updated: 2024/12/12 22:41:04 by derakoto         ###   ########.fr       */
+/*   Updated: 2024/12/14 07:10:14 by derakoto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 void	handle_quote(char *str, int *flag, int *i, int quote)
 {
+	if (quote == EMPTY)
+		return ;
 	if (*flag == EMPTY)
 		*flag = quote;
 	else if (*flag == quote)
@@ -45,8 +47,10 @@ void	handle_less_sign(t_data *data, int *i, int flag, t_var ***var)
 			*i = *i + 1;
 		while (str[*i] != ' ' && str[*i] != '\0')
 		{
-			if (str[*i] == '$' && is_quote(str[*i + 1]) != EMPTY)
+			handle_quote(str, &flag, i, is_quote(str[*i]));
+			if (str[*i] == '$' && is_quote(str[*i + 1]) != EMPTY && !flag)
 			{
+				printf("%d %d\n", flag, *i);
 				*i = *i + 1;
 				var_tmp = new_var(data, str + *i, i, flag);
 				if (var_tmp)
