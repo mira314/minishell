@@ -6,7 +6,7 @@
 /*   By: vrandria <vrandria@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/29 14:41:39 by vrandria          #+#    #+#             */
-/*   Updated: 2024/11/29 10:35:32 by vrandria         ###   ########.fr       */
+/*   Updated: 2024/12/14 08:29:44 by vrandria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,8 @@ int	sep_next_char(char c)
 	if (c == '$')
 		return (1);
 	else if (c == 32)
+		return (1);
+	else if (c >= 9 && c <= 13)
 		return (1);
 	else if (c == 0)
 		return (1);

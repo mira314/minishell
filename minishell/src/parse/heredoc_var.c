@@ -6,7 +6,7 @@
 /*   By: vrandria <vrandria@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 14:52:53 by derakoto          #+#    #+#             */
-/*   Updated: 2024/11/29 09:15:28 by vrandria         ###   ########.fr       */
+/*   Updated: 2024/12/14 08:35:18 by vrandria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,8 @@ char	*var_convert_her(char *str, char *var)
 {
 	char	*new;
 
+	if (!var)
+		return (str);
 	if (!str)
 		str = ft_strdup("");
 	new = ft_strjoin(str, var);
@@ -85,7 +87,7 @@ char	*var_str_heredoc(t_data *data, char *str, int i)
 	join = 0;
 	while (str[i])
 	{
-		if (str[i] == '$' && sep_next_char(str[i + 1] == 0))
+		if (str[i] == '$' && sep_next_char(str[i + 1]) == 0)
 		{
 			get_var = herdoc_var_handl(data, &str[i]);
 			tmp = var_convert_her(join, get_var);
