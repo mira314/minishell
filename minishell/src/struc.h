@@ -6,7 +6,7 @@
 /*   By: derakoto <derakoto@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 08:13:10 by vrandria          #+#    #+#             */
-/*   Updated: 2024/12/08 07:11:57 by derakoto         ###   ########.fr       */
+/*   Updated: 2024/12/14 07:32:26 by derakoto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,7 @@ typedef struct s_data
 	t_token	*token;
 	int		exit_value;
 	t_term	term_backup;
+	int		history_fd;
 }	t_data;
 
 #endif

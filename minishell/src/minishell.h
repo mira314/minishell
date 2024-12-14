@@ -6,7 +6,7 @@
 /*   By: derakoto <derakoto@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/18 13:32:50 by vrandria          #+#    #+#             */
-/*   Updated: 2024/11/27 16:19:22 by derakoto         ###   ########.fr       */
+/*   Updated: 2024/12/14 07:38:56 by derakoto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,4 +52,6 @@ int		check_only_space(char *str);
 int		parse_data_input(t_data *data);
 void	check_g_value(t_data *data);
 void	sig_int_handler(int sig_num);
+void	load_history(int fd_history);
+
 #endif

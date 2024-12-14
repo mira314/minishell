@@ -6,7 +6,7 @@
 /*   By: derakoto <derakoto@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/20 05:19:02 by derakoto          #+#    #+#             */
-/*   Updated: 2024/12/11 11:53:28 by derakoto         ###   ########.fr       */
+/*   Updated: 2024/12/14 07:46:11 by derakoto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ int	mini_exit(t_data *data, t_cmd *cmd)
 	int		arg_len;
 
 	ft_putstr_fd("exit\n", 2);
+	close(data->history_fd);
 	if (data->input != NULL)
 	{
 		args = cmd->args + cmd->offset;
