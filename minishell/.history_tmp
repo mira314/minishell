@@ -136,3 +136,41 @@ cat << $USER
 cat << $USER
 cat << $"USER"
 clear
+clear
+export a="lib src"
+ls
+ls $a
+export a="lib                                   src"
+ls $a
+echo $a
+echo "$a"
+clear
+ls
+cler
+clear
+export a="lib       src"
+echo $a
+echo "$a"
+clear
+export a="ls | cat"
+$a
+clear
+export a="ls | cat"
+$a
+export a="ls|cat"
+$a
+clear
+export a="ls | cat"
+$a
+clear
+export a="ls | cat"
+$a
+export a="ls | cat"
+$a
+export a="ls | cat"
+$a
+export a="ls | cat"
+$a
+clear
+export a="ls | cat"
+$a
