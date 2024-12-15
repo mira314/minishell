@@ -6,7 +6,7 @@
 /*   By: derakoto <derakoto@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/25 10:30:04 by vrandria          #+#    #+#             */
-/*   Updated: 2024/12/12 22:41:25 by derakoto         ###   ########.fr       */
+/*   Updated: 2024/12/14 21:15:40 by derakoto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,12 +139,15 @@ t_var		*new_var(t_data *data, char *str, int *i, int flag);
 t_var		**add_var(t_var **var, t_var *var_to_add);
 void		take_all_vars(t_data *data, char *str, t_var ***var);
 /**************var_expand.c************************************ */
-t_var		**identify_var(t_data *data, char *str);
+t_var		**identify_var(t_data *data, char *str, int is_heredoc_delim);
 int			compute_new_input_len(t_var **var, char *str);
 char		*build_new_input(t_var **var, char *str, char *new_input);
-char		*var_expand(t_data *data, char *str);
+char		*var_expand(t_data *data, char *str, int is_heredoc_delim);
 /************** var_identify_helper.c********************************/
 void		handle_quote(char *str, int *flag, int *i, int quote);
-void		handle_less_sign(t_data *data, int *i, int flag, t_var ***var);
+void		handle_less_sign(t_data *data, char *str, t_var ***var);
+/******************************************************************/
+int			split_var_helper(char *str, int start, t_token **token, int *i);
+void		split_var_to_token(t_token **token, char *input, int flag);
 
 #endif

@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   var_expand.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vrandria <vrandria@student.42antananari    +#+  +:+       +#+        */
+/*   By: derakoto <derakoto@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 17:44:39 by derakoto          #+#    #+#             */
-/*   Updated: 2024/12/11 10:37:52 by vrandria         ###   ########.fr       */
+/*   Updated: 2024/12/14 21:15:44 by derakoto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parse.h"
 
-t_var	**identify_var(t_data *data, char *str)
+t_var	**identify_var(t_data *data, char *str, int is_heredoc_delim)
 {
 	t_var	**var;
 
@@ -22,7 +22,10 @@ t_var	**identify_var(t_data *data, char *str)
 	var[0] = NULL;
 	if (data == NULL || str == NULL)
 		return (NULL);
-	take_all_vars(data, str, &var);
+	if (is_heredoc_delim == 0)
+		take_all_vars(data, str, &var);
+	else
+		handle_less_sign(data, str, &var);
 	return (var);
 }
 
@@ -76,7 +79,7 @@ char	*build_new_input(t_var **var, char *str, char *new_input)
 	return (new_input);
 }
 
-char	*var_expand(t_data *data, char *str)
+char	*var_expand(t_data *data, char *str, int is_heredoc_delim)
 {
 	char	*new_input;
 	t_var	**var;
@@ -84,7 +87,7 @@ char	*var_expand(t_data *data, char *str)
 	int		i;
 
 	new_input = str;
-	var = identify_var(data, str);
+	var = identify_var(data, str, is_heredoc_delim);
 	if (var == NULL)
 		return (str);
 	if (var[0] != NULL)

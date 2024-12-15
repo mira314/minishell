@@ -6,7 +6,7 @@
 /*   By: derakoto <derakoto@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/24 10:56:40 by vrandria          #+#    #+#             */
-/*   Updated: 2024/12/14 07:45:18 by derakoto         ###   ########.fr       */
+/*   Updated: 2024/12/14 11:49:26 by derakoto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ int	main(int argc, char *argv[], char **env)
 		if (check_input(&data) == 1)
 		{
 			check_g_value(&data);
-			data.input = var_expand(&data, data.input);
+			//data.input = var_expand(&data, data.input);
 			if (data.input != NULL)
 			{
 				process_input(&data);

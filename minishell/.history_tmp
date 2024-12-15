@@ -1,0 +1,138 @@
+ls
+echo Bonjour
+              
+cat << eof
+clear
+ls
+ls "$USER"
+ls $"USER"
+ls
+ls $USER
+ls $"USER"
+ls $"USER"
+ls "$USER"
+bahs
+bash
+ls
+ls "bonjour    les enfants"
+ls "bonjour    les enfants" salut
+clear
+exort a="lib src"
+export
+ls
+export a="lib src"
+echo $a
+clear
+export a="src lib"
+echo $a
+export a="lib src"
+echo $a
+export a="lib src"
+echo $a rakoto
+echo $a
+echo $a
+echo $a
+echo $a
+echo $a
+echo $a
+echo $a
+echo $a
+clear
+ls $a
+clear
+ls
+clear
+ls "$a
+clear
+export a="lib        src"
+ls $a
+echo $a
+echo "$a"
+clear
+export a="ls | cat"
+$a
+export a="ls | cat"
+$a
+export a="ls cat"
+$a
+clear
+export a="ls | cat"
+echo $a
+export a="ls | cat"
+echo $a
+export a="ls -la"
+$a
+export a="ls -la"
+$a
+$a
+export a="ls -la"
+$a
+clear
+export a="ls | cat"
+$a
+export a="ls | cat"
+$a
+export a="ls | cat"
+$a
+export a="ls | cat"
+$a
+export a="ls | cat"
+$a
+export a="ls | cat"
+export a="ls | cat"
+export a="ls | cat"
+$a
+$a
+$a
+export dir="src lib"
+ls
+ls
+clear
+$a
+clear
+export dir="lib                    src"
+echo dir
+echo $dir
+echo "$dir"
+ls $dir
+clear
+ls ra
+clear
+$a
+clear
+$a
+$a
+ls
+ls
+ls fsefjes
+echo $a
+clear
+ls -a
+cat .history_tmp 
+clear
+"ls | cat "
+echo $a
+$a
+"$a"
+clear
+cat << $USER
+cat << $USER
+export a="ls | cat"
+$a
+clear
+cat << $USER
+clear
+cat << $USER
+cat << $"USER"
+cat << $USER
+echo $USER
+cat << $USER
+ls
+cat << Makefile 
+cat << $USER
+cat << $USER
+
+cat << $USER
+cat << $USER
+cat << $"USER"
+clear
