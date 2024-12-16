@@ -6,7 +6,7 @@
 /*   By: derakoto <derakoto@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/14 09:21:23 by derakoto          #+#    #+#             */
-/*   Updated: 2024/12/16 08:44:23 by derakoto         ###   ########.fr       */
+/*   Updated: 2024/12/16 16:25:07 by derakoto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,18 +18,8 @@ int	what_is_sep1(char *str, int i)
 		return (SPACES);
 	if (str[i] == 32)
 		return (SPACES);
-	/*if (str[i] == '<' && str[i + 1] != '<')
-		return (INPUT);
-	if (str[i] == '>' && str[i + 1] != '>')
-		return (TRUNC);
-	if (str[i] == '<' && str[i + 1] == '<')
-		return (HEREDOC);
-	if (str[i] == '>' && str[i + 1] == '>')
-		return (APPEND);*/
 	if (str[i] == '\0')
 		return (END);
-	//if (str[i] == '|')
-	//	return (PIPE);
 	return (0);
 }
 

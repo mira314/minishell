@@ -6,7 +6,7 @@
 /*   By: derakoto <derakoto@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/18 13:32:50 by vrandria          #+#    #+#             */
-/*   Updated: 2024/12/15 21:19:13 by derakoto         ###   ########.fr       */
+/*   Updated: 2024/12/16 16:33:26 by derakoto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,5 +56,6 @@ void	load_history(int fd_history);
 void	set_tokentype_to_word(t_token *token);
 t_token	*replace_token(t_data *data, t_token *var_token, t_token *token);
 void	expand_token_str(t_data *data, t_token *token);
+t_token	*skip_token(t_token *token, t_token	*result);
 
 #endif

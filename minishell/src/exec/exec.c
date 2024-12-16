@@ -6,7 +6,7 @@
 /*   By: derakoto <derakoto@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 05:30:50 by derakoto          #+#    #+#             */
-/*   Updated: 2024/12/08 12:15:18 by derakoto         ###   ########.fr       */
+/*   Updated: 2024/12/16 13:52:42 by derakoto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,9 @@ void	exec(t_data *data)
 	t_cmd	*cmd;
 
 	cmd = data->cmd;
-	if (cmd->next == NULL)
+	if (cmd == NULL)
+		data->exit_value = 0;
+	else if (cmd->next == NULL)
 		data->exit_value = exec_with_redir(data, cmd);
 	else
 		data->exit_value = pipe_loop(data);
