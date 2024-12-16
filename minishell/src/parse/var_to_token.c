@@ -6,11 +6,32 @@
 /*   By: derakoto <derakoto@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/14 09:21:23 by derakoto          #+#    #+#             */
-/*   Updated: 2024/12/14 19:02:40 by derakoto         ###   ########.fr       */
+/*   Updated: 2024/12/15 22:00:32 by derakoto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parse.h"
+
+int	what_is_sep1(char *str, int i)
+{
+	if (str[i] >= 9 && str[i] <= 13)
+		return (SPACES);
+	if (str[i] == 32)
+		return (SPACES);
+	/*if (str[i] == '<' && str[i + 1] != '<')
+		return (INPUT);
+	if (str[i] == '>' && str[i + 1] != '>')
+		return (TRUNC);
+	if (str[i] == '<' && str[i + 1] == '<')
+		return (HEREDOC);
+	if (str[i] == '>' && str[i + 1] == '>')
+		return (APPEND);*/
+	if (str[i] == '\0')
+		return (END);
+	//if (str[i] == '|')
+	//	return (PIPE);
+	return (0);
+}
 
 void	split_var_to_token(t_token **token, char *input, int flag)
 {
@@ -34,7 +55,7 @@ int	split_var_helper(char *str, int start, t_token **token, int *i)
 {
 	int	type_token;
 
-	type_token = what_is_sep(str, (*i));
+	type_token = what_is_sep1(str, (*i));
 	if (type_token)
 	{
 		if ((*i) != 0 && (what_is_sep(str, (*i) - 1)) == 0)
