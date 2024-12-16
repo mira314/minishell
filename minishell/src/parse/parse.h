@@ -6,7 +6,7 @@
 /*   By: derakoto <derakoto@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/25 10:30:04 by vrandria          #+#    #+#             */
-/*   Updated: 2024/12/14 21:15:40 by derakoto         ###   ########.fr       */
+/*   Updated: 2024/12/16 20:30:45 by derakoto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,7 +144,7 @@ int			compute_new_input_len(t_var **var, char *str);
 char		*build_new_input(t_var **var, char *str, char *new_input);
 char		*var_expand(t_data *data, char *str, int is_heredoc_delim);
 /************** var_identify_helper.c********************************/
-void		handle_quote(char *str, int *flag, int *i, int quote);
+int			handle_quote(char *str, int *flag, int *i, int quote);
 void		handle_less_sign(t_data *data, char *str, t_var ***var);
 /******************************************************************/
 int			split_var_helper(char *str, int start, t_token **token, int *i);
