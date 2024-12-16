@@ -6,7 +6,7 @@
 /*   By: derakoto <derakoto@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/14 09:21:23 by derakoto          #+#    #+#             */
-/*   Updated: 2024/12/16 16:25:07 by derakoto         ###   ########.fr       */
+/*   Updated: 2024/12/16 20:55:00 by derakoto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,14 +50,6 @@ int	split_var_helper(char *str, int start, t_token **token, int *i)
 	{
 		if ((*i) != 0 && (what_is_sep1(str, (*i) - 1)) == 0)
 			token_word(token, str, (*i), start);
-		if (type_token == HEREDOC || type_token == PIPE
-			||type_token == APPEND || type_token == TRUNC
-			|| type_token == INPUT)
-		{
-			token_other(token, str, (*i), type_token);
-			if (type_token == HEREDOC || type_token == APPEND)
-				(*i)++;
-		}
 		start = (*i) + 1;
 	}
 	return (start);

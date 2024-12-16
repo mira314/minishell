@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   quote_process.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vrandria <vrandria@student.42antananari    +#+  +:+       +#+        */
+/*   By: derakoto <derakoto@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 07:27:36 by vrandria          #+#    #+#             */
-/*   Updated: 2024/12/07 10:48:20 by vrandria         ###   ########.fr       */
+/*   Updated: 2024/12/16 20:53:35 by derakoto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
