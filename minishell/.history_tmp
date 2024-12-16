@@ -1,0 +1,18 @@
+export a="ls | cat"
+$a
+export a="ls | cat"
+$a
+export a="ls|cat"
+$a
+clear
+$a
+export a="ls | cat"
+$a
+"ls|cat"
+export a="cat|ls"
+$a
+export a="ls|cat"
+$a
+export a="ls | cat"
+$a
+clear
