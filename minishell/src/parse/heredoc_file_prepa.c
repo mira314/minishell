@@ -6,7 +6,7 @@
 /*   By: derakoto <derakoto@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 14:50:54 by derakoto          #+#    #+#             */
-/*   Updated: 2024/12/14 06:50:07 by derakoto         ###   ########.fr       */
+/*   Updated: 2024/12/16 21:41:40 by derakoto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,11 +77,11 @@ void	get_doc_content(t_data *data, t_cmd *cmd, t_token *token, int fd)
 		if (str == NULL)
 		{
 			ft_putstr_fd("\nunexpected EOF while looking for matching \"", 2);
-			ft_putstr_fd(token->next->temp, 2);
+			ft_putstr_fd(token->next->str, 2);
 			ft_putstr_fd("\"\n", 2);
 			break ;
 		}
-		if (is_delimiter(token->next->temp, str) == 0)
+		if (is_delimiter(token->next->str, str) == 0)
 			break ;
 		tmp = str;
 		if (cmd->io->quote_status == 0 && ft_strrchr(str, '$') != 0)

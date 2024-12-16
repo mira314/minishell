@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc_var.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vrandria <vrandria@student.42antananari    +#+  +:+       +#+        */
+/*   By: derakoto <derakoto@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 14:52:53 by derakoto          #+#    #+#             */
-/*   Updated: 2024/11/29 09:15:28 by vrandria         ###   ########.fr       */
+/*   Updated: 2024/12/16 21:41:53 by derakoto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

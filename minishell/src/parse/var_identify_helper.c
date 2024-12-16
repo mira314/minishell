@@ -6,7 +6,7 @@
 /*   By: derakoto <derakoto@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 19:38:26 by derakoto          #+#    #+#             */
-/*   Updated: 2024/12/16 20:30:21 by derakoto         ###   ########.fr       */
+/*   Updated: 2024/12/16 22:23:53 by derakoto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,6 @@ void	handle_less_sign(t_data *data, char *str, t_var ***var)
 
 	flag = EMPTY;
 	i = 0;
-	str[3] = '\0';
 	while (str[i] != ' ' && str[i] != '\0')
 	{
 		if (handle_quote(str, &flag, &i, is_quote(str[i])))

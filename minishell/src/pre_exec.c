@@ -6,7 +6,7 @@
 /*   By: derakoto <derakoto@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 18:19:51 by derakoto          #+#    #+#             */
-/*   Updated: 2024/12/16 20:48:54 by derakoto         ###   ########.fr       */
+/*   Updated: 2024/12/16 22:31:47 by derakoto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ t_token	*vars_expander(t_data *data)
 		if (token->type_token == VAR
 			|| (token->prev != NULL && token->prev->type_token == HEREDOC && token->type_token == VAR))
 		{
-			printf ("here\n");
 			expand_token_str(data, token);
 			split_var_to_token(&var_token, token->str, EMPTY);
 			token_tmp = token->next;
@@ -67,14 +66,8 @@ int	parse_data_input(t_data *data)
 	}
 	if (exit == 0)
 	{
-		test(data->token);
-		printf("-----\n");
 		data->token = vars_expander(data);
-		test(data->token);
-		printf("-----\n");
 		quote_process(data);
-		test(data->token);
-		printf("-----\n");
 		if (fill_cmd(data, data->token) == -1)
 			exit = 130;
 	}

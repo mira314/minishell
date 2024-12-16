@@ -6,7 +6,7 @@
 /*   By: derakoto <derakoto@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/03 07:31:00 by vrandria          #+#    #+#             */
-/*   Updated: 2024/12/16 21:03:13 by derakoto         ###   ########.fr       */
+/*   Updated: 2024/12/16 22:32:15 by derakoto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,6 @@ int	fill_cmd(t_data *data, t_token *token)
 		if (tmp == token)
 			data->cmd = lst_add_back_cmd(data->cmd, new_cmd());
 		tmp = convert_token(data, tmp);
-		printf("[%s][%d]\n", tmp->str, token->type_token);
 		if (tmp == NULL)
 			return (-1);
 		if (tmp->type_token == END)

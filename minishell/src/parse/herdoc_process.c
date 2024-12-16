@@ -6,7 +6,7 @@
 /*   By: derakoto <derakoto@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 15:42:25 by vrandria          #+#    #+#             */
-/*   Updated: 2024/12/08 06:54:10 by derakoto         ###   ########.fr       */
+/*   Updated: 2024/12/16 22:21:06 by derakoto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,10 @@ t_token	*parsing_heredoc(t_cmd *cmd, t_token *token, t_data *data)
 	int		fd;
 	int		pid;
 	int		status;
-	char	*tmp;
+	//char	*tmp;
 
-	tmp = token->next->temp;
-	token->next->temp = trim_delim_heredoc(tmp, cmd);
+	//tmp = token->next->temp;
+	//token->next->temp = trim_delim_heredoc(tmp, cmd);
 	fd = prepare_heredoc_file(cmd);
 	if (fd == -1)
 		return (NULL);
