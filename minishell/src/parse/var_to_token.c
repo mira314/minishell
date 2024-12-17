@@ -6,7 +6,7 @@
 /*   By: derakoto <derakoto@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/14 09:21:23 by derakoto          #+#    #+#             */
-/*   Updated: 2024/12/16 20:55:00 by derakoto         ###   ########.fr       */
+/*   Updated: 2024/12/17 07:51:12 by derakoto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,14 +28,15 @@ void	split_var_to_token(t_token **token, char *input, int flag)
 	int	i;
 	int	start;
 	int	limit;
+	(void) flag;
 
 	i = 0;
 	start = 0;
 	limit = ft_strlen(input);
 	while (limit >= i)
 	{
-		flag = check_quote(flag, (int)input[i]);
-		if (flag == EMPTY)
+		//flag = check_quote(flag, (int)input[i]);
+		//if (flag == EMPTY)
 			start = split_var_helper(input, start, token, &i);
 		i++;
 	}

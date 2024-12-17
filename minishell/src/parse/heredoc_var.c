@@ -6,7 +6,7 @@
 /*   By: derakoto <derakoto@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 14:52:53 by derakoto          #+#    #+#             */
-/*   Updated: 2024/12/16 21:41:53 by derakoto         ###   ########.fr       */
+/*   Updated: 2024/12/17 08:34:11 by derakoto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,8 @@ char	*herdoc_var_handl(t_data *data, char *str)
 	else
 		exit_val = 0;
 	free(var);
+	if (ft_strlen(exit_val))
+		exit_val = ft_strdup("");
 	return (exit_val);
 }
 
