@@ -6,7 +6,7 @@
 /*   By: derakoto <derakoto@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/20 09:45:09 by derakoto          #+#    #+#             */
-/*   Updated: 2024/11/26 10:08:07 by vrandria         ###   ########.fr       */
+/*   Updated: 2024/12/17 12:17:00 by derakoto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,4 +20,14 @@ void	sig_int_handler(int sig_num)
 	rl_on_new_line();
 	rl_replace_line("", 0);
 	rl_redisplay ();
+}
+
+void	child_sigint_handler(int sig_num)
+{
+	t_data	*data;
+
+	(void) sig_num;
+	data = static_data(NULL);
+	printf("%p", data);
+	free_and_exit(data, 0);
 }

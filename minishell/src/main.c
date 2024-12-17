@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vrandria <vrandria@student.42antananari    +#+  +:+       +#+        */
+/*   By: derakoto <derakoto@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/24 10:56:40 by vrandria          #+#    #+#             */
-/*   Updated: 2024/12/17 09:28:03 by vrandria         ###   ########.fr       */
+/*   Updated: 2024/12/17 11:54:33 by derakoto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ void	process_input(t_data *data)
 		signal(SIGINT, SIG_IGN);
 		flag = parse_data_input(data);
 		lst_clear_all_token(data->token);
+		data->token = 0;
 		if (flag == 0)
 			exec(data);
 		else

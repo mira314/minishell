@@ -6,7 +6,7 @@
 /*   By: derakoto <derakoto@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/20 08:55:38 by derakoto          #+#    #+#             */
-/*   Updated: 2024/12/14 07:53:45 by derakoto         ###   ########.fr       */
+/*   Updated: 2024/12/17 11:35:24 by derakoto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,5 +122,6 @@ int	init_data(t_data *data, char **env)
 	}
 	data->env = update_shell_level(data->env);
 	g_last_val = 0;
+	static_data(data);
 	return (0);
 }

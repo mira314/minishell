@@ -6,7 +6,7 @@
 /*   By: derakoto <derakoto@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/18 13:32:50 by vrandria          #+#    #+#             */
-/*   Updated: 2024/12/16 16:33:26 by derakoto         ###   ########.fr       */
+/*   Updated: 2024/12/17 11:21:58 by derakoto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,10 +52,12 @@ int		check_only_space(char *str);
 int		parse_data_input(t_data *data);
 void	check_g_value(t_data *data);
 void	sig_int_handler(int sig_num);
+void	child_sigint_handler(int sig_num);
 void	load_history(int fd_history);
 void	set_tokentype_to_word(t_token *token);
 t_token	*replace_token(t_data *data, t_token *var_token, t_token *token);
 void	expand_token_str(t_data *data, t_token *token);
 t_token	*skip_token(t_token *token, t_token	*result);
+t_data	*static_data(t_data *data);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: derakoto <derakoto@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 15:42:25 by vrandria          #+#    #+#             */
-/*   Updated: 2024/12/17 08:26:48 by derakoto         ###   ########.fr       */
+/*   Updated: 2024/12/17 12:15:51 by derakoto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ t_token	*parsing_heredoc(t_cmd *cmd, t_token *token, t_data *data)
 	pid = fork();
 	if (pid == -1)
 		return (NULL);
+	signal(SIGINT, SIG_IGN);
 	if (pid == 0)
 		get_doc(data, cmd, token, fd);
 	else

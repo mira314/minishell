@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc_file_prepa.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vrandria <vrandria@student.42antananari    +#+  +:+       +#+        */
+/*   By: derakoto <derakoto@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 14:50:54 by derakoto          #+#    #+#             */
-/*   Updated: 2024/12/17 09:02:10 by vrandria         ###   ########.fr       */
+/*   Updated: 2024/12/17 12:14:48 by derakoto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,8 +72,7 @@ void	get_doc_content(t_data *data, t_cmd *cmd, t_token *token, int fd)
 
 	while (1)
 	{
-		write(1, ">", 1);
-		str = get_next_line(0);
+		str = readline(">");
 		if (str == NULL)
 		{
 			ft_putstr_fd("\nunexpected EOF while looking for matching \"", 2);
@@ -87,6 +86,7 @@ void	get_doc_content(t_data *data, t_cmd *cmd, t_token *token, int fd)
 		if (cmd->io->quote_status == 0 && ft_strrchr(str, '$') != 0)
 			str = var_str_heredoc(data, tmp);
 		write(fd, str, ft_strlen(str));
+		write(fd, "\n", 1);
 		free(str);
 	}
 	free(str);
@@ -94,9 +94,10 @@ void	get_doc_content(t_data *data, t_cmd *cmd, t_token *token, int fd)
 
 void	get_doc(t_data *data, t_cmd *cmd, t_token *token, int fd)
 {
-	signal(SIGINT, SIG_DFL);
+	signal(SIGINT, child_sigint_handler);
 	get_doc_content(data, cmd, token, fd);
 	close(fd);
 	lst_clear_all_token(data->token);
+	data->token = 0;
 	free_and_exit(data, 0);
 }

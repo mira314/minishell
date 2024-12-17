@@ -6,7 +6,7 @@
 /*   By: derakoto <derakoto@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/20 05:19:02 by derakoto          #+#    #+#             */
-/*   Updated: 2024/12/14 07:46:11 by derakoto         ###   ########.fr       */
+/*   Updated: 2024/12/17 12:10:02 by derakoto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 void	free_and_exit(t_data *data, int exit_code)
 {
+	lst_clear_all_token(data->token);
 	mini_tbl_free(data->env);
 	mini_tbl_free(data->var);
 	clear_lst_cmd(data);

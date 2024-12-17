@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vrandria <vrandria@student.42antananari    +#+  +:+       +#+        */
+/*   By: derakoto <derakoto@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 05:30:50 by derakoto          #+#    #+#             */
-/*   Updated: 2024/12/17 09:27:17 by vrandria         ###   ########.fr       */
+/*   Updated: 2024/12/17 11:44:27 by derakoto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
