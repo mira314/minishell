@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   quote_process.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: derakoto <derakoto@student.42antananari    +#+  +:+       +#+        */
+/*   By: vrandria <vrandria@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 07:27:36 by vrandria          #+#    #+#             */
-/*   Updated: 2024/12/16 21:40:20 by derakoto         ###   ########.fr       */
+/*   Updated: 2024/12/17 09:03:38 by vrandria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,13 +100,7 @@ void	quote_process(t_data *data)
 	while (current)
 	{
 		if (quote_between_str(current) == 1)
-		{
-			/*if (!current->prev)
-				current = trim_quote(current, 0);
-			else if (current->prev->type_token != HEREDOC)
-				current = trim_quote(current, 0);*/
 			current = trim_quote(current, 0);
-		}
 		current = current->next;
 	}
 }

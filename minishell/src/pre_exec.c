@@ -3,24 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   pre_exec.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: derakoto <derakoto@student.42antananari    +#+  +:+       +#+        */
+/*   By: vrandria <vrandria@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 18:19:51 by derakoto          #+#    #+#             */
-/*   Updated: 2024/12/17 08:19:00 by derakoto         ###   ########.fr       */
+/*   Updated: 2024/12/17 09:10:15 by vrandria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-void test(t_token *token)
-{
-	while (token)
-	{
-		printf("[%s][%d]\n", token->str, token->type_token);
-		token = token->next;
-	}
-}
-
 
 t_token	*vars_expander(t_data *data)
 {
@@ -34,8 +24,8 @@ t_token	*vars_expander(t_data *data)
 	result = data->token;
 	while (token)
 	{
-		if (token->type_token == VAR
-			|| (token->prev != NULL && token->prev->type_token == HEREDOC && token->type_token == VAR))
+		if ((token->prev != NULL && token->prev->type_token == HEREDOC
+				&& token->type_token == VAR) || token->type_token == VAR)
 		{
 			expand_token_str(data, token);
 			split_var_to_token(&var_token, token->str, EMPTY);

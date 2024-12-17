@@ -6,7 +6,7 @@
 /*   By: vrandria <vrandria@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/15 16:27:24 by vrandria          #+#    #+#             */
-/*   Updated: 2024/08/15 16:27:26 by vrandria         ###   ########.fr       */
+/*   Updated: 2024/12/14 08:46:39 by vrandria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@
 # include <stdarg.h>
 # include <stdint.h>
 # include <fcntl.h>
-# include "printf/ft_printf.h"
 
 typedef struct s_list
 {

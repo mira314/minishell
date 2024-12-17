@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: derakoto <derakoto@student.42antananari    +#+  +:+       +#+        */
+/*   By: vrandria <vrandria@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/24 10:56:40 by vrandria          #+#    #+#             */
-/*   Updated: 2024/12/16 16:16:14 by derakoto         ###   ########.fr       */
+/*   Updated: 2024/12/17 09:28:03 by vrandria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ int	main(int argc, char *argv[], char **env)
 	while (1)
 	{
 		signal(SIGINT, sig_int_handler);
+		signal(SIGQUIT, SIG_IGN);
 		data.input = readline("msh$");
 		if (data.input == NULL)
 			mini_exit(&data, NULL);

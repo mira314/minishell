@@ -6,12 +6,14 @@
 #    By: vrandria <vrandria@student.42antananari    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/25 10:09:05 by vrandria          #+#    #+#              #
-#    Updated: 2024/09/29 14:41:54 by vrandria         ###   ########.fr        #
+#    Updated: 2024/12/14 08:52:40 by vrandria         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
+NAME = libft.a
+
 SRCSLIB_DIR = ./libft/
-SRCSPR_DIR = ./libft/printf/
+
 SRCSLIB	= $(addprefix $(SRCSLIB_DIR),\
 		ft_atoi.c get_next_line.c\
 		ft_bzero.c ft_calloc.c \
@@ -30,10 +32,7 @@ SRCSLIB	= $(addprefix $(SRCSLIB_DIR),\
 		ft_lstlast_bonus.c ft_lstadd_back_bonus.c ft_lstdelone_bonus.c \
 		ft_lstclear_bonus.c ft_lstiter_bonus.c ft_lstmap_bonus.c )
 
-SRCSPR = $(addprefix $(SRCSPR_DIR),\
-		ft_printf.c ft_putchar.c ft_putnbr.c ft_putstr.c ft_put_hex.c ft_putptr.c)
-
-SRCS = $(SRCSLIB) $(SRCSPR)
+SRCS = $(SRCSLIB)
  
 
 CC	= gcc
@@ -44,15 +43,15 @@ CFLAGS	= -Wall -Wextra -Werror
 
 OBJS	= $(SRCS:.c=.o)
 
-.c.o	:
-		@$(CC) $(CFLAGS) -c $< -o $(<:.c=.o)
+%.o: %.c
+	@$(CC) $(CFLAGS) -o $@ -c $<
 
 $(NAME)	: $(OBJS)
 		ar rcs $(NAME) $(OBJS)
 all : $(NAME)
 
 clean :
-		$(RM) $(OBJS) $(BONUS_OBJS)
+		$(RM) $(OBJS)
 
 fclean	: clean
 		$(RM) $(NAME)

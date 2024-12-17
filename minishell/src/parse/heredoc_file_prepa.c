@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc_file_prepa.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: derakoto <derakoto@student.42antananari    +#+  +:+       +#+        */
+/*   By: vrandria <vrandria@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 14:50:54 by derakoto          #+#    #+#             */
-/*   Updated: 2024/12/17 08:27:20 by derakoto         ###   ########.fr       */
+/*   Updated: 2024/12/17 09:02:10 by vrandria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ void	get_doc_content(t_data *data, t_cmd *cmd, t_token *token, int fd)
 			break ;
 		tmp = str;
 		if (cmd->io->quote_status == 0 && ft_strrchr(str, '$') != 0)
-			str = var_str_heredoc(data, tmp, 0);
+			str = var_str_heredoc(data, tmp);
 		write(fd, str, ft_strlen(str));
 		free(str);
 	}

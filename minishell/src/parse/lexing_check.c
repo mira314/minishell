@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexing_check.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: derakoto <derakoto@student.42antananari    +#+  +:+       +#+        */
+/*   By: vrandria <vrandria@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/13 13:30:17 by vrandria          #+#    #+#             */
-/*   Updated: 2024/12/16 22:20:02 by derakoto         ###   ########.fr       */
+/*   Updated: 2024/12/17 08:58:14 by vrandria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,6 @@ t_token	*var_check(t_token *token)
 	{
 		if (token->str[i] == '$')
 		{
-			// if (token->prev && token->prev->type_token == HEREDOC)
-				// return (token);
 			token->type_token = VAR;
 			return (token);
 		}

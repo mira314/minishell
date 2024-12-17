@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc_var.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: derakoto <derakoto@student.42antananari    +#+  +:+       +#+        */
+/*   By: vrandria <vrandria@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 14:52:53 by derakoto          #+#    #+#             */
-/*   Updated: 2024/12/17 08:34:11 by derakoto         ###   ########.fr       */
+/*   Updated: 2024/12/17 08:56:27 by vrandria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,6 @@ char	*herdoc_var_handl(t_data *data, char *str)
 	else
 		exit_val = 0;
 	free(var);
-	if (ft_strlen(exit_val))
-		exit_val = ft_strdup("");
 	return (exit_val);
 }
 
@@ -77,29 +75,10 @@ char	*append_char_to_str(char *tmp, char c)
 	return (str);
 }
 
-char	*var_str_heredoc(t_data *data, char *str, int i)
+char	*var_str_heredoc(t_data *data, char *str)
 {
-	char	*get_var;
-	char	*tmp;
 	char	*join;
 
-	tmp = 0;
-	join = 0;
-	while (str[i])
-	{
-		if (str[i] == '$' && sep_next_char(str[i + 1] == 0))
-		{
-			get_var = herdoc_var_handl(data, &str[i]);
-			tmp = var_convert_her(join, get_var);
-			i += size_str_not_var(&str[i]);
-		}
-		else
-		{
-			join = append_char_to_str(tmp, str[i]);
-			tmp = join;
-			i++;
-		}
-	}
-	free(str);
+	join = var_expand(data, str, 0);
 	return (join);
 }

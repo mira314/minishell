@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: derakoto <derakoto@student.42antananari    +#+  +:+       +#+        */
+/*   By: vrandria <vrandria@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/25 10:30:04 by vrandria          #+#    #+#             */
-/*   Updated: 2024/12/16 20:30:45 by derakoto         ###   ########.fr       */
+/*   Updated: 2024/12/17 09:01:53 by vrandria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,7 +122,7 @@ void		get_doc(t_data *data, t_cmd *cmd, t_token *token, int fd);
 int			size_str_not_var(char *str);
 char		*herdoc_var_handl(t_data *data, char *str);
 char		*var_convert_her(char *str, char *var);
-char		*var_str_heredoc(t_data *data, char *str, int i);
+char		*var_str_heredoc(t_data *data, char *str);
 /***************heredoc_utils.c**********************/
 char		*trim_delim_heredoc(char *del, t_cmd *cmd);
 t_token		*decide_next_token(t_token *token);

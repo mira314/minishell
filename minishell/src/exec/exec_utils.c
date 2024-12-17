@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: derakoto <derakoto@student.42antananari    +#+  +:+       +#+        */
+/*   By: vrandria <vrandria@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 05:12:08 by derakoto          #+#    #+#             */
-/*   Updated: 2024/12/03 06:13:14 by derakoto         ###   ########.fr       */
+/*   Updated: 2024/12/17 09:37:52 by vrandria         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,9 @@ int	get_exitstatus_code(int status)
 	if (WIFEXITED(status))
 		return (WEXITSTATUS(status));
 	else if (WIFSIGNALED(status))
-		return (130);
+	{
+		write(1, "\n", 1);
+		return (128 + WTERMSIG(status));
+	}
 	return (0);
 }
