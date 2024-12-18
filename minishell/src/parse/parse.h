@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vrandria <vrandria@student.42antananari    +#+  +:+       +#+        */
+/*   By: derakoto <derakoto@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/25 10:30:04 by vrandria          #+#    #+#             */
-/*   Updated: 2024/12/17 09:01:53 by vrandria         ###   ########.fr       */
+/*   Updated: 2024/12/18 07:53:37 by derakoto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,6 +113,8 @@ int			switch_flag_token_empty(int *i, t_token *token);
 int			check_quote_flag(t_token *token, int i);
 int			switch_flag_token(int i, t_token *token);
 t_io_file	*add_output(t_cmd *cmd, char *filename, int mode);
+int			is_char_protection(char c, int *count);
+int			is_protected_quote(char *str, int i);
 /***************heredoc_file_prepa.c******************/
 char		*create_file_name(char *path);
 int			prepare_heredoc_file(t_cmd *cmd);
@@ -149,5 +151,7 @@ void		handle_less_sign(t_data *data, char *str, t_var ***var);
 /******************************************************************/
 int			split_var_helper(char *str, int start, t_token **token, int *i);
 void		split_var_to_token(t_token **token, char *input, int flag);
+int			count_quote_to_protect(char *str);
+char		*protect_quote(char *str);
 
 #endif

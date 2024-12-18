@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   quote_process.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vrandria <vrandria@student.42antananari    +#+  +:+       +#+        */
+/*   By: derakoto <derakoto@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 07:27:36 by vrandria          #+#    #+#             */
-/*   Updated: 2024/12/17 09:03:38 by vrandria         ###   ########.fr       */
+/*   Updated: 2024/12/18 07:42:18 by derakoto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,9 @@ int	count_str_betweenquote(char *str, int count, int flag)
 	i = count;
 	while (str[i])
 	{
-		if ((flag == EMPTY) && (str[i] == 39 || str[i] == 34))
+		if (is_char_protection(str[i], &count))
+			i++;
+		else if ((flag == EMPTY) && (str[i] == 39 || str[i] == 34))
 		{
 			if (str[i] == 34)
 				flag = DOUBLE_QUOTE;
@@ -47,7 +49,9 @@ static int	quote_between_str(t_token *token)
 	str = token->str;
 	while (str[i])
 	{
-		if (str[i] == 39 || str[i] == 34)
+		if (i == 0 && (str[i] == 39 || str[i] == 34))
+			return (1);
+		else if (i != 0 && str[i - 1] != 14 && (str[i] == 39 || str[i] == 34))
 			return (1);
 		i++;
 	}
@@ -77,7 +81,7 @@ t_token	*trim_quote(t_token *token, int j)
 	i = -1;
 	while (token->str[++i])
 	{
-		quote = is_quote(token->str[i]);
+		quote = is_protected_quote(token->str, i);
 		if (quote != EMPTY && token->flag == quote)
 			token->flag = EMPTY;
 		else if (quote != EMPTY && token->flag == EMPTY)

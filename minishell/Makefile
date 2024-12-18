@@ -9,7 +9,7 @@ PARSE_FILE = split_args.c var_processing.c lst_cmd_utils.c lexing_check.c parsin
 			herdoc_process.c  output_process.c trunc_process.c \
 			quote_process_utils.c quote_process.c lst_cmd_utils1.c\
 			init_int_and_out.c heredoc_utils.c heredoc_var.c heredoc_file_prepa.c \
-			var_expand.c var_expand_helpers.c var_identify_helper.c var_to_token.c
+			var_expand.c var_expand_helpers.c var_expand_utils.c var_identify_helper.c var_to_token.c
 
 EXEC_FILE = exec.c find_file.c ft_echo.c ft_pwd.c mini_cd.c mini_exec_utils.c get_env.c \
 			set_env.c env_utils.c unset.c export.c export_utils.c mini_exit.c var.c redirection.c \

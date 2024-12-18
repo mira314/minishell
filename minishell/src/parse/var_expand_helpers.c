@@ -6,7 +6,7 @@
 /*   By: derakoto <derakoto@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 17:46:11 by derakoto          #+#    #+#             */
-/*   Updated: 2024/12/16 15:27:32 by derakoto         ###   ########.fr       */
+/*   Updated: 2024/12/18 07:52:08 by derakoto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,12 +32,9 @@ t_var	*build_var(t_data *data, char *str, int name_len, int *i)
 	result->index = *i - 1;
 	result->name_len = name_len;
 	result->name = (char *)malloc(sizeof(char) * (name_len + 1));
-	j = 0;
-	while (j < name_len)
-	{
+	j = -1;
+	while (++j < name_len)
 		result->name[j] = str[j];
-		j++;
-	}
 	result->name[j] = '\0';
 	if (str[0] == '?')
 		result->value = ft_itoa(data->exit_value);
@@ -47,6 +44,7 @@ t_var	*build_var(t_data *data, char *str, int name_len, int *i)
 		result->value = get_env_value(data->var, result->name);
 	if (result->value == NULL)
 		result->value = get_env_value(data->env, result->name);
+	result->value = protect_quote(result->value);
 	return (result);
 }
 
