@@ -6,7 +6,7 @@
 /*   By: derakoto <derakoto@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 05:54:57 by derakoto          #+#    #+#             */
-/*   Updated: 2024/12/11 12:53:58 by derakoto         ###   ########.fr       */
+/*   Updated: 2024/12/18 10:49:39 by derakoto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,9 +50,9 @@ int	in_long_range(char *str)
 	i = 0;
 	if (str[0] == '-' || str[0] == '+')
 		i = 1;
-	if (ft_strlen(str) > 19 + i)
+	if (ft_strlen(str) - count_leading_zero(str) > 19 + i)
 		result = 1;
-	else if (ft_strlen(str) < 19 + i)
+	else if (ft_strlen(str) - count_leading_zero(str) < 19 + i)
 		result = 0;
 	else if (i && ((str[0] == '+' && ft_strcmp(str + 1, LONG_MAX_STR) > 0)
 			|| (str[0] == '-' && ft_strcmp(str + 1, LONG_MIN_STR) > 0)))
@@ -89,4 +89,23 @@ int	mini_is_numeric(char *str)
 	if (str[i] != 0)
 		return (-1);
 	return (0);
+}
+
+int	count_leading_zero(char *str)
+{
+	int	i;
+	int	leading_zero;
+
+	if (str == NULL)
+		return (-1);
+	i = 0;
+	leading_zero = 0;
+	if (str[i] == '-' || str[i] == '+')
+		i = 1;
+	while (str[i] == '0')
+	{
+		leading_zero++;
+		i++;
+	}
+	return (leading_zero);
 }

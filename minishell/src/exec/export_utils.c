@@ -6,7 +6,7 @@
 /*   By: derakoto <derakoto@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 05:37:16 by derakoto          #+#    #+#             */
-/*   Updated: 2024/11/25 05:37:32 by derakoto         ###   ########.fr       */
+/*   Updated: 2024/12/18 10:45:39 by derakoto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,8 @@ int	is_env_duplicated(char **envs, int index)
 	i = 1;
 	while (envs[index] != 0 && envs[index + i] != 0)
 	{
-		if (is_same_key(envs[index], envs[index + i]) == 0)
+		if (is_same_key(envs[index], envs[index + i]) == 0
+			&& is_value_present(envs[index + i]) == 0)
 			return (0);
 		i++;
 	}

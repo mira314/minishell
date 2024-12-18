@@ -6,7 +6,7 @@
 /*   By: derakoto <derakoto@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 18:19:51 by derakoto          #+#    #+#             */
-/*   Updated: 2024/12/18 09:49:01 by derakoto         ###   ########.fr       */
+/*   Updated: 2024/12/18 11:01:55 by derakoto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,20 +25,18 @@ t_token	*vars_expander(t_data *data)
 	while (token)
 	{
 		var_token = 0;
+		token_tmp = token->next;
 		if ((token->prev != NULL && token->prev->type_token == HEREDOC
 				&& token->type_token == VAR) || token->type_token == VAR)
 		{
 			expand_token_str(data, token);
 			split_var_to_token(&var_token, token->str, EMPTY);
-			token_tmp = token->next;
 			if (var_token == NULL)
 				result = skip_token(token, result);
 			else
 				result = replace_token(data, var_token, token);
-			token = token_tmp;
 		}
-		else
-			token = token->next;
+		token = token_tmp;
 	}
 	return (result);
 }
