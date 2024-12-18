@@ -6,7 +6,7 @@
 /*   By: derakoto <derakoto@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 15:42:25 by vrandria          #+#    #+#             */
-/*   Updated: 2024/12/17 12:15:51 by derakoto         ###   ########.fr       */
+/*   Updated: 2024/12/18 10:09:43 by derakoto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,11 @@ t_token	*parsing_heredoc(t_cmd *cmd, t_token *token, t_data *data)
 	{
 		wait(&status);
 		close(fd);
-		if (WIFSIGNALED(status))
-			return (NULL);
+		if (WIFEXITED(status))
+		{
+			if (WEXITSTATUS(status) == 130)
+				return (NULL);
+		}
 		token = decide_next_token(token);
 	}
 	return (token);

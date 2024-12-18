@@ -6,7 +6,7 @@
 /*   By: derakoto <derakoto@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 14:50:54 by derakoto          #+#    #+#             */
-/*   Updated: 2024/12/17 12:14:48 by derakoto         ###   ########.fr       */
+/*   Updated: 2024/12/18 10:30:09 by derakoto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ void	get_doc_content(t_data *data, t_cmd *cmd, t_token *token, int fd)
 		str = readline(">");
 		if (str == NULL)
 		{
-			ft_putstr_fd("\nunexpected EOF while looking for matching \"", 2);
+			ft_putstr_fd("unexpected EOF while looking for matching \"", 2);
 			ft_putstr_fd(token->next->str, 2);
 			ft_putstr_fd("\"\n", 2);
 			break ;

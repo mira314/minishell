@@ -6,7 +6,7 @@
 /*   By: derakoto <derakoto@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/20 09:45:09 by derakoto          #+#    #+#             */
-/*   Updated: 2024/12/18 08:34:23 by derakoto         ###   ########.fr       */
+/*   Updated: 2024/12/18 10:29:52 by derakoto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,5 +28,5 @@ void	child_sigint_handler(int sig_num)
 
 	(void) sig_num;
 	data = static_data(NULL);
-	free_and_exit(data, 0);
+	free_and_exit(data, 130);
 }
