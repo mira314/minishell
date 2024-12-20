@@ -6,7 +6,7 @@
 /*   By: derakoto <derakoto@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 05:12:08 by derakoto          #+#    #+#             */
-/*   Updated: 2024/12/17 10:22:10 by derakoto         ###   ########.fr       */
+/*   Updated: 2024/12/20 08:06:31 by derakoto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	get_exitstatus_code(int status)
 {
 	if (WIFEXITED(status))
 		return (WEXITSTATUS(status));
-	else if (WIFSIGNALED(status))
+	else if (WIFSIGNALED(status) && WTERMSIG(status) != SIGPIPE)
 	{
 		write(1, "\n", 1);
 		return (128 + WTERMSIG(status));
